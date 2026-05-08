@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MELANOIR RECRUITMENT | MISSION PAGE v1.1</title>
+  <meta name="description" content="멜라누아 채용 소개 페이지 v1.1 - SpaceX 스타일 기반 모바일 최적화">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000;
+      --line: rgba(255, 255, 255, 0.16);
+      --line-strong: rgba(255, 255, 255, 0.34);
+      --text: #f3f4f8;
+      --text-dim: rgba(243, 244, 248, 0.76);
+      --font: "Barlow Condensed", "DIN Alternate", "D-DIN", Bahnschrift, "Arial Narrow", Arial, sans-serif;
+      --max: 560px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      letter-spacing: 0.03em;
+      word-break: keep-all;
+      text-transform: uppercase;
+      overflow-x: hidden;
+    }
+
+    .app {
+      max-width: var(--max);
+      margin: 0 auto;
+      min-height: 100dvh;
+      background:
+        radial-gradient(90% 60% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 52%),
+        linear-gradient(180deg, #08080b 0%, #000 42%, #030307 100%);
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      z-index: 120;
+      background: linear-gradient(90deg, rgba(243, 244, 248, 0.75), #ffffff);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+      pointer-events: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.74);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .tag {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .section {
+      padding: 30px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 560ms ease, transform 560ms ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section--manifesto {
+      padding: 44px 22px;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(80% 50% at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 65%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+      text-align: center;
+    }
+
+    .manifesto-text {
+      margin: 0;
+      font-size: clamp(16px, 4.8vw, 22px);
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: rgba(243, 244, 248, 0.9);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    .hero-title {
+      font-size: clamp(34px, 11vw, 56px);
+      line-height: 0.95;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .lead {
+      text-transform: none;
+      letter-spacing: normal;
+      line-height: 1.6;
+      color: rgba(243, 244, 248, 0.92);
+      font-size: 17px;
+      margin-bottom: 14px;
+    }
+
+    .quote {
+      margin-top: 14px;
+      padding-left: 12px;
+      border-left: 2px solid var(--line-strong);
+      font-size: 15px;
+      line-height: 1.6;
+      text-transform: none;
+      letter-spacing: normal;
+      color: rgba(243, 244, 248, 0.9);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 10px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+      transition: transform 260ms ease, border-color 260ms ease, background-color 260ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.3);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+    }
+
+    .card-icon {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .card-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: rgba(243, 244, 248, 0.95);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .card p {
+      font-size: 13px;
+      line-height: 1.45;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--text-dim);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: rgba(243, 244, 248, 0.9);
+    }
+
+    .graph-wrap {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 12px 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .graph-title {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: rgba(243, 244, 248, 0.86);
+    }
+
+    .bar-impact {
+      margin: 0 0 10px;
+      font-size: 11px;
+      color: rgba(243, 244, 248, 0.72);
+      text-transform: none;
+      letter-spacing: normal;
+      text-align: right;
+    }
+
+    .role-intro-quote {
+      margin: 8px 0 14px;
+      padding-left: 10px;
+      border-left: 2px solid var(--line-strong);
+      font-size: 14px;
+      line-height: 1.55;
+      text-transform: none;
+      letter-spacing: normal;
+      color: rgba(243, 244, 248, 0.88);
+    }
+
+    .bars {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 8px;
+      min-height: 300px;
+      padding: 14px 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background:
+        repeating-linear-gradient(
+          to top,
+          rgba(255, 255, 255, 0.08) 0 1px,
+          transparent 1px 34px
+        ),
+        rgba(0, 0, 0, 0.25);
+    }
+
+    .bar-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .bar-label {
+      font-size: 12px;
+      color: rgba(243, 244, 248, 0.95);
+      letter-spacing: 0.06em;
+    }
+
+    .bar-fill {
+      width: clamp(24px, 18vw, 62px);
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, #ffffff 100%);
+      transition: height 1000ms cubic-bezier(0.22, 1, 0.36, 1), width 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bar-value {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+    }
+
+    .bar-note {
+      text-transform: none;
+      letter-spacing: normal;
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.35;
+      text-align: center;
+      min-height: 40px;
+    }
+
+    .job {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 12px;
+      margin-top: 10px;
+    }
+
+    .job-title {
+      font-size: 18px;
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .job-desc {
+      font-size: 15px;
+      line-height: 1.5;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--text-dim);
+    }
+
+    .list {
+      margin-top: 10px;
+      margin-bottom: 0;
+      padding-left: 16px;
+      text-transform: none;
+      letter-spacing: normal;
+      color: rgba(243, 244, 248, 0.92);
+    }
+
+    .list li {
+      margin: 7px 0;
+      line-height: 1.45;
+    }
+
+    .sticker-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .sticker {
+      border: 1px dashed var(--line-strong);
+      border-radius: 10px;
+      padding: 8px 10px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(243, 244, 248, 0.9);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .cta {
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 12px 14px;
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    .cta:active {
+      transform: scale(0.98);
+    }
+
+    .job-more {
+      margin-top: 10px;
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: rgba(243, 244, 248, 0.92);
+      text-decoration: none;
+      transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+    }
+
+    .job-more:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .job-more:active {
+      transform: scale(0.98);
+    }
+
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 460ms ease, transform 460ms ease;
+    }
+
+    .stagger-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal,
+      .stagger-item,
+      .bar-fill,
+      .cta,
+      .job-more,
+      .card {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .reveal,
+      .stagger-item {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .topbar {
+        padding: 12px 14px;
+        gap: 10px;
+      }
+
+      .tag {
+        font-size: 10px;
+      }
+
+      .section {
+        padding: 24px 14px;
+      }
+
+      .section--manifesto {
+        padding: 34px 16px;
+      }
+
+      .hero-title {
+        font-size: clamp(30px, 10vw, 44px);
+      }
+
+      .lead {
+        font-size: 16px;
+      }
+
+      .grid {
+        gap: 8px;
+      }
+
+      .card {
+        padding: 10px 8px;
+      }
+
+      .card h3 {
+        font-size: 13px;
+      }
+
+      .card p {
+        font-size: 12px;
+      }
+
+      .bars {
+        min-height: 272px;
+        padding: 12px 6px 8px;
+      }
+
+      .bar-fill {
+        width: clamp(20px, 15vw, 50px);
+      }
+
+      .bar-note {
+        font-size: 10px;
+        min-height: 34px;
+      }
+
+      .job {
+        padding: 12px 10px;
+      }
+
+      .job-title {
+        font-size: 16px;
+      }
+
+      .job-desc {
+        font-size: 14px;
+      }
+
+      .cta-row {
+        gap: 8px;
+      }
+
+      .cta {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chip {
+        font-size: 11px;
+        padding: 5px 8px;
+      }
+
+      .role-intro-quote,
+      .quote {
+        font-size: 14px;
+      }
+    }
+
+    .foot {
+      padding: 20px 18px 28px;
+      font-size: 11px;
+      color: rgba(243, 244, 248, 0.6);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="app">
+    <header class="topbar">
+      <div class="logo">MELANOIR</div>
+      <div class="tag">RECRUITMENT MISSION v1.1</div>
+    </header>
+
+    <section class="section reveal" id="intro">
+      <p class="eyebrow">01 · MELANOIR INTRODUCTION</p>
+      <h1 class="hero-title">BUILD THE NEW STANDARD OF BLACK.</h1>
+      <p class="lead">우리의 미션은 멜라닌의 유익함을 모두가 누릴 수 있도록 하는 것입니다.<br>단순한 친환경을 넘어, 지속가능한 고성능 소재로 다양한 분야의 혁신을 뒷받침합니다.</p>
+      <div class="chip-row" aria-label="채용 해시태그">
+        <span class="chip">#2030스타트업</span>
+        <span class="chip">#공학박사</span>
+        <span class="chip">#팀워크</span>
+      </div>
+      <div class="grid">
+        <article class="card stagger-item">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 4h8"></path>
+              <path d="M9 4v6l3 3 3-3V4"></path>
+              <path d="M7 13h10v7H7z"></path>
+            </svg>
+          </div>
+          <h3>BEAUTY NEW INGREDIENT</h3>
+          <p>뷰티 영역에서 멜라닌의 안전성과 효능을 데이터 기반 신원료로 확장합니다.</p>
+        </article>
+        <article class="card stagger-item">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 4v4a5 5 0 0 0 10 0V4"></path>
+              <path d="M12 13v3"></path>
+              <circle cx="16.5" cy="18.5" r="2.5"></circle>
+              <path d="M12 16c1.5 0 2.5.5 3.2 1.3"></path>
+            </svg>
+          </div>
+          <h3>MEDICAL EXPANSION</h3>
+          <p>메디컬 분야에서 멜라닌의 보호성과 안정성을 실사용 가능한 기술로 연결합니다.</p>
+        </article>
+        <article class="card stagger-item">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 20v-8"></path>
+              <path d="M12 12c0-3-2-5-5-5 0 3 2 5 5 5z"></path>
+              <path d="M12 12c0-3 2-5 5-5 0 3-2 5-5 5z"></path>
+            </svg>
+          </div>
+          <h3>ECO IMPACT</h3>
+          <p>친환경 분야에서 성능과 지속가능성을 동시에 만족하는 대체 기준을 만듭니다.</p>
+        </article>
+        <article class="card stagger-item">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 4c3 1 5 3 6 6-2.5 3.5-6 6-10 8-1-3 1-7 4-10z"></path>
+              <circle cx="14.5" cy="9.5" r="1.5"></circle>
+              <path d="M8 16l-3 3"></path>
+              <path d="M10 18l-1 3"></path>
+            </svg>
+          </div>
+          <h3>SPACE TECH</h3>
+          <p>우주 데이터센터, 유인탐사 등 차세대 우주 산업의 핵심 방호소재를 제공합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section--manifesto reveal" aria-label="멜라누아 선언문">
+      <p class="manifesto-text">멜라누아는 경쟁하지 않습니다.<br>다만, 기존에 없던 새로운 가치를 찾습니다.</p>
+    </section>
+
+    <section class="section reveal" id="roles">
+      <p class="eyebrow">02 · ROLES TO JOIN THE MISSION</p>
+      <h2 class="hero-title" style="font-size: clamp(30px, 9vw, 46px);">[모집분야]<br>SCALE-UP CREW · R&amp;D</h2>
+      <p class="lead">g 단위로 취급되던 멜라닌 나노입자를 kg 단위로 끌어올려 뷰티, 바이오 분야에 적용하였습니다. 다음은 지구에서 가장 안전한 Black이 모든 분야에 닿을 수 있도록 ton 단위의 혁신입니다.</p>
+
+      <div class="graph-wrap reveal" aria-label="멜라닌 스케일업 그래프">
+        <p class="graph-title">MELANIN SCALE-UP TRAJECTORY</p>
+        <p class="bar-impact">TARGET SCALE DOMINATES CURRENT SCALE</p>
+        <div class="bars">
+          <div class="bar-col">
+            <span class="bar-label">g</span>
+            <div class="bar-fill" data-height="2px" data-width="10px" style="height: 2px; width: 10px;"></div>
+            <span class="bar-value">1x</span>
+            <span class="bar-note">실험실 시약 · 기존</span>
+          </div>
+          <div class="bar-col">
+            <span class="bar-label">kg</span>
+            <div class="bar-fill" data-height="18px" style="height: 18px;"></div>
+            <span class="bar-value">1,000x</span>
+            <span class="bar-note">뷰티 · 바이오 적용 · 현재</span>
+          </div>
+          <div class="bar-col">
+            <span class="bar-label">ton</span>
+            <div class="bar-fill" data-height="230px" style="height: 230px;"></div>
+            <span class="bar-value">1,000,000x</span>
+            <span class="bar-note">모든 분야 적용 · 목표</span>
+          </div>
+        </div>
+      </div>
+      <p class="quote">멜라누아는 경쟁하지 않습니다.<br>다만, 기존에 없던 새로운 가치를 찾습니다.</p>
+
+      <article class="job reveal">
+        <h3 class="job-title">R&D TRACK 01 · 양산기술</h3>
+        <p class="job-desc">신소재의 양산 기술을 구축하고, 공정 안정성과 생산성을 동시에 고도화합니다.</p>
+        <ul class="list">
+          <li>추출/정제/안정화 공정 스케일업</li>
+          <li>양산 단계 병목 제거 및 수율 개선</li>
+          <li>뷰티/바이오 적용을 위한 공정 표준화</li>
+        </ul>
+        <a class="job-more" href="melanoir_recruitment_role_scaleup_v1.0.html">더 알아보기</a>
+      </article>
+
+      <article class="job reveal">
+        <h3 class="job-title">R&D TRACK 02 · 정밀분석</h3>
+        <p class="job-desc">다양한 분석을 통해 소재 특성과 품질 일관성을 검증하고, 분석 전문가로 성장할 수 있는 환경을 제공합니다.</p>
+        <ul class="list">
+          <li>원료/공정/완제품 데이터 분석</li>
+          <li>품질 기준 수립 및 검증 체계 운영</li>
+          <li>실험 결과 기반 개선 제안 및 실행</li>
+        </ul>
+        <a class="job-more" href="melanoir_recruitment_role_analysis_v1.0.html">더 알아보기</a>
+      </article>
+    </section>
+
+    <section class="section reveal" id="conditions">
+      <p class="eyebrow">03 · HIRING CONDITIONS</p>
+      <h2 class="hero-title" style="font-size: clamp(28px, 8.5vw, 42px);">FIVE CORE VALUES</h2>
+      <p class="lead" style="font-size:16px; margin-bottom:8px;">멜라누아 팀은 5가지 요소를 갖추고 있습니다.</p>
+      <ul class="list">
+        <li>전문성: 데이터와 결과로 설명할 수 있는 깊이</li>
+        <li>신뢰성: 약속한 기준을 끝까지 지키는 태도</li>
+        <li>관심: 미션과 고객 문제에 대한 진심 어린 몰입</li>
+        <li>리더십: 팀의 방향을 정렬하고 실행을 끌어내는 힘</li>
+        <li>민첩성: 빠르게 판단하고 빠르게 개선하는 실행력</li>
+      </ul>
+      <p class="quote">WE MOVE FORWARD. WE DO NOT REPEAT.<br>멜라누아는 항상 앞으로 나아가며, 똑같은 일을 반복하지 않습니다.<br>정형화된 업무에 머물지 않고, 매일 마주하는 새로운 문제를 해결하며 자신만의 커리어를 빌딩할 신입 팀원을 환영합니다.</p>
+      <p class="quote">멜라누아의 성장은 구성원들의 성장으로 이루어집니다.<br>개인의 성장에 동의하는 열정적 팀원을 필요로 합니다.</p>
+
+      <p class="eyebrow" style="margin-top:18px;">WELFARE STICKERS</p>
+      <div class="sticker-grid" aria-label="복리후생 스티커">
+        <div class="sticker">깨끗한환경</div>
+        <div class="sticker">야근불가능</div>
+        <div class="sticker">중식지원</div>
+        <div class="sticker">통근버스</div>
+      </div>
+
+      <div class="cta-row">
+        <a class="cta" href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">VISIT HOMEPAGE · MELANOIR.CO.KR</a>
+        <a class="cta" href="mailto:hello@melanoir.com">APPLY NOW · HELLO@MELANOIR.COM</a>
+      </div>
+    </section>
+
+    <footer class="foot reveal">
+      MELANOIR RECRUITMENT PAGE v1.1 · MOBILE FIRST · SPACEX STYLE INSPIRED
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var revealTargets = document.querySelectorAll(".reveal");
+      var staggerItems = document.querySelectorAll(".stagger-item");
+      var progress = document.getElementById("scrollProgress");
+      var bars = document.querySelector(".bars");
+      var fills = document.querySelectorAll(".bar-fill");
+      var barsAnimated = false;
+
+      if (!reduceMotion) {
+        revealTargets.forEach(function (el) {
+          if (!el.classList.contains("is-visible")) el.classList.add("reveal");
+        });
+      } else {
+        revealTargets.forEach(function (el) { el.classList.add("is-visible"); });
+        staggerItems.forEach(function (el) { el.classList.add("is-visible"); });
+      }
+
+      var io = !reduceMotion && "IntersectionObserver" in window
+        ? new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" })
+        : null;
+
+      if (io) {
+        revealTargets.forEach(function (el) { io.observe(el); });
+      } else {
+        revealTargets.forEach(function (el) { el.classList.add("is-visible"); });
+      }
+
+      function revealStagger() {
+        staggerItems.forEach(function (el, idx) {
+          window.setTimeout(function () {
+            el.classList.add("is-visible");
+          }, idx * 90);
+        });
+      }
+
+      if (!reduceMotion && "IntersectionObserver" in window && document.querySelector(".grid")) {
+        var gridObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              revealStagger();
+              gridObserver.disconnect();
+            }
+          });
+        }, { threshold: 0.2 });
+        gridObserver.observe(document.querySelector(".grid"));
+      } else {
+        revealStagger();
+      }
+
+      function animateBars() {
+        if (barsAnimated || !fills.length) return;
+        barsAnimated = true;
+        fills.forEach(function (fill) {
+          var targetHeight = fill.getAttribute("data-height") || fill.style.height || "0px";
+          var targetWidth = fill.getAttribute("data-width") || "";
+          fill.style.height = "0px";
+          if (targetWidth) fill.style.width = "2px";
+          window.requestAnimationFrame(function () {
+            fill.style.height = targetHeight;
+            if (targetWidth) fill.style.width = targetWidth;
+          });
+        });
+      }
+
+      if (!reduceMotion && "IntersectionObserver" in window && bars) {
+        var barObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateBars();
+              barObserver.disconnect();
+            }
+          });
+        }, { threshold: 0.3 });
+        barObserver.observe(bars);
+      } else {
+        animateBars();
+      }
+
+      function updateProgress() {
+        if (!progress) return;
+        var top = window.scrollY || window.pageYOffset;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var ratio = max > 0 ? (top / max) * 100 : 0;
+        progress.style.width = Math.max(0, Math.min(100, ratio)) + "%";
+      }
+
+      updateProgress();
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
+    })();
+  </script>
+</body>
+</html>
