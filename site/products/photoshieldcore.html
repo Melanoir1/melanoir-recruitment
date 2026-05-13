@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melanoir Photoshield Core</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <style>
+        .mela-wrapper {
+            margin: 0; padding: 0; box-sizing: border-box;
+            background-color: #ffffff; color: #1d1d1f;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            line-height: 1.6; word-break: keep-all; letter-spacing: -0.01em;
+            overflow-x: hidden;
+        }
+        .pc-br { display: block; } .mo-br { display: none; }
+        @media (max-width: 768px) { .pc-br { display: none; } .mo-br { display: block; } }
+
+        .mela-hero-section { text-align: center; border-bottom: none; padding-top: 200px !important; }
+        .mela-hero-brand { font-size: 1.6rem; font-weight: 600; color: #86868b; letter-spacing: 0.3em; margin: 0 0 20px; text-transform: uppercase; }
+        .mela-hero-title { font-size: 7.2rem; font-weight: 900; color: #000; line-height: 1.08; letter-spacing: -0.05em; margin: 0 0 18px; }
+        .mela-hero-subtitle { font-size: 3.5rem; font-weight: 700; color: #1d1d1f; margin: 0 0 22px; }
+        .mela-hero-kicker { color: #86868b; font-weight: 600; margin-bottom: 42px; font-size: 1.65rem; line-height: 1.35; }
+        .mela-hero-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+        .mela-hero-tag { background: #f5f5f7; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 1.2rem; color: #86868b; line-height: 1.2; letter-spacing: -0.01em; }
+        .mela-footer-headline { font-size: 4.2rem; margin-bottom: 30px; }
+
+        .mela-wrapper h2 { font-size: 3.8rem; font-weight: 700; margin-bottom: 25px; line-height: 1.25; color: #1d1d1f; }
+        .mela-wrapper h3 { font-size: 1.4rem; font-weight: 600; color: #86868b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.15em; }
+        .mela-wrapper p { font-size: 1.65rem; color: #424245; font-weight: 400; line-height: 1.8; margin-bottom: 30px; }
+
+        .mela-container { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+        .mela-section { padding: 180px 0; border-bottom: 1px solid #f5f5f7; }
+        .mela-grid-2 { display: flex; gap: 80px; align-items: center; justify-content: space-between; }
+        .mela-feature-text, .mela-feature-media { flex: 1; width: 50%; }
+
+        .mela-media-box {
+            width: 100%;
+            background: transparent;
+            border-radius: 0;
+            overflow: visible;
+            position: relative;
+            height: auto;
+            border: none;
+            display: block;
+            padding: 0;
+        }
+        .mela-media-box img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            background: transparent;
+        }
+        .mela-mobile-only { display: none !important; }
+        .mela-desktop-only { display: block !important; }
+
+        .mela-stats-bar { display: flex; gap: 0; margin-top: 60px; border-top: 1px solid #d2d2d7; border-bottom: 1px solid #d2d2d7; padding: 45px 0; width: 100%; }
+        .mela-stat-item { flex: 1; text-align: center; position: relative; }
+        .mela-stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background-color: #d2d2d7; }
+        .mela-stat-value { font-size: 3.5rem; font-weight: 700; color: #1d1d1f; display: block; line-height: 1; margin-bottom: 10px; }
+        .mela-stat-label { font-size: 1.2rem; color: #86868b; font-weight: 600; }
+        .mela-stats-bar-dark { border-top-color: rgba(255,255,255,0.2); border-bottom-color: rgba(255,255,255,0.2); }
+        .mela-stats-bar-dark .mela-stat-item:not(:last-child)::after { background-color: rgba(255,255,255,0.2); }
+        .mela-stats-bar-dark .mela-stat-value { color: #ffffff; }
+        .mela-stats-bar-dark .mela-stat-label { color: #c7c7cc; }
+        .mela-ingredient-line { display: block; text-align: center; font-weight: 200; letter-spacing: 0.12em; word-spacing: 0.14em; margin: 48px 0 48px; line-height: 1.35; }
+        .mela-ingredient-line .mela-ingredient-focus { font-size: 2em; font-weight: 200; line-height: 1; }
+
+        .mela-data-grid { border-top: 1px solid #d2d2d7; margin-top: 40px; }
+        .mela-data-row { display: flex; justify-content: space-between; padding: 25px 0; border-bottom: 1px solid #d2d2d7; font-size: 1.35rem; }
+        .mela-data-label { font-weight: 600; color: #1d1d1f; }
+        .mela-data-value { font-weight: 700; color: #0071e3; }
+
+        /* Embo와 동일한 언어 선택 버튼 UI */
+        .mela-lang-dropdown {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            z-index: 10000;
+            padding-top: 20px;
+        }
+        .mela-lang-trigger {
+            width: 60px; height: 60px; background: #ffffff; border: 1px solid #d2d2d7; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15); font-weight: 700; font-size: 16.7px;
+            color: #1d1d1f !important;
+        }
+        .mela-lang-menu {
+            position: absolute;
+            bottom: 68px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px); border: 1px solid #d2d2d7; border-radius: 20px; padding: 10px;
+            display: none; flex-direction: column; min-width: 170px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .mela-lang-menu::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: transparent;
+        }
+        .mela-lang-dropdown:hover .mela-lang-menu { display: flex; }
+        .mela-lang-item {
+            padding: 14px 20px; text-decoration: none;
+            color: #1d1d1f !important; font-size: 17.7px;
+            border-radius: 14px; transition: 0.2s; font-weight: 500;
+        }
+        .mela-lang-item:hover { background: rgba(0,0,0,0.05); color: #1d1d1f !important; }
+        .mela-lang-item.active { color: #0071e3 !important; font-weight: 700; }
+
+        /* CJK 언어는 동일 크기에서 모바일 오버플로우가 나기 쉬워 별도 보정 */
+        html[lang="ja"] .mela-wrapper,
+        html[lang="zh-CN"] .mela-wrapper,
+        html[lang="zh"] .mela-wrapper {
+            letter-spacing: 0;
+        }
+
+        @media (max-width: 768px) {
+            .mela-container { padding: 0 25px; }
+            .mela-hero-title { font-size: 4.8rem; }
+            .mela-hero-subtitle { font-size: 2.4rem; margin-bottom: 18px; }
+            .mela-hero-kicker { font-size: 1.3rem; margin-bottom: 28px; }
+            .mela-hero-tag { font-size: 1.05rem; padding: 7px 14px; }
+            .mela-footer-headline { font-size: 3rem; }
+            .mela-wrapper h2 { font-size: 2.8rem; }
+            .mela-wrapper p { font-size: 1.4rem; }
+            .mela-section { padding: 100px 0; }
+            .mela-grid-2 { flex-direction: column; gap: 40px; }
+            .mela-mobile-reverse { flex-direction: column-reverse !important; }
+            .mela-feature-text, .mela-feature-media { width: 100%; text-align: center; }
+            .mela-media-box { height: auto; border-radius: 0; }
+            .mela-stats-bar { flex-direction: column; gap: 40px; }
+            .mela-stat-item::after { display: none; }
+            .mela-mobile-only { display: block !important; }
+            .mela-desktop-only { display: none !important; }
+        }
+
+        @media (max-width: 768px) {
+            html[lang="ja"] .mela-wrapper h2,
+            html[lang="zh-CN"] .mela-wrapper h2,
+            html[lang="zh"] .mela-wrapper h2 {
+                font-size: 2.45rem;
+                line-height: 1.35;
+            }
+            html[lang="ja"] .mela-hero-subtitle,
+            html[lang="zh-CN"] .mela-hero-subtitle,
+            html[lang="zh"] .mela-hero-subtitle {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+            html[lang="ja"] .mela-wrapper p,
+            html[lang="zh-CN"] .mela-wrapper p,
+            html[lang="zh"] .mela-wrapper p {
+                font-size: 1.28rem;
+                line-height: 1.72;
+            }
+            html[lang="ja"] .mela-stat-label,
+            html[lang="zh-CN"] .mela-stat-label,
+            html[lang="zh"] .mela-stat-label {
+                font-size: 1.05rem;
+                line-height: 1.45;
+                word-break: break-word;
+            }
+            html[lang="ja"] .mela-data-row,
+            html[lang="zh-CN"] .mela-data-row,
+            html[lang="zh"] .mela-data-row {
+                align-items: flex-start;
+                gap: 10px;
+            }
+            html[lang="ja"] .mela-data-row span:first-child,
+            html[lang="zh-CN"] .mela-data-row span:first-child,
+            html[lang="zh"] .mela-data-row span:first-child {
+                flex: 1 1 auto;
+                min-width: 0;
+                word-break: break-word;
+            }
+            html[lang="ja"] .mela-data-row span:last-child,
+            html[lang="zh-CN"] .mela-data-row span:last-child,
+            html[lang="zh"] .mela-data-row span:last-child {
+                flex: 0 0 auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="mela-wrapper">
+    <div class="mela-lang-dropdown">
+        <div class="mela-lang-trigger" id="mela-lang-trigger">KR</div>
+        <div class="mela-lang-menu" id="mela-lang-menu">
+            <a href="#" class="mela-lang-item" data-lang="kr">한국어 (KR)</a>
+            <a href="#" class="mela-lang-item" data-lang="en">English (EN)</a>
+            <a href="#" class="mela-lang-item" data-lang="fr">Français (FR)</a>
+            <a href="#" class="mela-lang-item" data-lang="jp">日本語 (JP)</a>
+            <a href="#" class="mela-lang-item" data-lang="cn">中文 (CN)</a>
+        </div>
+    </div>
+    <div id="mela-content"></div>
+</div>
+
+<script>
+(() => {
+    const tByLang = {
+        kr: {
+            subtitle: "멜라누아 포토쉴드 코어",
+            missionTitle: "멜라닌의 유익함을<br>모두가 누릴 수 있도록.",
+            missionBody: "우리의 미션은 멜라닌의 유익함을 모두가 누릴 수 있도록 하는 것입니다. 기존 화학 소재의 한계를 보완하는 방향으로, 안전성을 고려한 아름다운 제품을 설계하고 보급함으로써 피부 보호와 항산화, 심미적 기능을 아우르는 제품 생태계를 지향합니다.",
+            melaninTitle: "자연이 설계한<br class=\"mo-br\">강력한 방어 메커니즘.",
+            melaninBody: "멜라닌은 단순한 색소가 아닙니다. 생명체가 생존하기 위해 선택한 필수적인 보호수단입니다. 자외선 등 유해광선을 흡수하고, 활성산소 및 중금속에 대응하는 특성을 통해 피부 보호에 기여할 수 있는 방어 메커니즘으로 작동합니다.",
+            ingredientTitle: "극단적 순수함.<br>오직 본질만 담았습니다.",
+            ingredientLine: "글리세린, 정제수, 그리고 <span class=\"mela-ingredient-focus\">멜라닌</span>",
+            ingredientBody: "불필요한 성분을 덜어내고, 독자적인 엔지니어링 기술로 단순하고 명확한 조성을 구현했습니다.",
+            concTitle: "극도의 농축.<br>20만 명을 위한 1kg.",
+            concBody: "고순도 멜라닌을 고농축 설계하여 높은 활용 효율을 제공합니다.",
+            stat1: "1g당 멜라닌 입자 수",
+            stat2: "1g당 유효 표면적",
+            stat3: "1kg당 피부 보호 가능 인원",
+            statVal1: "13조",
+            statVal3: "20만",
+            concNote: "* 100배 희석, 0.5g/회 사용 기준 단순 계산",
+            lightTitle: "광범위한 광보호의 새로운 표준.",
+            lightBody: "동일 농도 조건에서 UV 및 블루라이트 영역의 흡광 성능 우위를 확인했습니다.",
+            lightStat1: "블루라이트 차단 (vs ZnO)",
+            lightStat2: "UVA 차단 (vs ZnO)",
+            lightStat3: "가시광선 대비 최대 UV 흡광도",
+            safetyTitle: "지구에서 가장 안전한<br class=\"mo-br\">Black을 추구합니다.",
+            safetyBody: "포토쉴드 코어는 피부 임상 저자극 테스트에서 <strong>자극 지수 0.00(비자극성)</strong>을 기록했습니다.<br>또한 평균 <strong>97%</strong>의 세포 생존율과 <strong>52%</strong>의 자극 지수 감소 수치를 확인했습니다.",
+            safe1: "세포 생존율 (MTT)", safe2: "피부 자극 지수", safe3: "자극 지수 감소",
+            antiTitle: "오랫동안 성능을 유지하는<br>지속성 항산화 솔루션.",
+            antiStat1: "비타민 C 대비 지속 항산화 효과",
+            antiStat2: "라디칼 제거 유효 지속 시간",
+            antiBody: "비타민 C의 항산화 효과는 빠르게 감소하는 반면, 멜라닌은 일주일이 지나도 항산화 효과를 유지합니다.",
+            techTitle: "콜드체인 제로.<br>경계 없는 통합.",
+            techBody: "-20°C에서 80°C까지 장기간 보관이 가능하며, 단순 교반만으로 에멀젼, 세럼, 크림 등 다양한 베이스에 즉시 융합됩니다. 고비용의 특수 보관 설비나 복잡한 전처리 과정이 필요 없습니다.",
+            tech1: "열안정성", tech2: "제형 안정성",
+            ecoTitle: "멜라닌은<br>완전 생분해성 천연물.",
+            ecoBody: "멜라닌은 완전히 생분해되는 천연 유래 원료로, 사용 후 환경 영향을 줄이는 방향의 소재 설계에 적합합니다.",
+            eco1: "천연 유래 원료", eco2: "생분해성", eco2Val: "완전 광물화",
+            specTitle: "글로벌 규제 대응 및 조성.",
+            compTitle: "Composition",
+            reg1: "비나노 물질", reg2: "Free (미함유)",
+            disclaimerTitle: "법적 고지 및 면책 조항",
+            disclaimerBody: "본 자료의 수치와 결과는 공인 시험 기관 및 멜라누아 R&D 센터의 실측 데이터를 기반으로 합니다. 원료 단독 특성을 설명하며 완제품의 최종 효능을 확정적으로 보장하지 않으므로 최종 제형에 대한 안정성 검증을 권장합니다. 인허가 및 표시 광고 준수 책임은 화장품책임판매업자에게 귀속됩니다.",
+            footerTitle: "멜라누아는 경쟁하지 않습니다.",
+            footerBody: "이 세상에 더 나은 대안이 있다면 기꺼이 양보하겠습니다.<br class=\"pc-br\">우리는 경쟁 대신, 기존에 없던 새로운 가치를 찾습니다.",
+            size: "표준 규격: 30g / 500g / 5kg",
+            support: "기술 지원 및 구매 상담 | 카카오톡 채널 : 멜라누아",
+            tags: ["#비독성", "#유해광 차단", "#중금속 흡착", "#항산화"]
+        },
+        en: {
+            subtitle: "Melanoir Photoshield Core",
+            missionTitle: "Make melanin's benefits<br>accessible to everyone.",
+            missionBody: "Our mission is to make the benefits of melanin available to everyone. We complement the limits of conventional chemical materials and design safe, beautiful solutions that support skin protection, antioxidant performance, and aesthetic outcomes.",
+            melaninTitle: "A powerful defense mechanism<br>designed by nature.",
+            melaninBody: "Melanin is not just a pigment. It is an essential protection system selected by life itself. It absorbs harmful light such as UV and can help protect skin by responding to free radicals and heavy metals.",
+            ingredientTitle: "Extreme purity.<br>Only the essence remains.",
+            ingredientLine: "Glycerin, purified water, and <span class=\"mela-ingredient-focus\">melanin</span>",
+            ingredientBody: "By removing unnecessary ingredients, we built a clean and simple composition through proprietary engineering.",
+            concTitle: "Extreme concentration.<br>1kg for 200,000 people.",
+            concBody: "High-purity melanin is concentrated for high practical efficiency.",
+            stat1: "Melanin particles per 1g",
+            stat2: "Effective surface area per 1g",
+            stat3: "Potential users protected per 1kg",
+            statVal1: "13T",
+            statVal3: "200K",
+            concNote: "* Simple estimate based on 100x dilution and 0.5g per use",
+            lightTitle: "A new standard for<br>broad-spectrum light protection.",
+            lightBody: "At equal concentration, absorbance performance was superior in UV and blue-light ranges.",
+            lightStat1: "Blue-light shielding (vs ZnO)",
+            lightStat2: "UVA shielding (vs ZnO)",
+            lightStat3: "Max UV absorbance vs visible light",
+            safetyTitle: "Pursuing the safest<br class=\"mo-br\">black on Earth.",
+            safetyBody: "Photoshield Core recorded a <strong>0.00 irritation index (non-irritant)</strong> in clinical skin low-irritation testing.<br>It also showed average <strong>97%</strong> cell viability and a <strong>52%</strong> reduction in irritation index.",
+            safe1: "Cell viability (MTT)", safe2: "Skin irritation index", safe3: "Irritation index reduction",
+            antiTitle: "A long-lasting<br>antioxidant solution.",
+            antiStat1: "Sustained antioxidant effect vs Vitamin C",
+            antiStat2: "Effective radical-scavenging duration",
+            antiBody: "While Vitamin C loses antioxidant power quickly, melanin maintains its effect even after seven days.",
+            techTitle: "Zero cold chain.<br>Seamless integration.",
+            techBody: "Stable storage is possible from -20°C to 80°C, and it blends into emulsions, serums, and creams with simple stirring. No costly storage systems or complex preprocessing is needed.",
+            tech1: "Thermal stability", tech2: "Formulation stability",
+            ecoTitle: "Melanin is a<br>fully biodegradable natural material.",
+            ecoBody: "Melanin is a naturally derived, fully biodegradable ingredient suitable for material design that reduces environmental impact after use.",
+            eco1: "Natural-origin ingredient", eco2: "Biodegradability", eco2Val: "Complete mineralization",
+            specTitle: "Global regulatory readiness and composition.",
+            compTitle: "Composition",
+            reg1: "Non-nano material", reg2: "Free (not included)",
+            disclaimerTitle: "Legal Notice & Disclaimer",
+            disclaimerBody: "The values and results in this material are based on measured data from certified testing institutions and Melanoir R&D Center. These explain raw material characteristics and do not guarantee final efficacy of finished products; validation of final formulations is recommended. Compliance responsibility belongs to the responsible cosmetics distributor.",
+            footerTitle: "Melanoir does not compete.",
+            footerBody: "If there is a better alternative in this world, we will gladly yield.<br class=\"pc-br\">Instead of competition, we seek new value that did not exist before.",
+            size: "Standard sizes: 30g / 500g / 5kg",
+            support: "Technical support and purchasing inquiries | KakaoTalk Channel: Melanoir",
+            tags: ["#Non-toxic", "#Light Shielding", "#Heavy Metal Adsorption", "#Antioxidant"]
+        },
+        fr: {
+            subtitle: "Melanoir Photoshield Core",
+            missionTitle: "Rendre les bienfaits de la mélanine<br>accessibles à tous.",
+            missionBody: "Notre mission est de permettre à chacun de bénéficier de la mélanine. Nous compensons les limites des matériaux chimiques conventionnels en concevant des solutions sûres et esthétiques pour la protection cutanée et l'action antioxydante.",
+            melaninTitle: "Un puissant mécanisme de défense<br>conçu par la nature.",
+            melaninBody: "La mélanine n'est pas un simple pigment. C'est un système de protection essentiel. Elle absorbe les rayonnements nocifs comme les UV et aide à protéger la peau contre les radicaux libres et les métaux lourds.",
+            ingredientTitle: "Pureté extrême.<br>Uniquement l'essentiel.",
+            ingredientLine: "Glycérine, eau purifiée et <span class=\"mela-ingredient-focus\">mélanine</span>",
+            ingredientBody: "En éliminant les composants inutiles, nous avons créé une composition claire et simple grâce à une ingénierie propriétaire.",
+            concTitle: "Concentration extrême.<br>1 kg pour 200 000 personnes.",
+            concBody: "La mélanine de haute pureté est concentrée pour une efficacité d'utilisation maximale.",
+            stat1: "Particules de mélanine par 1 g",
+            stat2: "Surface active par 1 g",
+            stat3: "Personnes potentiellement protégées par 1 kg",
+            statVal1: "13 B",
+            statVal3: "200 k",
+            concNote: "* Estimation simple sur la base d'une dilution x100 et de 0,5 g par usage",
+            lightTitle: "Une nouvelle norme de photoprotection<br>à large spectre.",
+            lightBody: "À concentration identique, la performance d'absorption est supérieure dans les zones UV et lumière bleue.",
+            lightStat1: "Blocage lumière bleue (vs ZnO)",
+            lightStat2: "Blocage UVA (vs ZnO)",
+            lightStat3: "Absorbance UV max vs lumière visible",
+            safetyTitle: "Vers le noir le plus sûr<br class=\"mo-br\">sur Terre.",
+            safetyBody: "Photoshield Core a obtenu un <strong>indice d'irritation de 0,00 (non irritant)</strong> lors d'un test clinique cutané.<br>Il a aussi montré <strong>97 %</strong> de viabilité cellulaire moyenne et une réduction de <strong>52 %</strong> de l'indice d'irritation.",
+            safe1: "Viabilité cellulaire (MTT)", safe2: "Indice d'irritation cutanée", safe3: "Réduction de l'indice d'irritation",
+            antiTitle: "Une solution antioxydante<br>durable.",
+            antiStat1: "Effet antioxydant durable vs vitamine C",
+            antiStat2: "Durée efficace d'élimination des radicaux",
+            antiBody: "Alors que l'effet antioxydant de la vitamine C diminue rapidement, la mélanine conserve son efficacité même après sept jours.",
+            techTitle: "Zéro chaîne du froid.<br>Intégration sans frontières.",
+            techBody: "Stockage stable de -20°C à 80°C et intégration immédiate dans les émulsions, sérums et crèmes par simple agitation.",
+            tech1: "Stabilité thermique", tech2: "Stabilité de formulation",
+            ecoTitle: "La mélanine est un matériau naturel<br>entièrement biodégradable.",
+            ecoBody: "La mélanine est un ingrédient naturel entièrement biodégradable, adapté à des conceptions réduisant l'impact environnemental.",
+            eco1: "Ingrédient d'origine naturelle", eco2: "Biodégradabilité", eco2Val: "Minéralisation complète",
+            specTitle: "Conformité réglementaire mondiale et composition.",
+            compTitle: "Composition",
+            reg1: "Matériau non nano", reg2: "Free (non inclus)",
+            disclaimerTitle: "Mentions légales et clause de non-responsabilité",
+            disclaimerBody: "Les chiffres et résultats de ce document reposent sur des données mesurées par des organismes certifiés et le centre R&D Melanoir. Ils décrivent les caractéristiques de la matière première et ne garantissent pas l'efficacité finale d'un produit fini. Une validation de la formulation finale est recommandée.",
+            footerTitle: "Melanoir ne concurrence pas.",
+            footerBody: "S'il existe une meilleure alternative, nous sommes prêts à lui céder la place.<br class=\"pc-br\">Au lieu de la concurrence, nous cherchons une valeur nouvelle.",
+            size: "Formats standards : 30g / 500g / 5kg",
+            support: "Support technique et achat | Canal KakaoTalk : Melanoir",
+            tags: ["#Non-toxique", "#Protection lumineuse", "#Adsorption métaux lourds", "#Antioxydant"]
+        },
+        jp: {
+            subtitle: "メラヌア フォトシールド コア",
+            missionTitle: "メラニンの価値を<br>すべての人へ。",
+            missionBody: "私たちの使命は、メラニンの有益性を誰もが享受できるようにすることです。既存化学素材の限界を補完し、安全性を考慮した美しい製品設計により、皮膚保護・抗酸化・審美機能を包括する製品生態系を目指します。",
+            melaninTitle: "自然が設計した<br>強力な防御メカニズム。",
+            melaninBody: "メラニンは単なる色素ではありません。生命が選んだ本質的な防御手段です。紫外線などの有害光を吸収し、活性酸素や重金属への対応特性を通じて皮膚保護に寄与します。",
+            ingredientTitle: "極限の純度。<br>本質だけを。",
+            ingredientLine: "グリセリン、精製水、そして <span class=\"mela-ingredient-focus\">メラニン</span>",
+            ingredientBody: "不要な成分を削ぎ落とし、独自エンジニアリングでシンプルかつ明確な組成を実現しました。",
+            concTitle: "極度の濃縮。<br>1kgで20万人分。",
+            concBody: "高純度メラニンの高濃縮設計により、高い活用効率を提供します。",
+            stat1: "1gあたりメラニン粒子数",
+            stat2: "1gあたり有効表面積",
+            stat3: "1kgあたり皮膚保護可能人数",
+            statVal1: "13兆",
+            statVal3: "20万",
+            concNote: "* 100倍希釈・1回0.5g使用基準の簡易計算",
+            lightTitle: "広範囲光保護の<br>新しい標準。",
+            lightBody: "同一濃度条件で、UVおよびブルーライト領域の吸光性能優位を確認しました。",
+            lightStat1: "ブルーライト遮断 (vs ZnO)",
+            lightStat2: "UVA遮断 (vs ZnO)",
+            lightStat3: "可視光 대비最大UV吸光度",
+            safetyTitle: "地球で最も安全な<br class=\"mo-br\">Blackを追求。",
+            safetyBody: "フォトシールドコアは、皮膚低刺激臨床試験で<strong>刺激指数0.00（非刺激）</strong>を記録しました。<br>また、平均<strong>97%</strong>の細胞生存率と<strong>52%</strong>の刺激指数低減を確認しました。",
+            safe1: "細胞生存率 (MTT)", safe2: "皮膚刺激指数", safe3: "刺激指数低減",
+            antiTitle: "長く性能を保つ<br>持続型抗酸化ソリューション。",
+            antiStat1: "ビタミンC 대비持続抗酸化効果",
+            antiStat2: "ラジカル除去有効持続時間",
+            antiBody: "ビタミンCの抗酸化効果は急速に低下しますが、メラニンは7日後も効果を維持します。",
+            techTitle: "コールドチェーン不要。<br>境界のない統合。",
+            techBody: "-20°Cから80°Cまで長期保管が可能で、単純攪拌のみでエマルジョン・セラム・クリームなどに即時融合します。",
+            tech1: "熱安定性", tech2: "製剤安定性",
+            ecoTitle: "メラニンは<br>完全生分解性の天然物。",
+            ecoBody: "メラニンは完全生分解される天然由来原料で、使用後の環境影響を低減する素材設計に適しています。",
+            eco1: "天然由来原料", eco2: "生分解性", eco2Val: "完全鉱物化",
+            specTitle: "グローバル規制対応と組成。",
+            compTitle: "Composition",
+            reg1: "非ナノ物質", reg2: "Free (未配合)",
+            disclaimerTitle: "法的告知および免責事項",
+            disclaimerBody: "本資料の数値と結果は、公認試験機関およびメラヌアR&Dセンターの実測データに基づきます。原料単独特性の説明であり、完成品の最終効能を保証するものではないため、最終処方の安定性検証を推奨します。",
+            footerTitle: "メラヌアは競争しません。",
+            footerBody: "この世界により良い代替があるなら、喜んで譲ります。<br class=\"pc-br\">競争の代わりに、これまでになかった価値を探します。",
+            size: "標準規格: 30g / 500g / 5kg",
+            support: "技術サポート・購入相談 | カカオトークチャンネル : メラヌア",
+            tags: ["#無毒性", "#有害光遮断", "#重金属吸着", "#抗酸化"]
+        },
+        cn: {
+            subtitle: "Melanoir Photoshield Core",
+            missionTitle: "让所有人都能享受<br>黑色素的价值。",
+            missionBody: "我们的使命是让所有人都能享受黑色素的益处。通过补足传统化学材料的局限，我们设计并推广兼顾安全与美感的产品生态，覆盖皮肤防护、抗氧化与审美功能。",
+            melaninTitle: "自然设计的<br>强大防御机制。",
+            melaninBody: "黑色素不只是色素，而是生命选择的关键防护机制。它能吸收紫外线等有害光，并通过应对活性氧与重金属的特性，为皮肤防护提供支持。",
+            ingredientTitle: "极致纯净。<br>只保留本质。",
+            ingredientLine: "甘油、纯净水，以及 <span class=\"mela-ingredient-focus\">黑色素</span>",
+            ingredientBody: "去除不必要成分，通过独有工程技术实现简洁清晰的配方结构。",
+            concTitle: "极致浓缩。<br>1kg 对应 20 万人。",
+            concBody: "高纯度黑色素经高浓缩设计，带来更高使用效率。",
+            stat1: "每 1g 黑色素粒子数",
+            stat2: "每 1g 有效表面积",
+            stat3: "每 1kg 可支持皮肤防护人数",
+            statVal1: "13万亿",
+            statVal3: "20万",
+            concNote: "* 按 100 倍稀释、每次 0.5g 简化估算",
+            lightTitle: "广谱光防护的<br>新标准。",
+            lightBody: "在相同浓度条件下，UV 与蓝光区间的吸收性能表现更优。",
+            lightStat1: "蓝光屏蔽 (vs ZnO)",
+            lightStat2: "UVA 屏蔽 (vs ZnO)",
+            lightStat3: "相对可见光的最大 UV 吸收度",
+            safetyTitle: "追求地球上最安全的<br class=\"mo-br\">Black。",
+            safetyBody: "Photoshield Core 在皮肤临床低刺激测试中记录到<strong>0.00 刺激指数（无刺激）</strong>。<br>同时确认平均<strong>97%</strong>细胞存活率与<strong>52%</strong>刺激指数下降。",
+            safe1: "细胞存活率 (MTT)", safe2: "皮肤刺激指数", safe3: "刺激指数下降",
+            antiTitle: "长期维持性能的<br>持续抗氧化方案。",
+            antiStat1: "相对维生素 C 的持续抗氧化效果",
+            antiStat2: "清除自由基有效持续时间",
+            antiBody: "维生素 C 的抗氧化效果会快速下降，而黑色素在 7 天后仍能维持抗氧化效果。",
+            techTitle: "零冷链。<br>无边界融合。",
+            techBody: "可在 -20°C 至 80°C 长期储存，仅需简单搅拌即可与乳液、精华、面霜等多种基底即时融合。",
+            tech1: "热稳定性", tech2: "配方稳定性",
+            ecoTitle: "黑色素是<br>完全可生物降解天然物。",
+            ecoBody: "黑色素是完全可生物降解的天然来源原料，适用于降低使用后环境影响的材料设计。",
+            eco1: "天然来源原料", eco2: "生物降解性", eco2Val: "完全矿化",
+            specTitle: "全球法规适配与组成。",
+            compTitle: "Composition",
+            reg1: "非纳米物质", reg2: "Free (未添加)",
+            disclaimerTitle: "法律声明与免责条款",
+            disclaimerBody: "本资料中的数值与结果基于认证检测机构及 Melanoir 研发中心的实测数据。内容用于说明原料单体特性，不构成对成品最终功效的绝对保证，建议对最终配方进行稳定性验证。",
+            footerTitle: "Melanoir 不参与同质竞争。",
+            footerBody: "如果世界上有更好的替代方案，我们愿意让位。<br class=\"pc-br\">与其竞争，我们更愿寻找前所未有的新价值。",
+            size: "标准规格: 30g / 500g / 5kg",
+            support: "技术支持与采购咨询 | KakaoTalk 频道 : Melanoir",
+            tags: ["#无毒", "#有害光屏蔽", "#重金属吸附", "#抗氧化"]
+        }
+    };
+
+    const localizedContent = {};
+    Object.keys(tByLang).forEach((lang) => {
+        const t = tByLang[lang];
+        localizedContent[lang] = `
+        <section class="mela-section mela-hero-section">
+            <div class="mela-container">
+                <div class="mela-hero-brand">Melanoir</div>
+                <h1 class="mela-hero-title" style="letter-spacing: 0.8px;">Photoshield Core</h1>
+                <div class="mela-hero-subtitle">${t.subtitle}</div>
+                <p class="mela-hero-kicker">Technical Brochure</p>
+                <div class="mela-hero-tags">
+                    <span class="mela-hero-tag">${t.tags[0]}</span>
+                    <span class="mela-hero-tag">${t.tags[1]}</span>
+                    <span class="mela-hero-tag">${t.tags[2]}</span>
+                    <span class="mela-hero-tag">${t.tags[3]}</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section" style="background: #fbfbfd;">
+            <div class="mela-container">
+                <div class="mela-grid-2">
+                    <div class="mela-feature-text">
+                        <h3>Mission</h3>
+                        <h2>${t.missionTitle}</h2>
+                        <p>${t.missionBody}</p>
+                    </div>
+                    <div class="mela-feature-media">
+                        <div class="mela-media-box">
+                            <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1775722105/5p-1_ygyfss.png" alt="Photoshield Core Mission Visual">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section">
+            <div class="mela-container">
+                <div style="text-align: center; margin-bottom: 80px;">
+                    <h3>Melanin</h3>
+                    <h2>${t.melaninTitle}</h2>
+                    <p style="max-width: 900px; margin: 0 auto;">${t.melaninBody}</p>
+                </div>
+                <div class="mela-media-box" style="height: 450px;">
+                    <img class="mela-desktop-only" src="https://res.cloudinary.com/dssuxurpt/image/upload/v1775722105/3p-1_jkiqsy.png" alt="Melanin Protection Visual">
+                    <img class="mela-mobile-only" src="https://res.cloudinary.com/dssuxurpt/image/upload/v1777450702/3p-1-1_tx2ocm_f7ccqm.png" alt="Melanin Protection Visual Mobile">
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section" style="background: #fbfbfd;">
+            <div class="mela-container">
+                <div class="mela-grid-2">
+                    <div class="mela-feature-text">
+                        <h3>Ingredients</h3>
+                        <h2>${t.ingredientTitle}</h2>
+                        <p>
+                            <span class="mela-ingredient-line">${t.ingredientLine}</span><br>
+                            ${t.ingredientBody}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section">
+            <div class="mela-container">
+                <div style="text-align: center; margin-bottom: 60px;">
+                    <h3>Concentrate</h3>
+                    <h2>${t.concTitle}</h2>
+                    <p>${t.concBody}</p>
+                </div>
+                <div class="mela-stats-bar">
+                    <div class="mela-stat-item"><span class="mela-stat-value">${t.statVal1}</span><span class="mela-stat-label">${t.stat1}</span></div>
+                    <div class="mela-stat-item"><span class="mela-stat-value">1m²</span><span class="mela-stat-label">${t.stat2}</span></div>
+                    <div class="mela-stat-item"><span class="mela-stat-value">${t.statVal3}</span><span class="mela-stat-label">${t.stat3}</span></div>
+                </div>
+                <p style="font-size: 1.1rem; color: #86868b; text-align: center; margin-top: 30px;">${t.concNote}</p>
+            </div>
+        </section>
+
+        <section class="mela-section" style="background: #1d1d1f; color: #ffffff; border-bottom: none;">
+            <div class="mela-container">
+                <div style="text-align: center; margin-bottom: 80px;">
+                    <h3 style="color: #86868b;">Light Absorption Data</h3>
+                    <h2 style="color: #ffffff;">${t.lightTitle}</h2>
+                    <p style="color: #a1a1a6;">${t.lightBody}</p>
+                </div>
+                <div class="mela-stats-bar mela-stats-bar-dark" style="margin: 0 auto; max-width: 980px;">
+                    <div class="mela-stat-item"><span class="mela-stat-value">4.5x</span><span class="mela-stat-label">${t.lightStat1}</span></div>
+                    <div class="mela-stat-item"><span class="mela-stat-value">2.7x</span><span class="mela-stat-label">${t.lightStat2}</span></div>
+                    <div class="mela-stat-item"><span class="mela-stat-value">300%</span><span class="mela-stat-label">${t.lightStat3}</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section">
+            <div class="mela-container">
+                <div style="text-align: center; margin-bottom: 80px;">
+                    <h3>Safety</h3>
+                    <h2>${t.safetyTitle}</h2>
+                </div>
+                <div style="max-width: 980px; margin: 0 auto;">
+                    <p style="text-align:center;">${t.safetyBody}</p>
+                    <div class="mela-stats-bar" style="margin: 30px auto 0; max-width: 980px;">
+                        <div class="mela-stat-item"><span class="mela-stat-value">97%</span><span class="mela-stat-label">${t.safe1}</span></div>
+                        <div class="mela-stat-item"><span class="mela-stat-value">0.00</span><span class="mela-stat-label">${t.safe2}</span></div>
+                        <div class="mela-stat-item"><span class="mela-stat-value">52%↓</span><span class="mela-stat-label">${t.safe3}</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section" style="background: #1d1d1f; color: #ffffff; border-bottom: none;">
+            <div class="mela-container">
+                <div style="text-align:center; max-width: 980px; margin: 0 auto;">
+                    <h3 style="color: #86868b;">Anti-Oxidant</h3>
+                    <h2 style="color: #ffffff;">${t.antiTitle}</h2>
+                    <div class="mela-stats-bar mela-stats-bar-dark" style="margin: 30px auto 0; max-width: 780px;">
+                        <div class="mela-stat-item"><span class="mela-stat-value">3.8x</span><span class="mela-stat-label">${t.antiStat1}</span></div>
+                        <div class="mela-stat-item"><span class="mela-stat-value">7 days</span><span class="mela-stat-label">${t.antiStat2}</span></div>
+                    </div>
+                    <p style="color: #a1a1a6; margin-top: 30px;">${t.antiBody}</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section" style="background: #fbfbfd;">
+            <div class="mela-container">
+                <div class="mela-grid-2">
+                    <div class="mela-feature-text">
+                        <h3>Technical Stability</h3>
+                        <h2>${t.techTitle}</h2>
+                        <p>${t.techBody}</p>
+                        <div class="mela-data-grid">
+                            <div class="mela-data-row"><span class="mela-data-label">${t.tech1}</span><span class="mela-data-value">-20 to 80°C</span></div>
+                            <div class="mela-data-row"><span class="mela-data-label">${t.tech2}</span><span class="mela-data-value">pH 3 to 8</span></div>
+                        </div>
+                    </div>
+                    <div class="mela-feature-media">
+                        <div class="mela-media-box">
+                            <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1775722105/10p-1_g8po7o.png" alt="Technical Stability Visual">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section">
+            <div class="mela-container">
+                <div class="mela-grid-2 mela-mobile-reverse">
+                    <div class="mela-feature-media">
+                        <div class="mela-media-box">
+                            <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1775722106/17p-1_ddsqqf.png" alt="Advanced Protection Visual">
+                        </div>
+                    </div>
+                    <div class="mela-feature-text">
+                        <h3>Eco-friendly</h3>
+                        <h2>${t.ecoTitle}</h2>
+                        <p>${t.ecoBody}</p>
+                        <div class="mela-data-grid">
+                            <div class="mela-data-row"><span class="mela-data-label">${t.eco1}</span><span class="mela-data-value">Natural index 1.0</span></div>
+                            <div class="mela-data-row"><span class="mela-data-label">${t.eco2}</span><span class="mela-data-value">${t.eco2Val}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mela-section" style="background: #fbfbfd;">
+            <div class="mela-container">
+                <div style="text-align: center; margin-bottom: 60px;">
+                    <h3>Specification</h3>
+                    <h2>${t.specTitle}</h2>
+                </div>
+                <div class="mela-grid-2">
+                    <div class="mela-feature-text" style="background: #fff; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                        <h3 style="color: #1d1d1f; margin-bottom: 25px;">${t.compTitle}</h3>
+                        <div class="mela-data-grid" style="margin-top: 0; border-top: none;">
+                            <div class="mela-data-row"><span>Glycerin (Vegetable Origin)</span><span>70.0%</span></div>
+                            <div class="mela-data-row"><span>Aqua</span><span>27.0%</span></div>
+                            <div class="mela-data-row"><span>Melanin (Natural Origin)</span><span>3.0%</span></div>
+                        </div>
+                    </div>
+                    <div class="mela-feature-text">
+                        <div class="mela-data-grid" style="margin-top: 0; border-top: none;">
+                            <div class="mela-data-row"><span>Non-Nano Status</span><span>${t.reg1}</span></div>
+                            <div class="mela-data-row"><span>PFAS / Paraben</span><span>${t.reg2}</span></div>
+                            <div class="mela-data-row"><span>Natural Origin Index</span><span>0.73 (73%)</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 100px; padding: 40px; border: 1px solid #d2d2d7; border-radius: 30px; font-size: 1.25rem; color: #86868b; line-height: 1.8;">
+                    <strong>${t.disclaimerTitle}</strong><br><br>${t.disclaimerBody}
+                </div>
+            </div>
+        </section>
+
+        <footer style="padding: 150px 0; text-align: center;">
+            <div class="mela-container">
+                <h2 class="mela-footer-headline">${t.footerTitle}</h2>
+                <p style="max-width: 800px; margin: 0 auto 60px; font-size: 1.7rem; color: #424245;">${t.footerBody}</p>
+                <div style="border-top: 1px solid #d2d2d7; padding-top: 60px;">
+                    <p style="font-size: 2.2rem; font-weight: 800; color: #1d1d1f; margin-bottom: 15px;">Photoshield Core</p>
+                    <p style="font-size: 1.4rem; color: #86868b; margin-bottom: 40px;">${t.size}</p>
+                    <p style="font-size: 1.8rem; font-weight: 700;">official@melanoir.com</p>
+                    <p style="font-size: 1.3rem; color: #86868b; margin-top: 10px;">${t.support}</p>
+                </div>
+            </div>
+        </footer>
+        `;
+    });
+
+    const langToHtml = { kr: "ko", en: "en", fr: "fr", jp: "ja", cn: "zh-CN" };
+    const langToTrigger = { kr: "KR", en: "EN", fr: "FR", jp: "JP", cn: "CN" };
+
+    const contentEl = document.getElementById("mela-content");
+    const triggerEl = document.getElementById("mela-lang-trigger");
+    const menuEl = document.getElementById("mela-lang-menu");
+    const langItems = Array.from(menuEl.querySelectorAll(".mela-lang-item"));
+
+    function applyLanguage(lang) {
+        if (!localizedContent[lang]) lang = "kr";
+        document.documentElement.lang = langToHtml[lang] || "ko";
+        triggerEl.textContent = langToTrigger[lang] || "KR";
+        contentEl.innerHTML = localizedContent[lang];
+        langItems.forEach((item) => item.classList.toggle("active", item.dataset.lang === lang));
+        localStorage.setItem("photoshield_core_lang", lang);
+    }
+
+    langItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+            applyLanguage(item.dataset.lang);
+        });
+    });
+
+    const saved = localStorage.getItem("photoshield_core_lang");
+    const browserLang = (navigator.language || "").toLowerCase();
+    let initialLang = "kr";
+    if (saved && localizedContent[saved]) initialLang = saved;
+    else if (browserLang.startsWith("en")) initialLang = "en";
+    else if (browserLang.startsWith("fr")) initialLang = "fr";
+    else if (browserLang.startsWith("ja")) initialLang = "jp";
+    else if (browserLang.startsWith("zh")) initialLang = "cn";
+    applyLanguage(initialLang);
+})();
+</script>
+</body>
+</html>

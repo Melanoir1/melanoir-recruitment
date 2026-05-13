@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Melanoir · Melanin</title>
+  <meta name="description" content="멜라닌 — 자연이 설계한 보호. 지구에서 가장 안전한 Black, For the Safest Black in the Universe.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="assets/melanoir-shell.css" />
+  <style>
+    /*
+     * 히어로 배경 영상 튜닝
+     * — `.section--hero` 안의 --hero-video-* 값만 바꿔가며 저장·새로고침하면 됩니다.
+     *
+     * 크롭이 심할 때(확대가 과함):
+     *   --hero-video-min-w / --hero-video-min-h 를 100%에 가깝게 낮추거나
+     *   --hero-video-extra-scale 를 1보다 작게(예: 0.88~0.95)
+     * 잘림 없이 전체 프레임:
+     *   --hero-video-fit: contain;  + min-w/min-h 는 보통 100% 권장(빈 검정 띠 생길 수 있음)
+     */
+    .section--hero {
+      position: relative;
+      isolation: isolate;
+      min-height: calc(100dvh - 56px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 48px;
+      overflow: hidden;
+
+      --hero-video-fit: cover;
+      --hero-video-min-w: 59%;
+      --hero-video-min-h: 50%;
+      --hero-video-extra-scale: 0.8;
+      --hero-video-anchor-x: 72%;
+      --hero-video-anchor-y: 50%;
+      --hero-video-object-x: 92%;
+      --hero-video-object-y: center;
+      --hero-video-mirror: -1;
+      --hero-video-brightness: 1.33;
+      --hero-video-contrast: 1.06;
+    }
+
+    @media (min-width: 480px) {
+      .section--hero {
+        --hero-video-min-w: 125%;
+        --hero-video-anchor-x: 78%;
+        --hero-video-object-x: 96%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video-bg video {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .section--hero {
+        background: #000;
+      }
+    }
+
+    .hero-video-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-video-bg video {
+      position: absolute;
+      top: var(--hero-video-anchor-y);
+      left: var(--hero-video-anchor-x);
+      transform: translate(-50%, -50%) scale(var(--hero-video-extra-scale)) scaleX(var(--hero-video-mirror));
+      min-width: var(--hero-video-min-w);
+      min-height: var(--hero-video-min-h);
+      width: auto;
+      height: auto;
+      object-fit: var(--hero-video-fit);
+      object-position: var(--hero-video-object-x) var(--hero-video-object-y);
+      filter: brightness(var(--hero-video-brightness)) contrast(var(--hero-video-contrast));
+    }
+
+    .hero-video-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.97) 0%, rgba(0, 0, 0, 0.72) 36%, rgba(0, 0, 0, 0.18) 62%, rgba(0, 0, 0, 0.06) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 42%, rgba(0, 0, 0, 0.4) 100%);
+      pointer-events: none;
+    }
+
+    .section--hero > *:not(.hero-video-bg):not(.hero-video-scrim) {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-mission .mission-en {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--shell-text-dim);
+      margin-bottom: 12px;
+    }
+
+    .hero-mission .mission-ko {
+      display: block;
+      font-size: clamp(22px, 6vw, 34px);
+      line-height: 1.12;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+      text-transform: none;
+      font-family: var(--shell-font-ko);
+      color: rgba(243, 244, 248, 0.96);
+    }
+
+    .hero-promise {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--shell-line-strong);
+    }
+
+    .hero-promise-ko {
+      margin: 0 0 10px;
+      font-size: clamp(18px, 4.5vw, 26px);
+      font-weight: 700;
+      line-height: 1.2;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      font-family: var(--shell-font-ko);
+      color: rgba(255, 255, 255, 0.96);
+    }
+
+    .hero-promise-en {
+      margin: 0;
+      font-size: clamp(14px, 3.2vw, 18px);
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: var(--shell-text-dim);
+    }
+
+    .scroll-hint {
+      margin: 36px 0 0;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .hero-title {
+      font-size: clamp(34px, 11vw, 56px);
+      line-height: 0.95;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      margin: 0 0 16px;
+    }
+
+    .section-head {
+      font-size: clamp(28px, 8vw, 42px);
+      line-height: 1.02;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      margin: 0 0 18px;
+    }
+
+    .section-head--ko {
+      text-transform: none;
+      font-family: var(--shell-font-ko);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head--sentence {
+      text-transform: none;
+      letter-spacing: 0.02em;
+      line-height: 1.08;
+      font-size: clamp(22px, 5.8vw, 34px);
+      max-width: none;
+    }
+
+    .prose {
+      margin: 0 0 28px;
+    }
+
+    .prose:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-visual {
+      margin: 0 0 22px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--shell-line);
+      background: #0a0a0c;
+    }
+
+    .section-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 480px) {
+      .stat-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .stat-cell {
+      border: 1px solid var(--shell-line);
+      border-radius: 14px;
+      padding: 18px 14px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    }
+
+    .stat-cell dt {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: rgba(243, 244, 248, 0.95);
+      margin: 0 0 8px;
+    }
+
+    .stat-cell dd {
+      margin: 0;
+      text-transform: none;
+      letter-spacing: normal;
+      font-family: var(--shell-font-ko);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--shell-text-dim);
+    }
+
+    .domain-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .domain-cell {
+      border: 1px solid var(--shell-line);
+      border-radius: 14px;
+      padding: 18px 14px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    }
+
+    .domain-cell h3 {
+      font-size: 18px;
+      letter-spacing: 0.06em;
+      margin: 0 0 10px;
+    }
+
+    .domain-cell p {
+      margin: 0;
+      text-transform: none;
+      letter-spacing: normal;
+      font-family: var(--shell-font-ko);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--shell-text-dim);
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="app">
+    <header class="topbar">
+      <a class="logo" href="index.html">MELANOIR</a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html">Melanoir</a>
+        <a href="products/index.html">Products</a>
+        <a href="#technology">Technology</a>
+        <a class="nav-cta" href="recruitment/index.html">Job Opening</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section section--hero" aria-labelledby="mission-title">
+        <div class="hero-video-bg" aria-hidden="true">
+          <video
+            id="heroMissionVideo"
+            autoplay
+            muted
+            loop
+            playsinline
+            disablePictureInPicture
+          >
+            <source src="https://res.cloudinary.com/dssuxurpt/video/upload/v1778651445/Moon_gold_ighxxq.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hero-video-scrim" aria-hidden="true"></div>
+        <h1 id="mission-title" class="hero-mission">
+          <span class="mission-en eyebrow" style="margin-bottom:12px;">OUR MISSION</span>
+          <span class="mission-ko">우리의 미션은 멜라닌의 유익함을 모두가 누릴 수 있도록 하는 것입니다.</span>
+        </h1>
+        <div class="hero-promise" role="group" aria-label="브랜드 약속 — 동일 문구의 한국어와 영어">
+          <p class="hero-promise-ko">지구에서 가장 안전한 Black</p>
+          <p class="hero-promise-en">For the Safest Black in the Universe.</p>
+        </div>
+        <p class="scroll-hint">SCROLL</p>
+      </section>
+
+      <section class="section" id="melanin" aria-labelledby="melanin-title">
+        <p class="eyebrow">THE MATERIAL</p>
+        <h2 id="melanin-title" class="hero-title">WHY MELANIN</h2>
+        <figure class="section-visual">
+          <img
+            src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778563118/Phothotherm_crop_ma9fjr.png"
+            alt="멜라닌과 광·산화 환경을 상징하는 비주얼"
+            loading="lazy"
+            decoding="async">
+        </figure>
+        <p class="prose">
+          멜라닌은 생명이 오랜 시간 동안 빛과 산화로부터 자신을 지키기 위해 진화시킨 <strong>자연의 방패</strong>입니다.
+          합성 색소가 남기는 화학적 부담 대신, 생체에 가깝게 작동하는 광보호·항산화의 축을 하나의 물질 안에 모읍니다.
+          멜라누아가 다루는 이야기의 중심은 언제나 <strong>멜라닌 그 자체</strong>이며, 그 유익함을 더 많은 사람의 일상으로 가져가는 일입니다.
+        </p>
+        <dl class="stat-row">
+          <div class="stat-cell">
+            <dt>Bio-material</dt>
+            <dd>생체에서 영감을 받은 고기능 소재. 검은색이 요구되는 자리마다, 더 안전한 대안으로서의 멜라닌을 상상합니다.</dd>
+          </div>
+          <div class="stat-cell">
+            <dt>Reach</dt>
+            <dd>실험실의 소량에서 시작해, 지구와 우주를 가로지르는 응용까지. 스케일이 커질수록 멜라닌이 대체할 수 있는 영역은 넓어집니다.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <div id="technology">
+        <section class="section" id="tech-research" aria-labelledby="tech-title">
+          <p class="eyebrow">IRRADIATION</p>
+          <h2 id="tech-title" class="section-head section-head--sentence">How we drive innovation</h2>
+          <figure class="section-visual">
+            <img
+              src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778563616/Irradiation_eaqkxe.png"
+              alt="조사·광 스트레스 조건에서 멜라닌과 비교 소재의 안정성을 보여 주는 실험 비주얼"
+              loading="lazy"
+              decoding="async">
+          </figure>
+          <p class="prose">
+            멜라닌의 가치는 말로만 완성되지 않습니다. 실험과 데이터를 통해 그 안전성과 기능을 확인하고, 그 결과를 세상과 나누는 것이 멜라누아의 태도입니다.
+            우리는 멜라닌이 가진 물리·생물학적 특성을 끝까지 읽어 내고, 그 가능성을 새로운 기준으로 제시합니다.
+          </p>
+        </section>
+
+        <section class="section" id="domains" aria-labelledby="domains-title">
+          <p class="eyebrow">SCALE</p>
+          <h2 id="domains-title" class="section-head section-head--sentence">Our trajectory</h2>
+          <figure class="section-visual">
+            <img
+              src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778563885/powder_joxoc1.png"
+              alt="순수 멜라닌 분말이 쌓이며 스케일을 상징하는 비주얼"
+              loading="lazy"
+              decoding="async">
+          </figure>
+          <p class="prose">
+            같은 물질이어도, 영역마다 요구되는 역할은 다릅니다. 아래는 멜라닌이 어떤 세계와 맞닿아 있는지에 대한 방향이며, 각 축이 지향하는 공통 목표는 <strong>지구에서 가장 안전한 Black</strong>입니다.
+          </p>
+          <div class="domain-grid">
+            <article class="domain-cell" id="domain-beauty">
+              <h3>BEAUTY</h3>
+              <p>피부와 맞닿는 일상의 보호. 멜라닌은 감각을 넘어, 빛과 시간에 대한 방어를 새롭게 정의할 수 있는 소재입니다.</p>
+            </article>
+            <article class="domain-cell" id="domain-medical">
+              <h3>MEDICAL</h3>
+              <p>생체와의 상호작용이 중요한 영역에서, 멜라닌의 안정성과 보호성은 실사용 기술로 이어질 수 있는 잠재력을 품습니다.</p>
+            </article>
+            <article class="domain-cell" id="domain-space">
+              <h3>SPACE</h3>
+              <p>극한 환경에서는 물질의 내구와 방호가 곧 생존입니다. 우주를 포함한 차세대 산업이 요구하는 검은 방패로서 멜라닌을 상상합니다.</p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>© Melanoir</p>
+      <p>문의·쇼핑: <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var v = document.getElementById("heroMissionVideo");
+      if (v && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        v.pause();
+        v.removeAttribute("autoplay");
+      }
+    })();
+  </script>
+  <script>
+    (function () {
+      var bar = document.getElementById("scrollProgress");
+      if (!bar) return;
+      function tick() {
+        var y = window.scrollY || window.pageYOffset;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var p = max > 0 ? (y / max) * 100 : 0;
+        bar.style.width = Math.max(0, Math.min(100, p)) + "%";
+      }
+      tick();
+      window.addEventListener("scroll", tick, { passive: true });
+      window.addEventListener("resize", tick);
+    })();
+  </script>
+</body>
+</html>

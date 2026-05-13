@@ -1,0 +1,421 @@
+/* Melanoir site shell — 랜딩·제품 목록·채용 공통 (제품 상세 HTML 제외) */
+
+:root {
+  --shell-bg: #000;
+  --shell-line: rgba(255, 255, 255, 0.16);
+  --shell-line-strong: rgba(255, 255, 255, 0.34);
+  --shell-text: #f3f4f8;
+  --shell-text-dim: rgba(243, 244, 248, 0.76);
+  --shell-font: "Barlow Condensed", "DIN Alternate", "D-DIN", Bahnschrift, "Arial Narrow", Arial, sans-serif;
+  --shell-font-ko: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  --shell-max: 560px;
+  --shell-pad-x: 18px;
+  --shell-pad-y: 36px;
+  /* recruitment 레거시 변수명 호환 */
+  --bg: var(--shell-bg);
+  --line: var(--shell-line);
+  --line-strong: var(--shell-line-strong);
+  --text: var(--shell-text);
+  --text-dim: var(--shell-text-dim);
+  --font: var(--shell-font);
+  --max: var(--shell-max);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--shell-bg);
+  color: var(--shell-text);
+  font-family: var(--shell-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  letter-spacing: 0.03em;
+  word-break: keep-all;
+  text-transform: uppercase;
+  overflow-x: hidden;
+}
+
+.app {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  min-height: 100dvh;
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 52%),
+    linear-gradient(180deg, #08080b 0%, #000 42%, #030307 100%);
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  z-index: 200;
+  background: linear-gradient(90deg, rgba(243, 244, 248, 0.75), #ffffff);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 16px var(--shell-pad-x);
+  border-bottom: 1px solid var(--shell-line);
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--shell-text);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: #fff;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav a {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: #fff;
+}
+
+.nav a.is-here {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 2px;
+}
+
+.nav a.nav-cta {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 8px 12px;
+  border-radius: 2px;
+}
+
+.nav a.nav-cta:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.topbar-meta {
+  width: 100%;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  margin-top: 4px;
+  border-top: 1px solid var(--shell-line);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.topbar-meta strong {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.btn-meta {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 7px 12px;
+  border-radius: 2px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-family: var(--shell-font-ko);
+  text-transform: none;
+}
+
+.btn-meta:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* 섹션 리듬 (채용·역할 상세 공통) */
+.section {
+  padding: var(--shell-pad-y) var(--shell-pad-x);
+  border-bottom: 1px solid var(--shell-line);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 11px;
+  color: var(--shell-text-dim);
+  letter-spacing: 0.12em;
+}
+
+.lead,
+.manifesto-text,
+.job-desc,
+.value-desc,
+.list,
+.quote,
+.prose {
+  font-family: var(--shell-font-ko);
+}
+
+.prose {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(243, 244, 248, 0.88);
+}
+
+.lead {
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.65;
+  color: rgba(243, 244, 248, 0.92);
+  font-size: 16px;
+}
+
+/* 제품 목록 */
+.page-title {
+  font-size: clamp(30px, 9vw, 46px);
+  line-height: 1.02;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+.products-lead {
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.65;
+  color: rgba(243, 244, 248, 0.88);
+  font-size: 16px;
+  margin: 0 0 24px;
+  font-family: var(--shell-font-ko);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 520px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.product-grid .card {
+  border: 1px solid var(--shell-line);
+  border-radius: 14px;
+  padding: 20px 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+
+.product-grid .card h2 {
+  font-size: clamp(22px, 5vw, 28px);
+  letter-spacing: 0.05em;
+  margin: 0 0 10px;
+  line-height: 1.05;
+}
+
+.product-grid .card p {
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: var(--shell-font-ko);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--shell-text-dim);
+  margin: 0 0 auto;
+  padding-bottom: 18px;
+}
+
+.product-grid .card .btn {
+  display: inline-block;
+  text-align: center;
+  margin-top: auto;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border-radius: 2px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.product-grid .card .btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #fff;
+}
+
+.role-detail .title {
+  margin: 0 0 12px;
+  font-size: clamp(30px, 9vw, 44px);
+  line-height: 0.96;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.role-detail .lead {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.role-detail .section .card {
+  margin-top: 12px;
+  border: 1px solid var(--shell-line);
+  border-radius: 14px;
+  padding: 18px 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
+
+.role-detail .quote {
+  margin-top: 12px;
+  margin-bottom: 0;
+  padding-left: 10px;
+  border-left: 2px solid var(--shell-line-strong);
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.6;
+  color: rgba(243, 244, 248, 0.86);
+  font-size: 14px;
+}
+
+.role-detail .list {
+  margin: 0;
+  padding-left: 16px;
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: var(--shell-font-ko);
+  color: rgba(243, 244, 248, 0.9);
+}
+
+.role-detail .list li {
+  margin: 6px 0;
+  line-height: 1.45;
+}
+
+.role-detail .cta-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.role-detail .cta-row .btn {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 2px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--shell-font-ko);
+  text-transform: none;
+}
+
+.role-detail .cta-row .btn:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 420px) {
+  .role-detail .title {
+    font-size: clamp(26px, 9vw, 38px);
+  }
+
+  .role-detail .quote {
+    font-size: 13px;
+  }
+
+  .role-detail .section .card {
+    padding: 14px 12px;
+  }
+
+  .role-detail .cta-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.site-footer {
+  padding: 28px var(--shell-pad-x) 40px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: var(--shell-font-ko);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer p:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.site-footer a {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.foot {
+  padding: 28px var(--shell-pad-x) 36px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: var(--shell-font-ko);
+  border-top: 1px solid var(--shell-line);
+}
+
+@media (max-width: 420px) {
+  .section {
+    padding: 28px 14px;
+  }
+
+  .topbar {
+    padding: 14px 14px;
+  }
+}

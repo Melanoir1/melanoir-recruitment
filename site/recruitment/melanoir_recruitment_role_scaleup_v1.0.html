@@ -8,140 +8,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #000;
-      --line: rgba(255, 255, 255, 0.16);
-      --line-strong: rgba(255, 255, 255, 0.34);
-      --text: #f3f4f8;
-      --text-dim: rgba(243, 244, 248, 0.78);
-      --font: "Barlow Condensed", "DIN Alternate", "D-DIN", Bahnschrift, "Arial Narrow", Arial, sans-serif;
-      --max: 560px;
-    }
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      -webkit-font-smoothing: antialiased;
-    }
-    body { text-transform: uppercase; letter-spacing: 0.03em; word-break: keep-all; overflow-x: hidden; }
-    .app {
-      max-width: var(--max);
-      margin: 0 auto;
-      min-height: 100dvh;
-      background:
-        radial-gradient(90% 50% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 55%),
-        linear-gradient(180deg, #08080b 0%, #000 45%, #030307 100%);
-    }
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: blur(8px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .section { padding: 26px 18px; border-bottom: 1px solid var(--line); }
-    .eyebrow { margin: 0 0 10px; font-size: 11px; color: var(--text-dim); }
-    .title { margin: 0 0 12px; font-size: clamp(30px, 9vw, 44px); line-height: 0.96; }
-    .lead, .desc {
-      margin: 0;
-      text-transform: none;
-      letter-spacing: normal;
-      color: rgba(243, 244, 248, 0.92);
-      line-height: 1.55;
-      font-size: 16px;
-    }
-    .desc { color: var(--text-dim); }
-    .card {
-      margin-top: 12px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .card h3 { margin: 0 0 8px; font-size: 16px; }
-    .quote {
-      margin-top: 12px;
-      margin-bottom: 0;
-      padding-left: 10px;
-      border-left: 2px solid var(--line-strong);
-      text-transform: none;
-      letter-spacing: normal;
-      line-height: 1.6;
-      color: rgba(243, 244, 248, 0.86);
-      font-size: 14px;
-    }
-    .list {
-      margin: 0;
-      padding-left: 16px;
-      text-transform: none;
-      letter-spacing: normal;
-      color: rgba(243, 244, 248, 0.9);
-    }
-    .list li { margin: 6px 0; line-height: 1.45; }
-    .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-    .btn {
-      border: 1px solid var(--line-strong);
-      border-radius: 999px;
-      padding: 10px 12px;
-      font-size: 12px;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    @media (max-width: 420px) {
-      .topbar {
-        padding: 12px 14px;
-      }
-
-      .section {
-        padding: 22px 14px;
-      }
-
-      .title {
-        font-size: clamp(26px, 9vw, 38px);
-      }
-
-      .lead {
-        font-size: 15px;
-      }
-
-      .quote {
-        font-size: 13px;
-      }
-
-      .card {
-        padding: 10px;
-      }
-
-      .list li {
-        margin: 5px 0;
-      }
-
-      .cta-row {
-        gap: 8px;
-      }
-
-      .btn {
-        width: 100%;
-        text-align: center;
-      }
-    }
-  </style>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="../assets/melanoir-shell.css" />
 </head>
 <body>
-  <div class="app">
+  <div class="app role-detail">
     <header class="topbar">
-      <strong>R&D TRACK 01</strong>
-      <a class="btn" href="melanoir_recruitment_spacex_v1.1.html">요약으로</a>
+      <a class="logo" href="../index.html">MELANOIR</a>
+      <nav class="nav" aria-label="Main">
+        <a href="../index.html">Melanoir</a>
+        <a href="../products/index.html">Products</a>
+        <a href="../index.html#technology">Technology</a>
+        <a class="nav-cta is-here" href="index.html">Job Opening</a>
+      </nav>
+      <div class="topbar-meta">
+        <strong>R&amp;D TRACK 01</strong>
+        <a class="btn-meta" href="index.html">요약으로</a>
+      </div>
     </header>
 
     <section class="section">
@@ -212,8 +95,8 @@
       </div>
       <p class="quote">멜라누아의 성장은 구성원들의 성장으로 이루어집니다.<br>개인의 성장에 동의하는 열정적 팀원을 필요로 합니다.</p>
       <div class="cta-row">
-        <a class="btn" href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">홈페이지</a>
-        <a class="btn" href="mailto:official@melanoir.com">지원하기</a>
+        <a class="btn" href="../index.html">홈페이지</a>
+        <a class="btn" href="index.html#apply-form">지원하기</a>
       </div>
     </section>
   </div>
