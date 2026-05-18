@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="assets/melanoir-shell.css" />
+  <link rel="stylesheet" href="assets/melanoir-lang.css" />
   <style>
     /*
      * 히어로 배경 영상 튜닝
@@ -100,6 +101,7 @@
       z-index: 2;
     }
 
+    .hero-mission .mission-eyebrow,
     .hero-mission .mission-en {
       display: block;
       font-size: 11px;
@@ -108,6 +110,7 @@
       margin-bottom: 12px;
     }
 
+    .hero-mission .mission-body,
     .hero-mission .mission-ko {
       display: block;
       font-size: clamp(22px, 6vw, 34px);
@@ -125,6 +128,7 @@
       border-top: 1px solid var(--shell-line-strong);
     }
 
+    .hero-promise-primary,
     .hero-promise-ko {
       margin: 0 0 10px;
       font-size: clamp(18px, 4.5vw, 26px);
@@ -136,6 +140,12 @@
       color: rgba(255, 255, 255, 0.96);
     }
 
+    .hero-promise-primary:last-child,
+    .hero-promise-ko:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-promise-secondary,
     .hero-promise-en {
       margin: 0;
       font-size: clamp(14px, 3.2vw, 18px);
@@ -273,135 +283,224 @@
       line-height: 1.55;
       color: var(--shell-text-dim);
     }
+
+    /* —— 모션 (recruitment 페이지와 동일 패턴) —— */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 560ms ease, transform 560ms ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 460ms ease, transform 460ms ease;
+    }
+
+    .stagger-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-mission .mission-eyebrow,
+    .hero-mission .mission-en { transition-delay: 0ms; }
+    .hero-mission .mission-body,
+    .hero-mission .mission-ko { transition-delay: 100ms; }
+    .hero-promise { transition-delay: 200ms; }
+    .scroll-hint { transition-delay: 320ms; }
+
+    .stat-cell,
+    .domain-cell {
+      transition: transform 260ms ease, border-color 260ms ease, background-color 260ms ease;
+    }
+
+    .stat-cell:hover,
+    .domain-cell:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.3);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+    }
+
+    .section-visual {
+      transition: border-color 320ms ease, transform 560ms ease;
+    }
+
+    .section-visual.is-visible {
+      transform: scale(1);
+    }
+
+    .section-visual:not(.is-visible) {
+      transform: scale(0.98);
+    }
+
+    .scroll-hint {
+      animation: scroll-hint-pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes scroll-hint-pulse {
+      0%, 100% { opacity: 0.45; }
+      50% { opacity: 0.85; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal,
+      .stagger-item,
+      .stat-cell,
+      .domain-cell,
+      .section-visual,
+      .scroll-hint {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .reveal,
+      .stagger-item,
+      .section-visual {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .scroll-hint {
+        opacity: 0.45;
+      }
+    }
+    html[lang="ja"] .section-head--sentence,
+    html[lang="zh-CN"] .section-head--sentence,
+    html[lang="zh"] .section-head--sentence {
+      font-size: clamp(20px, 5.2vw, 30px);
+      line-height: 1.22;
+    }
+
+    html[lang="ja"] .hero-mission .mission-body,
+    html[lang="zh-CN"] .hero-mission .mission-body,
+    html[lang="zh"] .hero-mission .mission-body {
+      font-size: clamp(20px, 5.5vw, 30px);
+      line-height: 1.28;
+    }
+
   </style>
 </head>
 <body>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <div class="app">
-    <header class="topbar">
-      <a class="logo" href="index.html">MELANOIR</a>
-      <nav class="nav" aria-label="Main">
-        <a href="index.html">Melanoir</a>
-        <a href="products/index.html">Products</a>
-        <a href="#technology">Technology</a>
-        <a class="nav-cta" href="recruitment/index.html">Job Opening</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="section section--hero" aria-labelledby="mission-title">
-        <div class="hero-video-bg" aria-hidden="true">
-          <video
-            id="heroMissionVideo"
-            autoplay
-            muted
-            loop
-            playsinline
-            disablePictureInPicture
-          >
-            <source src="https://res.cloudinary.com/dssuxurpt/video/upload/v1778651445/Moon_gold_ighxxq.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="hero-video-scrim" aria-hidden="true"></div>
-        <h1 id="mission-title" class="hero-mission">
-          <span class="mission-en eyebrow" style="margin-bottom:12px;">OUR MISSION</span>
-          <span class="mission-ko">우리의 미션은 멜라닌의 유익함을 모두가 누릴 수 있도록 하는 것입니다.</span>
-        </h1>
-        <div class="hero-promise" role="group" aria-label="브랜드 약속 — 동일 문구의 한국어와 영어">
-          <p class="hero-promise-ko">지구에서 가장 안전한 Black</p>
-          <p class="hero-promise-en">For the Safest Black in the Universe.</p>
-        </div>
-        <p class="scroll-hint">SCROLL</p>
-      </section>
-
-      <section class="section" id="melanin" aria-labelledby="melanin-title">
-        <p class="eyebrow">THE MATERIAL</p>
-        <h2 id="melanin-title" class="hero-title">WHY MELANIN</h2>
-        <figure class="section-visual">
-          <img
-            src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778563118/Phothotherm_crop_ma9fjr.png"
-            alt="멜라닌과 광·산화 환경을 상징하는 비주얼"
-            loading="lazy"
-            decoding="async">
-        </figure>
-        <p class="prose">
-          멜라닌은 생명이 오랜 시간 동안 빛과 산화로부터 자신을 지키기 위해 진화시킨 <strong>자연의 방패</strong>입니다.
-          합성 색소가 남기는 화학적 부담 대신, 생체에 가깝게 작동하는 광보호·항산화의 축을 하나의 물질 안에 모읍니다.
-          멜라누아가 다루는 이야기의 중심은 언제나 <strong>멜라닌 그 자체</strong>이며, 그 유익함을 더 많은 사람의 일상으로 가져가는 일입니다.
-        </p>
-        <dl class="stat-row">
-          <div class="stat-cell">
-            <dt>Bio-material</dt>
-            <dd>생체에서 영감을 받은 고기능 소재. 검은색이 요구되는 자리마다, 더 안전한 대안으로서의 멜라닌을 상상합니다.</dd>
-          </div>
-          <div class="stat-cell">
-            <dt>Reach</dt>
-            <dd>실험실의 소량에서 시작해, 지구와 우주를 가로지르는 응용까지. 스케일이 커질수록 멜라닌이 대체할 수 있는 영역은 넓어집니다.</dd>
-          </div>
-        </dl>
-      </section>
-
-      <div id="technology">
-        <section class="section" id="tech-research" aria-labelledby="tech-title">
-          <p class="eyebrow">IRRADIATION</p>
-          <h2 id="tech-title" class="section-head section-head--sentence">How we drive innovation</h2>
-          <figure class="section-visual">
-            <img
-              src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778563616/Irradiation_eaqkxe.png"
-              alt="조사·광 스트레스 조건에서 멜라닌과 비교 소재의 안정성을 보여 주는 실험 비주얼"
-              loading="lazy"
-              decoding="async">
-          </figure>
-          <p class="prose">
-            멜라닌의 가치는 말로만 완성되지 않습니다. 실험과 데이터를 통해 그 안전성과 기능을 확인하고, 그 결과를 세상과 나누는 것이 멜라누아의 태도입니다.
-            우리는 멜라닌이 가진 물리·생물학적 특성을 끝까지 읽어 내고, 그 가능성을 새로운 기준으로 제시합니다.
-          </p>
-        </section>
-
-        <section class="section" id="domains" aria-labelledby="domains-title">
-          <p class="eyebrow">SCALE</p>
-          <h2 id="domains-title" class="section-head section-head--sentence">Our trajectory</h2>
-          <figure class="section-visual">
-            <img
-              src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778563885/powder_joxoc1.png"
-              alt="순수 멜라닌 분말이 쌓이며 스케일을 상징하는 비주얼"
-              loading="lazy"
-              decoding="async">
-          </figure>
-          <p class="prose">
-            같은 물질이어도, 영역마다 요구되는 역할은 다릅니다. 아래는 멜라닌이 어떤 세계와 맞닿아 있는지에 대한 방향이며, 각 축이 지향하는 공통 목표는 <strong>지구에서 가장 안전한 Black</strong>입니다.
-          </p>
-          <div class="domain-grid">
-            <article class="domain-cell" id="domain-beauty">
-              <h3>BEAUTY</h3>
-              <p>피부와 맞닿는 일상의 보호. 멜라닌은 감각을 넘어, 빛과 시간에 대한 방어를 새롭게 정의할 수 있는 소재입니다.</p>
-            </article>
-            <article class="domain-cell" id="domain-medical">
-              <h3>MEDICAL</h3>
-              <p>생체와의 상호작용이 중요한 영역에서, 멜라닌의 안정성과 보호성은 실사용 기술로 이어질 수 있는 잠재력을 품습니다.</p>
-            </article>
-            <article class="domain-cell" id="domain-space">
-              <h3>SPACE</h3>
-              <p>극한 환경에서는 물질의 내구와 방호가 곧 생존입니다. 우주를 포함한 차세대 산업이 요구하는 검은 방패로서 멜라닌을 상상합니다.</p>
-            </article>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <footer class="site-footer">
-      <p>© Melanoir</p>
-      <p>문의·쇼핑: <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p>
-    </footer>
+    <div id="melanoir-content"></div>
   </div>
 
+  <script src="assets/landing-i18n.js"></script>
+  <script src="assets/melanoir-lang.js"></script>
   <script>
     (function () {
-      var v = document.getElementById("heroMissionVideo");
-      if (v && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        v.pause();
-        v.removeAttribute("autoplay");
+      function initHeroVideo(root) {
+        var v = (root || document).querySelector("#heroMissionVideo");
+        if (!v) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          v.pause();
+          v.removeAttribute("autoplay");
+          return;
+        }
+        v.setAttribute("autoplay", "");
+        v.muted = true;
+        var playPromise = v.play();
+        if (playPromise && playPromise.catch) playPromise.catch(function () {});
       }
+
+      function initLandingMotion(root) {
+        root = root || document;
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var revealTargets = root.querySelectorAll(".reveal");
+        var staggerItems = root.querySelectorAll(".stagger-item");
+
+        revealTargets.forEach(function (el) {
+          el.classList.remove("is-visible");
+        });
+        staggerItems.forEach(function (el) {
+          el.classList.remove("is-visible");
+        });
+
+        initHeroVideo(root);
+
+        if (reduceMotion) {
+          revealTargets.forEach(function (el) { el.classList.add("is-visible"); });
+          staggerItems.forEach(function (el) { el.classList.add("is-visible"); });
+          return;
+        }
+
+        var heroReveals = root.querySelectorAll(".section--hero .reveal");
+        heroReveals.forEach(function (el, idx) {
+          window.setTimeout(function () {
+            el.classList.add("is-visible");
+          }, 80 + idx * 100);
+        });
+
+        var scrollReveals = Array.prototype.filter.call(revealTargets, function (el) {
+          return !el.closest(".section--hero");
+        });
+
+        var io = "IntersectionObserver" in window
+          ? new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  io.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" })
+          : null;
+
+        if (io) {
+          scrollReveals.forEach(function (el) { io.observe(el); });
+        } else {
+          scrollReveals.forEach(function (el) { el.classList.add("is-visible"); });
+        }
+
+        function revealStagger(container) {
+          var items = container.querySelectorAll(".stagger-item");
+          items.forEach(function (el, idx) {
+            window.setTimeout(function () {
+              el.classList.add("is-visible");
+            }, idx * 90);
+          });
+        }
+
+        root.querySelectorAll("[data-stagger]").forEach(function (container) {
+          if ("IntersectionObserver" in window) {
+            var staggerObserver = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  revealStagger(entry.target);
+                  staggerObserver.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.2 });
+            staggerObserver.observe(container);
+          } else {
+            revealStagger(container);
+          }
+        });
+      }
+
+      function applyMeta(lang) {
+        var meta = LandingI18n.PAGE_META[lang] || LandingI18n.PAGE_META.kr;
+        document.title = meta.title;
+        var desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute("content", meta.description);
+      }
+
+      MelanoirLang.init({
+        theme: "dark",
+        contentSelector: "#melanoir-content",
+        localizedContent: LandingI18n.buildLocalizedContent(),
+        onApply: function (lang) {
+          applyMeta(lang);
+          initLandingMotion(document.getElementById("melanoir-content"));
+        },
+      });
     })();
   </script>
   <script>
