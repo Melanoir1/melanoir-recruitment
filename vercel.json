@@ -9,11 +9,6 @@
       "permanent": true
     },
     {
-      "source": "/recruitment",
-      "destination": "/recruitment/index.html",
-      "permanent": false
-    },
-    {
       "source": "/recruitment/melanoir_recruitment_role_scaleup_v1.0.html",
       "destination": "/recruitment/scaleup",
       "permanent": true

@@ -120,15 +120,77 @@ body {
   padding-bottom: 2px;
 }
 
-.nav a.nav-cta {
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  padding: 8px 12px;
-  border-radius: 2px;
+/* 사이트 공통 헤더 (2줄: 로고+메뉴 / 채용 CTA) */
+.topbar--site {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding-bottom: 12px;
 }
 
-.nav a.nav-cta:hover {
+.topbar--site .topbar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.logo--brand {
+  display: block;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.logo--brand img {
+  display: block;
+  height: 20px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+}
+
+.topbar-hire {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  text-decoration: none;
+  text-transform: none;
+  font-family: var(--shell-font-ko);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.topbar-hire:hover {
   border-color: #fff;
   background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.topbar-hire.is-here {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.topbar--site .topbar-meta {
+  width: 100%;
+  flex-basis: auto;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--shell-line);
 }
 
 .topbar-meta {
