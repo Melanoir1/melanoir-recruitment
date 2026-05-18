@@ -1,0 +1,416 @@
+/* Embo · Photoshield Core — 모바일·좁은 화면 보정 (공통) */
+
+@media (max-width: 768px) {
+  .mela-wrapper {
+    word-break: normal;
+    overflow-wrap: break-word;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .mela-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .mela-section {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+  }
+
+  .mela-hero-section {
+    padding-top: 120px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .mela-hero-brand {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.2em !important;
+    margin-bottom: 12px !important;
+  }
+
+  .mela-hero-title {
+    font-size: clamp(1.85rem, 8.5vw, 2.75rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  .mela-hero-subtitle {
+    font-size: clamp(1.25rem, 5.5vw, 1.75rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 14px !important;
+  }
+
+  .mela-hero-kicker {
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem) !important;
+    line-height: 1.5 !important;
+    margin-bottom: 22px !important;
+  }
+
+  .mela-hero-tags {
+    gap: 8px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .mela-hero-tag {
+    font-size: 0.8rem !important;
+    padding: 6px 12px !important;
+  }
+
+  .mela-wrapper h1 {
+    font-size: clamp(1.65rem, 7vw, 2.35rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .mela-wrapper h2 {
+    font-size: clamp(1.45rem, 6vw, 2rem) !important;
+    line-height: 1.28 !important;
+    margin-bottom: 18px !important;
+  }
+
+  .mela-wrapper h3 {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.12em !important;
+    margin-bottom: 10px !important;
+  }
+
+  .mela-wrapper p {
+    font-size: clamp(0.95rem, 3.6vw, 1.125rem) !important;
+    line-height: 1.65 !important;
+    margin-bottom: 22px !important;
+  }
+
+  .mela-wrapper .hero-product-name {
+    font-size: clamp(1.1rem, 4.5vw, 1.5rem) !important;
+  }
+
+  .mela-footer-headline {
+    font-size: clamp(1.5rem, 6.5vw, 2.25rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  .mela-grid-2 {
+    gap: 36px !important;
+  }
+
+  .mela-feature-text,
+  .mela-feature-media {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .mela-media-box {
+    height: auto !important;
+    min-height: 200px;
+    max-height: min(52vh, 380px);
+    border-radius: 20px !important;
+  }
+
+  .mela-media-box img,
+  .mela-media-box video {
+    object-fit: contain !important;
+  }
+
+  .mela-wrapper img[style] {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 28px !important;
+  }
+
+  .mela-media-overlay {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    font-size: 0.8rem !important;
+    padding: 8px 12px !important;
+    max-width: calc(100% - 24px);
+  }
+
+  .mela-graph-wrapper {
+    padding: 24px 16px !important;
+    border-radius: 20px !important;
+    overflow: visible;
+  }
+
+  .mela-graph-container {
+    gap: clamp(10px, 4vw, 24px) !important;
+    height: 160px !important;
+    margin-top: 24px !important;
+    padding: 0 4px 8px !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start !important;
+  }
+
+  .mela-graph-container > div {
+    flex: 0 0 auto;
+    min-width: 52px;
+    font-size: 0.75rem !important;
+  }
+
+  .mela-graph-container > div span {
+    font-size: 0.7rem !important;
+    text-align: center;
+    max-width: 64px;
+    line-height: 1.25;
+    word-break: keep-all;
+  }
+
+  /* Embo — 2막대 비교 차트 */
+  .mela-graph-container.mela-graph-bars {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    overflow: visible !important;
+    height: 188px !important;
+    max-width: 100%;
+    gap: clamp(20px, 9vw, 44px) !important;
+    padding: 0 8px 12px !important;
+    margin-top: 24px !important;
+    border-bottom: 1px solid #d2d2d7;
+  }
+
+  .mela-graph-bars .mela-chart-col {
+    flex: 1 1 0 !important;
+    min-width: 64px !important;
+    max-width: 46% !important;
+    height: 100% !important;
+    gap: 6px !important;
+  }
+
+  .mela-graph-bars .mela-chart-value {
+    font-size: 0.9rem !important;
+  }
+
+  .mela-graph-bars .mela-chart-label {
+    font-size: 0.72rem !important;
+    line-height: 1.25 !important;
+    max-width: 76px;
+    word-break: keep-all;
+  }
+
+  .mela-graph-bars .mela-bar {
+    width: clamp(36px, 11vw, 52px) !important;
+  }
+
+  .mela-graph-bars .mela-bar--ref {
+    height: clamp(80px, 24vw, 108px) !important;
+  }
+
+  .mela-graph-bars .mela-bar--test {
+    height: clamp(38px, 11.5vw, 52px) !important;
+  }
+
+  .mela-graph-wrapper .mela-chart-caption {
+    font-size: 0.95rem !important;
+    margin-top: 24px !important;
+    line-height: 1.45 !important;
+  }
+
+  .mela-bar {
+    width: clamp(32px, 10vw, 48px) !important;
+  }
+
+  /* 법적 고지 — Embo 푸터 안내 문단과 동일 톤 */
+  .mela-legal-note {
+    margin-top: 48px !important;
+    padding: 28px 20px !important;
+    border-radius: 20px !important;
+    font-size: 0.85rem !important;
+    color: #86868b !important;
+    line-height: 1.65 !important;
+    text-align: left !important;
+  }
+
+  .mela-legal-note strong {
+    display: block;
+    font-size: 0.9rem !important;
+    font-weight: 700;
+    color: #6e6e73;
+    margin-bottom: 0;
+  }
+
+  .mela-data-grid {
+    margin-top: 24px !important;
+  }
+
+  .mela-data-row {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 6px;
+    padding: 16px 0 !important;
+    font-size: 0.95rem !important;
+  }
+
+  .mela-data-value {
+    text-align: left;
+    word-break: break-all;
+  }
+
+  .mela-stats-bar {
+    flex-direction: column !important;
+    gap: 28px !important;
+    padding: 28px 0 !important;
+    margin-top: 36px !important;
+  }
+
+  .mela-stat-item::after {
+    display: none !important;
+  }
+
+  .mela-stat-value {
+    font-size: clamp(1.75rem, 8vw, 2.35rem) !important;
+  }
+
+  .mela-stat-label {
+    font-size: 0.85rem !important;
+    line-height: 1.45 !important;
+    padding: 0 8px;
+  }
+
+  .mela-ingredient-line {
+    font-size: clamp(1rem, 4vw, 1.35rem) !important;
+    margin: 32px 0 !important;
+    letter-spacing: 0.06em !important;
+    word-spacing: 0.06em !important;
+  }
+
+  .mela-ingredient-line .mela-ingredient-focus {
+    font-size: 1.35em !important;
+  }
+
+  .mela-lang-dropdown {
+    right: 16px !important;
+    bottom: 16px !important;
+  }
+
+  .mela-lang-trigger {
+    width: 52px !important;
+    height: 52px !important;
+    font-size: 14px !important;
+  }
+
+  .mela-lang-item {
+    font-size: 15px !important;
+    padding: 12px 16px !important;
+  }
+
+  /* 인라인 스타일이 많은 푸터·섹션 */
+  .mela-wrapper footer[style],
+  .mela-wrapper section[style] {
+    max-width: 100%;
+  }
+
+  .mela-wrapper footer h2,
+  .mela-wrapper footer h2[style] {
+    font-size: clamp(1.35rem, 5.5vw, 1.75rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  .mela-wrapper footer p[style],
+  .mela-wrapper p[style*="max-width"] {
+    font-size: clamp(0.9rem, 3.4vw, 1.05rem) !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .mela-wrapper div[style*="text-align: left"] {
+    font-size: 0.85rem !important;
+    line-height: 1.65 !important;
+    padding-top: 32px !important;
+  }
+
+  .mela-wrapper p[style*="font-weight:700"],
+  .mela-wrapper p[style*="font-size:1.35rem"] {
+    font-size: 0.95rem !important;
+    margin-top: 24px !important;
+  }
+
+  .mela-wrapper div[style*="height: 450px"],
+  .mela-wrapper div[style*="height:450px"] {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mela-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .mela-section {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+
+  .mela-hero-section {
+    padding-top: 96px !important;
+  }
+
+  .mela-graph-container {
+    height: 140px !important;
+  }
+
+  .mela-graph-container.mela-graph-bars {
+    height: 168px !important;
+    gap: 16px !important;
+  }
+
+  .mela-graph-bars .mela-bar--ref {
+    height: clamp(72px, 22vw, 96px) !important;
+  }
+
+  .mela-graph-bars .mela-bar--test {
+    height: clamp(34px, 10vw, 46px) !important;
+  }
+
+  .mela-legal-note {
+    padding: 24px 16px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .mela-stats-bar[style],
+  .mela-stats-bar {
+    max-width: 100% !important;
+  }
+}
+
+/* CJK — 좁은 화면 추가 보정 */
+@media (max-width: 768px) {
+  html[lang="ja"] .mela-wrapper,
+  html[lang="zh-CN"] .mela-wrapper,
+  html[lang="zh"] .mela-wrapper {
+    letter-spacing: 0;
+  }
+
+  html[lang="ja"] .mela-hero-title,
+  html[lang="zh-CN"] .mela-hero-title,
+  html[lang="zh"] .mela-hero-title {
+    font-size: clamp(1.65rem, 7.5vw, 2.35rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  html[lang="ja"] .mela-wrapper h2,
+  html[lang="zh-CN"] .mela-wrapper h2,
+  html[lang="zh"] .mela-wrapper h2 {
+    font-size: clamp(1.35rem, 5.5vw, 1.85rem) !important;
+    line-height: 1.32 !important;
+  }
+
+  html[lang="ja"] .mela-hero-subtitle,
+  html[lang="zh-CN"] .mela-hero-subtitle,
+  html[lang="zh"] .mela-hero-subtitle {
+    font-size: clamp(1.1rem, 4.8vw, 1.55rem) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mela-graph-container {
+    scroll-behavior: auto;
+  }
+}
