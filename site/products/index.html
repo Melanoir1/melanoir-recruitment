@@ -10,40 +10,146 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="../assets/melanoir-shell.css" />
+  <link rel="stylesheet" href="../assets/melanoir-lang.css" />
 </head>
 <body>
   <div class="app">
-    <header class="topbar">
-      <a class="logo" href="../index.html">MELANOIR</a>
-      <nav class="nav" aria-label="Main">
-        <a href="../index.html">Melanoir</a>
-        <a class="is-here" href="index.html">Products</a>
-        <a href="../index.html#technology">Technology</a>
-        <a class="nav-cta" href="../recruitment/index.html">Job Opening</a>
-      </nav>
-    </header>
-
-    <section class="section" aria-labelledby="products-title">
-      <p class="eyebrow">PRODUCT LINEUP</p>
-      <h1 id="products-title" class="page-title">PRODUCTS</h1>
-      <p class="products-lead">멜라누아 뷰티 라인업. 각 카드에서 상세 페이지로 이동합니다.</p>
-      <div class="product-grid">
-        <article class="card">
-          <h2>MELANOIR EMBO</h2>
-          <p>Embo 제품 스펙, 스토리, 데이터.</p>
-          <a class="btn" href="embo.html">자세히 알아보기</a>
-        </article>
-        <article class="card">
-          <h2>MELANOIR PHOTOSHIELD CORE</h2>
-          <p>Photoshield Core 상세 소개.</p>
-          <a class="btn" href="photoshieldcore.html">자세히 알아보기</a>
-        </article>
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <p>© Melanoir · <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p>
-    </footer>
+    <div id="melanoir-content"></div>
   </div>
+  <script src="../assets/melanoir-lang.js"></script>
+  <script>
+    (function () {
+      var hireKo = "[2026\uB144 \uC0C1\uBC18\uAE30 \uCC44\uC6A9] \uBA5C\uB77C\uB204\uC544 R&amp;D \uD300\uC5D0 \uD569\uB958\uD558\uAE30";
+
+      var pageMeta = {
+        kr: {
+          title: "Melanoir \u00b7 \uC81C\uD488",
+          description: "\uBA5C\uB77C\uB204\uC544 \uBDF0\uD2F0 \uB77C\uC778\uC5C5 \u2014 Embo, Photoshield Core",
+        },
+        en: {
+          title: "Melanoir \u00b7 Products",
+          description: "Melanoir beauty lineup \u2014 Embo and Photoshield Core",
+        },
+        fr: {
+          title: "Melanoir \u00b7 Produits",
+          description: "Gamme beaut\u00e9 Melanoir \u2014 Embo et Photoshield Core",
+        },
+        jp: {
+          title: "Melanoir \u00b7 \u30D7\u30ED\u30C0\u30AF\u30C8",
+          description: "Melanoir \u30D3\u30E5\u30FC\u30C6\u30A3\u30E9\u30A4\u30F3\u30A2\u30C3\u30D7 \u2014 Embo\u3001Photoshield Core",
+        },
+        cn: {
+          title: "Melanoir \u00b7 \u4EA7\u54C1",
+          description: "Melanoir \u7F8E\u5986\u4EA7\u54C1\u7EBF \u2014 Embo\u3001Photoshield Core",
+        },
+      };
+
+      function shellPage(t) {
+        return (
+          '<header class="topbar topbar--site">' +
+          '<div class="topbar-head">' +
+          '<a class="logo logo--brand" href="/">' +
+          '<img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" width="140" height="20" decoding="async">' +
+          "</a>" +
+          '<nav class="nav" aria-label="' + t.navAria + '">' +
+          '<a class="is-here" href="/products">' + t.navProducts + "</a>" +
+          '<a href="/#technology">' + t.navTechnology + "</a>" +
+          "</nav></div>" +
+          '<a class="topbar-hire" href="/recruitment">' + hireKo + "</a>" +
+          "</header>" +
+          '<section class="section" aria-labelledby="products-title">' +
+          '<p class="eyebrow">' + t.eyebrow + "</p>" +
+          '<h1 id="products-title" class="page-title">' + t.pageTitle + "</h1>" +
+          '<p class="products-lead shell-i18n-prose">' + t.lead + "</p>" +
+          '<div class="product-grid">' +
+          "<article class=\"card\"><h2>MELANOIR EMBO</h2>" +
+          '<p class="shell-i18n-prose">' + t.emboDesc + "</p>" +
+          '<a class="btn" href="/products/embo">' + t.cta + "</a></article>" +
+          "<article class=\"card\"><h2>MELANOIR PHOTOSHIELD CORE</h2>" +
+          '<p class="shell-i18n-prose">' + t.psDesc + "</p>" +
+          '<a class="btn" href="/products/photoshieldcore">' + t.cta + "</a></article>" +
+          "</div></section>" +
+          '<footer class="site-footer"><p>\u00a9 Melanoir \u00b7 <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p></footer>'
+        );
+      }
+
+      var copy = {
+        kr: {
+          navAria: "Main",
+          navProducts: "Products",
+          navTechnology: "Technology",
+          eyebrow: "PRODUCT LINEUP",
+          pageTitle: "PRODUCTS",
+          lead: "\uBA5C\uB77C\uB204\uC544 \uBDF0\uD2F0 \uB77C\uC778\uC5C5. \uAC01 \uCE74\uB4DC\uC5D0\uC11C \uC0C1\uC138 \uD398\uC774\uC9C0\uB85C \uC774\uB3D9\uD569\uB2C8\uB2E4.",
+          emboDesc: "Embo \uC81C\uD488 \uC2A4\uD399, \uC2A4\uD1A0\uB9AC, \uB370\uC774\uD130.",
+          psDesc: "Photoshield Core \uC0C1\uC138 \uC18C\uAC1C.",
+          cta: "\uC790\uC138\uD788 \uC54C\uC544\uBCF4\uAE30",
+        },
+        en: {
+          navAria: "Main",
+          navProducts: "Products",
+          navTechnology: "Technology",
+          eyebrow: "PRODUCT LINEUP",
+          pageTitle: "PRODUCTS",
+          lead: "The Melanoir beauty lineup. Each card opens the full product story, specs, and proof points.",
+          emboDesc: "Embo \u2014 formulation narrative, performance data, and the pursuit of the safest black.",
+          psDesc: "Photoshield Core \u2014 technical brochure for our melanin-forward shield.",
+          cta: "Learn more",
+        },
+        fr: {
+          navAria: "Principal",
+          navProducts: "Produits",
+          navTechnology: "Technologie",
+          eyebrow: "GAMME PRODUITS",
+          pageTitle: "PRODUITS",
+          lead: "La gamme beaut\u00e9 Melanoir. Chaque carte m\u00e8ne \u00e0 l\u2019histoire compl\u00e8te du produit.",
+          emboDesc: "Embo \u2014 r\u00e9cit, fiches techniques et donn\u00e9es de performance.",
+          psDesc: "Photoshield Core \u2014 brochure technique autour du bouclier \u00e0 base de m\u00e9lanine.",
+          cta: "En savoir plus",
+        },
+        jp: {
+          navAria: "メイン",
+          navProducts: "製品",
+          navTechnology: "テクノロジー",
+          eyebrow: "PRODUCT LINEUP",
+          pageTitle: "PRODUCTS",
+          lead: "メラヌア ビューティーラインアップ。各カードから商品の詳細ページへ進みます。",
+          emboDesc: "Embo — 製品スペック、ブランドストーリー、検証データ。",
+          psDesc: "Photoshield Core — メラニンシールドの技術ブローシャー。",
+          cta: "詳しく見る",
+        },
+        cn: {
+          navAria: "主导航",
+          navProducts: "产品",
+          navTechnology: "技术",
+          eyebrow: "PRODUCT LINEUP",
+          pageTitle: "PRODUCTS",
+          lead: "Melanoir 美妆产品线。点击各卡片进入完整产品故事与数据页面。",
+          emboDesc: "Embo — 产品规格、品牌叙事与验证数据。",
+          psDesc: "Photoshield Core — 以黑色素为核心的防护技术手册。",
+          cta: "了解更多",
+        },
+      };
+
+      var localizedContent = {};
+      Object.keys(copy).forEach(function (lang) {
+        localizedContent[lang] = shellPage(copy[lang]);
+      });
+
+      function applyMeta(lang) {
+        var meta = pageMeta[lang] || pageMeta.kr;
+        document.title = meta.title;
+        var desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute("content", meta.description);
+      }
+
+      MelanoirLang.init({
+        theme: "dark",
+        contentSelector: "#melanoir-content",
+        localizedContent: localizedContent,
+        onApply: applyMeta,
+      });
+    })();
+  </script>
 </body>
 </html>
