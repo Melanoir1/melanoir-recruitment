@@ -151,17 +151,52 @@ body {
   object-fit: contain;
 }
 
-/* 하단 플로팅 채용 CTA — 언어 선택 FAB 바로 왼쪽에 배치 */
+.topbar-hire {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  text-decoration: none;
+  text-transform: none;
+  font-family: var(--shell-font-ko);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.topbar-hire:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.topbar-hire.is-here {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* 하단 플로팅 채용 CTA — 뷰포트 가로 중앙 배치 */
 .melanoir-hire-fab {
   position: fixed;
   z-index: 9999;
-  right: calc(30px + 60px + 12px);
+  left: 50%;
   bottom: 30px;
+  transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 60px;
-  max-width: calc(100vw - 132px);
+  max-width: calc(100vw - 200px);
   padding: 10px 20px;
   border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 36px;
@@ -185,11 +220,11 @@ body {
   background: rgba(20, 20, 24, 0.96);
   border-color: rgba(255, 255, 255, 0.55);
   color: #fff;
-  transform: translateY(-2px);
+  transform: translateX(-50%) translateY(-2px);
 }
 
 .melanoir-hire-fab:active {
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .melanoir-hire-fab:focus-visible {
@@ -205,10 +240,9 @@ body {
 
 @media (max-width: 768px) {
   .melanoir-hire-fab {
-    right: calc(16px + 52px + 10px);
     bottom: 16px;
     min-height: 52px;
-    max-width: calc(100vw - 94px);
+    max-width: calc(100vw - 160px);
     padding: 8px 14px;
     font-size: 11.5px;
     line-height: 1.25;
@@ -219,6 +253,7 @@ body {
   .melanoir-hire-fab {
     font-size: 11px;
     padding: 7px 12px;
+    max-width: calc(100vw - 140px);
   }
 }
 

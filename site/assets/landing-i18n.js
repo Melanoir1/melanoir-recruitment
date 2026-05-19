@@ -223,7 +223,9 @@
       t.navTechnology +
       "</a>" +
       "</nav></div>" +
-      "</header>" +
+      '<a class="topbar-hire" href="/recruitment">' +
+      HIRE_KO +
+      "</a></header>" +
       "<main>" +
       '<section class="section section--hero" aria-labelledby="mission-title">' +
       '<div class="hero-video-bg" aria-hidden="true"><video id="heroMissionVideo" autoplay muted loop playsinline disablePictureInPicture><source src="' +

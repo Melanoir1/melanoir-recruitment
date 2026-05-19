@@ -159,6 +159,9 @@ html[lang="zh"] body .shell-i18n-prose {
   line-height: 1.55;
 }
 
+html[lang="ja"] body .topbar-hire,
+html[lang="zh-CN"] body .topbar-hire,
+html[lang="zh"] body .topbar-hire,
 html[lang="ja"] body .melanoir-hire-fab,
 html[lang="zh-CN"] body .melanoir-hire-fab,
 html[lang="zh"] body .melanoir-hire-fab {
