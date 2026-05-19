@@ -151,38 +151,75 @@ body {
   object-fit: contain;
 }
 
-.topbar-hire {
-  display: flex;
+/* 하단 플로팅 채용 CTA — 언어 선택 FAB 바로 왼쪽에 배치 */
+.melanoir-hire-fab {
+  position: fixed;
+  z-index: 9999;
+  right: calc(30px + 60px + 12px);
+  bottom: 30px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  margin-top: 12px;
-  padding: 10px 14px;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.04);
-  text-decoration: none;
-  text-transform: none;
+  min-height: 60px;
+  max-width: calc(100vw - 132px);
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 36px;
+  background: rgba(12, 12, 16, 0.92);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(243, 244, 248, 0.95);
   font-family: var(--shell-font-ko);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  line-height: 1.35;
-  color: rgba(255, 255, 255, 0.9);
-  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.topbar-hire:hover {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.06);
+.melanoir-hire-fab:hover {
+  background: rgba(20, 20, 24, 0.96);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.melanoir-hire-fab:active {
+  transform: translateY(0);
+}
+
+.melanoir-hire-fab:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}
+
+.melanoir-hire-fab.is-here {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.55);
   color: #fff;
 }
 
-.topbar-hire.is-here {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+@media (max-width: 768px) {
+  .melanoir-hire-fab {
+    right: calc(16px + 52px + 10px);
+    bottom: 16px;
+    min-height: 52px;
+    max-width: calc(100vw - 94px);
+    padding: 8px 14px;
+    font-size: 11.5px;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 380px) {
+  .melanoir-hire-fab {
+    font-size: 11px;
+    padding: 7px 12px;
+  }
 }
 
 .topbar--site .topbar-meta {
