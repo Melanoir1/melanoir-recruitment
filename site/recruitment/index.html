@@ -36,9 +36,121 @@
 
     #intro,
     #roles,
+    #workspace,
     #conditions,
     #apply-form {
       scroll-margin-top: 92px;
+    }
+
+    .space-carousel {
+      margin-top: 18px;
+      position: relative;
+    }
+
+    .space-carousel__viewport {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 2px 2px 6px;
+    }
+
+    .space-carousel__viewport::-webkit-scrollbar {
+      display: none;
+    }
+
+    .space-carousel__slide {
+      flex: 0 0 88%;
+      scroll-snap-align: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.45);
+      aspect-ratio: 4 / 3;
+      line-height: 0;
+    }
+
+    .space-carousel__slide img,
+    .space-carousel__slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .space-carousel__slide video {
+      object-fit: contain;
+      background: #000;
+    }
+
+    .space-carousel__nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .space-carousel__btn {
+      -webkit-appearance: none;
+      appearance: none;
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font: inherit;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+    }
+
+    .space-carousel__btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.55);
+      transform: translateY(-1px);
+    }
+
+    .space-carousel__btn:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.7);
+      outline-offset: 2px;
+    }
+
+    .space-carousel__count {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: rgba(243, 244, 248, 0.72);
+    }
+
+    .space-carousel__hint,
+    .space-carousel__empty {
+      margin: 10px 0 0;
+      font-size: 12px;
+      line-height: 1.5;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    .space-carousel[data-loading] .space-carousel__viewport {
+      min-height: 200px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .space-carousel[data-loading] .space-carousel__viewport::after {
+      content: "LOADING SPACE MEDIA…";
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: rgba(243, 244, 248, 0.5);
     }
 
     .manifesto-text {
@@ -290,6 +402,11 @@
     .list li {
       margin: 7px 0;
       line-height: 1.45;
+    }
+
+    .list li strong {
+      font-weight: 600;
+      color: rgba(243, 244, 248, 0.96);
     }
 
     .values-grid {
@@ -737,8 +854,42 @@
       </article>
     </section>
 
+    <section class="section reveal" id="workspace">
+      <p class="eyebrow">03 · WORKSPACE & WELFARE</p>
+      <h2 class="hero-title" style="font-size: clamp(28px, 8.5vw, 42px);">WORK ENVIRONMENT</h2>
+      <p class="lead" style="font-size:16px;">멜라누아 R&amp;D 팀은 연구에 집중할 수 있는 물리적 환경과, 협업의 시너지를 낼 수 있는 운영 원칙을 함께 설계합니다.</p>
+      <ul class="list" aria-label="근무 환경·운영 원칙">
+        <li><strong>근무 환경</strong> — 항상 깨끗하게 관리되는 쾌적한 환경을 제공합니다.</li>
+        <li><strong>업무 지원</strong> — Intensive한 몰입을 추구하며, AI툴, 교육 등 ‘일하고 싶은’ 사람에게 아낌없는 지원이 제공됩니다.</li>
+        <li><strong>성과 중심</strong> — 불필요한 야근이 발생하지 않도록, 성과 중심의 업무 설계와 야근이 어려운 구조를 구축합니다.</li>
+      </ul>
+
+      <div class="space-carousel" id="spaceCarousel" data-loading aria-label="근무 환경 사진 및 영상">
+        <div class="space-carousel__viewport" id="spaceCarouselViewport"></div>
+        <div class="space-carousel__nav">
+          <button type="button" class="space-carousel__btn" data-carousel-prev aria-label="이전 슬라이드">←</button>
+          <span class="space-carousel__count" data-carousel-count aria-live="polite"></span>
+          <button type="button" class="space-carousel__btn" data-carousel-next aria-label="다음 슬라이드">→</button>
+        </div>
+        <p class="space-carousel__hint" data-carousel-hint hidden>좌우로 밀어 더 보기 · SWIPE</p>
+        <p class="space-carousel__empty" data-carousel-empty hidden>근무 환경 미디어를 준비 중입니다. 잠시 후 다시 확인해 주세요.</p>
+      </div>
+
+      <p class="eyebrow" style="margin-top:22px;">WELFARE STICKERS</p>
+      <div class="sticker-grid" aria-label="복리후생 스티커">
+        <div class="sticker">깨끗한환경</div>
+        <div class="sticker">야근불가능</div>
+        <div class="sticker">중식지원</div>
+        <div class="sticker">통근버스</div>
+        <div class="sticker">다양한 연구시설 활용</div>
+        <div class="sticker">AI툴 활용 지원</div>
+        <div class="sticker">성과 공동 크레딧</div>
+        <div class="sticker">스톡옵션</div>
+      </div>
+    </section>
+
     <section class="section reveal" id="conditions">
-      <p class="eyebrow">03 · TEAM & CULTURE</p>
+      <p class="eyebrow">04 · TEAM & CULTURE</p>
       <h2 class="hero-title" style="font-size: clamp(28px, 8.5vw, 42px);">FIVE CORE VALUES</h2>
       <p class="lead" style="font-size:16px; margin-bottom:8px;">멜라누아 팀은 5가지 요소를 갖추고 있습니다.</p>
       <div class="values-grid" aria-label="핵심 인재 가치 카드">
@@ -766,18 +917,6 @@
       <p class="quote">WE MOVE FORWARD. WE DO NOT REPEAT.<br>멜라누아는 항상 앞으로 나아가며, 똑같은 일을 반복하지 않습니다.<br>정형화된 업무에 머물지 않고, 매일 마주하는 새로운 문제를 해결하며 자신만의 커리어를 빌딩할 신입 팀원을 환영합니다.</p>
       <p class="quote">멜라누아의 성장은 구성원들의 성장으로 이루어집니다.<br>개인의 성장에 동의하는 열정적 팀원을 필요로 합니다.</p>
 
-      <p class="eyebrow" style="margin-top:18px;">WELFARE STICKERS</p>
-      <div class="sticker-grid" aria-label="복리후생 스티커">
-        <div class="sticker">깨끗한환경</div>
-        <div class="sticker">야근불가능</div>
-        <div class="sticker">중식지원</div>
-        <div class="sticker">통근버스</div>
-        <div class="sticker">다양한 연구시설 활용</div>
-        <div class="sticker">AI툴 활용 지원</div>
-        <div class="sticker">성과 공동 크레딧</div>
-        <div class="sticker">스톡옵션</div>
-      </div>
-
       <div class="cta-row">
           <a class="cta" href="/">SITE HOME · MELANOIR</a>
         <a class="cta" href="#apply-form">APPLY NOW · FORM</a>
@@ -785,7 +924,7 @@
     </section>
 
     <section class="section reveal" id="apply-form">
-      <p class="eyebrow">04 · APPLY</p>
+      <p class="eyebrow">05 · APPLY</p>
       <h2 class="hero-title" style="font-size: clamp(28px, 8.5vw, 42px);">JOIN MELANOIR</h2>
       <p class="lead">이력서와 지원 정보를 제출해주시면 검토 후 순차적으로 연락드립니다.<br>복수 직무 지원 가능합니다.</p>
       <p class="quote" style="margin-top: 16px;">빠른 합류를 우선합니다.<br>늦어도 1–2개월 이내 합류 가능하신 분을 환영합니다.</p>
@@ -801,6 +940,7 @@
   <a class="melanoir-hire-fab is-here" href="/recruitment" aria-label="2026년 상반기 채용 — 멜라누아 R&amp;D 팀에 합류하기">
     [2026년 상반기 채용]<br>멜라누아 R&amp;D 팀에 합류하기
   </a>
+  <script src="../assets/recruitment-space-carousel.js"></script>
   <script>
     (function () {
       var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

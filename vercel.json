@@ -1,7 +1,13 @@
 {
-  "outputDirectory": "site",
+  "outputDirectory": "site-partial",
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/melanoir_recruitment_spacex_v1.1.html",

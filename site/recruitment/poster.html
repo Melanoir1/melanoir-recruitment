@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>멜라누아 채용 공고 · MELANOIR RECRUITMENT POSTER</title>
+  <meta name="description" content="멜라누아 2026년 상반기 R&D 채용 포스터">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Noto+Sans+KR:wght@300;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <style>
+    :root {
+      --line: rgba(255, 255, 255, 0.14);
+      --line-strong: rgba(255, 255, 255, 0.32);
+      --text: #f3f4f8;
+      --text-dim: rgba(243, 244, 248, 0.72);
+      --text-muted: rgba(243, 244, 248, 0.5);
+      --font: "Barlow Condensed", "DIN Alternate", Bahnschrift, "Arial Narrow", Arial, sans-serif;
+      --font-display: "Barlow Condensed", "Noto Sans KR", "Pretendard", sans-serif;
+      --font-ko: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+      --pad-x: 15mm;
+      --space-1: 2mm;
+      --space-2: 4mm;
+      --space-3: 6mm;
+      --space-4: 8mm;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      background: #111;
+      color: var(--text);
+      font-family: var(--font);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .poster {
+      width: 210mm;
+      margin: 0 auto;
+      background:
+        radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.09) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0a0c 0%, #000 45%, #030307 100%);
+      padding: 11mm var(--pad-x) 10mm;
+    }
+
+    .poster-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-3);
+      padding-bottom: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .logo img {
+      display: block;
+      width: 36mm;
+      height: auto;
+      opacity: 0.96;
+    }
+
+    .hire-badge {
+      text-align: right;
+      font-family: var(--font-ko);
+      font-size: 8pt;
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      color: var(--text-muted);
+    }
+
+    .eyebrow {
+      font-size: 7pt;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      margin: 0 0 var(--space-1);
+    }
+
+    .block-head {
+      margin-bottom: var(--space-2);
+    }
+
+    .block-head .display-headline--section {
+      margin-bottom: 0;
+    }
+
+    .poster-hero {
+      text-align: center;
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-4);
+    }
+
+    .display-headline {
+      font-family: var(--font-display);
+      line-height: 1.08;
+      color: #fff;
+    }
+
+    .poster-title--lead,
+    .poster-title--recruit {
+      font-family: var(--font-display);
+      line-height: 1.08;
+      color: #fff;
+    }
+
+    .poster-title--lead {
+      font-size: 18pt;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      color: rgba(243, 244, 248, 0.88);
+      margin: 0 0 1.5mm;
+    }
+
+    .poster-title--recruit {
+      font-size: 27pt;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: none;
+      margin: 0;
+    }
+
+    .poster-tags {
+      font-family: var(--font-display);
+      font-size: 14pt;
+      font-weight: 300;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: rgba(243, 244, 248, 0.65);
+      margin: 14mm 0 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2mm 8mm;
+    }
+
+    .display-headline--section {
+      font-size: 20pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.055em;
+      line-height: 1.02;
+    }
+
+    .lead, .quote, .list, .job-desc, .sq-card p, .value-pill p, .manifesto p {
+      font-family: var(--font-ko);
+      text-transform: none;
+      letter-spacing: -0.01em;
+    }
+
+    .lead {
+      font-size: 10.5pt;
+      font-weight: 400;
+      line-height: 1.65;
+      color: rgba(243, 244, 248, 0.9);
+      margin: 0 0 var(--space-3);
+      max-width: 52em;
+    }
+
+    .manifesto {
+      text-align: center;
+      padding: var(--space-3) var(--space-2);
+      margin: var(--space-4) 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .manifesto p {
+      font-size: 11pt;
+      font-weight: 500;
+      line-height: 1.55;
+      color: rgba(243, 244, 248, 0.88);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2mm;
+      margin-bottom: var(--space-3);
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 1.2mm 3mm;
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(243, 244, 248, 0.82);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .block {
+      margin-bottom: var(--space-3);
+      padding-top: var(--space-2);
+      border-top: 1px solid var(--line);
+      page-break-inside: avoid;
+    }
+
+    .block:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .poster-hero + .block {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .sq-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5mm;
+    }
+
+    .sq-card {
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      border-radius: 3mm;
+      padding: 2mm 1.8mm;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.01) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1mm;
+    }
+
+    .sq-card h3 {
+      font-size: 12.5pt;
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: 0.04em;
+      color: rgba(243, 244, 248, 0.98);
+    }
+
+    .sq-card p {
+      font-size: 7.5pt;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text-dim);
+    }
+
+    .job-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5mm;
+    }
+
+    .job {
+      border-left: 2px solid rgba(255, 255, 255, 0.55);
+      border-radius: 0 3mm 3mm 0;
+      padding: 2.5mm 3mm 2.5mm 3.5mm;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .job-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.2mm;
+      color: rgba(243, 244, 248, 0.95);
+    }
+
+    .job-desc {
+      font-size: 8.5pt;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--text-dim);
+      margin-bottom: 1.8mm;
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      font-size: 8pt;
+      line-height: 1.45;
+      color: rgba(243, 244, 248, 0.86);
+    }
+
+    .list--inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2mm 4mm;
+    }
+
+    .list--inline li {
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+
+    .list--inline li::before {
+      content: "· ";
+      color: var(--text-muted);
+      margin-right: 0.5mm;
+    }
+
+    .list li strong {
+      font-weight: 600;
+      color: rgba(243, 244, 248, 0.95);
+    }
+
+    .welfare-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2mm;
+      margin-bottom: var(--space-3);
+    }
+
+    .welfare-list li {
+      padding: 2mm 2mm 2mm 2.5mm;
+      border-left: 2px solid var(--line-strong);
+      line-height: 1.45;
+      font-size: 8pt;
+    }
+
+    .stickers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2mm;
+    }
+
+    .sticker {
+      border: 1px solid var(--line);
+      border-radius: 2.5mm;
+      padding: 2mm 1.5mm;
+      text-align: center;
+      font-family: var(--font-ko);
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: rgba(243, 244, 248, 0.86);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .values-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2.5mm;
+      margin-bottom: var(--space-2);
+    }
+
+    .value-pill {
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      border-radius: 3mm;
+      padding: 2mm 1.5mm;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.04) 0%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0.8mm;
+    }
+
+    .value-pill h3 {
+      font-family: var(--font-ko);
+      font-size: 14pt;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: rgba(243, 244, 248, 0.98);
+      line-height: 1.12;
+    }
+
+    .value-pill p {
+      font-size: 7.5pt;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--text-dim);
+    }
+
+    .quote {
+      margin-top: var(--space-2);
+      padding: 2.5mm 0 2.5mm 3.5mm;
+      border-left: 2px solid rgba(255, 255, 255, 0.4);
+      font-size: 8.5pt;
+      font-weight: 400;
+      line-height: 1.55;
+      color: rgba(243, 244, 248, 0.78);
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-top: var(--space-3);
+      padding: var(--space-3) var(--space-2);
+      border-top: 1px solid var(--line-strong);
+      border-radius: 4mm;
+      background: rgba(255, 255, 255, 0.03);
+      page-break-inside: avoid;
+    }
+
+    .apply-block {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .apply-block .eyebrow {
+      margin-bottom: 1.5mm;
+    }
+
+    .apply-block h2 {
+      margin-bottom: 2mm;
+    }
+
+    .apply-block p {
+      font-size: 9pt;
+      line-height: 1.55;
+      color: var(--text-dim);
+      margin-bottom: 1.5mm;
+    }
+
+    .apply-url {
+      font-family: var(--font);
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: rgba(243, 244, 248, 0.9);
+    }
+
+    .qr-block {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 3.5mm;
+    }
+
+    .qr-callout {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 1.5mm;
+      text-align: right;
+    }
+
+    .qr-callout-text {
+      font-family: var(--font-ko);
+      font-size: 9.5pt;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      color: rgba(243, 244, 248, 0.92);
+      white-space: nowrap;
+    }
+
+    .qr-arrow {
+      display: block;
+      width: 12mm;
+      height: auto;
+      color: rgba(243, 244, 248, 0.75);
+    }
+
+    .qr-wrap img {
+      display: block;
+      width: 26mm;
+      height: 26mm;
+      border: 1px solid var(--line);
+      border-radius: 3mm;
+      padding: 1.5mm;
+      background: #fff;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .qr-caption {
+      margin-top: 1.5mm;
+      font-size: 6.5pt;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .screen-hint {
+      max-width: 210mm;
+      margin: 8px auto 0;
+      padding: 10px 14px;
+      font-family: var(--font-ko);
+      font-size: 12px;
+      text-transform: none;
+      letter-spacing: normal;
+      color: #888;
+      text-align: center;
+    }
+
+    @media print {
+      body { background: #000; }
+      .screen-hint { display: none !important; }
+      .poster { margin: 0; width: 100%; }
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <header class="poster-header">
+      <div class="logo">
+        <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" width="200" height="28">
+      </div>
+      <p class="hire-badge">[2026년 상반기 채용]<br>멜라누아 R&amp;D 팀에 합류하기</p>
+    </header>
+
+    <div class="poster-hero">
+      <p class="poster-title poster-title--lead">성장 중심의 스타트업, 멜라누아.</p>
+      <p class="poster-title poster-title--recruit">R&amp;D 팀원 모집합니다.</p>
+      <p class="poster-tags">
+        <span>#K뷰티</span>
+        <span>#우주산업</span>
+        <span>#메디컬</span>
+        <span>#친환경소재</span>
+      </p>
+    </div>
+
+    <section class="block">
+      <div class="block-head">
+        <p class="eyebrow">01 · MELANOIR INTRODUCTION</p>
+        <h1 class="display-headline display-headline--section">BUILD THE NEW STANDARD OF BLACK.</h1>
+      </div>
+      <p class="lead">멜라닌의 유익함을 모두가 누릴 수 있도록. 지속가능한 고성능 소재로 다양한 분야의 혁신을 뒷받침합니다.</p>
+      <div class="chips">
+        <span class="chip">#2030스타트업</span>
+        <span class="chip">#딥테크</span>
+        <span class="chip">#팀워크</span>
+      </div>
+      <div class="sq-row" aria-label="사업 영역">
+        <div class="sq-card">
+          <h3>BEAUTY<br>NEW INGREDIENT</h3>
+          <p>데이터 기반<br>뷰티 신원료</p>
+        </div>
+        <div class="sq-card">
+          <h3>MEDICAL<br>EXPANSION</h3>
+          <p>보호·안정<br>실사용 기술</p>
+        </div>
+        <div class="sq-card">
+          <h3>ECO<br>IMPACT</h3>
+          <p>지속가능<br>고성능 대체</p>
+        </div>
+        <div class="sq-card">
+          <h3>SPACE<br>TECH</h3>
+          <p>차세대<br>방호 소재</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="manifesto">
+      <p>멜라누아는 경쟁하지 않습니다. 기존에 없던 새로운 가치를 찾습니다.</p>
+    </div>
+
+    <section class="block">
+      <div class="block-head">
+        <p class="eyebrow">02 · ROLES TO JOIN THE MISSION</p>
+        <h2 class="display-headline display-headline--section">[모집분야] R&amp;D · TECHNOLOGY · ENGINEERING</h2>
+      </div>
+
+      <div class="job-stack">
+      <div class="job">
+        <h3 class="job-title">TRACK 01 · 양산기술</h3>
+        <p class="job-desc">kg → ton 스케일업 · 공정 안정화·표준화</p>
+        <ul class="list list--inline">
+          <li>추출·정제·스케일업</li>
+          <li>수율·원가 개선</li>
+          <li>생산 일관성</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3 class="job-title">TRACK 02 · 성능 엔지니어링</h3>
+        <p class="job-desc">멜라닌 나노입자 · 10배 기능성 · 카테고리 혁신</p>
+        <ul class="list list--inline">
+          <li>성능 극대화</li>
+          <li>통합 설계</li>
+          <li>지표 갱신 R&amp;D</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3 class="job-title">TRACK 03 · 나노바이오 계측</h3>
+        <p class="job-desc">나노 스케일 거동 · 소재·공정 검증</p>
+        <ul class="list list--inline">
+          <li>정량 계측</li>
+          <li>원인·개선</li>
+          <li>설계 적용</li>
+        </ul>
+      </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <p class="eyebrow">03 · WORKSPACE &amp; WELFARE</p>
+        <h2 class="display-headline display-headline--section">WORK ENVIRONMENT</h2>
+      </div>
+      <ul class="list welfare-list">
+        <li><strong>근무 환경</strong> 쾌적·청결</li>
+        <li><strong>업무 지원</strong> AI·교육·몰입</li>
+        <li><strong>성과 중심</strong> 야근 어려운 구조</li>
+      </ul>
+      <div class="stickers">
+        <span class="sticker">깨끗한환경</span>
+        <span class="sticker">야근불가능</span>
+        <span class="sticker">중식지원</span>
+        <span class="sticker">통근버스</span>
+        <span class="sticker">연구시설</span>
+        <span class="sticker">AI툴</span>
+        <span class="sticker">공동 크레딧</span>
+        <span class="sticker">스톡옵션</span>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <p class="eyebrow">04 · TEAM &amp; CULTURE</p>
+        <h2 class="display-headline display-headline--section">FIVE CORE VALUES</h2>
+      </div>
+      <div class="values-row" aria-label="핵심 가치">
+        <div class="value-pill">
+          <h3>전문성</h3>
+          <p>데이터·결과</p>
+        </div>
+        <div class="value-pill">
+          <h3>신뢰성</h3>
+          <p>기준 준수</p>
+        </div>
+        <div class="value-pill">
+          <h3>관심</h3>
+          <p>미션 몰입</p>
+        </div>
+        <div class="value-pill">
+          <h3>리더십</h3>
+          <p>실행 정렬</p>
+        </div>
+        <div class="value-pill">
+          <h3>민첩성</h3>
+          <p>빠른 개선</p>
+        </div>
+      </div>
+      <p class="quote">WE MOVE FORWARD. WE DO NOT REPEAT. · 신입 환영 · 성장에 동의하는 팀원을 찾습니다.</p>
+    </section>
+
+    <footer class="footer">
+      <div class="apply-block">
+        <div class="block-head">
+          <p class="eyebrow">05 · APPLY</p>
+          <h2 class="display-headline display-headline--section">JOIN MELANOIR</h2>
+        </div>
+        <p>지원서 제출 후 순차 연락 · 복수 직무 가능 · 1–2개월 내 합류 환영</p>
+        <p class="apply-url">https://melanoir.co.kr/recruitment</p>
+      </div>
+      <div class="qr-block" aria-label="채용 공고 QR">
+        <div class="qr-callout">
+          <span class="qr-callout-text">채용 공고 확인하기</span>
+          <svg class="qr-arrow" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 12H62" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M54 5L68 12L54 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="qr-wrap">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&amp;margin=10&amp;data=https%3A%2F%2Fmelanoir.co.kr%2Frecruitment"
+            width="320"
+            height="320"
+            alt="채용 페이지 QR 코드: https://melanoir.co.kr/recruitment">
+          <p class="qr-caption">SCAN · APPLY</p>
+        </div>
+      </div>
+    </footer>
+  </article>
+
+  <p class="screen-hint">PDF 저장: 인쇄 → PDF로 저장 · 배경 그래픽 켜기</p>
+</body>
+</html>

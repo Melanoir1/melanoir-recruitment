@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Melanin — Melanoir</title>
+  <meta name="description" content="멜라닌 — 자연이 수억 년에 걸쳐 설계한 광보호·항산화 물질. 멜라누아가 멜라닌을 선택한 이유.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="../assets/melanoir-shell.css" />
+  <link rel="stylesheet" href="../assets/melanoir-lang.css" />
+  <style>
+    /* —— 히어로 —— */
+    .melanin-hero {
+      padding: 52px var(--shell-pad-x) 40px;
+      border-bottom: 1px solid var(--shell-line);
+    }
+
+    .melanin-hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--shell-text-dim);
+      margin: 0 0 14px;
+    }
+
+    .melanin-hero-title {
+      font-size: clamp(44px, 14vw, 72px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 0.94;
+      margin: 0 0 20px;
+      color: #fff;
+    }
+
+    .melanin-hero-sub {
+      font-family: var(--shell-font-ko);
+      font-size: clamp(16px, 4.2vw, 22px);
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: rgba(255, 255, 255, 0.82);
+      text-transform: none;
+      margin: 0;
+      max-width: 420px;
+    }
+
+    /* —— 섹션 공통 —— */
+    .melanin-section {
+      padding: var(--shell-pad-y) var(--shell-pad-x);
+      border-bottom: 1px solid var(--shell-line);
+    }
+
+    .melanin-section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--shell-text-dim);
+      margin: 0 0 12px;
+    }
+
+    .melanin-section-title {
+      font-family: var(--shell-font-ko);
+      font-size: clamp(20px, 5.5vw, 30px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: rgba(255, 255, 255, 0.96);
+      text-transform: none;
+      margin: 0 0 18px;
+    }
+
+    .melanin-section-prose {
+      font-family: var(--shell-font-ko);
+      font-size: 15px;
+      line-height: 1.78;
+      color: rgba(243, 244, 248, 0.82);
+      text-transform: none;
+      letter-spacing: normal;
+      margin: 0 0 20px;
+    }
+
+    .melanin-section-prose:last-child {
+      margin-bottom: 0;
+    }
+
+    /* —— 특성 그리드 —— */
+    .prop-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    @media (min-width: 420px) {
+      .prop-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .prop-cell {
+      border: 1px solid var(--shell-line);
+      border-radius: 12px;
+      padding: 16px 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    }
+
+    .prop-cell-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: rgba(255,255,255,0.55);
+      margin: 0 0 8px;
+      display: block;
+    }
+
+    .prop-cell-value {
+      font-family: var(--shell-font-ko);
+      font-size: 14px;
+      line-height: 1.58;
+      color: var(--shell-text-dim);
+      text-transform: none;
+      letter-spacing: normal;
+      margin: 0;
+    }
+
+    /* —— 플레이스홀더 비주얼 —— */
+    .melanin-placeholder-visual {
+      margin: 0 0 22px;
+      border-radius: 14px;
+      border: 1px solid var(--shell-line);
+      background: linear-gradient(135deg, #0a0a0f 0%, #111118 100%);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .melanin-placeholder-visual span {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.18);
+    }
+
+    /* —— 리드백 CTA —— */
+    .melanin-back-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding-bottom: 3px;
+      margin-top: 6px;
+      transition: color 200ms ease, border-color 200ms ease;
+    }
+
+    .melanin-back-cta::before {
+      content: "←";
+      font-size: 13px;
+    }
+
+    .melanin-back-cta:hover {
+      color: rgba(255,255,255,0.85);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    /* —— 모션 —— */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="app">
+    <div id="melanoir-content"></div>
+  </div>
+  <a class="melanoir-hire-fab" href="/recruitment" aria-label="2026년 상반기 채용 — 멜라누아 R&amp;D 팀에 합류하기">
+    [2026년 상반기 채용]<br>멜라누아 R&amp;D 팀에 합류하기
+  </a>
+
+  <script src="../assets/melanoir-lang.js"></script>
+  <script>
+    (function () {
+      var hireKo = "[2026\uB144 \uC0C1\uBC18\uAE30 \uCC44\uC6A9] \uBA5C\uB77C\uB204\uC544 R&amp;D \uD300\uC5D0 \uD569\uB958\uD558\uAE30";
+
+      var pageMeta = {
+        kr: { title: "Melanin — Melanoir", description: "멜라닌 — 자연이 설계한 광보호·항산화 물질. 멜라누아가 멜라닌을 선택한 이유." },
+        en: { title: "Melanin — Melanoir", description: "Melanin — photoprotection and antioxidant defense designed by nature. Why Melanoir chose melanin." },
+        fr: { title: "Mélanine — Melanoir", description: "La mélanine — photoprotection et défense antioxydante conçues par la nature." },
+        jp: { title: "メラニン — Melanoir", description: "メラニン — 自然が設計した光防護・抗酸化物質。メラヌアがメラニンを選んだ理由。" },
+        cn: { title: "黑色素 — Melanoir", description: "黑色素 — 自然设计的光防护与抗氧化物质。Melanoir 为何选择黑色素。" },
+      };
+
+      var copy = {
+        kr: {
+          navAria: "Main",
+          navProducts: "Products",
+          navTechnology: "Technology",
+          backLabel: "홈으로 돌아가기",
+          heroEyebrow: "THE MATERIAL",
+          heroTitle: "MELANIN",
+          heroSub: "자연이 수억 년에 걸쳐 설계한 광보호·항산화의 분자.",
+
+          /* 섹션 1 — 멜라닌이란 */
+          s1Eyebrow: "OVERVIEW",
+          s1Title: "멜라닌이란 무엇인가요?",
+          s1Body: "이 섹션에는 멜라닌의 정의, 생물학적 기원, 종류(유멜라닌/페오멜라닌)에 대한 내용이 들어갑니다.",
+
+          /* 섹션 2 — 광보호 */
+          s2Eyebrow: "PHOTOPROTECTION",
+          s2Title: "빛으로부터의 방어",
+          s2Body: "이 섹션에는 멜라닌의 UV 흡수 메커니즘, 자유 라디칼 소거, 합성 색소 대비 안전성 비교 데이터가 들어갑니다.",
+          propLabel1: "UV 흡수 범위",
+          propValue1: "240–700 nm 광범위 흡수",
+          propLabel2: "에너지 소산",
+          propValue2: "흡수 에너지의 ~99.9% 무해 열로 전환",
+          propLabel3: "자유 라디칼 소거",
+          propValue3: "강력한 항산화 활성",
+          propLabel4: "생체 기원",
+          propValue4: "포유류 피부·모발에 자연 존재",
+
+          /* 섹션 3 — 항산화 */
+          s3Eyebrow: "ANTIOXIDANT",
+          s3Title: "산화 스트레스에 맞서다",
+          s3Body: "이 섹션에는 멜라닌의 항산화 메커니즘, ROS 소거 데이터, 적용 사례 연구가 들어갑니다.",
+
+          /* 섹션 4 — 연구·데이터 */
+          s4Eyebrow: "RESEARCH",
+          s4Title: "데이터로 증명합니다",
+          s4Body: "이 섹션에는 조사 실험 결과, 비교 안전성 데이터, 멜라누아 자체 연구 결과가 들어갑니다.",
+
+          /* 섹션 5 — 기술 연결 */
+          s5Eyebrow: "APPLICATIONS",
+          s5Title: "멜라닌이 적용되는 곳",
+          s5Body: "타투·PMU 잉크에서 화장품 기능성 원료, 방사선 차폐 소재까지. 멜라누아는 멜라닌의 가능성을 각 산업으로 연결합니다.",
+
+          footerShop: "문의·쇼핑",
+        },
+        en: {
+          navAria: "Main",
+          navProducts: "Products",
+          navTechnology: "Technology",
+          backLabel: "Back to home",
+          heroEyebrow: "THE MATERIAL",
+          heroTitle: "MELANIN",
+          heroSub: "The photoprotective and antioxidant molecule nature engineered over hundreds of millions of years.",
+          s1Eyebrow: "OVERVIEW",
+          s1Title: "What is melanin?",
+          s1Body: "This section will cover the definition of melanin, its biological origins, and its types (eumelanin / pheomelanin).",
+          s2Eyebrow: "PHOTOPROTECTION",
+          s2Title: "Defense against light.",
+          s2Body: "This section will cover melanin's UV absorption mechanism, free radical scavenging, and safety comparison data vs. synthetic pigments.",
+          propLabel1: "UV absorption range",
+          propValue1: "Broad absorption 240–700 nm",
+          propLabel2: "Energy dissipation",
+          propValue2: "~99.9% of absorbed energy released as harmless heat",
+          propLabel3: "Free radical scavenging",
+          propValue3: "Strong antioxidant activity",
+          propLabel4: "Biological origin",
+          propValue4: "Naturally present in mammalian skin and hair",
+          s3Eyebrow: "ANTIOXIDANT",
+          s3Title: "Against oxidative stress.",
+          s3Body: "This section will cover melanin's antioxidant mechanism, ROS scavenging data, and application case studies.",
+          s4Eyebrow: "RESEARCH",
+          s4Title: "Proven by data.",
+          s4Body: "This section will include irradiation experiment results, comparative safety data, and Melanoir's in-house research findings.",
+          s5Eyebrow: "APPLICATIONS",
+          s5Title: "Where melanin is applied.",
+          s5Body: "From tattoo and PMU inks to functional cosmetic ingredients and radiation shielding materials. Melanoir connects melanin's potential to each industry.",
+          footerShop: "Inquiries & shopping",
+        },
+      };
+
+      // Minimal fallback copy for fr/jp/cn
+      ["fr","jp","cn"].forEach(function(lang) {
+        copy[lang] = copy["en"];
+      });
+
+      function buildPage(t) {
+        return (
+          '<header class="topbar topbar--site">' +
+          '<div class="topbar-head">' +
+          '<a class="logo logo--brand" href="/">' +
+          '<img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" width="140" height="20" decoding="async">' +
+          "</a>" +
+          '<nav class="nav" aria-label="' + t.navAria + '">' +
+          '<a href="/products">' + t.navProducts + "</a>" +
+          '<a href="/#technology">' + t.navTechnology + "</a>" +
+          "</nav></div>" +
+          '<a class="topbar-hire" href="/recruitment">' + hireKo + "</a>" +
+          "</header>" +
+          "<main>" +
+          '<div class="melanin-hero">' +
+          '<p class="melanin-hero-eyebrow reveal">' + t.heroEyebrow + "</p>" +
+          '<h1 class="melanin-hero-title reveal">' + t.heroTitle + "</h1>" +
+          '<p class="melanin-hero-sub reveal shell-i18n-prose">' + t.heroSub + "</p>" +
+          "</div>" +
+          /* Section 1 — What is melanin */
+          '<section class="melanin-section" aria-labelledby="ml-s1">' +
+          '<p class="melanin-section-eyebrow reveal">' + t.s1Eyebrow + "</p>" +
+          '<h2 id="ml-s1" class="melanin-section-title reveal">' + t.s1Title + "</h2>" +
+          '<div class="melanin-placeholder-visual reveal"><span>VISUAL PLACEHOLDER</span></div>' +
+          '<p class="melanin-section-prose reveal shell-i18n-prose">' + t.s1Body + "</p>" +
+          "</section>" +
+          /* Section 2 — Photoprotection */
+          '<section class="melanin-section" aria-labelledby="ml-s2">' +
+          '<p class="melanin-section-eyebrow reveal">' + t.s2Eyebrow + "</p>" +
+          '<h2 id="ml-s2" class="melanin-section-title reveal">' + t.s2Title + "</h2>" +
+          '<div class="melanin-placeholder-visual reveal"><span>VISUAL PLACEHOLDER</span></div>' +
+          '<p class="melanin-section-prose reveal shell-i18n-prose">' + t.s2Body + "</p>" +
+          '<dl class="prop-grid">' +
+          '<div class="prop-cell"><dt class="prop-cell-label">' + t.propLabel1 + '</dt><dd class="prop-cell-value shell-i18n-prose">' + t.propValue1 + "</dd></div>" +
+          '<div class="prop-cell"><dt class="prop-cell-label">' + t.propLabel2 + '</dt><dd class="prop-cell-value shell-i18n-prose">' + t.propValue2 + "</dd></div>" +
+          '<div class="prop-cell"><dt class="prop-cell-label">' + t.propLabel3 + '</dt><dd class="prop-cell-value shell-i18n-prose">' + t.propValue3 + "</dd></div>" +
+          '<div class="prop-cell"><dt class="prop-cell-label">' + t.propLabel4 + '</dt><dd class="prop-cell-value shell-i18n-prose">' + t.propValue4 + "</dd></div>" +
+          "</dl></section>" +
+          /* Section 3 — Antioxidant */
+          '<section class="melanin-section" aria-labelledby="ml-s3">' +
+          '<p class="melanin-section-eyebrow reveal">' + t.s3Eyebrow + "</p>" +
+          '<h2 id="ml-s3" class="melanin-section-title reveal">' + t.s3Title + "</h2>" +
+          '<div class="melanin-placeholder-visual reveal"><span>VISUAL PLACEHOLDER</span></div>' +
+          '<p class="melanin-section-prose reveal shell-i18n-prose">' + t.s3Body + "</p>" +
+          "</section>" +
+          /* Section 4 — Research */
+          '<section class="melanin-section" aria-labelledby="ml-s4">' +
+          '<p class="melanin-section-eyebrow reveal">' + t.s4Eyebrow + "</p>" +
+          '<h2 id="ml-s4" class="melanin-section-title reveal">' + t.s4Title + "</h2>" +
+          '<div class="melanin-placeholder-visual reveal"><span>VISUAL PLACEHOLDER</span></div>' +
+          '<p class="melanin-section-prose reveal shell-i18n-prose">' + t.s4Body + "</p>" +
+          "</section>" +
+          /* Section 5 — Applications */
+          '<section class="melanin-section" aria-labelledby="ml-s5">' +
+          '<p class="melanin-section-eyebrow reveal">' + t.s5Eyebrow + "</p>" +
+          '<h2 id="ml-s5" class="melanin-section-title reveal">' + t.s5Title + "</h2>" +
+          '<p class="melanin-section-prose reveal shell-i18n-prose">' + t.s5Body + "</p>" +
+          '<a class="melanin-back-cta reveal" href="/">' + t.backLabel + "</a>" +
+          "</section>" +
+          "</main>" +
+          '<footer class="site-footer"><p>© Melanoir</p><p class="shell-i18n-prose">' +
+          t.footerShop +
+          ': <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p></footer>'
+        );
+      }
+
+      var localizedContent = {};
+      Object.keys(copy).forEach(function (lang) {
+        localizedContent[lang] = buildPage(copy[lang]);
+      });
+
+      function applyMeta(lang) {
+        var meta = pageMeta[lang] || pageMeta.kr;
+        document.title = meta.title;
+        var desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute("content", meta.description);
+      }
+
+      MelanoirLang.init({
+        theme: "dark",
+        contentSelector: "#melanoir-content",
+        localizedContent: localizedContent,
+        onApply: function(lang) {
+          applyMeta(lang);
+          // scroll reveal
+          var io = "IntersectionObserver" in window
+            ? new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                  if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
+                });
+              }, { threshold: 0.12 })
+            : null;
+          document.querySelectorAll(".reveal").forEach(function(el) {
+            el.classList.remove("is-visible");
+            if (io) io.observe(el); else el.classList.add("is-visible");
+          });
+        },
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var bar = document.getElementById("scrollProgress");
+      if (!bar) return;
+      function tick() {
+        var y = window.scrollY || window.pageYOffset;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = Math.max(0, Math.min(100, max > 0 ? (y/max)*100 : 0)) + "%";
+      }
+      tick();
+      window.addEventListener("scroll", tick, { passive: true });
+      window.addEventListener("resize", tick);
+    })();
+  </script>
+</body>
+</html>

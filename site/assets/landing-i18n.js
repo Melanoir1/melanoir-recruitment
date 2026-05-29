@@ -41,9 +41,10 @@
       promiseSecondary: "For the Safest Black in the Universe.",
       scroll: "SCROLL",
       melaninEyebrow: "THE MATERIAL",
-      melaninTitle: "WHY MELANIN",
+      melaninTitle: "왜 멜라닌인가요?",
       melaninImgAlt: "멜라닌과 광·산화 환경을 상징하는 비주얼",
-      melaninProse: "멜라닌은 생명이 오랜 시간 동안 빛과 산화로부터 자신을 지키기 위해 진화시킨 <strong>자연의 방패</strong>입니다. 합성 색소가 남기는 화학적 부담 대신, 생체에 가깝게 작동하는 광보호·항산화의 축을 하나의 물질 안에 모읍니다. 멜라누아가 다루는 이야기의 중심은 언제나 <strong>멜라닌 그 자체</strong>이며, 그 유익함을 더 많은 사람의 일상으로 가져가는 일입니다.",
+      melaninProse: "멜라닌은 생명이 오랜 시간 동안 빛과 산화로부터 자신을 지키기 위해 진화시킨 <strong>자연의 방패</strong>입니다. 멜라누아는 자연이 정교하게 설계한 이 구조를 우리의 일상으로 가져옵니다.",
+      melaninLearnMore: "더 알아보기",
       statBioLabel: "Bio-material",
       statBio: "생체에서 영감을 받은 고기능 소재. 검은색이 요구되는 자리마다, 더 안전한 대안으로서의 멜라닌을 상상합니다.",
       statReachLabel: "Reach",
@@ -53,12 +54,16 @@
       techImgAlt: "조사·광 스트레스 조건에서 멜라닌과 비교 소재의 안정성을 보여 주는 실험 비주얼",
       techProse: "멜라닌의 가치는 말로만 완성되지 않습니다. 실험과 데이터를 통해 그 안전성과 기능을 확인하고, 그 결과를 세상과 나누는 것이 멜라누아의 태도입니다. 우리는 멜라닌이 가진 물리·생물학적 특성을 끝까지 읽어 내고, 그 가능성을 새로운 기준으로 제시합니다.",
       scaleEyebrow: "SCALE",
-      scaleTitle: "Our trajectory",
+      scaleTitle: "멜라누아의 기술이 적용되는 곳",
       scaleImgAlt: "순수 멜라닌 분말이 쌓이며 스케일을 상징하는 비주얼",
       scaleProse: "같은 물질이어도, 영역마다 요구되는 역할은 다릅니다. 아래는 멜라닌이 어떤 세계와 맞닿아 있는지에 대한 방향이며, 각 축이 지향하는 공통 목표는 <strong>지구에서 가장 안전한 Black</strong>입니다.",
-      domainBeauty: "피부와 맞닿는 일상의 보호. 멜라닌은 감각을 넘어, 빛과 시간에 대한 방어를 새롭게 정의할 수 있는 소재입니다.",
-      domainMedical: "생체와의 상호작용이 중요한 영역에서, 멜라닌의 안정성과 보호성은 실사용 기술로 이어질 수 있는 잠재력을 품습니다.",
-      domainSpace: "극한 환경에서는 물질의 내구와 방호가 곧 생존입니다. 우주를 포함한 차세대 산업이 요구하는 검은 방패로서 멜라닌을 상상합니다.",
+      trajTattooTitle: "타투와 눈썹 문신을 더욱 안전하게.",
+      trajTattooDesc: "피부 안에 영구적으로 새겨지는 색소는 그 어떤 소재보다 높은 안전 기준을 요구합니다. 멜라누아는 멜라닌 기반 타투·PMU 잉크를 개발하며, 가장 안전한 블랙을 구현합니다.",
+      trajRadTitle: "방사선 차폐 기술의 혁신을 만듭니다.",
+      trajRadDesc: "멜라닌의 방사선 흡수 특성은 단순한 색소를 넘어, 차세대 차폐 소재로서의 가능성을 열어 줍니다. 우주 산업과 의료 환경이 요구하는 방호 기준을 멜라닌으로 다시 씁니다.",
+      trajCosmeticTitle: "화장품에 여러 기능성을 동시에 구현합니다.",
+      trajCosmeticDesc: "피부에 닿는 성분은 기능을 가져야 합니다. 멜라닌을 정교하게 기능화해, 기존 화장품 성분이 채우지 못했던 광보호와 항산화의 자리를 채웁니다.",
+      learnMore: "더 알아보기",
       footerShop: "문의·쇼핑",
     },
     en: {
@@ -74,22 +79,27 @@
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "Visual symbolizing melanin in light and oxidative environments",
-      melaninProse: "Melanin is nature\u2019s shield\u2014evolved over eons so life could endure light and oxidation. Rather than the chemical load of synthetic pigments, it concentrates photoprotection and antioxidant defense in a single substance that works closer to biology. Melanoir tells that story with melanin itself at the center, bringing its benefits into everyday life.",
+      melaninProse: "Melanin is nature’s shield—evolved over eons so life could endure light and oxidation. Melanoir brings this elegantly engineered structure into everyday life.",
+      melaninLearnMore: "Learn more",
       statBioLabel: "Bio-material",
       statBio: "A high-performance material inspired by living systems. Wherever black is required, we imagine melanin as the safer alternative.",
       statReachLabel: "Reach",
-      statReach: "From bench-scale batches to applications that span Earth and space\u2014the larger the scale, the wider melanin\u2019s reach becomes.",
+      statReach: "From bench-scale batches to applications that span Earth and space—the larger the scale, the wider melanin’s reach becomes.",
       techEyebrow: "IRRADIATION",
       techTitle: "How we drive innovation",
       techImgAlt: "Experimental visual of melanin stability under irradiation and optical stress",
-      techProse: "Melanin\u2019s value is not finished in words alone. Melanoir proves safety and function through experiment and data, then shares those results with the world. We read melanin\u2019s physical and biological character to the end\u2014and set new standards for what it can do.",
+      techProse: "Melanin’s value is not finished in words alone. Melanoir proves safety and function through experiment and data, then shares those results with the world. We read melanin’s physical and biological character to the end—and set new standards for what it can do.",
       scaleEyebrow: "SCALE",
       scaleTitle: "Our trajectory",
       scaleImgAlt: "Pure melanin powder stacked to symbolize scale",
-      scaleProse: "The same molecule plays different roles in different worlds. Below is how melanin meets each domain\u2014and the goal every axis shares: <strong>the safest black on Earth</strong>.",
-      domainBeauty: "Protection for skin and daily life. Beyond sensation, melanin can redefine defense against light and time.",
-      domainMedical: "Where interaction with living tissue matters, melanin\u2019s stability and protective character hold potential for real-world technologies.",
-      domainSpace: "In extreme environments, durability and shielding are survival. We imagine melanin as the black shield demanded by next-generation industry\u2014including space.",
+      scaleProse: "The same molecule plays different roles in different worlds. Below is how melanin meets each domain—and the goal every axis shares: <strong>the safest black on Earth</strong>.",
+      trajTattooTitle: "Making tattoo ink safe and beyond.",
+      trajTattooDesc: "Pigments permanently embedded in skin demand the highest safety standards of any material. Melanoir develops melanin-based tattoo and PMU inks that realize the safest black.",
+      trajRadTitle: "Revolutionizing radiation shielding technology.",
+      trajRadDesc: "Melanin’s radiation-absorbing properties open possibilities far beyond ordinary pigments, toward next-generation shielding materials. Melanoir is rewriting protection standards for space and medical environments.",
+      trajCosmeticTitle: "Functionalizing cosmetic ingredient.",
+      trajCosmeticDesc: "Every ingredient that touches skin must carry a function. Through the precise functionalization of melanin, Melanoir fills the gaps in photoprotection and antioxidant defense that conventional cosmetics leave behind.",
+      learnMore: "Learn more",
       footerShop: "Inquiries & shopping",
     },
     fr: {
@@ -104,23 +114,28 @@
       scroll: "DÉFILER",
       melaninEyebrow: "LA MATIÈRE",
       melaninTitle: "POURQUOI LA MÉLANINE",
-      melaninImgAlt: "Visuel évoquant la mélanine face à la lumière et à l\u2019oxydation",
-      melaninProse: "La mélanine est le <strong>bouclier de la nature</strong>, façonné par l\u2019évolution pour protéger le vivant de la lumière et de l\u2019oxydation. Loin du fardeau chimique des pigments synthétiques, elle concentre photoprotection et défense antioxydante en une seule matière proche du biologique. Melanoir place la <strong>mélanine elle-même</strong> au centre de son récit et cherche à en partager les bienfaits au quotidien.",
+      melaninImgAlt: "Visuel évoquant la mélanine face à la lumière et à l’oxydation",
+      melaninProse: "La mélanine est le <strong>bouclier de la nature</strong>, façonné par l’évolution pour protéger le vivant de la lumière et de l’oxydation. Melanoir apporte cette structure finement conçue par la nature dans votre quotidien.",
+      melaninLearnMore: "En savoir plus",
       statBioLabel: "Bio-matière",
-      statBio: "Un matériau haute performance inspiré du vivant. Partout où le noir est exigé, nous imaginons la mélanine comme l\u2019alternative la plus sûre.",
+      statBio: "Un matériau haute performance inspiré du vivant. Partout où le noir est exigé, nous imaginons la mélanine comme l’alternative la plus sûre.",
       statReachLabel: "Portée",
-      statReach: "Du laboratoire aux applications qui traversent la Terre et l\u2019espace\u2014plus l\u2019échelle grandit, plus le champ de la mélanine s\u2019élargit.",
+      statReach: "Du laboratoire aux applications qui traversent la Terre et l’espace—plus l’échelle grandit, plus le champ de la mélanine s’élargit.",
       techEyebrow: "IRRADIATION",
       techTitle: "Comment nous innovons",
       techImgAlt: "Visuel expérimental de la stabilité de la mélanine sous stress lumineux et irradiation",
-      techProse: "La valeur de la mélanine ne se clôt pas dans les mots. Melanoir en démontre la sûreté et la fonction par l\u2019expérience et les données, puis les partage. Nous lisons ses propriétés physiques et biologiques jusqu\u2019au bout\u2014et proposons de nouveaux repères.",
+      techProse: "La valeur de la mélanine ne se clôt pas dans les mots. Melanoir en démontre la sûreté et la fonction par l’expérience et les données, puis les partage. Nous lisons ses propriétés physiques et biologiques jusqu’au bout—et proposons de nouveaux repères.",
       scaleEyebrow: "ÉCHELLE",
       scaleTitle: "Notre trajectoire",
-      scaleImgAlt: "Poudre de mélanine pure symbolisant l\u2019échelle",
-      scaleProse: "Une même molécule, des rôles différents selon les mondes. Voici comment la mélanine touche chaque domaine\u2014avec un objectif commun : <strong>le Black le plus sûr sur Terre</strong>.",
-      domainBeauty: "La protection au contact de la peau et du quotidien. Au-delà du sensoriel, la mélanine peut redéfinir la défense face à la lumière et au temps.",
-      domainMedical: "Là où l\u2019interaction avec le vivant compte, la stabilité et la protection de la mélanine ouvrent des technologies applicables.",
-      domainSpace: "En environnement extrême, durabilité et blindage sont survie. Nous imaginons la mélanine comme bouclier noir pour les industries de demain\u2014y compris l\u2019espace.",
+      scaleImgAlt: "Poudre de mélanine pure symbolisant l’échelle",
+      scaleProse: "Une même molécule, des rôles différents selon les mondes. Voici comment la mélanine touche chaque domaine—avec un objectif commun : <strong>le Black le plus sûr sur Terre</strong>.",
+      trajTattooTitle: "Un encre de tatouage sûr. Et au-delà.",
+      trajTattooDesc: "Les pigments incrustés définitivement dans la peau exigent les plus hauts critères de sécurité. Melanoir développe des encres de tatouage et PMU à base de mélanine pour réaliser le Black le plus sûr.",
+      trajRadTitle: "Révolutionner la technologie de protection contre les rayonnements.",
+      trajRadDesc: "Les propriétés d'absorption des rayonnements de la mélanine ouvrent des perspectives au-delà du simple pigment, vers des matériaux de blindage de nouvelle génération. Melanoir réécrit les normes de protection pour l'espace et le médical.",
+      trajCosmeticTitle: "Des ingrédients cosmétiques fonctionnalisés.",
+      trajCosmeticDesc: "Chaque ingrédient en contact avec la peau doit avoir une fonction. Par la fonctionnalisation précise de la mélanine, Melanoir comble les lacunes en photoprotection et défense antioxydante.",
+      learnMore: "En savoir plus",
       footerShop: "Contact & boutique",
     },
     jp: {
@@ -136,7 +151,8 @@
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "メラニンと光・酸化環境を象徴するビジュアル",
-      melaninProse: "メラニンは、生命が長い時間をかけて光と酸化から身を守るために進化させた<strong>自然の盾</strong>です。合成色素の化学的負担の代わりに、光防御と抗酸化の軸を一つの物質に集約し、生体に近い働きを目指します。メラヌアの物語の中心は常に<strong>メラニンそのもの</strong>であり、その恩恵をより多くの日常へ届けることです。",
+      melaninProse: "メラニンは、生命が長い時間をかけて光と酸化から身を守るために進化させた<strong>自然の盾</strong>です。メラヌアは、自然が精巧に設計したこの構造を私たちの日常へ届けます。",
+      melaninLearnMore: "詳しく見る",
       statBioLabel: "Bio-material",
       statBio: "生体から着想を得た高機能材料。黒が求められる場所ごとに、より安全な代替としてのメラニンを描きます。",
       statReachLabel: "Reach",
@@ -149,9 +165,13 @@
       scaleTitle: "私たちの軌道",
       scaleImgAlt: "純メラニン粉末が積み重なりスケールを象徴するビジュアル",
       scaleProse: "同じ物質でも、領域ごとに求められる役割は異なります。以下はメラニンが接する世界の方向性であり、各軸が目指す共通のゴールは<strong>地球で最も安全な Black</strong>です。",
-      domainBeauty: "肌に触れる日常の防御。メラニンは感覚を超え、光と時間への防衛を新しく定義しうる材料です。",
-      domainMedical: "生体との相互作用が重要な領域では、メラニンの安定性と保護性が実用技術への潜在力を持ちます。",
-      domainSpace: "極限環境では耐久と防護が生存そのもの。宇宙を含む次世代産業が求める黒い盾として、メラニンを想像します。",
+      trajTattooTitle: "タトゥーインクを安全に。そして、その先へ。",
+      trajTattooDesc: "皮膚に永久に刻まれる色素は、あらゆる素材の中で最高の安全基準を求めます。メラヌアはメラニンベースのタトゥー・PMUインクを開発し、最も安全なブラックを実現します。",
+      trajRadTitle: "放射線遮蔽技術の革新をつくります。",
+      trajRadDesc: "メラニンの放射線吸収特性は、単なる色素を超えて次世代遮蔽材料への可能性を開きます。宇宙産業と医療環境が求める防護基準をメラニンで書き替えます。",
+      trajCosmeticTitle: "化粧品成分に先端技術を適用します。",
+      trajCosmeticDesc: "膚に触れる成分は機能を持つべきです。メラニンの精巧な機能化を通じて、従来の化粧品成分が埋められなかった光防護と抗酸化の空白を埋めます。",
+      learnMore: "詳しく見る",
       footerShop: "お問い合わせ・ショッピング",
     },
     cn: {
@@ -167,7 +187,8 @@
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "象征黑色素与光、氧化环境的视觉",
-      melaninProse: "黑色素是生命在漫长岁月中为抵御光与氧化而进化出的<strong>自然之盾</strong>。它不以合成色素的化学负担为代价，而是在单一物质中汇聚光防护与抗氧化轴线，更接近生物本真的运作方式。Melanoir 的故事始终围绕<strong>黑色素本身</strong>，并将其益处带入更多人的日常。",
+      melaninProse: "黑色素是生命在漫长岁月中为抗御光与氧化而进化出的<strong>自然之盾</strong>。Melanoir 将这一由自然精心设计的结构带入日常生活。",
+      melaninLearnMore: "了解更多",
       statBioLabel: "Bio-material",
       statBio: "源于生命启发的高性能材料。在需要黑色的每一处，我们想象黑色素作为更安全的替代。",
       statReachLabel: "Reach",
@@ -175,20 +196,31 @@
       techEyebrow: "IRRADIATION",
       techTitle: "我们如何推动创新",
       techImgAlt: "照射与光应激条件下黑色素稳定性的实验视觉",
-      techProse: "黑色素的价值不会止于言语。Melanoir 以实验与数据验证其安全性与功能，并与世界分享结果。我们读尽黑色素的物理与生物学特性，并以新标准呈现其可能。",
+      techProse: "黑色素的价値不会止于言语。Melanoir 以实验与数据验证其安全性与功能，并与世界分享结果。我们读尽黑色素的物理与生物学特性，并以新标准呈现其可能。",
       scaleEyebrow: "SCALE",
       scaleTitle: "我们的路径",
       scaleImgAlt: "纯黑色素粉末堆叠，象征规模",
       scaleProse: "同一物质，在不同领域承担不同角色。以下是黑色素所触及的世界方向——各轴共同指向<strong>地球上最安全的 Black</strong>。",
-      domainBeauty: "贴近肌肤与日常的防护。黑色素超越感官，有望重新定义对光与时间的防御。",
-      domainMedical: "在重视生物相互作用的领域，黑色素的稳定性与保护性蕴含走向实用技术的潜力。",
-      domainSpace: "极端环境中，耐久与防护即生存。我们想象黑色素作为下一代产业——包括航天——所需的黑色护盾。",
+      trajTattooTitle: "让纹身墨水更安全。以及更远。",
+      trajTattooDesc: "永久嵌入皮肤的色素要求所有材料中最高的安全标准。Melanoir 开发基于黑色素的纹身和 PMU 墨水，实现最安全的黑色。",
+      trajRadTitle: "开创辐射防护技术的革新。",
+      trajRadDesc: "黑色素的辐射吸收特性超越了普通色素，开启了新一代防护材料的可能性。Melanoir 正在用黑色素重写航天和医疗环境的防护标准。",
+      trajCosmeticTitle: "将先进技术应用于化妆品成分。",
+      trajCosmeticDesc: "接触皮肤的每种成分都必须具有功能。通过精确功能化黑色素，Melanoir 填补了传统化妆品成分在光防护和抗氧化防御方面留下的空白。",
+      learnMore: "了解更多",
       footerShop: "咨询与购物",
     },
   };
 
   var VIDEO_SRC =
     "https://res.cloudinary.com/dssuxurpt/video/upload/v1778651445/Moon_gold_ighxxq.mp4";
+
+  var TRAJ_TATTOO_VIDEO =
+    "https://res.cloudinary.com/dssuxurpt/video/upload/v1779244150/%E1%84%82%E1%85%A1%E1%84%8B%E1%85%B4_%E1%84%83%E1%85%A9%E1%86%BC%E1%84%8B%E1%85%A7%E1%86%BC%E1%84%89%E1%85%A1%E1%86%BC_6-1_cpuuew.mp4";
+  var TRAJ_RADIATION_IMG =
+    "https://res.cloudinary.com/dssuxurpt/image/upload/v1779243028/Gown2-compressed_poeqah.jpg";
+  var TRAJ_COSMETICS_IMG =
+    "https://res.cloudinary.com/dssuxurpt/image/upload/v1779242602/Color_jvs9he.png";
 
   function promiseBlock(t) {
     var secondary =
@@ -266,7 +298,10 @@
       t.statReachLabel +
       '</dt><dd class="shell-i18n-prose">' +
       t.statReach +
-      "</dd></div></dl></section>" +
+      "</dd></div></dl>" +
+      '<a class="section-cta reveal" href="/melanin">' +
+      t.melaninLearnMore +
+      "</a></section>" +
       '<div id="technology">' +
       '<section class="section" id="tech-research" aria-labelledby="tech-title">' +
       '<p class="eyebrow reveal">' +
@@ -294,16 +329,33 @@
       '<p class="prose reveal shell-i18n-prose">' +
       t.scaleProse +
       "</p>" +
-      '<div class="domain-grid" data-stagger>' +
-      '<article class="domain-cell stagger-item" id="domain-beauty"><h3>BEAUTY</h3><p class="shell-i18n-prose">' +
-      t.domainBeauty +
-      "</p></article>" +
-      '<article class="domain-cell stagger-item" id="domain-medical"><h3>MEDICAL</h3><p class="shell-i18n-prose">' +
-      t.domainMedical +
-      "</p></article>" +
-      '<article class="domain-cell stagger-item" id="domain-space"><h3>SPACE</h3><p class="shell-i18n-prose">' +
-      t.domainSpace +
-      "</p></article></div></section></div></main>" +
+      '<div class="traj-list" data-stagger>' +
+      '<article class="traj-item stagger-item">' +
+      '<figure class="traj-visual traj-visual--video">' +
+      '<video autoplay muted loop playsinline disablePictureInPicture aria-hidden="true">' +
+      '<source src="' + TRAJ_TATTOO_VIDEO + '" type="video/mp4"></video></figure>' +
+      '<p class="traj-eyebrow">TATTOO · PMU</p>' +
+      '<h3 class="traj-title shell-i18n-prose">' + t.trajTattooTitle + "</h3>" +
+      '<p class="traj-desc shell-i18n-prose">' + t.trajTattooDesc + "</p>" +
+      '<a class="traj-cta" href="/technology/tattoo">' + t.learnMore + "</a>" +
+      "</article>" +
+      '<article class="traj-item stagger-item">' +
+      '<figure class="traj-visual">' +
+      '<img src="' + TRAJ_RADIATION_IMG + '" alt="" loading="lazy" decoding="async"></figure>' +
+      '<p class="traj-eyebrow">RADIATION SHIELDING</p>' +
+      '<h3 class="traj-title shell-i18n-prose">' + t.trajRadTitle + "</h3>" +
+      '<p class="traj-desc shell-i18n-prose">' + t.trajRadDesc + "</p>" +
+      '<a class="traj-cta" href="/technology/radiation">' + t.learnMore + "</a>" +
+      "</article>" +
+      '<article class="traj-item stagger-item">' +
+      '<figure class="traj-visual">' +
+      '<img src="' + TRAJ_COSMETICS_IMG + '" alt="" loading="lazy" decoding="async"></figure>' +
+      '<p class="traj-eyebrow">COSMETICS</p>' +
+      '<h3 class="traj-title shell-i18n-prose">' + t.trajCosmeticTitle + "</h3>" +
+      '<p class="traj-desc shell-i18n-prose">' + t.trajCosmeticDesc + "</p>" +
+      '<a class="traj-cta" href="/technology/cosmetics">' + t.learnMore + "</a>" +
+      "</article>" +
+      "</div></section></div></main>" +
       '<footer class="site-footer"><p>© Melanoir</p><p class="shell-i18n-prose">' +
       t.footerShop +
       ': <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p></footer>'

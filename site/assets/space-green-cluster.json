@@ -1,0 +1,126 @@
+{
+  "ok": true,
+  "mode": "cloudinary",
+  "folder": "space(green cluster)",
+  "localDir": "site/recruitment/environment(green cluster)",
+  "updatedAt": "2026-05-22T06:35:34.169Z",
+  "items": [
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431700/space%28green%20cluster%29/a-1.png",
+      "publicId": "space(green cluster)/a-1",
+      "width": 1806,
+      "height": 1342,
+      "format": "png",
+      "sourceFile": "a-1.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431704/space%28green%20cluster%29/a-2.png",
+      "publicId": "space(green cluster)/a-2",
+      "width": 1822,
+      "height": 1294,
+      "format": "png",
+      "sourceFile": "a-2.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431706/space%28green%20cluster%29/a-5.png",
+      "publicId": "space(green cluster)/a-5",
+      "width": 1740,
+      "height": 1304,
+      "format": "png",
+      "sourceFile": "a-5.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431708/space%28green%20cluster%29/b-1.png",
+      "publicId": "space(green cluster)/b-1",
+      "width": 1816,
+      "height": 1336,
+      "format": "png",
+      "sourceFile": "b-1.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431711/space%28green%20cluster%29/b-2.png",
+      "publicId": "space(green cluster)/b-2",
+      "width": 1784,
+      "height": 1246,
+      "format": "png",
+      "sourceFile": "b-2.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431713/space%28green%20cluster%29/b-3.png",
+      "publicId": "space(green cluster)/b-3",
+      "width": 1804,
+      "height": 956,
+      "format": "png",
+      "sourceFile": "b-3.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431716/space%28green%20cluster%29/b-4.png",
+      "publicId": "space(green cluster)/b-4",
+      "width": 1798,
+      "height": 1334,
+      "format": "png",
+      "sourceFile": "b-4.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431718/space%28green%20cluster%29/b-5.png",
+      "publicId": "space(green cluster)/b-5",
+      "width": 1550,
+      "height": 1020,
+      "format": "png",
+      "sourceFile": "b-5.png"
+    },
+    {
+      "type": "video",
+      "url": "https://res.cloudinary.com/dssuxurpt/video/upload/v1779431722/space%28green%20cluster%29/d-0.mp4",
+      "publicId": "space(green cluster)/d-0",
+      "width": 1920,
+      "height": 1080,
+      "format": "mp4",
+      "sourceFile": "d-0.mp4"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431725/space%28green%20cluster%29/d-1.png",
+      "publicId": "space(green cluster)/d-1",
+      "width": 1826,
+      "height": 1342,
+      "format": "png",
+      "sourceFile": "d-1.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431728/space%28green%20cluster%29/d-2.png",
+      "publicId": "space(green cluster)/d-2",
+      "width": 1822,
+      "height": 1306,
+      "format": "png",
+      "sourceFile": "d-2.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431731/space%28green%20cluster%29/d-3.png",
+      "publicId": "space(green cluster)/d-3",
+      "width": 1826,
+      "height": 1330,
+      "format": "png",
+      "sourceFile": "d-3.png"
+    },
+    {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dssuxurpt/image/upload/v1779431733/space%28green%20cluster%29/d-4.png",
+      "publicId": "space(green cluster)/d-4",
+      "width": 1824,
+      "height": 1274,
+      "format": "png",
+      "sourceFile": "d-4.png"
+    }
+  ]
+}
