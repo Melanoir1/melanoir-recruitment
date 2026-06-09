@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>베타테스터 모집폼 수정안 | 멜라누아</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #2c2c2c;
+      background: #f8f7f5;
+    }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    h1 { font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+    .sub { font-size: 13px; color: #999; margin-bottom: 40px; }
+
+    h2 {
+      font-size: 14px; font-weight: 700; color: #1a1a1a;
+      margin: 40px 0 14px;
+      padding-left: 10px;
+      border-left: 3px solid #1a1a1a;
+    }
+
+    /* 비교표 */
+    .diff-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .diff-table th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      border: 1px solid #ddd;
+    }
+    .diff-table th:first-child { background: #f5e8e8; color: #a33; width: 50%; }
+    .diff-table th:last-child  { background: #e8f5ec; color: #2a7a3b; width: 50%; }
+    .diff-table td {
+      padding: 12px 14px;
+      border: 1px solid #e0ddd8;
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .diff-table tr:nth-child(even) td { background: #faf9f7; }
+    .diff-table .label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .del { color: #cc4444; text-decoration: line-through; }
+    .add { color: #2a7a3b; font-weight: 600; }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+    .badge-fix { background: #fde8e8; color: #a33; }
+    .badge-new { background: #e8f5ec; color: #2a7a3b; }
+    .badge-sales { background: #fff3e0; color: #b35a00; }
+
+    /* 복붙 박스 */
+    .copy-section {
+      background: #fff;
+      border: 1px solid #e0ddd8;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .copy-header {
+      background: #f3f1ee;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #555;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .copy-note { font-weight: 400; color: #999; font-size: 11px; }
+    .copy-body {
+      padding: 16px;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      word-break: keep-all;
+    }
+    .copy-body .highlight { background: #fffbe6; border-radius: 2px; padding: 0 2px; }
+
+    footer { font-size: 12px; color: #bbb; text-align: center; margin-top: 48px; padding-top: 20px; border-top: 1px solid #e8e6e2; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>베타테스터 모집폼 수정안</h1>
+  <p class="sub">멜라누아 엠보 · 섹션 3 개인정보 동의 및 서약 — 수정 전/후 비교 및 복붙 텍스트</p>
+
+  <!-- ── 비교표 ── -->
+  <h2>수정 전 / 후 비교</h2>
+  <table class="diff-table">
+    <thead>
+      <tr>
+        <th>수정 전</th>
+        <th>수정 후</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- 1. 수집 목적 -->
+      <tr>
+        <td>
+          <span class="label">수집 목적</span>
+          <span class="badge badge-fix">수정</span><br />
+          베타 테스터 선정·본인 확인 / 샘플 배송 / 테스트 진행 안내 / 데이터 분석 / 제품 개선 / 응답 사본 전송 / 혜택 제공.
+        </td>
+        <td>
+          <span class="label">수집 목적</span>
+          <span class="badge badge-fix">수정</span><br />
+          베타 테스터 선정·본인 확인 / 샘플 배송 / 테스트 진행 안내 <span class="add">(알림톡·SMS·이메일)</span> / <span class="del">데이터 분석</span> <span class="add">제품 사용성 평가 데이터 분석</span> / 제품 개선 / 응답 사본 전송 / 혜택 제공.
+        </td>
+      </tr>
+
+      <!-- 2. 보유 기간 -->
+      <tr>
+        <td>
+          <span class="label">보유 기간</span>
+          <span class="badge badge-fix">오류</span><br />
+          수집 정보 (최대 3년), <span class="del">임상 데이터(설문·사진)</span>, 배송 정보 (배송 완료 후 6개월 이내 파기).<br /><br />
+          <em style="color:#cc4444; font-size:12px;">⚠ 임상 데이터의 보유 기간 누락, "임상" 용어 부적절</em>
+        </td>
+        <td>
+          <span class="label">보유 기간</span>
+          <span class="badge badge-fix">수정</span><br />
+          기본 수집 정보 (최대 3년) / <span class="add">제품 사용성 평가 데이터(설문·사진) (테스트 종료 후 3년)</span> / 배송 정보 (배송 완료 후 6개월 이내 파기).
+        </td>
+      </tr>
+
+      <!-- 3. 파기 방법 -->
+      <tr>
+        <td>
+          <span class="label">파기 방법</span>
+          <span class="badge badge-fix">누락</span><br />
+          <span class="del">(없음)</span>
+        </td>
+        <td>
+          <span class="label">파기 방법</span>
+          <span class="badge badge-new">추가</span><br />
+          <span class="add">전자파일은 복구 불가능한 방법으로 영구 삭제, 출력물·서류는 파쇄 또는 소각.</span>
+        </td>
+      </tr>
+
+      <!-- 4. 처리위탁 -->
+      <tr>
+        <td>
+          <span class="label">처리위탁</span>
+          <span class="badge badge-fix">누락</span><br />
+          <span class="del">(없음)</span>
+        </td>
+        <td>
+          <span class="label">처리위탁</span>
+          <span class="badge badge-new">추가</span><br />
+          <span class="add">배송 업무: 우체국(과학기술정보통신부 우정사업본부).</span>
+        </td>
+      </tr>
+
+      <!-- 5. 처리방침 링크 -->
+      <tr>
+        <td>
+          <span class="label">개인정보처리방침</span>
+          <span class="badge badge-fix">누락</span><br />
+          <span class="del">(없음)</span>
+        </td>
+        <td>
+          <span class="label">개인정보처리방침</span>
+          <span class="badge badge-new">추가</span><br />
+          <span class="add">자세한 내용: melanoir.co.kr/privacy</span>
+        </td>
+      </tr>
+
+      <!-- 6. 서약 페널티 문구 -->
+      <tr>
+        <td>
+          <span class="label">서약 — 페널티 문구</span>
+          <span class="badge badge-sales">세일즈</span><br />
+          ※ 미이행 시 향후 이벤트 참여 및 혜택 제공이 <span class="del">제한될 수 있습니다.</span><br /><br />
+          <em style="color:#b35a00; font-size:12px;">⚠ 지원 단계에서 페널티 노출 → 이탈 유발</em>
+        </td>
+        <td>
+          <span class="label">서약 — 페널티 문구</span>
+          <span class="badge badge-sales">세일즈</span><br />
+          <span class="add">※ 세부 제출 방법 및 일정은 선정 후 개별 안내드립니다.</span><br />
+          <span class="del">미이행 시 향후 이벤트 참여 및 혜택 제공이 제한될 수 있습니다.</span> → 삭제 (선정 후 안내 메시지로 이동)
+        </td>
+      </tr>
+
+      <!-- 7. 광고 활용 동의 (신규) -->
+      <tr>
+        <td>
+          <span class="label">홍보·광고 활용 동의</span>
+          <span class="badge badge-fix">누락</span><br />
+          <span class="del">(없음)</span><br /><br />
+          <em style="color:#cc4444; font-size:12px;">⚠ 사진·후기를 상세페이지·광고에 활용하려면 동의 필수<br />눈썹 부위만 활용 → 개인정보 비해당, 단 민법상 활용 동의는 필요</em>
+        </td>
+        <td>
+          <span class="label">홍보·광고 활용 동의</span>
+          <span class="badge badge-new">신규 추가</span><br />
+          <span class="add"><strong>필수</strong> 동의 항목으로 추가 (베타 테스터 참여 조건):<br />
+          "시술 결과 사진 및 후기 홍보·광고 활용 동의"<br />
+          눈썹 부위 사진만 활용 · 얼굴 식별 사진 불사용 명시<br />
+          보유 기간: 동의 철회 시까지 (기한 없음)<br />
+          체크박스: "동의합니다" 단일 선택지 (필수 응답)</span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+  <!-- ── 복붙 텍스트 ── -->
+  <h2>구글폼 복붙 텍스트</h2>
+  <p style="color:#666; font-size:13px; margin-bottom:20px;">아래 텍스트를 각 필드에 그대로 붙여넣으세요.</p>
+
+  <!-- 개인정보 동의 본문 -->
+  <div class="copy-section">
+    <div class="copy-header">
+      개인정보 수집 및 활용 동의 — 질문 설명란
+      <span class="copy-note">섹션 3 › 개인정보 수집 및 활용 동의 › 질문 설명(선택사항) 필드</span>
+    </div>
+    <div class="copy-body">1. 수집 목적: 베타 테스터 선정·본인 확인 / 샘플 배송 / 테스트 진행 안내(알림톡·SMS·이메일) / 제품 사용성 평가 데이터 분석 / 제품 개선 / 응답 사본 전송 / 혜택 제공.
+
+2. 수집 항목: 필수 (성명, 연락처, 주소, 상호명, 이메일 주소), 선택 (인스타그램 계정).
+
+3. 보유 기간: 기본 수집 정보 (최대 3년) / 제품 사용성 평가 데이터(설문·사진) (테스트 종료 후 3년) / 배송 정보 (배송 완료 후 6개월 이내 파기).
+
+4. 파기 방법: 전자파일은 복구 불가능한 방법으로 영구 삭제, 출력물·서류는 파쇄 또는 소각.
+
+5. 처리위탁: 우체국(과학기술정보통신부 우정사업본부) — 배송 업무.
+
+6. 동의 거부 시: 베타테스터 선정 및 샘플 발송 불가.
+
+자세한 내용: melanoir.co.kr/privacy</div>
+  </div>
+
+  <!-- 서약 본문 -->
+  <div class="copy-section">
+    <div class="copy-header">
+      베타 테스트 참여 서약 — 질문 설명란
+      <span class="copy-note">섹션 3 › 베타 테스트 참여 서약 › 질문 설명(선택사항) 필드</span>
+    </div>
+    <div class="copy-body">본인은 멜라누아 공식 베타 테스터로서 샘플 수령 후 8주 이내에 다음을 이행할 것을 약속합니다.
+
+1. 패드 테스트 (수령 후 7일 이내)
+2. 눈썹 시술 (시술 당일 전후 사진 제출)
+3. 정착 결과 제출 (시술 후 4주, 최종 평가 설문 + 사진 업로드)
+
+※ 세부 제출 방법 및 일정은 선정 후 개별 안내드립니다.</div>
+  </div>
+
+  <p style="font-size:12px; color:#aaa; margin-top:8px;">
+    ※ 페널티 문구("미이행 시 향후 이벤트 참여 및 혜택 제공이 제한될 수 있습니다")는 선정 통보 메시지로 이동하세요.
+  </p>
+
+  <!-- 광고 활용 동의 복붙 텍스트 -->
+  <div class="copy-section">
+    <div class="copy-header">
+      [필수] 시술 결과 사진 및 후기 홍보·광고 활용 동의 — 질문 설명란
+      <span class="copy-note">섹션 3 › 새 필수 질문 추가 › 질문 설명(선택사항) 필드</span>
+    </div>
+    <div class="copy-body">본 동의는 베타 테스터 참여의 필수 조건입니다. 제출하신 시술 결과 사진 및 사용 후기는 멜라누아의 홍보·마케팅 자료로 활용될 수 있습니다.
+
+선정 후 상세 참여 조건(활용 시점, 보유 기간, 철회 조건 등)을 개별 안내드립니다.</div>
+  </div>
+
+  <p style="font-size:12px; color:#aaa; margin-top:8px;">
+    ※ 이 항목의 체크박스 선택지는 "동의합니다" 단일 선택지로 구성하고, <strong>필수 응답</strong>으로 설정하세요.
+  </p>
+
+  <footer>멜라누아 (Melanoir) · 폼 수정 가이드 · 2025.06</footer>
+
+</div>
+</body>
+</html>

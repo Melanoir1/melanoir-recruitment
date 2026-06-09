@@ -77,6 +77,23 @@
         .data-label, .data-value { font-weight: 700; font-size: 18px; }
         @media (min-width: 769px) { .data-label, .data-value { font-size: 20px; } }
 
+        /* 등급 테이블 */
+        .tier-table { width: 100%; border-collapse: collapse; margin-top: 36px; font-family: 'Pretendard', sans-serif; }
+        .tier-table th { font-size: 13px; font-weight: 700; color: #86868b; text-transform: uppercase; letter-spacing: 0.08em; padding: 12px 16px; border-bottom: 2px solid #d2d2d7; text-align: left; }
+        .tier-table td { padding: 20px 16px; border-bottom: 1px solid #f0f0f2; vertical-align: top; font-size: 16px; color: #1d1d1f; }
+        .tier-table tr:last-child td { border-bottom: none; }
+        .tier-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; }
+        .tier-basic  { background: #f5f5f7; color: #424245; }
+        .tier-silver { background: #e8eaf0; color: #3a3d4a; }
+        .tier-gold   { background: #fdf3dc; color: #7a5a00; }
+        .tier-partner{ background: #1d1d1f; color: #f5f5f7; }
+        .tier-point  { font-size: 17px; font-weight: 800; color: #0071e3; }
+        .tier-hidden { font-style: italic; color: #86868b; font-size: 14px; }
+        @media (max-width: 768px) {
+            .tier-table th, .tier-table td { padding: 14px 10px; font-size: 14px; }
+            .tier-point { font-size: 15px; }
+        }
+
         /* 설문 평가 항목 */
         .eval-grid { margin-top: 30px; }
         .eval-item { padding: 20px 0; border-bottom: 1px solid #f0f0f2; display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: start; }
@@ -212,8 +229,37 @@
             <span style="font-size: 18px; flex-shrink: 0;">⏱</span>
             <p style="margin-bottom: 0; font-size: 15px !important; color: #424245; font-weight: 600;">
                 전체 제출 마감: <strong style="color: #1d1d1f;">샘플 수령 후 8주 이내</strong><br>
-                미제출 시 향후 이벤트 참여 및 혜택 제공이 제한될 수 있습니다.
+                <span style="font-weight: 400; color: #86868b; font-size: 14px !important;">
+                    폼 C(최종 평가 설문)까지 완료하셔야 VIP 혜택이 확정됩니다.<br>
+                    기간 내 미제출 시 향후 이벤트 참여 및 혜택 제공이 제한될 수 있습니다.
+                </span>
             </p>
+        </div>
+
+        <div style="margin-top: 16px; background: #f0f4ff; border-radius: 16px; padding: 18px 24px; display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 18px; flex-shrink: 0;">📷</span>
+            <div style="font-size: 14px !important; color: #424245;">
+                <strong style="font-size: 14px !important;">사진 제출 안내: 눈썹 부위 중심으로 촬영해주세요.</strong><br>
+                <span style="font-weight: 400; color: #86868b; display: block; margin-top: 6px;">
+                    멜라누아는 얼굴 전체가 식별되는 사진을 요청하지 않으며, 활용하지 않습니다.
+                </span>
+                <span style="font-weight: 400; color: #86868b; display: block; margin-top: 10px;">
+                    ⚠️ <strong style="color: #424245;">시술 전 고객에게 반드시 안내해주세요.</strong><br>
+                    제출하신 시술 결과 사진 및 사용 후기는 연구 및 마케팅 자료로 활용될 수 있습니다. 시술 전에 고객에게 이 사실을 안내하고 동의를 받아주세요.
+                </span>
+                <div style="margin-top: 14px; background: #fff; border-radius: 10px; padding: 14px 16px; border: 1px solid #dde3f0;">
+                    <p style="margin: 0 0 8px 0; font-weight: 600; color: #1d1d1f; font-size: 13px !important;">홍보·마케팅 활용 조건 (참여 필수 동의)</p>
+                    <p style="margin: 0; color: #86868b; font-size: 13px !important; line-height: 1.7;">
+                        · <strong style="color: #424245;">테스트 기간 (8주):</strong> 제품 사용성 평가 목적으로만 활용<br>
+                        · <strong style="color: #424245;">테스트 완료 후:</strong> 공식 홈페이지, 상세페이지, SNS, 온·오프라인 광고 소재 등 홍보·마케팅 자료로 활용<br>
+                        · <strong style="color: #424245;">최소 활용 기간:</strong> 테스트 완료 후 24개월 — 이 기간 내 철회 시 샘플 제품 정가 상당액([샘플 정가 TBD]원)이 청구될 수 있습니다<br>
+                        · <strong style="color: #424245;">24개월 이후:</strong> 언제든지 무상 철회 가능 (<a href="mailto:official@melanoir.co.kr" style="color: #0071e3; text-decoration: none;">official@melanoir.co.kr</a>)
+                    </p>
+                </div>
+                <span style="font-weight: 400; color: #86868b; display: block; margin-top: 10px; font-size: 13px !important;">
+                    <a href="https://melanoir.co.kr/privacy" style="color: #0071e3; text-decoration: none;">개인정보처리방침 전문 보기</a>
+                </span>
+            </div>
         </div>
     </div>
 </section>
@@ -328,13 +374,57 @@
                 <span class="data-value">엠보 본품 용량 앰플 3개 (신청 완료자 전원)</span>
             </div>
             <div class="data-row">
-                <span class="data-label">VIP 리워드</span>
-                <span class="data-value" style="color: #0071e3;">정식 출시 후 6개월간 VIP 할인 적용<span style="font-size: 14px; font-weight: 400; color: #86868b; display: block;">최종 응답(폼 C) 완료한 경우에 한함</span></span>
+                <span class="data-label">파트너 리워드</span>
+                <span class="data-value" style="color: #0071e3;">정식 출시 후 3개월간 파트너 등급 포인트 적용<span style="font-size: 14px; font-weight: 400; color: #86868b; display: block;">최종 응답(폼 C) 완료한 경우에 한함 · 포인트 유효기간 적립일로부터 1년</span></span>
             </div>
             <div class="data-row">
                 <span class="data-label">우수 리뷰어</span>
                 <span class="data-value">50만원 상당 본품 패키지 증정 (3인 선정)</span>
             </div>
+        </div>
+
+        <!-- 등급 구조 -->
+        <div class="reveal delay-3" style="margin-top: 60px;">
+            <h3 style="margin-bottom: 8px;">Membership Tier</h3>
+            <p style="font-size: 16px !important; color: #86868b; margin-bottom: 0;">정식 출시 후 멜라누아 멤버십 등급 제도가 운영됩니다.<br>등급은 최근 6개월간 멜라누아 시술 등록 횟수를 기준으로 매월 자동 산정됩니다.</p>
+
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th>등급</th>
+                        <th>기준 (6개월 시술 등록)</th>
+                        <th>포인트 적립</th>
+                        <th>추가 혜택</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tier-badge tier-basic">기본</span></td>
+                        <td style="color: #86868b;">제한 없음</td>
+                        <td><span class="tier-point">3%</span></td>
+                        <td>교육 콘텐츠 접근권</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-silver">실버</span></td>
+                        <td>6~11회</td>
+                        <td><span class="tier-point">10%</span></td>
+                        <td>신제품 출시 사전 알림 + 우선 구매권</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-gold">골드</span></td>
+                        <td>12~23회</td>
+                        <td><span class="tier-point">15%</span></td>
+                        <td>신제품 체험권</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-partner">파트너</span></td>
+                        <td>24회 이상</td>
+                        <td><span class="tier-point" style="color: #f5f5f7;">20%</span></td>
+                        <td><span class="tier-hidden">파트너 선정 후 개별 안내</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 13px !important; color: #86868b; margin-top: 14px; margin-bottom: 0;">· 포인트 유효기간: 적립일로부터 1년 · 시술 등록은 정품인증 기반으로 집계됩니다</p>
         </div>
     </div>
 </section>
@@ -364,7 +454,8 @@
         <p style="font-size: 15px !important; color: #86868b; line-height: 1.8; text-align: center; word-break: keep-all;">
             Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
             © 2026 Melanoir. All rights reserved.<br><br>
-            본 가이드는 베타 테스터 전용 문서입니다. 외부 공유를 삼가 주세요.
+            본 가이드는 베타 테스터 전용 문서입니다. 외부 공유를 삼가 주세요.<br><br>
+            <a href="https://melanoir.co.kr/privacy" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">개인정보처리방침</a>
         </p>
     </div>
 </footer>
