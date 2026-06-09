@@ -1,5 +1,8 @@
 .vercel
 .env
+.env.local
 site-partial/
+web/site-partial/
+node_modules/
 .DS_Store
 **/.DS_Store

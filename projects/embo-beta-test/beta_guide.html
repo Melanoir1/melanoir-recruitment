@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Melanoir Embo — 베타 테스트 가이드</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/Paperlogy-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body {
+            background-color: #ffffff; color: #1d1d1f;
+            font-family: 'Pretendard', -apple-system, sans-serif !important;
+            line-height: 1.6; word-break: keep-all; letter-spacing: -0.01em; overflow-x: hidden;
+        }
+
+        /* 타이포그래피 */
+        h1 { font-family: 'Paperlogy', sans-serif; font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 700 !important; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 15px; }
+        h2 { font-family: 'Paperlogy', sans-serif; font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 700 !important; letter-spacing: -0.03em; margin-bottom: 20px; }
+        h3 { font-family: 'Pretendard', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; color: #86868b; margin-bottom: 12px; text-transform: uppercase; }
+        p { font-size: 18px !important; color: #424245; margin-bottom: 24px; font-family: 'Pretendard', sans-serif !important; }
+        @media (min-width: 769px) {
+            h3 { font-size: 18px !important; }
+            p { font-size: 20px !important; }
+        }
+
+        /* 레이아웃 */
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 80px 0; background-color: #ffffff; border-bottom: 1px solid #f5f5f7; }
+        .section-alt { padding: 80px 0; background-color: #fbfbfd; border-bottom: 1px solid #f5f5f7; }
+        @media (min-width: 769px) {
+            .section, .section-alt { padding: 140px 0; }
+            .container { padding: 0 40px; }
+        }
+
+        /* 스텝 카드 */
+        .step-grid { display: grid; grid-template-columns: 1fr; gap: 1px; margin-top: 50px; background: #f0f0f2; border-radius: 24px; overflow: hidden; border: 1px solid #f0f0f2; }
+        @media (min-width: 769px) { .step-grid { grid-template-columns: repeat(3, 1fr); } }
+        .step-card { background: #ffffff; padding: 40px 30px; }
+        .step-num { font-family: 'Paperlogy', sans-serif; font-size: clamp(3rem, 8vw, 5rem); font-weight: 700; color: #f0f0f2; line-height: 1; display: block; margin-bottom: 16px; letter-spacing: -0.05em; }
+        .step-label { font-size: 13px !important; font-weight: 700; color: #0071e3; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 10px; }
+        .step-title { font-family: 'Paperlogy', sans-serif; font-size: clamp(1.3rem, 3vw, 1.6rem); font-weight: 700; color: #1d1d1f; margin-bottom: 14px; line-height: 1.3; }
+        .step-desc { font-size: 15px !important; color: #86868b; line-height: 1.7; margin-bottom: 0; }
+        .step-tag { display: inline-block; background: #f5f5f7; color: #424245; padding: 4px 10px; border-radius: 6px; font-size: 13px; font-weight: 700; margin-top: 14px; }
+
+        /* 타임라인 */
+        .timeline { margin-top: 50px; }
+        .tl-item { display: flex; gap: 24px; padding: 28px 0; border-bottom: 1px solid #f0f0f2; align-items: flex-start; }
+        .tl-item:last-child { border-bottom: none; }
+        .tl-dot { width: 36px; height: 36px; border-radius: 50%; background: #0071e3; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+        .tl-dot span { font-size: 13px; font-weight: 800; color: #ffffff; }
+        .tl-when { font-size: 14px !important; font-weight: 700; color: #0071e3; margin-bottom: 4px; }
+        .tl-what { font-size: 18px !important; font-weight: 700; color: #1d1d1f; margin-bottom: 4px; }
+        .tl-how { font-size: 15px !important; color: #86868b; margin-bottom: 0; }
+        @media (min-width: 769px) {
+            .tl-when { font-size: 15px !important; }
+            .tl-what { font-size: 20px !important; }
+            .tl-how { font-size: 16px !important; }
+        }
+
+        /* 샘플 구성 카드 */
+        .sample-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+        @media (min-width: 769px) { .sample-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+        .sample-card { background: #fbfbfd; border: 1px solid #f0f0f2; border-radius: 24px; padding: 32px 24px; text-align: center; }
+        .sample-num { font-family: 'Paperlogy', sans-serif; font-size: 2.5rem; font-weight: 700; color: #0071e3; display: block; margin-bottom: 12px; }
+        .sample-purpose { font-size: 13px !important; font-weight: 700; color: #0071e3; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+        .sample-desc { font-size: 15px !important; color: #424245; margin-bottom: 0; line-height: 1.6; }
+
+        /* 데이터 그리드 */
+        .data-grid { border-top: 1px solid #d2d2d7; margin-top: 30px; }
+        .data-row { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #d2d2d7; }
+        .data-label, .data-value { font-weight: 700; font-size: 18px; }
+        @media (min-width: 769px) { .data-label, .data-value { font-size: 20px; } }
+
+        /* 설문 평가 항목 */
+        .eval-grid { margin-top: 30px; }
+        .eval-item { padding: 20px 0; border-bottom: 1px solid #f0f0f2; display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: start; }
+        .eval-item:last-child { border-bottom: none; }
+        .eval-q { font-size: 13px; font-weight: 800; color: #0071e3; padding-top: 2px; }
+        .eval-label { font-size: 16px !important; font-weight: 700; color: #1d1d1f; margin-bottom: 4px; }
+        .eval-desc { font-size: 14px !important; color: #86868b; margin-bottom: 0; line-height: 1.5; }
+        .eval-scale { font-size: 13px !important; color: #86868b; white-space: nowrap; padding-top: 2px; text-align: right; }
+        @media (max-width: 768px) { .eval-item { grid-template-columns: auto 1fr; } .eval-scale { grid-column: 2; margin-top: -8px; } }
+
+        /* 연락처 카드 */
+        .contact-card { background: #1d1d1f; border-radius: 32px; padding: 60px 40px; text-align: center; color: #ffffff; }
+        .contact-card h2 { color: #ffffff !important; }
+        .contact-card p { color: rgba(255,255,255,0.65) !important; }
+        .contact-email { font-family: 'Paperlogy', sans-serif; font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 700; color: #0071e3; text-decoration: none; display: block; margin: 20px 0 10px; }
+
+        /* 스크롤 애니메이션 */
+        .reveal        { opacity: 0; transform: translateY(48px);    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .reveal-left   { opacity: 0; transform: translateX(-56px);   transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .reveal-right  { opacity: 0; transform: translateX(56px);    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: none; }
+        .delay-1 { transition-delay: 0.10s; }
+        .delay-2 { transition-delay: 0.20s; }
+        .delay-3 { transition-delay: 0.30s; }
+        .delay-4 { transition-delay: 0.40s; }
+
+        /* 위로가기 */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 20px; width: 44px; height: 44px;
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.08); border-radius: 50%;
+            display: grid !important; place-items: center !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;
+            z-index: 9999; opacity: 0; visibility: hidden; transition: 0.3s;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top svg { width: 24px; height: 24px; fill: none; stroke: #1d1d1f; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        @media (min-width: 769px) { .back-to-top { bottom: 40px; right: 40px; width: 52px; height: 52px; } }
+    </style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════════════════════════
+  HERO
+══════════════════════════════════════════════════════ -->
+<section class="section" style="text-align: center; padding-top: 120px; padding-bottom: 100px;">
+    <div class="container">
+        <p class="reveal" style="text-transform: uppercase; letter-spacing: 2px; color: #0071e3; font-weight: 700; margin-bottom: 10px; font-size: 14px !important;">Melanoir Embo · Beta Test</p>
+        <h1 class="reveal delay-1">베타 테스터<br>가이드라인</h1>
+        <p class="reveal delay-2" style="color: #86868b; font-weight: 500; max-width: 560px; margin: 20px auto 0; line-height: 1.8;">
+            참여해주셔서 감사합니다.<br>
+            아래 내용을 확인하시고, 일정에 맞게 진행해주세요.
+        </p>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+  샘플 구성
+══════════════════════════════════════════════════════ -->
+<section class="section-alt">
+    <div class="container">
+        <h3 class="reveal">Sample Kit</h3>
+        <h2 class="reveal delay-1">동봉된 샘플 구성.</h2>
+        <p class="reveal delay-2" style="max-width: 640px;">멜라누아 엠보 앰플 3개가 동봉되어 있습니다. 각 앰플은 아래 순서에 따라 사용해주세요.</p>
+        <div class="sample-grid">
+            <div class="sample-card reveal delay-2">
+                <span class="sample-num">01</span>
+                <span class="sample-purpose">Pad Test</span>
+                <p class="sample-desc">패드(실리콘) 또는 연습 피부에서<br>물성·핸들링 감각 확인</p>
+            </div>
+            <div class="sample-card reveal delay-3">
+                <span class="sample-num">02</span>
+                <span class="sample-purpose">실제 시술</span>
+                <p class="sample-desc">실제 고객 시술에 사용.<br>시술 전후 사진 촬영 필수.</p>
+            </div>
+            <div class="sample-card reveal delay-4">
+                <span class="sample-num">03</span>
+                <span class="sample-purpose">리터치 (선택)</span>
+                <p class="sample-desc">필요한 경우 리터치에 사용.<br>사용하지 않아도 무방합니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+  제출 일정
+══════════════════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <h3 class="reveal">Submission Schedule</h3>
+        <h2 class="reveal delay-1">제출 일정.</h2>
+        <p class="reveal delay-2" style="max-width: 640px;">각 시점에 맞춰 멜라누아가 먼저 이메일로 폼 링크를 발송해드립니다. 기다리지 않으셔도 됩니다.</p>
+
+        <div class="timeline reveal delay-2">
+            <div class="tl-item">
+                <div class="tl-dot"><span>A</span></div>
+                <div>
+                    <p class="tl-when">수령 후 7일 이내</p>
+                    <p class="tl-what">패드 테스트 소감 (폼 A)</p>
+                    <p class="tl-how">첫인상·물성·핸들링 소감을 자유롭게 작성해주세요.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"><span>B</span></div>
+                <div>
+                    <p class="tl-when">시술 당일</p>
+                    <p class="tl-what">시술 직후 사진 + 한 줄 코멘트 (폼 B)</p>
+                    <p class="tl-how">시술 직후 사진을 촬영하여 업로드해주세요. (헤일링 전 상태)</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"><span>C</span></div>
+                <div>
+                    <p class="tl-when">시술 후 4주 (D+28~35)</p>
+                    <p class="tl-what">정착 결과 + 전체 평가 설문 (폼 C)</p>
+                    <p class="tl-how">정착된 발색 결과 사진 + 10개 항목 평가 설문을 제출해주세요.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot" style="background: #f0f0f2;"><span style="color: #86868b;">C2</span></div>
+                <div>
+                    <p class="tl-when">리터치 후 2주 (해당 시)</p>
+                    <p class="tl-what">리터치 결과 사진 + 소감 (폼 C-2)</p>
+                    <p class="tl-how">리터치를 진행한 경우에 한합니다. 폼 C 제출 시 리터치 예정 여부를 알려주시면 별도 안내드립니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; background: #f5f5f7; border-radius: 16px; padding: 20px 24px; display: flex; gap: 12px; align-items: flex-start;">
+            <span style="font-size: 18px; flex-shrink: 0;">⏱</span>
+            <p style="margin-bottom: 0; font-size: 15px !important; color: #424245; font-weight: 600;">
+                전체 제출 마감: <strong style="color: #1d1d1f;">샘플 수령 후 8주 이내</strong><br>
+                미제출 시 향후 이벤트 참여 및 혜택 제공이 제한될 수 있습니다.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+  평가 항목 (폼 C)
+══════════════════════════════════════════════════════ -->
+<section class="section-alt">
+    <div class="container">
+        <h3 class="reveal">Evaluation Criteria</h3>
+        <h2 class="reveal delay-1">평가 항목 미리보기.</h2>
+        <p class="reveal delay-2" style="max-width: 640px;">폼 C에서 아래 10개 항목을 1~10점으로 평가합니다. 시술하시면서 미리 체감해두시면 좋습니다.</p>
+
+        <div class="eval-grid reveal delay-2">
+            <div class="eval-item">
+                <span class="eval-q">Q1</span>
+                <div>
+                    <p class="eval-label">응집력</p>
+                    <p class="eval-desc">니들 팁에 묻혔을 때 흐르지 않고 형태를 유지하는가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q2</span>
+                <div>
+                    <p class="eval-label">체감 점도</p>
+                    <p class="eval-desc">실제 피부에 시술하기에 적절한 농도인가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q3</span>
+                <div>
+                    <p class="eval-label">주입 부드러움</p>
+                    <p class="eval-desc">피부 진입 시 저항감 없이 잉크가 풀려 나오는가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q4</span>
+                <div>
+                    <p class="eval-label">오염 내성</p>
+                    <p class="eval-desc">혈액·조직액과 섞여도 잉크 흐름이 끊기지 않는가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q5</span>
+                <div>
+                    <p class="eval-label">라인 선명도</p>
+                    <p class="eval-desc">주입 후 퍼짐 없이 즉시 라인이 잡히는가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q6</span>
+                <div>
+                    <p class="eval-label">즉각 발색력</p>
+                    <p class="eval-desc">한 번의 터치로도 또렷한가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q7</span>
+                <div>
+                    <p class="eval-label">점착성</p>
+                    <p class="eval-desc">니들을 뗄 때 잉크가 늘어지며 시야를 방해하지 않는가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q8</span>
+                <div>
+                    <p class="eval-label">와이핑 용이성</p>
+                    <p class="eval-desc">피부 요철·모공 사이 끼임 없이 깔끔하게 닦이는가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q9</span>
+                <div>
+                    <p class="eval-label">정밀 제어</p>
+                    <p class="eval-desc">피부 굴곡·텐션에도 정교한 핸들링이 가능한가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+            <div class="eval-item">
+                <span class="eval-q">Q10</span>
+                <div>
+                    <p class="eval-label">시술 만족도</p>
+                    <p class="eval-desc">전반적인 사용성은 주력 잉크로 사용하기에 적절한가</p>
+                </div>
+                <span class="eval-scale">1 ↔ 10</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+  참여 혜택 확인
+══════════════════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <h3 class="reveal">Benefits</h3>
+        <h2 class="reveal delay-1">참여 혜택 안내.</h2>
+
+        <div class="data-grid reveal delay-2">
+            <div class="data-row">
+                <span class="data-label">무료 샘플</span>
+                <span class="data-value">엠보 본품 용량 앰플 3개 (신청 완료자 전원)</span>
+            </div>
+            <div class="data-row">
+                <span class="data-label">VIP 리워드</span>
+                <span class="data-value" style="color: #0071e3;">정식 출시 후 6개월간 VIP 할인 적용<span style="font-size: 14px; font-weight: 400; color: #86868b; display: block;">최종 응답(폼 C) 완료한 경우에 한함</span></span>
+            </div>
+            <div class="data-row">
+                <span class="data-label">우수 리뷰어</span>
+                <span class="data-value">50만원 상당 본품 패키지 증정 (3인 선정)</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+  문의
+══════════════════════════════════════════════════════ -->
+<section class="section-alt">
+    <div class="container">
+        <div class="contact-card reveal">
+            <h3 style="color: rgba(255,255,255,0.5) !important;">Contact</h3>
+            <h2>궁금한 점이 있으신가요?</h2>
+            <p>제출 방법, 일정, 샘플 관련 문의는 언제든지 편하게 연락 주세요.</p>
+            <a href="mailto:official@melanoir.co.kr" class="contact-email">official@melanoir.co.kr</a>
+            <p style="font-size: 14px !important; color: rgba(255,255,255,0.4) !important; margin-bottom: 0; margin-top: 10px;">이메일로 회신드리겠습니다.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+  FOOTER
+══════════════════════════════════════════════════════ -->
+<footer style="padding: 60px 0; background: #ffffff; text-align: center; border-top: 1px solid #f5f5f7;">
+    <div class="container">
+        <p style="font-size: 15px !important; color: #86868b; line-height: 1.8; text-align: center; word-break: keep-all;">
+            Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
+            © 2026 Melanoir. All rights reserved.<br><br>
+            본 가이드는 베타 테스터 전용 문서입니다. 외부 공유를 삼가 주세요.
+        </p>
+    </div>
+</footer>
+
+<!-- 위로가기 -->
+<div id="backToTop" class="back-to-top">
+    <svg viewBox="0 0 24 24">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</div>
+
+<script>
+    window.onbeforeunload = function() { window.scrollTo(0, 0); };
+    if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = { threshold: 0.08 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("active"); } });
+        }, observerOptions);
+        document.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach(el => observer.observe(el));
+        const topBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) { topBtn.classList.add('show'); }
+            else { topBtn.classList.remove('show'); }
+        });
+        topBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+</script>
+
+</body>
+</html>
