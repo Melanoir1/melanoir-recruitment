@@ -365,7 +365,8 @@
       "</div></section></div></main>" +
       '<footer class="site-footer"><p>© Melanoir</p><p class="shell-i18n-prose">' +
       t.footerShop +
-      ': <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p></footer>'
+      ': <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p>' +
+      '<p><a href="/privacy/privacy">개인정보처리방침</a></p></footer>'
     );
   }
 
