@@ -189,6 +189,11 @@
         .delay-7 { transition-delay: 0.70s; }
         .glass-card { background: #ffffff; border: 1px solid #f0f0f2; box-shadow: 0 4px 30px rgba(0,0,0,0.03); padding: 40px 24px; border-radius: 32px; }
         @media (min-width: 769px) { .glass-card { padding: 60px 40px; } }
+
+        /* 모바일: 텍스트를 항상 이미지보다 먼저 표시 */
+        @media (max-width: 768px) {
+            .grid-2 .feature-text { order: -1; }
+        }
     </style>
 </head>
 <body>
