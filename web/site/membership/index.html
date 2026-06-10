@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>멜라누아 멤버십 — Melanoir Membership</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/Paperlogy-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body {
+            background-color: #ffffff; color: #1d1d1f;
+            font-family: 'Pretendard', -apple-system, sans-serif !important;
+            line-height: 1.6; word-break: keep-all; letter-spacing: -0.01em; overflow-x: hidden;
+        }
+        .container { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+
+        .hero { padding: 120px 0 100px; background: #1d1d1f; color: #f5f5f7; text-align: center; }
+        .hero-eyebrow { font-size: 13px !important; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 18px; }
+        .hero h1 { font-family: 'Paperlogy', sans-serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 500; line-height: 1.08; letter-spacing: -0.04em; color: #f5f5f7; margin-bottom: 24px; }
+        .hero-desc { font-size: clamp(1rem, 2.2vw, 1.2rem) !important; color: rgba(255,255,255,0.6); max-width: 540px; margin: 0 auto 40px; line-height: 1.7; }
+        .hero-cta { display: inline-block; background: #ffffff; color: #1d1d1f; padding: 14px 32px; border-radius: 980px; font-size: 15px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+        .hero-cta:hover { opacity: 0.85; }
+
+        .section { padding: 100px 0; background-color: #ffffff; border-bottom: 1px solid #f5f5f7; }
+        .section-alt { padding: 100px 0; background-color: #fbfbfd; border-bottom: 1px solid #f5f5f7; }
+        @media (min-width: 769px) { .section, .section-alt { padding: 140px 0; } }
+        .section-eyebrow { font-size: 12px !important; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #86868b; margin-bottom: 14px; }
+        .section h2, .section-alt h2 { font-family: 'Paperlogy', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
+        .section-lead { font-size: clamp(1rem, 2vw, 1.15rem) !important; color: #6e6e73; max-width: 600px; line-height: 1.7; margin-bottom: 60px; }
+
+        .steps { display: flex; flex-direction: column; gap: 0; margin-top: 60px; }
+        @media (min-width: 769px) { .steps { flex-direction: row; } }
+        .step { flex: 1; padding: 40px 32px; border-top: 2px solid #1d1d1f; display: flex; flex-direction: column; gap: 14px; }
+        @media (min-width: 769px) { .step { border-top: none; border-left: 2px solid #1d1d1f; } .step:first-child { border-left: none; border-top: 2px solid #1d1d1f; } }
+        .step-num { font-size: 12px !important; font-weight: 700; letter-spacing: 0.08em; color: #86868b; }
+        .step-title { font-size: 1.1rem !important; font-weight: 700; color: #1d1d1f; letter-spacing: -0.02em; }
+        .step-desc { font-size: 14px !important; color: #6e6e73; line-height: 1.65; }
+
+        .credit-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: #e8e8ed; border-radius: 20px; overflow: hidden; border: 1px solid #e8e8ed; margin-top: 60px; }
+        @media (min-width: 600px) { .credit-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 900px) { .credit-grid { grid-template-columns: repeat(4, 1fr); } }
+        .credit-card { background: #ffffff; padding: 36px 28px; display: flex; flex-direction: column; gap: 12px; }
+        .credit-card-label { font-size: 13px !important; color: #86868b; font-weight: 500; line-height: 1.4; }
+        .credit-card-amount { font-family: 'Paperlogy', sans-serif; font-size: 2.2rem; font-weight: 500; color: #1d1d1f; letter-spacing: -0.04em; line-height: 1; }
+        .credit-card-unit { font-size: 13px !important; color: #86868b; }
+
+        .usage-wrap { margin-top: 60px; display: flex; flex-direction: column; gap: 16px; }
+        .usage-item { padding: 28px 32px; border: 1px solid #e8e8ed; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+        .usage-title { font-size: 1rem !important; font-weight: 600; color: #1d1d1f; }
+        .usage-desc { font-size: 13px !important; color: #86868b; margin-top: 4px; }
+        .usage-badge { font-size: 11px !important; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 980px; background: #f5f5f7; color: #86868b; white-space: nowrap; flex-shrink: 0; }
+        .usage-badge.active { background: #1d1d1f; color: #f5f5f7; }
+
+        .note-box { margin-top: 60px; padding: 28px 32px; background: #fbfbfd; border: 1px solid #e8e8ed; border-radius: 16px; }
+        .note-box p { font-size: 14px !important; color: #6e6e73; line-height: 1.7; }
+        .note-box strong { color: #1d1d1f; }
+
+        .cta-section { padding: 100px 0; text-align: center; background: #ffffff; border-top: 1px solid #f5f5f7; }
+        .cta-section h2 { font-family: 'Paperlogy', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -0.03em; margin-bottom: 14px; color: #1d1d1f; }
+        .cta-section p { font-size: 1rem !important; color: #86868b; margin-bottom: 36px; }
+        .btn-primary { display: inline-block; background: #1d1d1f; color: #f5f5f7; padding: 14px 32px; border-radius: 980px; font-size: 15px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+        .btn-primary:hover { opacity: 0.8; }
+        .btn-secondary { display: inline-block; border: 1px solid #c7c7cc; color: #1d1d1f; padding: 13px 28px; border-radius: 980px; font-size: 15px; font-weight: 500; text-decoration: none; margin-left: 12px; transition: border-color 0.2s; }
+        .btn-secondary:hover { border-color: #86868b; }
+
+        footer { padding: 60px 0; background: #ffffff; text-align: center; border-top: 1px solid #f5f5f7; }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%; background: rgba(29,29,31,0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .back-to-top.show { opacity: 1; pointer-events: auto; }
+        .back-to-top svg { width: 18px; height: 18px; stroke: #f5f5f7; stroke-width: 2; fill: none; }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="container">
+        <p class="hero-eyebrow reveal">Melanoir Membership</p>
+        <h1 class="reveal delay-1">멜라누아 멤버십.</h1>
+        <p class="hero-desc reveal delay-2">
+            시술 받은 날부터 시작되는 혜택.<br>
+            정품을 등록하는 순간, 멤버가 됩니다.
+        </p>
+        <a href="https://verify.melanoir.co.kr" class="hero-cta reveal delay-3">정품 등록하기</a>
+    </div>
+</section>
+
+<section class="section-alt">
+    <div class="container">
+        <p class="section-eyebrow reveal">How It Works</p>
+        <h2 class="reveal delay-1">가입 방법.</h2>
+        <p class="section-lead reveal delay-2">별도 가입 절차가 없습니다. 정품 등록을 완료하면 자동으로 멜라누아 멤버십 회원이 됩니다.</p>
+        <div class="steps">
+            <div class="step reveal">
+                <span class="step-num">01</span>
+                <span class="step-title">보증서 QR 스캔</span>
+                <p class="step-desc">시술 시 받은 보증서의 QR 코드를 스마트폰 카메라로 스캔합니다.</p>
+            </div>
+            <div class="step reveal delay-1">
+                <span class="step-num">02</span>
+                <span class="step-title">정품 확인</span>
+                <p class="step-desc">제조일 · 배송일 · 시술일 · 시술자 정보를 확인합니다.</p>
+            </div>
+            <div class="step reveal delay-2">
+                <span class="step-num">03</span>
+                <span class="step-title">정품 등록</span>
+                <p class="step-desc">이름 · 후기 · 시술 직후 사진을 등록합니다. 완료와 동시에 멤버십 가입.</p>
+            </div>
+            <div class="step reveal delay-3">
+                <span class="step-num">04</span>
+                <span class="step-title">크레딧 적립</span>
+                <p class="step-desc">등록 즉시 크레딧이 지급됩니다. 힐링 완료 사진 추가 시 추가 적립.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <p class="section-eyebrow reveal">Credits</p>
+        <h2 class="reveal delay-1">크레딧 적립 기준.</h2>
+        <p class="section-lead reveal delay-2">행동할수록 크레딧이 쌓입니다. 유효기간은 적립일로부터 24개월입니다.</p>
+        <div class="credit-grid reveal delay-2">
+            <div class="credit-card">
+                <span class="credit-card-label">정품 등록 완료</span>
+                <span class="credit-card-amount">10,000</span>
+                <span class="credit-card-unit">크레딧</span>
+            </div>
+            <div class="credit-card">
+                <span class="credit-card-label">후기 텍스트 작성</span>
+                <span class="credit-card-amount">5,000</span>
+                <span class="credit-card-unit">크레딧</span>
+            </div>
+            <div class="credit-card">
+                <span class="credit-card-label">시술 직후 사진 업로드</span>
+                <span class="credit-card-amount">10,000</span>
+                <span class="credit-card-unit">크레딧</span>
+            </div>
+            <div class="credit-card">
+                <span class="credit-card-label">힐링 완료 사진 업로드</span>
+                <span class="credit-card-amount">15,000</span>
+                <span class="credit-card-unit">크레딧</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-alt">
+    <div class="container">
+        <p class="section-eyebrow reveal">Benefits</p>
+        <h2 class="reveal delay-1">크레딧 사용처.</h2>
+        <p class="section-lead reveal delay-2">쌓인 크레딧은 다양한 혜택으로 연결됩니다. 순차적으로 확장됩니다.</p>
+        <div class="usage-wrap reveal delay-2">
+            <div class="usage-item">
+                <div>
+                    <p class="usage-title">리터칭 잉크 무상 지급</p>
+                    <p class="usage-desc">힐링 완료 등록 시 리터칭 잉크 1개 자동 발송</p>
+                </div>
+                <span class="usage-badge active">운영 중</span>
+            </div>
+            <div class="usage-item">
+                <div>
+                    <p class="usage-title">멜라누아 이벤트 우선권</p>
+                    <p class="usage-desc">신제품 런칭 이벤트, 회원 전용 프로모션 참여 우선권</p>
+                </div>
+                <span class="usage-badge">Coming Soon</span>
+            </div>
+            <div class="usage-item">
+                <div>
+                    <p class="usage-title">제휴 뷰티 서비스</p>
+                    <p class="usage-desc">파트너 뷰티 시술, 제품 구매 시 크레딧 사용</p>
+                </div>
+                <span class="usage-badge">Coming Soon</span>
+            </div>
+        </div>
+        <div class="note-box reveal delay-3">
+            <p>
+                <strong>크레딧 유효기간</strong>은 적립일로부터 <strong>24개월</strong>입니다.<br>
+                사용처는 순차적으로 추가됩니다. 멤버십 회원에게 사전 안내가 제공됩니다.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2 class="reveal">지금 바로 등록하세요.</h2>
+        <p class="reveal delay-1">보증서의 QR 코드를 스캔하거나, 아래 버튼으로 직접 진행하세요.</p>
+        <div class="reveal delay-2">
+            <a href="https://verify.melanoir.co.kr" class="btn-primary">정품 등록하기</a>
+            <a href="/pro" class="btn-secondary">시술자라면 멜라누아 프로 →</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p style="font-size: 15px !important; color: #86868b; line-height: 1.8; text-align: center; word-break: keep-all;">
+            Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
+            © 2026 Melanoir. All rights reserved.<br><br>
+            <a href="https://melanoir.co.kr/privacy" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">개인정보처리방침</a>
+            &nbsp;·&nbsp;
+            <a href="/pro" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">멜라누아 프로</a>
+        </p>
+    </div>
+</footer>
+
+<div id="backToTop" class="back-to-top">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</div>
+
+<script>
+    window.onbeforeunload = function() { window.scrollTo(0, 0); };
+    if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("active"); } });
+        }, { threshold: 0.08 });
+        document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+        const topBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => { topBtn.classList.toggle('show', window.scrollY > 500); });
+        topBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+</script>
+</body>
+</html>

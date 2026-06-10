@@ -1,9 +1,22 @@
 # Melanoir 정품 추적 & 멤버십 시스템 — 구현 인계 문서
 
-> 작성일: 2026-06-02  
+> 작성일: 2026-06-02 / 최종 수정: 2026-06-10  
 > 브랜드: Melanoir (멜라누아)  
 > 제품: 멜라누아 엠보 (반영구 눈썹 시술용 잉크)  
 > 목적: 정품 이력 추적 + 시술자/고객 멤버십 시스템 구축
+
+---
+
+## 멤버십 프로그램 구조 (개요)
+
+멜라누아의 멤버십은 대상에 따라 **완전히 분리된 두 개의 프로그램**으로 운영된다.
+
+| 구분 | 프로그램명 | 대상 | 화폐 단위 | 가입 방법 |
+|---|---|---|---|---|
+| 시술자 | **멜라누아 프로** | 반영구 시술 전문가 | **포인트** | QR 스캔 시 자동 계정 생성 |
+| 고객 | **멜라누아 멤버십** | 엠보 시술을 받은 피시술자 | **크레딧** | 정품 등록 완료 시 자동 가입 |
+
+> ⚠️ "프로 멤버십" 등 두 프로그램을 혼용하는 표현은 사용하지 않는다.
 
 ---
 
@@ -53,19 +66,19 @@
 
 고객: QR 스캔
   → 제조일 / 배송완료일 / 시술일 / 시술자 정보 조회
-  → 정품 등록 (이름 · 후기 · 시술 직후 사진)
+  → 정품 등록 (이름 · 후기 · 시술 직후 사진) → 멜라누아 멤버십 자동 가입
   → 크레딧 즉시 지급
 
 7~30일 후
   → 고객: 힐링 완료 사진 추가 업로드
-  → 추가 크레딧 + 리터칭 잉크 발송 요청 자동 생성
+  → 추가 크레딧(멜라누아 멤버십) + 리터칭 잉크 발송 요청 자동 생성
   → 관리자 승인 → 3PL 리터칭 출고
 ```
 
 - QR 스캔은 항상 1건씩 (시술이 1건씩 이루어지므로 배치 스캔 불필요)
 - 별도 바코드 스캐너 장비 불필요, 시술자 스마트폰으로 충분
 
-### 시술자 회원가입
+### 멜라누아 프로 등록 (시술자)
 
 - 최초 QR 스캔 시 "이름 / 샵 이름 / 휴대폰 번호" 입력 + SMS 인증 → 계정 생성
 - 이후 재방문: 휴대폰 번호 입력 → SMS 인증 → 자동 로그인
@@ -144,15 +157,17 @@ CREATE TABLE registrations (
   healing_registered_at   TIMESTAMPTZ
 );
 
--- 크레딧 원장 (ledger 방식)
+-- 통합 원장 (ledger 방식)
+-- owner_type='customer'  → 멜라누아 멤버십 크레딧 (고객)
+-- owner_type='practitioner' → 멜라누아 프로 포인트 (시술자)
 CREATE TABLE credits (
   credit_id  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  owner_type TEXT NOT NULL,   -- 'customer' | 'practitioner'
-  owner_id   TEXT NOT NULL,   -- customer phone or practitioner_id
+  owner_type TEXT NOT NULL,   -- 'customer'(멤버십 크레딧) | 'practitioner'(프로 포인트)
+  owner_id   TEXT NOT NULL,   -- customer: phone / practitioner: practitioner_id
   amount     INTEGER NOT NULL,
   type       TEXT NOT NULL,   -- 'earn' | 'spend'
   reason     TEXT,
-  expires_at TIMESTAMPTZ,     -- 발급 후 24개월
+  expires_at TIMESTAMPTZ,     -- customer: 24개월 / practitioner: 12개월
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -170,7 +185,7 @@ CREATE TABLE retouch_dispatches (
 
 ---
 
-## 4. 크레딧 지급 기준
+## 4. 고객 크레딧 지급 기준 (멜라누아 멤버십)
 
 | 행동 | 지급량 |
 |---|---|
@@ -180,11 +195,12 @@ CREATE TABLE retouch_dispatches (
 | 힐링 완료 사진 업로드 | 15000 크레딧 |
 
 - 유효기간: 발급일로부터 24개월
-- 크레딧 잔액 = credits 테이블 owner 기준 SUM(amount) (earn +, spend -)
+- 크레딧 잔액 = credits 테이블 owner_type='customer' 기준 SUM(amount) (earn +, spend -)
+- 사용처: 현재 미정. 추후 제휴 서비스·이벤트·프로모션 연계 예정.
 
 ---
 
-## 5. 시술자 멤버십 등급
+## 5. 멜라누아 프로 — 등급 및 포인트
 
 | 등급 | 조건 (최근 6개월 시술 등록 횟수) | 포인트 적립 | 추가 혜택 |
 |---|---|---|---|
@@ -237,18 +253,18 @@ CREATE TABLE retouch_dispatches (
   - 등록 폼: 이름 · 후기 텍스트 · 시술 직후 사진 업로드
   - 힐링 사진 추가: 동일 URL 재접속 → 힐링 사진 업로드
 
-### 시술자 포털 `/pro`
+### 멜라누아 프로 포털 `/pro`
 - SMS 인증 로그인 (최초 방문 시 계정 생성 포함)
 - QR 스캔 → 시술 등록 폼 (시술일 · 기법)
 - 내 시술 이력 목록
-- 내 등급 및 누적 횟수
+- 내 등급(기본/실버/골드/파트너) 및 포인트 잔액
 
 ### 관리자 `/admin`
 - Lot 생성 및 시리얼 발급
 - 배송 현황 조회
 - 시술자 목록 및 등급 관리
 - 리터칭 잉크 발송 승인 큐
-- 크레딧 발급 내역
+- 크레딧·포인트 발급 내역 (고객/시술자 구분)
 
 ---
 
@@ -292,7 +308,7 @@ CREATE TABLE retouch_dispatches (
 - [ ] 등록 완료 SMS 발송 (Coolsms 또는 알리고)
 - [ ] 어뷰징 방지 (중복 체크 · pHash)
 
-### Phase 2 — 멤버십 완성 (운영 안정화 후)
+### Phase 2 — 멜라누아 프로 & 멤버십 완성 (운영 안정화 후)
 
 - [ ] 시술자 등급 월 1회 자동 산정 Edge Function
 - [ ] 등급별 혜택 자동 처리

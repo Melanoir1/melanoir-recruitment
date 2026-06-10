@@ -1,5 +1,6 @@
 -- =============================================
--- Melanoir 정품 추적 & 멤버십 시스템
+-- Melanoir 정품 추적 시스템
+-- 멜라누아 프로(시술자) + 멜라누아 멤버십(고객) 분리 운영
 -- Phase 0 초기 스키마
 -- =============================================
 
@@ -9,7 +10,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 -- =============================================
 -- 제조 배치
 -- =============================================
-CREATE TABLE lots (
+CREATE TABLE mnr_lots (
   lot_id          TEXT PRIMARY KEY,       -- e.g. L-2026-04
   manufactured_at TIMESTAMPTZ NOT NULL,
   quantity        INTEGER NOT NULL,
@@ -20,20 +21,20 @@ CREATE TABLE lots (
 -- =============================================
 -- 제품 (시리얼)
 -- =============================================
-CREATE TABLE products (
+CREATE TABLE mnr_products (
   internal_id   SERIAL PRIMARY KEY,
   serial_token  TEXT UNIQUE NOT NULL,     -- HMAC 토큰 (노출 코드, 형식: XXXX-XXXX-XXXX-XXXX)
-  lot_id        TEXT REFERENCES lots(lot_id),
+  lot_id        TEXT REFERENCES mnr_lots(lot_id),
   product_type  TEXT NOT NULL DEFAULT 'main' CHECK (product_type IN ('main', 'retouch')),
   created_at    TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_products_serial_token ON products(serial_token);
+CREATE INDEX idx_mnr_products_serial_token ON mnr_products(serial_token);
 
 -- =============================================
 -- 시술자
 -- =============================================
-CREATE TABLE practitioners (
+CREATE TABLE mnr_practitioners (
   practitioner_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name            TEXT NOT NULL,
   shop_name       TEXT NOT NULL,
@@ -47,7 +48,7 @@ CREATE TABLE practitioners (
 -- =============================================
 -- 출고·배송
 -- =============================================
-CREATE TABLE shipments (
+CREATE TABLE mnr_shipments (
   shipment_id      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   internal_id_from INTEGER,
   internal_id_to   INTEGER,
@@ -58,15 +59,15 @@ CREATE TABLE shipments (
   delivered_at     TIMESTAMPTZ            -- Sweettracker 웹훅으로 자동 기록
 );
 
-CREATE INDEX idx_shipments_waybill ON shipments(waybill_no);
+CREATE INDEX idx_mnr_shipments_waybill ON mnr_shipments(waybill_no);
 
 -- =============================================
 -- 시술 등록 (시술자 입력)
 -- =============================================
-CREATE TABLE procedures (
+CREATE TABLE mnr_procedures (
   procedure_id    UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  serial_token    TEXT UNIQUE REFERENCES products(serial_token),
-  practitioner_id UUID REFERENCES practitioners(practitioner_id),
+  serial_token    TEXT UNIQUE REFERENCES mnr_products(serial_token),
+  practitioner_id UUID REFERENCES mnr_practitioners(practitioner_id),
   procedure_at    DATE NOT NULL,
   technique       TEXT NOT NULL CHECK (technique IN ('hairstroke', 'combo', 'machine_gradient')),
   customer_phone  TEXT,                   -- 암호화 저장 (pgp_sym_encrypt 사용)
@@ -76,9 +77,9 @@ CREATE TABLE procedures (
 -- =============================================
 -- 고객 정품 등록
 -- =============================================
-CREATE TABLE registrations (
+CREATE TABLE mnr_registrations (
   reg_id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  serial_token            TEXT UNIQUE REFERENCES products(serial_token),
+  serial_token            TEXT UNIQUE REFERENCES mnr_products(serial_token),
   customer_name           TEXT,
   customer_phone          TEXT,           -- 암호화 저장
   review_text             TEXT,
@@ -91,27 +92,29 @@ CREATE TABLE registrations (
 );
 
 -- =============================================
--- 크레딧 원장 (ledger 방식)
+-- 통합 원장 (ledger 방식)
+-- owner_type='customer'      → 멜라누아 멤버십 크레딧 (고객, 유효 24개월)
+-- owner_type='practitioner'  → 멜라누아 프로 포인트 (시술자, 유효 12개월)
 -- =============================================
-CREATE TABLE credits (
+CREATE TABLE mnr_credits (
   credit_id  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   owner_type TEXT NOT NULL CHECK (owner_type IN ('customer', 'practitioner')),
-  owner_id   TEXT NOT NULL,              -- customer phone or practitioner_id
+  owner_id   TEXT NOT NULL,              -- customer: phone / practitioner: practitioner_id
   amount     INTEGER NOT NULL,
   type       TEXT NOT NULL CHECK (type IN ('earn', 'spend')),
   reason     TEXT,
-  expires_at TIMESTAMPTZ,               -- 발급 후 24개월
+  expires_at TIMESTAMPTZ,               -- customer: 24개월 / practitioner: 12개월
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_credits_owner ON credits(owner_type, owner_id);
+CREATE INDEX idx_mnr_credits_owner ON mnr_credits(owner_type, owner_id);
 
 -- =============================================
 -- 리터칭 잉크 발송
 -- =============================================
-CREATE TABLE retouch_dispatches (
+CREATE TABLE mnr_retouch_dispatches (
   dispatch_id    UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  origin_serial  TEXT REFERENCES products(serial_token),
+  origin_serial  TEXT REFERENCES mnr_products(serial_token),
   r_serial       TEXT,                  -- MNR-R-XXXX 형식 내부 추적용
   status         TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'dispatched')),
   approved_at    TIMESTAMPTZ,
@@ -122,7 +125,7 @@ CREATE TABLE retouch_dispatches (
 -- =============================================
 -- SMS 인증 (임시 OTP 보관)
 -- =============================================
-CREATE TABLE sms_verifications (
+CREATE TABLE mnr_sms_verifications (
   id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   phone      TEXT NOT NULL,
   code       TEXT NOT NULL,
@@ -131,43 +134,43 @@ CREATE TABLE sms_verifications (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_sms_phone ON sms_verifications(phone, expires_at);
+CREATE INDEX idx_mnr_sms_phone ON mnr_sms_verifications(phone, expires_at);
 
 -- =============================================
 -- Row Level Security (기본 설정)
 -- =============================================
-ALTER TABLE lots ENABLE ROW LEVEL SECURITY;
-ALTER TABLE products ENABLE ROW LEVEL SECURITY;
-ALTER TABLE practitioners ENABLE ROW LEVEL SECURITY;
-ALTER TABLE shipments ENABLE ROW LEVEL SECURITY;
-ALTER TABLE procedures ENABLE ROW LEVEL SECURITY;
-ALTER TABLE registrations ENABLE ROW LEVEL SECURITY;
-ALTER TABLE credits ENABLE ROW LEVEL SECURITY;
-ALTER TABLE retouch_dispatches ENABLE ROW LEVEL SECURITY;
-ALTER TABLE sms_verifications ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_lots ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_practitioners ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_shipments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_procedures ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_registrations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_credits ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_retouch_dispatches ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mnr_sms_verifications ENABLE ROW LEVEL SECURITY;
 
 -- products: 누구나 serial_token으로 조회 가능 (정품 확인용)
-CREATE POLICY "products_public_read" ON products
+CREATE POLICY "mnr_products_public_read" ON mnr_products
   FOR SELECT USING (true);
 
 -- procedures: 누구나 serial_token으로 조회 가능
-CREATE POLICY "procedures_public_read" ON procedures
+CREATE POLICY "mnr_procedures_public_read" ON mnr_procedures
   FOR SELECT USING (true);
 
 -- registrations: 누구나 serial_token으로 조회 가능, 등록은 미등록 건만
-CREATE POLICY "registrations_public_read" ON registrations
+CREATE POLICY "mnr_registrations_public_read" ON mnr_registrations
   FOR SELECT USING (true);
 
-CREATE POLICY "registrations_insert" ON registrations
+CREATE POLICY "mnr_registrations_insert" ON mnr_registrations
   FOR INSERT WITH CHECK (true);
 
-CREATE POLICY "registrations_update_healing" ON registrations
+CREATE POLICY "mnr_registrations_update_healing" ON mnr_registrations
   FOR UPDATE USING (healing_photo_url IS NULL);
 
 -- practitioners: service_role만 insert/update
-CREATE POLICY "practitioners_public_read" ON practitioners
+CREATE POLICY "mnr_practitioners_public_read" ON mnr_practitioners
   FOR SELECT USING (true);
 
 -- sms_verifications: service_role 전용 (API route에서 service_role 키 사용)
-CREATE POLICY "sms_service_only" ON sms_verifications
+CREATE POLICY "mnr_sms_service_only" ON mnr_sms_verifications
   FOR ALL USING (false);

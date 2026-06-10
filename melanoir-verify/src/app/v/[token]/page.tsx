@@ -19,7 +19,7 @@ async function getProductData(slug: string) {
   )
 
   const { data: product } = await supabase
-    .from('products')
+    .from('mnr_products')
     .select('*')
     .eq('serial_token', token)
     .single()
@@ -29,21 +29,21 @@ async function getProductData(slug: string) {
   const [{ data: lot }, { data: shipment }, { data: procedure }, { data: registration }] =
     await Promise.all([
       product.lot_id
-        ? supabase.from('lots').select('manufactured_at, lot_id').eq('lot_id', product.lot_id).single()
+        ? supabase.from('mnr_lots').select('manufactured_at, lot_id').eq('lot_id', product.lot_id).single()
         : Promise.resolve({ data: null }),
       supabase
-        .from('shipments')
+        .from('mnr_shipments')
         .select('delivered_at, shipped_at')
         .lte('internal_id_from', product.internal_id)
         .gte('internal_id_to', product.internal_id)
         .single(),
       supabase
-        .from('procedures')
+        .from('mnr_procedures')
         .select('procedure_at, technique, practitioners(name, shop_name, region)')
         .eq('serial_token', token)
         .single(),
       supabase
-        .from('registrations')
+        .from('mnr_registrations')
         .select('*')
         .eq('serial_token', token)
         .single(),

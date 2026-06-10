@@ -1,13 +1,32 @@
 import { createServiceClient } from './supabase'
 
+// ============================================================
+// 멜라누아 멤버십 크레딧 (고객, owner_type = 'customer')
+//   - 정품 등록 → 힐링 사진 업로드 시 자동 적립
+//   - 유효기간: 적립일로부터 24개월
+//   - 사용처: 추후 제휴 서비스·이벤트·프로모션 연계 예정
+//
+// 멜라누아 프로 포인트 (시술자, owner_type = 'practitioner')
+//   - 시술 등록 횟수 기반 등급에 따라 구매 시 적립
+//   - 유효기간: 적립일로부터 12개월
+//   - 사용처: 엠보 제품 구매 할인
+// ============================================================
+
+// 고객 크레딧 지급량 (멜라누아 멤버십)
 export const CREDIT_AMOUNTS = {
-  registration: 10000,    // 정품 등록 완료
+  registration: 10000,    // 정품 등록 완료 (멜라누아 멤버십 자동 가입)
   review_text: 5000,      // 후기 텍스트 작성
   photo_before: 10000,    // 시술 직후 사진 업로드
   photo_healing: 15000,   // 힐링 완료 사진 업로드
 } as const
 
 export type CreditReason = keyof typeof CREDIT_AMOUNTS
+
+// 유효기간 설정 (owner_type별 분리)
+const EXPIRY_MONTHS: Record<'customer' | 'practitioner', number> = {
+  customer: 24,       // 멜라누아 멤버십 크레딧
+  practitioner: 12,   // 멜라누아 프로 포인트
+}
 
 export async function issueCredit(
   ownerType: 'customer' | 'practitioner',
@@ -17,9 +36,9 @@ export async function issueCredit(
   const supabase = createServiceClient()
   const amount = CREDIT_AMOUNTS[reason]
   const expiresAt = new Date()
-  expiresAt.setMonth(expiresAt.getMonth() + 24)
+  expiresAt.setMonth(expiresAt.getMonth() + EXPIRY_MONTHS[ownerType])
 
-  const { error } = await supabase.from('credits').insert({
+  const { error } = await supabase.from('mnr_credits').insert({
     owner_type: ownerType,
     owner_id: ownerId,
     amount,
@@ -38,7 +57,7 @@ export async function getCreditBalance(
 ): Promise<number> {
   const supabase = createServiceClient()
   const { data, error } = await supabase
-    .from('credits')
+    .from('mnr_credits')
     .select('amount, type')
     .eq('owner_type', ownerType)
     .eq('owner_id', ownerId)

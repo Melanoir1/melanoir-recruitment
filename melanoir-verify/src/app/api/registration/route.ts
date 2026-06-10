@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
   // 시술 등록 여부 확인
   const { data: procedure } = await supabase
-    .from('procedures')
+    .from('mnr_procedures')
     .select('procedure_id')
     .eq('serial_token', formattedToken)
     .single()
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
   // 중복 등록 확인
   const { data: existing } = await supabase
-    .from('registrations')
+    .from('mnr_registrations')
     .select('reg_id')
     .eq('serial_token', formattedToken)
     .single()
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
   }
 
   // 등록
-  const { error } = await supabase.from('registrations').insert({
+  const { error } = await supabase.from('mnr_registrations').insert({
     serial_token: formattedToken,
     customer_name: customerName,
     customer_phone: customerPhone,
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: '등록 실패' }, { status: 500 })
   }
 
-  // 크레딧 지급
+  // 멜라누아 멤버십 크레딧 지급 (정품 등록 완료 = 멜라누아 멤버십 자동 가입)
   let creditsEarned = CREDIT_AMOUNTS.registration
   await issueCredit('customer', customerPhone, 'registration')
 

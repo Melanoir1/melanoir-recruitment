@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   const deliveredAt = payload.delivered_at ?? new Date().toISOString()
 
   const { error } = await supabase
-    .from('shipments')
+    .from('mnr_shipments')
     .update({ delivered_at: deliveredAt })
     .eq('waybill_no', waybill_no)
 

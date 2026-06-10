@@ -16,7 +16,7 @@ const supabase = createClient(
 
 async function main() {
   const { data, error } = await supabase
-    .from('products')
+    .from('mnr_products')
     .select('internal_id, serial_token, lot_id, created_at')
     .order('internal_id', { ascending: true })
 

@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
   // 제품 존재 확인
   const { data: product } = await supabase
-    .from('products')
+    .from('mnr_products')
     .select('serial_token, product_type')
     .eq('serial_token', formattedToken)
     .single()
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
   // 시술자 존재 확인
   const { data: practitioner } = await supabase
-    .from('practitioners')
+    .from('mnr_practitioners')
     .select('practitioner_id')
     .eq('practitioner_id', practitioner_id)
     .single()
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
   }
 
   // 시술 등록 (UNIQUE 제약으로 중복 방지)
-  const { error } = await supabase.from('procedures').insert({
+  const { error } = await supabase.from('mnr_procedures').insert({
     serial_token: formattedToken,
     practitioner_id,
     procedure_at,
@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
 
   const supabase = createServiceClient()
   const { data, error } = await supabase
-    .from('procedures')
+    .from('mnr_procedures')
     .select('procedure_id, serial_token, procedure_at, technique, registered_at')
     .eq('practitioner_id', practitioner_id)
     .order('registered_at', { ascending: false })

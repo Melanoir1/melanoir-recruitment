@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
   const expiresAt = new Date(Date.now() + 5 * 60 * 1000) // 5분
 
   const supabase = createServiceClient()
-  await supabase.from('sms_verifications').insert({
+  await supabase.from('mnr_sms_verifications').insert({
     phone: normalizedPhone,
     code,
     expires_at: expiresAt.toISOString(),

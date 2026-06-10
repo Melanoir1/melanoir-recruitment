@@ -39,7 +39,7 @@ async function main() {
 
   // 1. 배치 생성
   const LOT_ID = 'L-2026-06'
-  const { error: lotError } = await supabase.from('lots').upsert({
+  const { error: lotError } = await supabase.from('mnr_lots').upsert({
     lot_id: LOT_ID,
     manufactured_at: '2026-05-15T00:00:00+09:00',
     quantity: 50,
@@ -51,7 +51,7 @@ async function main() {
   // 2. 시리얼 50개 생성
   // 먼저 현재 max internal_id 확인
   const { data: maxRow } = await supabase
-    .from('products')
+    .from('mnr_products')
     .select('internal_id')
     .order('internal_id', { ascending: false })
     .limit(1)
@@ -69,7 +69,7 @@ async function main() {
   }
 
   const { data: inserted, error: productError } = await supabase
-    .from('products')
+    .from('mnr_products')
     .insert(products)
     .select('internal_id, serial_token')
 
@@ -77,7 +77,7 @@ async function main() {
   console.log(`✓ 시리얼 ${products.length}개 생성 (internal_id: ${startId} ~ ${startId + 49})`)
 
   // 3. 출고 배송 정보
-  const { error: shipError } = await supabase.from('shipments').insert({
+  const { error: shipError } = await supabase.from('mnr_shipments').insert({
     internal_id_from: startId,
     internal_id_to: startId + 49,
     waybill_no: 'BETA-TEST-001',
@@ -91,7 +91,7 @@ async function main() {
 
   // 4. 테스트 시술자 생성
   const { data: practitioner, error: pracError } = await supabase
-    .from('practitioners')
+    .from('mnr_practitioners')
     .upsert({
       name: '김베타',
       shop_name: '테스트 뷰티샵',
@@ -108,7 +108,7 @@ async function main() {
   // 5. 첫 번째 시리얼에 시술 등록 (테스트용)
   if (inserted && inserted.length > 0 && practitioner) {
     const testSerial = inserted[0].serial_token
-    const { error: procError } = await supabase.from('procedures').upsert({
+    const { error: procError } = await supabase.from('mnr_procedures').upsert({
       serial_token: testSerial,
       practitioner_id: practitioner.practitioner_id,
       procedure_at: new Date().toISOString().split('T')[0],

@@ -3,7 +3,7 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export interface Database {
   public: {
     Tables: {
-      lots: {
+      mnr_lots: {
         Row: {
           lot_id: string
           manufactured_at: string
@@ -11,10 +11,10 @@ export interface Database {
           qc_result: 'pass' | 'fail'
           qc_document_url: string | null
         }
-        Insert: Omit<Database['public']['Tables']['lots']['Row'], never>
-        Update: Partial<Database['public']['Tables']['lots']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_lots']['Row'], never>
+        Update: Partial<Database['public']['Tables']['mnr_lots']['Row']>
       }
-      products: {
+      mnr_products: {
         Row: {
           internal_id: number
           serial_token: string
@@ -22,10 +22,10 @@ export interface Database {
           product_type: 'main' | 'retouch'
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['products']['Row'], 'internal_id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['products']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_products']['Row'], 'internal_id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['mnr_products']['Row']>
       }
-      practitioners: {
+      mnr_practitioners: {
         Row: {
           practitioner_id: string
           name: string
@@ -36,10 +36,10 @@ export interface Database {
           tier_updated_at: string | null
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['practitioners']['Row'], 'practitioner_id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['practitioners']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_practitioners']['Row'], 'practitioner_id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['mnr_practitioners']['Row']>
       }
-      shipments: {
+      mnr_shipments: {
         Row: {
           shipment_id: string
           internal_id_from: number | null
@@ -50,10 +50,10 @@ export interface Database {
           shipped_at: string | null
           delivered_at: string | null
         }
-        Insert: Omit<Database['public']['Tables']['shipments']['Row'], 'shipment_id'>
-        Update: Partial<Database['public']['Tables']['shipments']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_shipments']['Row'], 'shipment_id'>
+        Update: Partial<Database['public']['Tables']['mnr_shipments']['Row']>
       }
-      procedures: {
+      mnr_procedures: {
         Row: {
           procedure_id: string
           serial_token: string
@@ -63,10 +63,10 @@ export interface Database {
           customer_phone: string | null
           registered_at: string
         }
-        Insert: Omit<Database['public']['Tables']['procedures']['Row'], 'procedure_id' | 'registered_at'>
-        Update: Partial<Database['public']['Tables']['procedures']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_procedures']['Row'], 'procedure_id' | 'registered_at'>
+        Update: Partial<Database['public']['Tables']['mnr_procedures']['Row']>
       }
-      registrations: {
+      mnr_registrations: {
         Row: {
           reg_id: string
           serial_token: string
@@ -80,13 +80,14 @@ export interface Database {
           registered_at: string
           healing_registered_at: string | null
         }
-        Insert: Omit<Database['public']['Tables']['registrations']['Row'], 'reg_id' | 'registered_at'>
-        Update: Partial<Database['public']['Tables']['registrations']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_registrations']['Row'], 'reg_id' | 'registered_at'>
+        Update: Partial<Database['public']['Tables']['mnr_registrations']['Row']>
       }
-      credits: {
+      // 멜라누아 멤버십 크레딧(customer) + 멜라누아 프로 포인트(practitioner) 통합 원장
+      mnr_credits: {
         Row: {
           credit_id: string
-          owner_type: 'customer' | 'practitioner'
+          owner_type: 'customer' | 'practitioner' // customer=멤버십 크레딧, practitioner=프로 포인트
           owner_id: string
           amount: number
           type: 'earn' | 'spend'
@@ -94,10 +95,10 @@ export interface Database {
           expires_at: string | null
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['credits']['Row'], 'credit_id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['credits']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_credits']['Row'], 'credit_id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['mnr_credits']['Row']>
       }
-      retouch_dispatches: {
+      mnr_retouch_dispatches: {
         Row: {
           dispatch_id: string
           origin_serial: string | null
@@ -107,10 +108,10 @@ export interface Database {
           dispatched_at: string | null
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['retouch_dispatches']['Row'], 'dispatch_id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['retouch_dispatches']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_retouch_dispatches']['Row'], 'dispatch_id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['mnr_retouch_dispatches']['Row']>
       }
-      sms_verifications: {
+      mnr_sms_verifications: {
         Row: {
           id: string
           phone: string
@@ -119,8 +120,8 @@ export interface Database {
           expires_at: string
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['sms_verifications']['Row'], 'id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['sms_verifications']['Row']>
+        Insert: Omit<Database['public']['Tables']['mnr_sms_verifications']['Row'], 'id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['mnr_sms_verifications']['Row']>
       }
     }
   }

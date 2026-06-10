@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
   const supabase = createServiceClient()
 
   const { data: reg } = await supabase
-    .from('registrations')
+    .from('mnr_registrations')
     .select('reg_id, customer_phone, healing_credits_issued, healing_photo_url')
     .eq('serial_token', formattedToken)
     .single()
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
   // Phase 0: 사진 URL은 placeholder, Phase 1에서 실제 업로드
   const { error } = await supabase
-    .from('registrations')
+    .from('mnr_registrations')
     .update({
       healing_photo_url: 'pending_upload',
       healing_credits_issued: true,
@@ -41,13 +41,13 @@ export async function POST(req: NextRequest) {
   if (error) return NextResponse.json({ error: '업데이트 실패' }, { status: 500 })
 
   // 리터칭 잉크 발송 요청 생성
-  await supabase.from('retouch_dispatches').insert({
+  await supabase.from('mnr_retouch_dispatches').insert({
     origin_serial: formattedToken,
     r_serial: `MNR-R-${Date.now()}`,
     status: 'pending',
   })
 
-  // 크레딧 지급
+  // 멜라누아 멤버십 크레딧 추가 지급 (힐링 완료)
   let creditsEarned = 0
   if (reg.customer_phone && !reg.healing_credits_issued) {
     creditsEarned = CREDIT_AMOUNTS.photo_healing

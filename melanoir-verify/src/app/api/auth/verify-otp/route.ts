@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
 
   // OTP 검증
   const { data: otp } = await supabase
-    .from('sms_verifications')
+    .from('mnr_sms_verifications')
     .select('id, verified, expires_at')
     .eq('phone', normalizedPhone)
     .eq('code', code)
@@ -27,11 +27,11 @@ export async function POST(req: NextRequest) {
   }
 
   // OTP 소진 처리
-  await supabase.from('sms_verifications').update({ verified: true }).eq('id', otp.id)
+  await supabase.from('mnr_sms_verifications').update({ verified: true }).eq('id', otp.id)
 
   // 기존 시술자 조회
   const { data: existing } = await supabase
-    .from('practitioners')
+    .from('mnr_practitioners')
     .select('*')
     .eq('phone', normalizedPhone)
     .single()
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { data: newPractitioner, error } = await supabase
-    .from('practitioners')
+    .from('mnr_practitioners')
     .insert({ phone: normalizedPhone, name, shop_name })
     .select()
     .single()

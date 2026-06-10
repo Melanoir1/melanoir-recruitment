@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
   // 제품 조회
   const { data: product, error: productError } = await supabase
-    .from('products')
+    .from('mnr_products')
     .select('*')
     .eq('serial_token', formattedToken)
     .single()
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
   // 배송 정보
   const { data: shipment } = await supabase
-    .from('shipments')
+    .from('mnr_shipments')
     .select('delivered_at, shipped_at, carrier')
     .lte('internal_id_from', product.internal_id)
     .gte('internal_id_to', product.internal_id)
@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
 
   // 시술 정보
   const { data: procedure } = await supabase
-    .from('procedures')
+    .from('mnr_procedures')
     .select(`
       procedure_at,
       technique,
@@ -49,14 +49,14 @@ export async function GET(req: NextRequest) {
 
   // 고객 등록 정보
   const { data: registration } = await supabase
-    .from('registrations')
+    .from('mnr_registrations')
     .select('registered_at, healing_photo_url, healing_registered_at')
     .eq('serial_token', formattedToken)
     .single()
 
   // 배치 정보
   const { data: lot } = product.lot_id
-    ? await supabase.from('lots').select('manufactured_at, lot_id').eq('lot_id', product.lot_id).single()
+    ? await supabase.from('mnr_lots').select('manufactured_at, lot_id').eq('lot_id', product.lot_id).single()
     : { data: null }
 
   return NextResponse.json({

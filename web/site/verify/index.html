@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>정품 확인 — Melanoir</title>
+    <meta http-equiv="refresh" content="4;url=https://verify.melanoir.co.kr">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/Paperlogy-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body {
+            background: #1d1d1f; color: #f5f5f7;
+            font-family: 'Pretendard', -apple-system, sans-serif !important;
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 40px 22px;
+            word-break: keep-all; letter-spacing: -0.01em;
+        }
+        .logo {
+            font-size: 13px !important; font-weight: 700;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: rgba(255,255,255,0.35); margin-bottom: 48px;
+        }
+        h1 {
+            font-family: 'Paperlogy', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 500; letter-spacing: -0.04em;
+            line-height: 1.1; margin-bottom: 20px; color: #f5f5f7;
+        }
+        .sub {
+            font-size: 1rem !important; color: rgba(255,255,255,0.5);
+            line-height: 1.7; max-width: 400px; margin: 0 auto 48px;
+        }
+        .badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 980px; padding: 10px 20px;
+            font-size: 14px !important; color: rgba(255,255,255,0.6);
+            margin-bottom: 40px;
+        }
+        .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #30d158;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+        }
+        .btn {
+            display: inline-block;
+            background: #ffffff; color: #1d1d1f;
+            padding: 14px 32px; border-radius: 980px;
+            font-size: 15px; font-weight: 600;
+            text-decoration: none; letter-spacing: -0.01em;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .note {
+            margin-top: 48px;
+            font-size: 13px !important; color: rgba(255,255,255,0.25);
+            line-height: 1.6;
+        }
+        .divider {
+            width: 1px; height: 60px;
+            background: rgba(255,255,255,0.1);
+            margin: 48px auto;
+        }
+        .info-row {
+            display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+            margin-top: 0;
+        }
+        .info-item {
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .info-label { font-size: 11px !important; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+        .info-value { font-size: 14px !important; color: rgba(255,255,255,0.6); }
+    </style>
+</head>
+<body>
+    <p class="logo">Melanoir</p>
+
+    <h1>정품 확인.</h1>
+    <p class="sub">
+        멜라누아 엠보 정품 여부와 시술 이력을 확인하고,<br>
+        멜라누아 멤버십 크레딧을 받을 수 있습니다.
+    </p>
+
+    <div class="badge">
+        <span class="dot"></span>
+        잠시 후 정품 확인 페이지로 이동합니다
+    </div>
+
+    <a href="https://verify.melanoir.co.kr" class="btn">바로 이동하기</a>
+
+    <div class="divider"></div>
+
+    <div class="info-row">
+        <div class="info-item">
+            <span class="info-label">정품 확인 앱</span>
+            <span class="info-value">verify.melanoir.co.kr</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">고객 멤버십</span>
+            <span class="info-value"><a href="/membership" style="color:rgba(255,255,255,0.6);text-decoration:underline;text-underline-offset:3px;">멜라누아 멤버십</a></span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">시술자</span>
+            <span class="info-value"><a href="/pro" style="color:rgba(255,255,255,0.6);text-decoration:underline;text-underline-offset:3px;">멜라누아 프로</a></span>
+        </div>
+    </div>
+
+    <p class="note">
+        QR 코드가 손상된 경우, verify.melanoir.co.kr에서<br>보증서의 시리얼 번호를 직접 입력하세요.
+    </p>
+
+<script>
+    // URL에 token 파라미터가 있으면 verify 앱으로 바로 전달
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token') || params.get('t');
+    if (token) {
+        window.location.replace('https://verify.melanoir.co.kr/v/' + token);
+    }
+</script>
+</body>
+</html>
