@@ -39,7 +39,7 @@ async function getProductData(slug: string) {
         .single(),
       supabase
         .from('mnr_procedures')
-        .select('procedure_at, technique, practitioners(name, shop_name, region)')
+        .select('procedure_at, technique, mnr_practitioners(name, shop_name, region)')
         .eq('serial_token', token)
         .single(),
       supabase

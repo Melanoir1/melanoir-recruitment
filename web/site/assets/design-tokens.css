@@ -1,0 +1,70 @@
+:root {
+  /* 색상 */
+  --color-ink:        #1d1d1f;
+  --color-bg:         #ffffff;
+  --color-bg-alt:     #fbfbfd;
+  --color-bg-subtle:  #f5f5f7;
+  --color-line:       #e8e8ed;
+  --color-line-strong:#d2d2d7;
+  --color-text-muted: #6e6e73;
+  --color-text-dim:   #86868b;
+  --color-accent:     #A07830;
+
+  /* 간격 (8px 그리드) */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  48px;
+  --space-xl:  80px;
+  --space-2xl: 120px;
+
+  /* 카드 radius */
+  --radius-sm: 12px;
+  --radius-lg: 20px;
+
+  /* 폰트 */
+  --font-display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-body:    "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* 버튼 */
+  --btn-radius: 3px;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--color-ink);
+  color: #f5f5f7;
+  padding: 14px 32px;
+  border-radius: var(--btn-radius);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary:hover { opacity: 0.8; }
+
+.btn-secondary {
+  display: inline-block;
+  border: 1px solid var(--color-line-strong);
+  color: var(--color-ink);
+  padding: 13px 28px;
+  border-radius: var(--btn-radius);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s;
+  cursor: pointer;
+  background: transparent;
+}
+.btn-secondary:hover { border-color: var(--color-text-dim); }
+
+.section, .section-alt {
+  padding: var(--space-xl) 0;
+}
+@media (min-width: 769px) {
+  .section, .section-alt {
+    padding: var(--space-2xl) 0;
+  }
+}

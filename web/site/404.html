@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>페이지를 찾을 수 없습니다 — Melanoir</title>
+  <link rel="stylesheet" href="/assets/design-tokens.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-ink);
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .not-found {
+      flex: 1;
+      text-align: center;
+      padding: 120px 24px;
+    }
+    .not-found-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--color-text-dim);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .not-found h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+    .not-found p {
+      color: var(--color-text-muted);
+      margin-bottom: 36px;
+    }
+    .not-found-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <header class="mnr-header">
+    <div class="mnr-header-inner">
+      <a class="mnr-header-logo" href="/">
+        <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" style="filter: invert(1);">
+      </a>
+      <button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="mnr-nav">
+        <a href="/products">Products</a>
+        <a href="/pro">Pro</a>
+        <a href="/register">정품등록</a>
+        <a href="/#technology">Technology</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="not-found">
+    <p class="not-found-eyebrow">404</p>
+    <h1>페이지를 찾을 수 없습니다.</h1>
+    <p>요청하신 페이지가 존재하지 않거나 이동되었습니다.</p>
+    <div class="not-found-actions">
+      <a href="/" class="btn-primary">홈으로</a>
+      <a href="/register" class="btn-secondary">정품 등록</a>
+    </div>
+  </section>
+
+  <footer class="mnr-footer">
+    <div class="mnr-footer-inner">
+      <p class="mnr-footer-corp">
+        Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
+        © 2026 Melanoir. All rights reserved.
+      </p>
+      <nav class="mnr-footer-nav">
+        <a href="/products">Products</a>
+        <a href="/pro">Pro</a>
+        <a href="/register">정품등록</a>
+        <a href="/privacy">개인정보처리방침</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/mnr-nav.js"></script>
+</body>
+</html>

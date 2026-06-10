@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Melanoir Pro — 멜라누아 프로</title>
+    <meta property="og:title" content="멜라누아 프로 — Melanoir Pro">
+    <meta property="og:description" content="엠보 시술자를 위한 포인트 프로그램.">
+    <meta property="og:url" content="https://melanoir.co.kr/pro">
+    <link rel="stylesheet" href="/assets/design-tokens.css">
+    <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
-        @font-face {
-            font-family: 'Paperlogy';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/Paperlogy-Medium.woff2') format('woff2');
-            font-weight: 500;
-        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body {
@@ -19,17 +20,16 @@
             line-height: 1.6; word-break: keep-all; letter-spacing: -0.01em; overflow-x: hidden;
         }
 
-        h1 { font-family: 'Paperlogy', sans-serif; font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 700 !important; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 15px; }
-        h2 { font-family: 'Paperlogy', sans-serif; font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 700 !important; letter-spacing: -0.03em; margin-bottom: 20px; }
-        h3 { font-family: 'Pretendard', sans-serif !important; font-size: 16px !important; font-weight: 700 !important; color: #86868b; margin-bottom: 12px; text-transform: uppercase; }
+        h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 700 !important; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 15px; }
+        h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 700 !important; letter-spacing: -0.03em; margin-bottom: 20px; }
+        h3 { font-family: var(--font-body); font-size: 1.2rem; font-weight: 700; color: #86868b; margin-bottom: 12px; text-transform: uppercase; }
         p { font-size: 18px !important; color: #424245; margin-bottom: 24px; font-family: 'Pretendard', sans-serif !important; }
-        @media (min-width: 769px) { h3 { font-size: 18px !important; } p { font-size: 20px !important; } }
+        @media (min-width: 769px) { p { font-size: 20px !important; } }
 
         .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-        .section { padding: 80px 0; background-color: #ffffff; border-bottom: 1px solid #f5f5f7; }
-        .section-alt { padding: 80px 0; background-color: #fbfbfd; border-bottom: 1px solid #f5f5f7; }
+        .section { background-color: #ffffff; border-bottom: 1px solid #f5f5f7; }
+        .section-alt { background-color: #fbfbfd; border-bottom: 1px solid #f5f5f7; }
         @media (min-width: 769px) {
-            .section, .section-alt { padding: 140px 0; }
             .container { padding: 0 40px; }
         }
 
@@ -43,7 +43,7 @@
 
         /* 히어로 */
         .hero { padding: 96px 0 100px; text-align: center; background: #ffffff; border-bottom: 1px solid #f5f5f7; }
-        .hero-eyebrow { font-size: 14px !important; font-weight: 700; color: #0071e3; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
+        .hero-eyebrow { font-size: 14px !important; font-weight: 700; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
         .hero-desc { max-width: 580px; margin: 24px auto 0; color: #86868b; font-size: 18px !important; line-height: 1.8; }
         @media (min-width: 769px) { .hero-desc { font-size: 20px !important; } }
 
@@ -54,7 +54,7 @@
         .tier-card { background: #ffffff; padding: 44px 32px; display: flex; flex-direction: column; gap: 20px; }
         .tier-card.is-partner { background: #1d1d1f; }
 
-        .tier-name { font-family: 'Paperlogy', sans-serif; font-size: 1.6rem; font-weight: 700; color: #1d1d1f; letter-spacing: -0.02em; }
+        .tier-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: #1d1d1f; letter-spacing: -0.02em; }
         .tier-card.is-partner .tier-name { color: #f5f5f7; }
 
         .tier-criterion { font-size: 13px !important; color: #86868b; font-weight: 600; margin-bottom: 0; line-height: 1.5; }
@@ -62,7 +62,7 @@
 
         .tier-point-wrap { margin-top: 4px; }
         .tier-point-label { font-size: 12px !important; font-weight: 700; color: #86868b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-        .tier-point-value { font-family: 'Paperlogy', sans-serif; font-size: 3rem; font-weight: 700; color: #0071e3; line-height: 1; letter-spacing: -0.04em; }
+        .tier-point-value { font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--color-accent); line-height: 1; letter-spacing: -0.04em; }
         .tier-card.is-partner .tier-point-label { color: rgba(255,255,255,0.4); }
         .tier-card.is-partner .tier-point-value { color: #f5f5f7; }
 
@@ -81,24 +81,16 @@
         @media (min-width: 769px) { .info-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
         .info-card { background: #f5f5f7; border-radius: 20px; padding: 32px 28px; }
         .info-card-label { font-size: 13px !important; font-weight: 700; color: #86868b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-        .info-card-value { font-family: 'Paperlogy', sans-serif; font-size: 1.5rem; font-weight: 700; color: #1d1d1f; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .info-card-value { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: #1d1d1f; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 8px; }
         .info-card-desc { font-size: 14px !important; color: #86868b; margin-bottom: 0; line-height: 1.6; }
 
         /* How it works */
         .how-grid { display: grid; grid-template-columns: 1fr; gap: 1px; margin-top: 50px; background: #f0f0f2; border-radius: 24px; overflow: hidden; border: 1px solid #f0f0f2; }
         @media (min-width: 769px) { .how-grid { grid-template-columns: repeat(3, 1fr); } }
         .how-card { background: #ffffff; padding: 40px 32px; }
-        .how-num { font-family: 'Paperlogy', sans-serif; font-size: 4rem; font-weight: 700; color: #f0f0f2; line-height: 1; margin-bottom: 16px; letter-spacing: -0.05em; }
-        .how-title { font-family: 'Paperlogy', sans-serif; font-size: 1.3rem; font-weight: 700; color: #1d1d1f; margin-bottom: 12px; line-height: 1.3; }
+        .how-num { font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: #f0f0f2; line-height: 1; margin-bottom: 16px; letter-spacing: -0.05em; }
+        .how-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #1d1d1f; margin-bottom: 12px; line-height: 1.3; }
         .how-desc { font-size: 15px !important; color: #86868b; line-height: 1.7; margin-bottom: 0; }
-
-        /* 베타테스터 배너 */
-        .beta-banner { background: linear-gradient(135deg, #0055b3 0%, #0071e3 100%); border-radius: 28px; padding: 60px 40px; text-align: center; }
-        .beta-banner h2 { color: #ffffff !important; }
-        .beta-banner p { color: rgba(255,255,255,0.75) !important; max-width: 560px; margin: 0 auto 32px; }
-        .beta-tag { display: inline-block; background: rgba(255,255,255,0.15); color: #ffffff; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
-        .beta-highlight { display: inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 20px 32px; }
-        .beta-highlight p { color: rgba(255,255,255,0.9) !important; font-size: 16px !important; margin-bottom: 0; font-weight: 600; }
 
         /* 위로가기 */
         .back-to-top {
@@ -113,7 +105,6 @@
         .back-to-top svg { width: 24px; height: 24px; fill: none; stroke: #1d1d1f; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
         @media (min-width: 769px) { .back-to-top { bottom: 40px; right: 40px; width: 52px; height: 52px; } }
     </style>
-<link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
 </head>
 <body>
 <header class="mnr-header">
@@ -121,10 +112,14 @@
     <a class="mnr-header-logo" href="/">
       <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" style="filter: invert(1);">
     </a>
+    <button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="mnr-nav">
       <a href="/products">Products</a>
       <a href="/pro" class="is-current">Pro</a>
-      <a href="/membership">멤버십</a>
+      <a href="/register">정품등록</a>
+      <a href="/#technology">Technology</a>
     </nav>
   </div>
 </header>
@@ -294,41 +289,50 @@
 
 
 <!-- ══════════════════════════════════════════════════════
-  베타테스터 특전
+  Pro CTA
 ══════════════════════════════════════════════════════ -->
-<section class="section">
-    <div class="container">
-        <div class="beta-banner reveal">
-            <span class="beta-tag">Beta Tester Exclusive</span>
-            <h2>베타테스터 특전.</h2>
-            <p>테스트를 완료하신 분께는 정식 출시 후 골드 등급 혜택이 먼저 적용됩니다.</p>
-            <div class="beta-highlight">
-                <p>테스트 완료(폼 C 제출) 후 3개월간 골드 등급 포인트(15%) 자동 적용</p>
-            </div>
-        </div>
+<section class="section" style="text-align: center;">
+  <div class="container">
+    <div style="max-width: 860px; margin: 0 auto; padding: 80px 40px;
+                border: 1px solid var(--color-line, #e8e8ed);
+                border-radius: var(--radius-lg, 20px);
+                background: var(--color-bg-alt, #fbfbfd);">
+      <h3 style="letter-spacing: 0.15em; margin-bottom: 20px; color: var(--color-text-dim, #86868b);">MELANOIR PRO</h3>
+      <h2 style="margin-bottom: 16px;">지금 Pro를 시작하세요.</h2>
+      <p style="color: var(--color-text-muted, #6e6e73); max-width: 520px; margin: 0 auto 36px;">
+        멜라누아 엠보를 사용하는 시술자라면 Pro 프로그램에 참여할 수 있습니다.
+        시술 등록마다 포인트가 쌓이고, 등급에 따라 혜택이 늘어납니다.
+      </p>
+      <a href="/register" class="btn-secondary" style="margin-right: 12px;">정품 등록하기</a>
+      <a href="/products/embo" class="btn-primary">엠보 알아보기</a>
     </div>
+  </div>
 </section>
 
 
 <!-- ══════════════════════════════════════════════════════
   FOOTER
 ══════════════════════════════════════════════════════ -->
-<footer style="padding: 60px 0; background: #ffffff; text-align: center; border-top: 1px solid #f5f5f7;">
-    <div class="container">
-        <p style="font-size: 15px !important; color: #86868b; line-height: 1.8; text-align: center; word-break: keep-all;">
-            Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
-            © 2026 Melanoir. All rights reserved.<br><br>
-            <a href="https://melanoir.co.kr/privacy" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">개인정보처리방침</a>
-            &nbsp;·&nbsp;
-            <a href="/membership" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">멜라누아 멤버십</a>
-        </p>
-    </div>
+<footer class="mnr-footer">
+  <div class="mnr-footer-inner">
+    <p class="mnr-footer-corp">
+      Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
+      © 2026 Melanoir. All rights reserved.
+    </p>
+    <nav class="mnr-footer-nav">
+      <a href="/products">Products</a>
+      <a href="/pro">Pro</a>
+      <a href="/register">정품등록</a>
+      <a href="/privacy">개인정보처리방침</a>
+    </nav>
+  </div>
 </footer>
 
 <div id="backToTop" class="back-to-top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
+<script src="/assets/mnr-nav.js"></script>
 <script>
     window.onbeforeunload = function() { window.scrollTo(0, 0); };
     if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }

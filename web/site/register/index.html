@@ -3,72 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>멜라누아 멤버십 — Melanoir Membership</title>
+    <title>정품 등록 — Melanoir</title>
+    <meta property="og:title" content="정품 등록 — 멜라누아">
+    <meta property="og:description" content="멜라누아 엠보 정품을 등록하고 크레딧을 받으세요.">
+    <meta property="og:url" content="https://melanoir.co.kr/register">
+    <link rel="stylesheet" href="/assets/design-tokens.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
-        @font-face {
-            font-family: 'Paperlogy';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/Paperlogy-Medium.woff2') format('woff2');
-            font-weight: 500;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body {
-            background-color: #ffffff; color: #1d1d1f;
+            background-color: var(--color-bg); color: var(--color-ink);
             font-family: 'Pretendard', -apple-system, sans-serif !important;
             line-height: 1.6; word-break: keep-all; letter-spacing: -0.01em; overflow-x: hidden;
         }
         .container { max-width: 980px; margin: 0 auto; padding: 0 22px; }
 
-        .hero { padding: 80px 0 100px; background: #1d1d1f; color: #f5f5f7; text-align: center; }
+        .hero { padding: 80px 0 100px; background: var(--color-ink); color: #f5f5f7; text-align: center; }
         .hero-eyebrow { font-size: 13px !important; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 18px; }
-        .hero h1 { font-family: 'Paperlogy', sans-serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 500; line-height: 1.08; letter-spacing: -0.04em; color: #f5f5f7; margin-bottom: 24px; }
+        .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 500; line-height: 1.08; letter-spacing: -0.04em; color: #f5f5f7; margin-bottom: 24px; }
         .hero-desc { font-size: clamp(1rem, 2.2vw, 1.2rem) !important; color: rgba(255,255,255,0.6); max-width: 540px; margin: 0 auto 40px; line-height: 1.7; }
-        .hero-cta { display: inline-block; background: #ffffff; color: #1d1d1f; padding: 14px 32px; border-radius: 980px; font-size: 15px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+        .hero-cta { display: inline-block; background: #ffffff; color: var(--color-ink); padding: 14px 32px; border-radius: var(--btn-radius); font-size: 15px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
         .hero-cta:hover { opacity: 0.85; }
 
-        .section { padding: 100px 0; background-color: #ffffff; border-bottom: 1px solid #f5f5f7; }
-        .section-alt { padding: 100px 0; background-color: #fbfbfd; border-bottom: 1px solid #f5f5f7; }
-        @media (min-width: 769px) { .section, .section-alt { padding: 140px 0; } }
-        .section-eyebrow { font-size: 12px !important; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #86868b; margin-bottom: 14px; }
-        .section h2, .section-alt h2 { font-family: 'Paperlogy', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
-        .section-lead { font-size: clamp(1rem, 2vw, 1.15rem) !important; color: #6e6e73; max-width: 600px; line-height: 1.7; margin-bottom: 60px; }
+        .section { background-color: var(--color-bg); border-bottom: 1px solid var(--color-bg-subtle); }
+        .section-alt { background-color: var(--color-bg-alt); border-bottom: 1px solid var(--color-bg-subtle); }
+        .section-eyebrow { font-size: 12px !important; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-dim); margin-bottom: 14px; }
+        .section h2, .section-alt h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
+        .section-lead { font-size: clamp(1rem, 2vw, 1.15rem) !important; color: var(--color-text-muted); max-width: 600px; line-height: 1.7; margin-bottom: 60px; }
 
         .steps { display: flex; flex-direction: column; gap: 0; margin-top: 60px; }
         @media (min-width: 769px) { .steps { flex-direction: row; } }
-        .step { flex: 1; padding: 40px 32px; border-top: 2px solid #1d1d1f; display: flex; flex-direction: column; gap: 14px; }
-        @media (min-width: 769px) { .step { border-top: none; border-left: 2px solid #1d1d1f; } .step:first-child { border-left: none; border-top: 2px solid #1d1d1f; } }
-        .step-num { font-size: 12px !important; font-weight: 700; letter-spacing: 0.08em; color: #86868b; }
-        .step-title { font-size: 1.1rem !important; font-weight: 700; color: #1d1d1f; letter-spacing: -0.02em; }
-        .step-desc { font-size: 14px !important; color: #6e6e73; line-height: 1.65; }
+        .step { flex: 1; padding: 40px 32px; border-top: 2px solid var(--color-ink); display: flex; flex-direction: column; gap: 14px; }
+        @media (min-width: 769px) { .step { border-top: none; border-left: 2px solid var(--color-ink); } .step:first-child { border-left: none; border-top: 2px solid var(--color-ink); } }
+        .step-num { font-size: 12px !important; font-weight: 700; letter-spacing: 0.08em; color: var(--color-text-dim); }
+        .step-title { font-size: 1.1rem !important; font-weight: 700; color: var(--color-ink); letter-spacing: -0.02em; }
+        .step-desc { font-size: 14px !important; color: var(--color-text-muted); line-height: 1.65; }
 
-        .credit-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: #e8e8ed; border-radius: 20px; overflow: hidden; border: 1px solid #e8e8ed; margin-top: 60px; }
+        .credit-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--color-line); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-line); margin-top: 60px; }
         @media (min-width: 600px) { .credit-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 900px) { .credit-grid { grid-template-columns: repeat(4, 1fr); } }
-        .credit-card { background: #ffffff; padding: 36px 28px; display: flex; flex-direction: column; gap: 12px; }
-        .credit-card-label { font-size: 13px !important; color: #86868b; font-weight: 500; line-height: 1.4; }
-        .credit-card-amount { font-family: 'Paperlogy', sans-serif; font-size: 2.2rem; font-weight: 500; color: #1d1d1f; letter-spacing: -0.04em; line-height: 1; }
-        .credit-card-unit { font-size: 13px !important; color: #86868b; }
+        .credit-card { background: var(--color-bg); padding: 36px 28px; display: flex; flex-direction: column; gap: 12px; }
+        .credit-card-label { font-size: 13px !important; color: var(--color-text-dim); font-weight: 500; line-height: 1.4; }
+        .credit-card-amount { font-family: var(--font-display); font-size: 2.2rem; font-weight: 500; color: var(--color-ink); letter-spacing: -0.04em; line-height: 1; }
+        .credit-card-unit { font-size: 13px !important; color: var(--color-text-dim); }
 
         .usage-wrap { margin-top: 60px; display: flex; flex-direction: column; gap: 16px; }
-        .usage-item { padding: 28px 32px; border: 1px solid #e8e8ed; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-        .usage-title { font-size: 1rem !important; font-weight: 600; color: #1d1d1f; }
-        .usage-desc { font-size: 13px !important; color: #86868b; margin-top: 4px; }
-        .usage-badge { font-size: 11px !important; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 980px; background: #f5f5f7; color: #86868b; white-space: nowrap; flex-shrink: 0; }
-        .usage-badge.active { background: #1d1d1f; color: #f5f5f7; }
+        .usage-item { padding: 28px 32px; border: 1px solid var(--color-line); border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+        .usage-title { font-size: 1rem !important; font-weight: 600; color: var(--color-ink); }
+        .usage-desc { font-size: 13px !important; color: var(--color-text-dim); margin-top: 4px; }
+        .usage-badge { font-size: 11px !important; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: var(--btn-radius); background: var(--color-bg-subtle); color: var(--color-text-dim); white-space: nowrap; flex-shrink: 0; }
+        .usage-badge.active { background: var(--color-ink); color: #f5f5f7; }
 
-        .note-box { margin-top: 60px; padding: 28px 32px; background: #fbfbfd; border: 1px solid #e8e8ed; border-radius: 16px; }
-        .note-box p { font-size: 14px !important; color: #6e6e73; line-height: 1.7; }
-        .note-box strong { color: #1d1d1f; }
+        .note-box { margin-top: 60px; padding: 28px 32px; background: var(--color-bg-alt); border: 1px solid var(--color-line); border-radius: 16px; }
+        .note-box p { font-size: 14px !important; color: var(--color-text-muted); line-height: 1.7; }
+        .note-box strong { color: var(--color-ink); }
 
-        .cta-section { padding: 100px 0; text-align: center; background: #ffffff; border-top: 1px solid #f5f5f7; }
-        .cta-section h2 { font-family: 'Paperlogy', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -0.03em; margin-bottom: 14px; color: #1d1d1f; }
-        .cta-section p { font-size: 1rem !important; color: #86868b; margin-bottom: 36px; }
-        .btn-primary { display: inline-block; background: #1d1d1f; color: #f5f5f7; padding: 14px 32px; border-radius: 980px; font-size: 15px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
-        .btn-primary:hover { opacity: 0.8; }
-        .btn-secondary { display: inline-block; border: 1px solid #c7c7cc; color: #1d1d1f; padding: 13px 28px; border-radius: 980px; font-size: 15px; font-weight: 500; text-decoration: none; margin-left: 12px; transition: border-color 0.2s; }
-        .btn-secondary:hover { border-color: #86868b; }
-
-        footer { padding: 60px 0; background: #ffffff; text-align: center; border-top: 1px solid #f5f5f7; }
+        .cta-section { padding: var(--space-xl) 0; text-align: center; background: var(--color-bg); border-top: 1px solid var(--color-bg-subtle); }
+        @media (min-width: 769px) { .cta-section { padding: var(--space-2xl) 0; } }
+        .cta-section h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -0.03em; margin-bottom: 14px; color: var(--color-ink); }
+        .cta-section p { font-size: 1rem !important; color: var(--color-text-dim); margin-bottom: 36px; }
+        .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -80,7 +78,6 @@
         .back-to-top.show { opacity: 1; pointer-events: auto; }
         .back-to-top svg { width: 18px; height: 18px; stroke: #f5f5f7; stroke-width: 2; fill: none; }
     </style>
-<link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
 </head>
 <body>
 <header class="mnr-header">
@@ -88,21 +85,25 @@
     <a class="mnr-header-logo" href="/">
       <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" style="filter: invert(1);">
     </a>
+    <button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="mnr-nav">
       <a href="/products">Products</a>
       <a href="/pro">Pro</a>
-      <a href="/membership" class="is-current">멤버십</a>
+      <a href="/register" class="is-current">정품등록</a>
+      <a href="/#technology">Technology</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
     <div class="container">
-        <p class="hero-eyebrow reveal">Melanoir Membership</p>
-        <h1 class="reveal delay-1">멜라누아 멤버십.</h1>
+        <p class="hero-eyebrow reveal">Authenticity Registration</p>
+        <h1 class="reveal delay-1">정품 등록.</h1>
         <p class="hero-desc reveal delay-2">
             시술 받은 날부터 시작되는 혜택.<br>
-            정품을 등록하는 순간, 멤버가 됩니다.
+            정품을 등록하세요. 크레딧이 쌓입니다.
         </p>
         <a href="https://verify.melanoir.co.kr" class="hero-cta reveal delay-3">정품 등록하기</a>
     </div>
@@ -111,8 +112,8 @@
 <section class="section-alt">
     <div class="container">
         <p class="section-eyebrow reveal">How It Works</p>
-        <h2 class="reveal delay-1">가입 방법.</h2>
-        <p class="section-lead reveal delay-2">별도 가입 절차가 없습니다. 정품 등록을 완료하면 자동으로 멜라누아 멤버십 회원이 됩니다.</p>
+        <h2 class="reveal delay-1">등록 방법.</h2>
+        <p class="section-lead reveal delay-2">별도 가입 절차가 없습니다. 정품 등록을 완료하면 크레딧이 자동으로 적립됩니다.</p>
         <div class="steps">
             <div class="step reveal">
                 <span class="step-num">01</span>
@@ -127,7 +128,7 @@
             <div class="step reveal delay-2">
                 <span class="step-num">03</span>
                 <span class="step-title">정품 등록</span>
-                <p class="step-desc">이름 · 후기 · 시술 직후 사진을 등록합니다. 완료와 동시에 멤버십 가입.</p>
+                <p class="step-desc">이름 · 후기 · 시술 직후 사진을 등록합니다. 완료와 동시에 크레딧 적립.</p>
             </div>
             <div class="step reveal delay-3">
                 <span class="step-num">04</span>
@@ -199,7 +200,7 @@
         <div class="note-box reveal delay-3">
             <p>
                 <strong>크레딧 유효기간</strong>은 적립일로부터 <strong>24개월</strong>입니다.<br>
-                사용처는 순차적으로 추가됩니다. 멤버십 회원에게 사전 안내가 제공됩니다.
+                사용처는 순차적으로 추가됩니다. 등록 회원에게 사전 안내가 제공됩니다.
             </p>
         </div>
     </div>
@@ -209,29 +210,33 @@
     <div class="container">
         <h2 class="reveal">지금 바로 등록하세요.</h2>
         <p class="reveal delay-1">보증서의 QR 코드를 스캔하거나, 아래 버튼으로 직접 진행하세요.</p>
-        <div class="reveal delay-2">
+        <div class="cta-buttons reveal delay-2">
             <a href="https://verify.melanoir.co.kr" class="btn-primary">정품 등록하기</a>
             <a href="/pro" class="btn-secondary">시술자라면 멜라누아 프로 →</a>
         </div>
     </div>
 </section>
 
-<footer>
-    <div class="container">
-        <p style="font-size: 15px !important; color: #86868b; line-height: 1.8; text-align: center; word-break: keep-all;">
-            Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
-            © 2026 Melanoir. All rights reserved.<br><br>
-            <a href="https://melanoir.co.kr/privacy" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">개인정보처리방침</a>
-            &nbsp;·&nbsp;
-            <a href="/pro" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">멜라누아 프로</a>
-        </p>
-    </div>
+<footer class="mnr-footer">
+  <div class="mnr-footer-inner">
+    <p class="mnr-footer-corp">
+      Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
+      © 2026 Melanoir. All rights reserved.
+    </p>
+    <nav class="mnr-footer-nav">
+      <a href="/products">Products</a>
+      <a href="/pro">Pro</a>
+      <a href="/register">정품등록</a>
+      <a href="/privacy">개인정보처리방침</a>
+    </nav>
+  </div>
 </footer>
 
 <div id="backToTop" class="back-to-top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
+<script src="/assets/mnr-nav.js"></script>
 <script>
     window.onbeforeunload = function() { window.scrollTo(0, 0); };
     if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }

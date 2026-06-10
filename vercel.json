@@ -4,6 +4,16 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/membership",
+      "destination": "/register",
+      "permanent": true
+    },
+    {
+      "source": "/membership/:path*",
+      "destination": "/register/:path*",
+      "permanent": true
+    },
+    {
       "source": "/melanoir_recruitment_spacex_v1.1.html",
       "destination": "/recruitment",
       "permanent": true

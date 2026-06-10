@@ -1,6 +1,6 @@
 /* ============================================================
-   Melanoir — 서브페이지 공통 헤더
-   /pro/, /membership/, /products/ 등 라이트 테마 서브페이지에 사용
+   Melanoir — 서브페이지 공통 헤더 · 푸터 · 모바일 nav
+   /pro/, /register/, /products/ 등 라이트 테마 서브페이지에 사용
    ============================================================ */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -39,6 +39,29 @@
   width: auto;
 }
 
+.mnr-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mnr-nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #1d1d1f;
+  border-radius: 1px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
 .mnr-nav {
   display: flex;
   align-items: center;
@@ -66,12 +89,69 @@
   font-weight: 600;
 }
 
-/* 모바일: 작은 화면에서 nav 일부 숨김 */
+/* 모바일 햄버거 메뉴 */
 @media (max-width: 480px) {
-  .mnr-nav a.mnr-nav-hide-sm {
-    display: none;
-  }
   .mnr-header-inner {
     padding: 0 16px;
   }
+
+  .mnr-nav-toggle {
+    display: flex;
+  }
+
+  .mnr-nav {
+    display: none;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0 16px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .mnr-nav.is-open {
+    display: flex;
+  }
+
+  .mnr-nav a {
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+}
+
+/* Footer */
+.mnr-footer {
+  padding: 60px 0;
+  background: var(--color-bg, #ffffff);
+  border-top: 1px solid var(--color-line, #e8e8ed);
+  text-align: center;
+}
+.mnr-footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.mnr-footer-corp {
+  font-size: 13px;
+  color: var(--color-text-dim, #86868b);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.mnr-footer-nav {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.mnr-footer-nav a {
+  font-size: 12px;
+  color: #b0b0b8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
