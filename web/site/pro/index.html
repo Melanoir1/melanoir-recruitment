@@ -42,7 +42,7 @@
         .delay-4 { transition-delay: 0.40s; }
 
         /* 히어로 */
-        .hero { padding: 140px 0 100px; text-align: center; background: #ffffff; border-bottom: 1px solid #f5f5f7; }
+        .hero { padding: 96px 0 100px; text-align: center; background: #ffffff; border-bottom: 1px solid #f5f5f7; }
         .hero-eyebrow { font-size: 14px !important; font-weight: 700; color: #0071e3; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
         .hero-desc { max-width: 580px; margin: 24px auto 0; color: #86868b; font-size: 18px !important; line-height: 1.8; }
         @media (min-width: 769px) { .hero-desc { font-size: 20px !important; } }
@@ -113,8 +113,21 @@
         .back-to-top svg { width: 24px; height: 24px; fill: none; stroke: #1d1d1f; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
         @media (min-width: 769px) { .back-to-top { bottom: 40px; right: 40px; width: 52px; height: 52px; } }
     </style>
+<link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
 </head>
 <body>
+<header class="mnr-header">
+  <div class="mnr-header-inner">
+    <a class="mnr-header-logo" href="/">
+      <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" style="filter: invert(1);">
+    </a>
+    <nav class="mnr-nav">
+      <a href="/products">Products</a>
+      <a href="/pro" class="is-current">Pro</a>
+      <a href="/membership">멤버십</a>
+    </nav>
+  </div>
+</header>
 
 
 <!-- ══════════════════════════════════════════════════════
@@ -306,6 +319,8 @@
             Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
             © 2026 Melanoir. All rights reserved.<br><br>
             <a href="https://melanoir.co.kr/privacy" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">개인정보처리방침</a>
+            &nbsp;·&nbsp;
+            <a href="/membership" style="color: #b0b0b8; font-size: 13px; text-decoration: underline; text-underline-offset: 3px;">멜라누아 멤버십</a>
         </p>
     </div>
 </footer>

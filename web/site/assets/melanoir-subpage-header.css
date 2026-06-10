@@ -1,0 +1,77 @@
+/* ============================================================
+   Melanoir — 서브페이지 공통 헤더
+   /pro/, /membership/, /products/ 등 라이트 테마 서브페이지에 사용
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.mnr-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mnr-header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.mnr-header-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.mnr-header-logo img {
+  display: block;
+  height: 16px;
+  width: auto;
+}
+
+.mnr-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px 20px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.mnr-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: #424245;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+
+.mnr-nav a:hover {
+  color: #1d1d1f;
+}
+
+.mnr-nav a.is-current {
+  color: #1d1d1f;
+  font-weight: 600;
+}
+
+/* 모바일: 작은 화면에서 nav 일부 숨김 */
+@media (max-width: 480px) {
+  .mnr-nav a.mnr-nav-hide-sm {
+    display: none;
+  }
+  .mnr-header-inner {
+    padding: 0 16px;
+  }
+}
