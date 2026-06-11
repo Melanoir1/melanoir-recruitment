@@ -9,11 +9,11 @@
     <meta property="og:title" content="멜라누아 클럽 — Melanoir">
     <meta property="og:description" content="멜라누아 클럽 — 정품 등록 프로그램. 정식 출시 알림을 신청하세요.">
     <meta property="og:url" content="https://melanoir.co.kr/register">
-    <meta property="og:image" content="[OG_IMAGE_URL]">
+    <meta property="og:image" content="https://res.cloudinary.com/dssuxurpt/image/upload/v1781193103/Certificate_melanoir_zduec0.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="[OG_IMAGE_URL]">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dssuxurpt/image/upload/v1781193103/Certificate_melanoir_zduec0.jpg">
     <link rel="stylesheet" href="/assets/design-tokens.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,17 @@
         .hero-note { margin-top: 16px; font-size: 13px !important; color: rgba(255,255,255,0.45); line-height: 1.6; }
         .hero-prereq { margin-top: 10px; font-size: 12px !important; color: rgba(255,255,255,0.35); }
         .hero-media { max-width: 360px; margin: 0 auto 32px; }
-        .hero-media .mnr-media-slot { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.45); }
+        .mnr-media-frame {
+            overflow: hidden; border-radius: var(--radius-sm, 12px);
+            border: 1px solid var(--color-line); background: #f5f5f7;
+        }
+        .hero-media .mnr-media-frame { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); }
+        .mnr-media-frame--card { aspect-ratio: 4 / 3; }
+        .mnr-media-frame--square { aspect-ratio: 1 / 1; }
+        .mnr-media-frame--wide { aspect-ratio: 16 / 9; }
+        .mnr-media-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .mnr-media-caption { margin-top: 10px; font-size: 12px !important; color: var(--color-text-dim); text-align: center; }
+        .hero-media .mnr-media-caption { color: rgba(255,255,255,0.4); }
 
         .pro-banner { background: #fbfbfd; border-bottom: 1px solid #f5f5f7; padding: 14px 22px; text-align: center; font-size: 13px; color: #6e6e73; }
 
@@ -167,12 +177,12 @@
             멜라누아 엠보 시술 고객을 위한 프로그램입니다.<br>
             별도 가입 없이 정품 등록으로 시작합니다. 현재 베타 기간 — 출시 알림을 신청하세요.
         </p>
-        <!-- [MEDIA SLOT: club-hero-card] 보증서 QR 카드 — 오너 에셋 교체 -->
+        <!-- [MEDIA: club-hero-card] -->
         <div class="hero-media reveal delay-2">
-            <div class="mnr-media-slot mnr-media-slot--card" data-mnr-media-slot="club-hero-card" aria-hidden="true">
-                <span class="mnr-media-slot-label">IMAGE · 보증서 QR 카드</span>
-                <span class="mnr-media-slot-ratio">4:3</span>
+            <div class="mnr-media-frame mnr-media-frame--card" data-mnr-media-slot="club-hero-card">
+                <img class="mnr-media-img" src="https://res.cloudinary.com/dssuxurpt/image/upload/v1781193103/Certificate_melanoir_zduec0.jpg" alt="멜라누아 엠보 정품 보증서" loading="lazy">
             </div>
+            <p class="mnr-media-caption">정품 보증서 · QR 코드</p>
         </div>
         <a href="#waitlist" class="hero-cta reveal delay-3">출시 알림 받기</a>
         <p class="hero-note reveal delay-3">현재 베타 기간입니다. 정식 출시와 함께 정품 등록이 오픈됩니다.</p>
@@ -269,15 +279,19 @@
                 </div>
             </div>
             <div class="process-media-col">
-                <!-- [MEDIA SLOT: club-flow-scan] QR 스캔 — 오너 에셋 교체 -->
-                <div class="mnr-media-slot mnr-media-slot--square" data-mnr-media-slot="club-flow-scan" aria-hidden="true">
-                    <span class="mnr-media-slot-label">IMAGE · QR 스캔</span>
-                    <span class="mnr-media-slot-ratio">1:1</span>
+                <!-- [MEDIA: club-flow-scan] -->
+                <div data-mnr-media-slot="club-flow-scan">
+                    <div class="mnr-media-frame mnr-media-frame--square">
+                        <img class="mnr-media-img" src="https://res.cloudinary.com/dssuxurpt/image/upload/v1781193103/Certificate_melanoir_zduec0.jpg" alt="보증서 QR 코드" loading="lazy">
+                    </div>
+                    <p class="mnr-media-caption">보증서 QR</p>
                 </div>
-                <!-- [MEDIA SLOT: club-flow-register] verify 등록 화면 — 오너 에셋 교체 -->
-                <div class="mnr-media-slot mnr-media-slot--card" data-mnr-media-slot="club-flow-register" aria-hidden="true">
-                    <span class="mnr-media-slot-label">IMAGE · 등록 화면</span>
-                    <span class="mnr-media-slot-ratio">4:3</span>
+                <!-- [MEDIA: club-flow-register] -->
+                <div data-mnr-media-slot="club-flow-register">
+                    <div class="mnr-media-frame mnr-media-frame--card">
+                        <img class="mnr-media-img" src="https://res.cloudinary.com/dssuxurpt/image/upload/v1781193672/review_example_yy8hfg.jpg" alt="시술 부위 사진 등록 예시" loading="lazy">
+                    </div>
+                    <p class="mnr-media-caption">시술 부위 사진 예시</p>
                 </div>
             </div>
         </div>
@@ -309,12 +323,12 @@
                 <span class="credit-card-unit">6개월 기록</span>
             </div>
         </div>
-        <!-- [MEDIA SLOT: club-photo-guide] 눈썹 OK/NG 가이드 — 오너 에셋 교체 -->
-        <div class="reveal delay-3" style="margin-top:32px;">
-            <div class="mnr-media-slot mnr-media-slot--wide" data-mnr-media-slot="club-photo-guide" aria-hidden="true">
-                <span class="mnr-media-slot-label">IMAGE · 시술 부위 사진 가이드 (눈썹 OK / 얼굴 NG)</span>
-                <span class="mnr-media-slot-ratio">16:9</span>
+        <!-- [MEDIA: club-photo-guide] -->
+        <div class="reveal delay-3" style="margin-top:32px;" data-mnr-media-slot="club-photo-guide">
+            <div class="mnr-media-frame mnr-media-frame--wide">
+                <img class="mnr-media-img" src="https://res.cloudinary.com/dssuxurpt/image/upload/v1781193672/review_example_yy8hfg.jpg" alt="시술 부위(눈썹) 사진 예시 — 얼굴 전체 불필요" loading="lazy">
             </div>
+            <p class="mnr-media-caption">시술 부위(눈썹)만 선명히 — 얼굴 전체 사진은 필요하지 않습니다.</p>
         </div>
         <div class="note-box reveal delay-3">
             <p>
