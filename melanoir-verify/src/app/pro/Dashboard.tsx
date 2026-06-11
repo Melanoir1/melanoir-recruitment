@@ -34,6 +34,8 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
   const [token, setToken] = useState('')
   const [procedureAt, setProcedureAt] = useState(new Date().toISOString().split('T')[0])
   const [technique, setTechnique] = useState('hairstroke')
+  const [procArea, setProcArea] = useState('eyebrow')
+  const [procIsRetouch, setProcIsRetouch] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
@@ -69,6 +71,8 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
         practitioner_id: practitioner.practitioner_id,
         procedure_at: procedureAt,
         technique,
+        area: procArea,
+        is_retouch: procIsRetouch,
       }),
     })
 
@@ -151,6 +155,29 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
                     {Object.entries(TECHNIQUE_LABELS).map(([v, l]) => (
                       <option key={v} value={v}>{l}</option>
                     ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">시술 부위 *</label>
+                  <select
+                    value={procArea}
+                    onChange={e => setProcArea(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                  >
+                    <option value="eyebrow">눈썹</option>
+                    <option value="eyeliner">아이라인</option>
+                    <option value="lip">입술</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">시술 구분 *</label>
+                  <select
+                    value={procIsRetouch ? 'retouch' : 'first'}
+                    onChange={e => setProcIsRetouch(e.target.value === 'retouch')}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                  >
+                    <option value="first">첫 시술</option>
+                    <option value="retouch">리터치</option>
                   </select>
                 </div>
               </div>

@@ -36,7 +36,7 @@
       navAria: "Main",
       navProducts: "Products",
       navPro: "Pro",
-      navMembership: "Membership",
+      navClub: "Club",
       navTechnology: "Technology",
       missionEyebrow: "OUR MISSION",
       mission: "우리의 미션은 멜라닌의 유익함을 모두가 누릴 수 있도록 하는 것입니다.",
@@ -76,7 +76,7 @@
       navAria: "Main",
       navProducts: "Products",
       navPro: "Pro",
-      navMembership: "Membership",
+      navClub: "Club",
       navTechnology: "Technology",
       missionEyebrow: "OUR MISSION",
       mission: "Our mission is to make the benefits of melanin accessible to everyone.",
@@ -116,7 +116,7 @@
       navAria: "Principal",
       navProducts: "Produits",
       navPro: "Pro",
-      navMembership: "Adhésion",
+      navClub: "Club",
       navTechnology: "Technologie",
       missionEyebrow: "NOTRE MISSION",
       mission: "Notre mission est de rendre les bienfaits de la mélanine accessibles à tous.",
@@ -156,7 +156,7 @@
       navAria: "メイン",
       navProducts: "製品",
       navPro: "Pro",
-      navMembership: "メンバーシップ",
+      navClub: "クラブ",
       navTechnology: "テクノロジー",
       missionEyebrow: "OUR MISSION",
       mission: "私たちのミッションは、メラニンの恩恵をすべての人が享受できるようにすることです。",
@@ -196,7 +196,7 @@
       navAria: "主导航",
       navProducts: "产品",
       navPro: "Pro",
-      navMembership: "会员",
+      navClub: "俱乐部",
       navTechnology: "技术",
       missionEyebrow: "OUR MISSION",
       mission: "我们的使命，是让所有人都能享有黑色素的益处。",
@@ -285,7 +285,7 @@
       t.navTechnology +
       "</a>" +
       '<a href="/register">' +
-      t.navMembership +
+      t.navClub +
       "</a>" +
       '<a href="/pro">' +
       t.navPro +

@@ -23,9 +23,9 @@
       ],
     },
     {
-      title: "Membership",
+      title: "Club",
       links: [
-        { label: "멜라누아 멤버십 (정품 등록)", href: "/register" },
+        { label: "멜라누아 클럽 (정품 등록)", href: "/register" },
         { label: "멜라누아 프로", href: "/pro" },
         { label: "정품 확인", href: "https://verify.melanoir.co.kr" },
       ],
@@ -33,6 +33,7 @@
     {
       title: "Company",
       links: [
+        { label: "문의하기", href: "/contact" },
         { label: "Recruitment", href: "/recruitment" },
         { label: "문의: " + CONTACT_EMAIL, href: "mailto:" + CONTACT_EMAIL },
       ],
@@ -56,8 +57,8 @@
       href: "/products/embo",
       cta: "자세히 보기",
     },
-    membership: {
-      title: "멜라누아 멤버십",
+    club: {
+      title: "멜라누아 클럽",
       desc: "정품을 등록하면 크레딧이 쌓입니다. 별도 가입 절차 없이 시작됩니다.",
       href: "/register",
       cta: "등록 안내",
@@ -75,7 +76,7 @@
       cta: "라인업 보기",
     },
   };
-  var EXPLORE_ORDER = ["embo", "membership", "pro", "products"];
+  var EXPLORE_ORDER = ["embo", "club", "pro", "products"];
 
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

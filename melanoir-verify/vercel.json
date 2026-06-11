@@ -1,6 +1,11 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
+  "crons": [
+    { "path": "/api/cron/healing-reminder", "schedule": "0 1 * * *" },
+    { "path": "/api/cron/longterm-reminder", "schedule": "30 1 * * *" },
+    { "path": "/api/cron/tier-update", "schedule": "0 2 * * *" }
+  ],
   "redirects": [
     {
       "source": "/:path*",

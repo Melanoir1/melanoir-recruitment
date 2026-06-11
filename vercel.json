@@ -19,6 +19,16 @@
       "permanent": true
     },
     {
+      "source": "/club",
+      "destination": "/register",
+      "permanent": false
+    },
+    {
+      "source": "/club/:path*",
+      "destination": "/register/:path*",
+      "permanent": false
+    },
+    {
       "source": "/melanoir_recruitment_spacex_v1.1.html",
       "destination": "/recruitment",
       "permanent": true
