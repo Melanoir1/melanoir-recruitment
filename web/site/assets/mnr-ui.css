@@ -67,11 +67,11 @@
 }
 .mnr-uft-group a:hover { color: var(--uft-head); }
 .mnr-uft-base {
-  margin-top: 36px;
-  padding-top: 20px;
+  margin: 10px 0 0;
+  padding-top: 10px;
   border-top: 1px solid var(--uft-line);
-  font-size: 12px;
-  line-height: 1.8;
+  font-size: 9px;
+  line-height: 1.5;
   color: var(--uft-dim);
 }
 .mnr-uft-base a { color: var(--uft-dim); }
@@ -181,4 +181,11 @@
 }
 .mnr-explore-card .mnr-explore-cta::after { content: " →"; }
 
-.mnr-footer-legal { font-size: 11px; color: #86868b; line-height: 1.8; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); }
+.mnr-footer-legal {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 9px;
+  line-height: 1.5;
+  color: #86868b;
+}
