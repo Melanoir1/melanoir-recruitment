@@ -1,23 +1,27 @@
-'use client'
-
-import { useState } from 'react'
-import SmsLogin from './SmsLogin'
+import { cookies } from 'next/headers'
+import { verifySession, COOKIE_PRO } from '@/lib/session'
+import { createServiceClient } from '@/lib/supabase'
 import Dashboard from './Dashboard'
+import SmsLogin from './SmsLogin'
 
-export interface Practitioner {
-  practitioner_id: string
-  name: string
-  shop_name: string
-  phone: string
-  tier: string
-}
-
-export default function ProPage() {
-  const [practitioner, setPractitioner] = useState<Practitioner | null>(null)
-
-  if (!practitioner) {
-    return <SmsLogin onLogin={setPractitioner} />
+export default async function ProPage() {
+  const raw = cookies().get(COOKIE_PRO)?.value
+  const practitionerId = raw ? verifySession(raw) : null
+  if (practitionerId) {
+    const supabase = createServiceClient()
+    const { data: practitioner } = await supabase
+      .from('mnr_practitioners')
+      .select('practitioner_id, name, shop_name, phone, tier')
+      .eq('practitioner_id', practitionerId)
+      .single()
+    if (practitioner) {
+      return (
+        <Dashboard
+          practitionerId={practitionerId}
+          practitioner={{ ...practitioner, tier: practitioner.tier ?? 'basic' }}
+        />
+      )
+    }
   }
-
-  return <Dashboard practitioner={practitioner} onLogout={() => setPractitioner(null)} />
+  return <SmsLogin />
 }

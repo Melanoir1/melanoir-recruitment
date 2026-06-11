@@ -96,7 +96,7 @@
     return (
       '<div class="mnr-uft-inner"><div class="mnr-uft-grid">' +
       groups +
-      '</div><p class="mnr-uft-base">' +
+      '</div><p class="mnr-footer-legal">상호: 멜라누아&ensp;|&ensp;대표: [대표자명]&ensp;|&ensp;사업자등록번호: [사업자등록번호]&ensp;|&ensp;통신판매업신고번호: [통신판매업신고번호]&ensp;|&ensp;주소: [주소]&ensp;|&ensp;이메일: official@melanoir.co.kr</p><p class="mnr-uft-base">' +
       FOOTER_BASE +
       "</p></div>"
     );

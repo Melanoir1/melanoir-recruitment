@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import type { Practitioner } from './page'
+import type { Practitioner } from './types'
+import { logoutPro } from './actions'
 
 const TECHNIQUE_LABELS: Record<string, string> = {
   hairstroke: '헤어스트로크',
@@ -25,11 +26,11 @@ interface ProcedureRecord {
 }
 
 interface Props {
+  practitionerId: string
   practitioner: Practitioner
-  onLogout: () => void
 }
 
-export default function Dashboard({ practitioner, onLogout }: Props) {
+export default function Dashboard({ practitionerId, practitioner }: Props) {
   const [tab, setTab] = useState<'scan' | 'history'>('scan')
   const [token, setToken] = useState('')
   const [procedureAt, setProcedureAt] = useState(new Date().toISOString().split('T')[0])
@@ -41,15 +42,23 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
   const [success, setSuccess] = useState(false)
   const [procedures, setProcedures] = useState<ProcedureRecord[]>([])
   const [loadingHistory, setLoadingHistory] = useState(false)
+  const [proBalance, setProBalance] = useState<number | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (tab === 'history') loadHistory()
   }, [tab])
 
+  useEffect(() => {
+    fetch('/api/credits/pro-balance')
+      .then(r => r.json())
+      .then(d => { if (typeof d.balance === 'number') setProBalance(d.balance) })
+      .catch(() => {})
+  }, [])
+
   async function loadHistory() {
     setLoadingHistory(true)
-    const res = await fetch(`/api/procedure?practitioner_id=${practitioner.practitioner_id}`)
+    const res = await fetch(`/api/procedure?practitioner_id=${practitionerId}`)
     if (res.ok) {
       const j = await res.json()
       setProcedures(j.procedures ?? [])
@@ -68,7 +77,7 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         token: token.replace(/-/g, ''),
-        practitioner_id: practitioner.practitioner_id,
+        practitioner_id: practitionerId,
         procedure_at: procedureAt,
         technique,
         area: procArea,
@@ -95,8 +104,18 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
         <div>
           <h1 className="font-semibold text-sm">Melanoir Pro</h1>
           <p className="text-xs text-gray-400">{practitioner.shop_name} · {TIER_LABELS[practitioner.tier] ?? practitioner.tier}</p>
+          {proBalance !== null && (
+            <div style={{ marginTop: 8, padding: '10px 16px', background: '#f5f5f7', borderRadius: 10, display: 'inline-block' }}>
+              <span style={{ fontSize: 13, color: '#6e6e73' }}>포인트 잔액 </span>
+              <span style={{ fontSize: 18, fontWeight: 700 }}>{proBalance.toLocaleString('ko-KR')}</span>
+              <span style={{ fontSize: 12, color: '#6e6e73', marginLeft: 4 }}>P</span>
+              <span style={{ fontSize: 11, color: '#86868b', marginLeft: 8 }}>유효기간 12개월</span>
+            </div>
+          )}
         </div>
-        <button onClick={onLogout} className="text-xs text-gray-400 hover:text-gray-700">로그아웃</button>
+        <form action={logoutPro} style={{ display: 'inline' }}>
+          <button type="submit" style={{ fontSize: 12, color: '#6e6e73', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 8px' }}>로그아웃</button>
+        </form>
       </header>
 
       {/* 탭 */}

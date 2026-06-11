@@ -180,3 +180,5 @@
   color: var(--exp-head);
 }
 .mnr-explore-card .mnr-explore-cta::after { content: " →"; }
+
+.mnr-footer-legal { font-size: 11px; color: #86868b; line-height: 1.8; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); }

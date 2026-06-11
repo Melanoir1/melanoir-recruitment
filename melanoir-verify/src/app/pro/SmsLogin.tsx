@@ -1,15 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import type { Practitioner } from './page'
-
-interface Props {
-  onLogin: (p: Practitioner) => void
-}
+import { useRouter } from 'next/navigation'
 
 type Step = 'phone' | 'otp' | 'register'
 
-export default function SmsLogin({ onLogin }: Props) {
+export default function SmsLogin() {
+  const router = useRouter()
   const [step, setStep] = useState<Step>('phone')
   const [phone, setPhone] = useState('')
   const [otp, setOtp] = useState('')
@@ -50,7 +47,7 @@ export default function SmsLogin({ onLogin }: Props) {
     setLoading(false)
     if (!res.ok) { setError(j.error ?? '인증 실패'); return }
     if (j.need_registration) { setStep('register'); return }
-    onLogin(j.practitioner)
+    router.refresh()
   }
 
   async function register(e: React.FormEvent) {
@@ -65,7 +62,7 @@ export default function SmsLogin({ onLogin }: Props) {
     const j = await res.json()
     setLoading(false)
     if (!res.ok) { setError(j.error ?? '등록 실패'); return }
-    onLogin(j.practitioner)
+    router.refresh()
   }
 
   return (

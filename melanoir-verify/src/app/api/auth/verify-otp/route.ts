@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase'
+import { signSession, setCookie, COOKIE_PRO, COOKIE_CUSTOMER, SESSION_MAX_AGE } from '@/lib/session'
 
 export async function POST(req: NextRequest) {
-  const { phone, code, name, shop_name, region } = await req.json()
+  const { phone, code, name, shop_name, region, type } = await req.json()
   if (!phone || !code) {
     return NextResponse.json({ error: '전화번호와 인증번호를 입력해주세요.' }, { status: 400 })
   }
@@ -29,6 +30,12 @@ export async function POST(req: NextRequest) {
   // OTP 소진 처리
   await supabase.from('mnr_sms_verifications').update({ verified: true }).eq('id', otp.id)
 
+  if (type === 'customer') {
+    const _custHeaders = new Headers()
+    setCookie(_custHeaders, COOKIE_CUSTOMER, signSession(normalizedPhone), SESSION_MAX_AGE)
+    return NextResponse.json({ success: true, phone: normalizedPhone }, { headers: _custHeaders })
+  }
+
   // 기존 시술자 조회
   const { data: existing } = await supabase
     .from('mnr_practitioners')
@@ -37,7 +44,9 @@ export async function POST(req: NextRequest) {
     .single()
 
   if (existing) {
-    return NextResponse.json({ practitioner: existing, is_new: false })
+    const _resHeaders = new Headers()
+    setCookie(_resHeaders, COOKIE_PRO, signSession(existing.practitioner_id), SESSION_MAX_AGE)
+    return NextResponse.json({ practitioner: existing, is_new: false }, { headers: _resHeaders })
   }
 
   // 신규 시술자: name, shop_name 필요
@@ -55,5 +64,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: '계정 생성에 실패했습니다.' }, { status: 500 })
   }
 
-  return NextResponse.json({ practitioner: newPractitioner, is_new: true })
+  const _resHeaders = new Headers()
+  setCookie(_resHeaders, COOKIE_PRO, signSession(newPractitioner.practitioner_id), SESSION_MAX_AGE)
+  return NextResponse.json({ practitioner: newPractitioner, is_new: true }, { headers: _resHeaders })
 }
