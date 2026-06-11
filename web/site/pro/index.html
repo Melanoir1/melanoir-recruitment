@@ -2,13 +2,16 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="/favicon-32.png" type="image/png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <title>Melanoir Pro — 멜라누아 프로</title>
     <meta property="og:title" content="멜라누아 프로 — Melanoir Pro">
     <meta property="og:description" content="엠보 시술자를 위한 포인트 프로그램.">
     <meta property="og:url" content="https://melanoir.co.kr/pro">
     <link rel="stylesheet" href="/assets/design-tokens.css">
     <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
+    <link rel="stylesheet" href="/assets/mnr-ui.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
@@ -117,9 +120,9 @@
     </button>
     <nav class="mnr-nav">
       <a href="/products">Products</a>
-      <a href="/pro" class="is-current">Pro</a>
-      <a href="/register">정품등록</a>
       <a href="/#technology">Technology</a>
+      <a href="/register">Membership</a>
+      <a href="/pro" class="is-current">Pro</a>
     </nav>
   </div>
 </header>
@@ -313,26 +316,15 @@
 <!-- ══════════════════════════════════════════════════════
   FOOTER
 ══════════════════════════════════════════════════════ -->
-<footer class="mnr-footer">
-  <div class="mnr-footer-inner">
-    <p class="mnr-footer-corp">
-      Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
-      © 2026 Melanoir. All rights reserved.
-    </p>
-    <nav class="mnr-footer-nav">
-      <a href="/products">Products</a>
-      <a href="/pro">Pro</a>
-      <a href="/register">정품등록</a>
-      <a href="/privacy">개인정보처리방침</a>
-    </nav>
-  </div>
-</footer>
+<div data-mnr-explore="exclude:pro"></div>
+<div data-mnr-footer data-theme="light"></div>
 
 <div id="backToTop" class="back-to-top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script src="/assets/mnr-nav.js"></script>
+<script src="/assets/mnr-ui.js"></script>
 <script>
     window.onbeforeunload = function() { window.scrollTo(0, 0); };
     if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }

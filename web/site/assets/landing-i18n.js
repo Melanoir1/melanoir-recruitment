@@ -34,7 +34,7 @@
       navAria: "Main",
       navProducts: "Products",
       navPro: "Pro",
-      navMembership: "정품등록",
+      navMembership: "Membership",
       navTechnology: "Technology",
       missionEyebrow: "OUR MISSION",
       mission: "우리의 미션은 멜라닌의 유익함을 모두가 누릴 수 있도록 하는 것입니다.",
@@ -72,7 +72,7 @@
       navAria: "Main",
       navProducts: "Products",
       navPro: "Pro",
-      navMembership: "Register",
+      navMembership: "Membership",
       navTechnology: "Technology",
       missionEyebrow: "OUR MISSION",
       mission: "Our mission is to make the benefits of melanin accessible to everyone.",
@@ -110,7 +110,7 @@
       navAria: "Principal",
       navProducts: "Produits",
       navPro: "Pro",
-      navMembership: "Enregistrement",
+      navMembership: "Adhésion",
       navTechnology: "Technologie",
       missionEyebrow: "NOTRE MISSION",
       mission: "Notre mission est de rendre les bienfaits de la mélanine accessibles à tous.",
@@ -148,7 +148,7 @@
       navAria: "メイン",
       navProducts: "製品",
       navPro: "Pro",
-      navMembership: "正規登録",
+      navMembership: "メンバーシップ",
       navTechnology: "テクノロジー",
       missionEyebrow: "OUR MISSION",
       mission: "私たちのミッションは、メラニンの恩恵をすべての人が享受できるようにすることです。",
@@ -186,7 +186,7 @@
       navAria: "主导航",
       navProducts: "产品",
       navPro: "Pro",
-      navMembership: "正品登记",
+      navMembership: "会员",
       navTechnology: "技术",
       missionEyebrow: "OUR MISSION",
       mission: "我们的使命，是让所有人都能享有黑色素的益处。",
@@ -269,14 +269,14 @@
       '<a href="/products">' +
       t.navProducts +
       "</a>" +
-      '<a href="/pro">' +
-      t.navPro +
+      '<a href="/#technology">' +
+      t.navTechnology +
       "</a>" +
       '<a href="/register">' +
       t.navMembership +
       "</a>" +
-      '<a href="/#technology">' +
-      t.navTechnology +
+      '<a href="/pro">' +
+      t.navPro +
       "</a>" +
       "</nav></div>" +
       '<a class="topbar-hire" href="/recruitment">' +
@@ -379,10 +379,8 @@
       deferredLearnMoreLink("traj-cta", "/technology/cosmetics", t.learnMore) +
       "</article>" +
       "</div></section></div></main>" +
-      '<footer class="site-footer"><p>© Melanoir</p><p class="shell-i18n-prose">' +
-      t.footerShop +
-      ': <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p>' +
-      '<p><a href="/privacy/privacy">개인정보처리방침</a></p></footer>'
+      '<div data-mnr-explore="exclude:products" data-theme="dark"></div>' +
+      '<div data-mnr-footer data-theme="dark"></div>'
     );
   }
 

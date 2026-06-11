@@ -2,15 +2,22 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="icon" href="/favicon-32.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <title>Melanin — Melanoir</title>
   <meta name="description" content="멜라닌 — 자연이 수억 년에 걸쳐 설계한 광보호·항산화 물질. 멜라누아가 멜라닌을 선택한 이유.">
+  <meta property="og:title" content="Melanin — Melanoir">
+  <meta property="og:description" content="멜라닌 — 자연이 수억 년에 걸쳐 설계한 광보호·항산화 물질. 멜라누아가 멜라닌을 선택한 이유.">
+  <meta property="og:url" content="https://melanoir.co.kr/melanin">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="../assets/melanoir-shell.css" />
   <link rel="stylesheet" href="../assets/melanoir-lang.css" />
+  <link rel="stylesheet" href="../assets/mnr-ui.css" />
   <style>
     /* —— 히어로 —— */
     .melanin-hero {
@@ -188,11 +195,9 @@
   <div class="app">
     <div id="melanoir-content"></div>
   </div>
-  <a class="melanoir-hire-fab" href="/recruitment" aria-label="2026년 상반기 채용 — 멜라누아 R&amp;D 팀에 합류하기">
-    [2026년 상반기 채용]<br>멜라누아 R&amp;D 팀에 합류하기
-  </a>
 
   <script src="../assets/melanoir-lang.js"></script>
+  <script src="../assets/mnr-ui.js"></script>
   <script>
     (function () {
       var hireKo = "[2026\uB144 \uC0C1\uBC18\uAE30 \uCC44\uC6A9] \uBA5C\uB77C\uB204\uC544 R&amp;D \uD300\uC5D0 \uD569\uB958\uD558\uAE30";
@@ -300,6 +305,8 @@
           '<nav class="nav" aria-label="' + t.navAria + '">' +
           '<a href="/products">' + t.navProducts + "</a>" +
           '<a href="/#technology">' + t.navTechnology + "</a>" +
+          '<a href="/register">Membership</a>' +
+          '<a href="/pro">Pro</a>' +
           "</nav></div>" +
           '<a class="topbar-hire" href="/recruitment">' + hireKo + "</a>" +
           "</header>" +
@@ -350,9 +357,8 @@
           '<a class="melanin-back-cta reveal" href="/">' + t.backLabel + "</a>" +
           "</section>" +
           "</main>" +
-          '<footer class="site-footer"><p>© Melanoir</p><p class="shell-i18n-prose">' +
-          t.footerShop +
-          ': <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p></footer>'
+          '<div data-mnr-explore="exclude:products" data-theme="dark"></div>' +
+          '<div data-mnr-footer data-theme="dark"></div>'
         );
       }
 
@@ -386,6 +392,7 @@
             el.classList.remove("is-visible");
             if (io) io.observe(el); else el.classList.add("is-visible");
           });
+          if (window.MnrUI) window.MnrUI.renderAll();
         },
       });
     })();

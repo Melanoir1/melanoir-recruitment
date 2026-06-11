@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /products/index_legacy.html
+Sitemap: https://melanoir.co.kr/sitemap.xml

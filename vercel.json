@@ -4,6 +4,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/privacy/privacy",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
       "source": "/membership",
       "destination": "/register",
       "permanent": true

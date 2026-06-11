@@ -2,7 +2,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="/favicon-32.png" type="image/png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <title>정품 등록 — Melanoir</title>
     <meta property="og:title" content="정품 등록 — 멜라누아">
     <meta property="og:description" content="멜라누아 엠보 정품을 등록하고 크레딧을 받으세요.">
@@ -12,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
+  <link rel="stylesheet" href="/assets/mnr-ui.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
@@ -90,9 +93,9 @@
     </button>
     <nav class="mnr-nav">
       <a href="/products">Products</a>
-      <a href="/pro">Pro</a>
-      <a href="/register" class="is-current">정품등록</a>
       <a href="/#technology">Technology</a>
+      <a href="/register" class="is-current">Membership</a>
+      <a href="/pro">Pro</a>
     </nav>
   </div>
 </header>
@@ -217,26 +220,15 @@
     </div>
 </section>
 
-<footer class="mnr-footer">
-  <div class="mnr-footer-inner">
-    <p class="mnr-footer-corp">
-      Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
-      © 2026 Melanoir. All rights reserved.
-    </p>
-    <nav class="mnr-footer-nav">
-      <a href="/products">Products</a>
-      <a href="/pro">Pro</a>
-      <a href="/register">정품등록</a>
-      <a href="/privacy">개인정보처리방침</a>
-    </nav>
-  </div>
-</footer>
+<div data-mnr-explore="exclude:membership"></div>
+<div data-mnr-footer data-theme="light"></div>
 
 <div id="backToTop" class="back-to-top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script src="/assets/mnr-nav.js"></script>
+<script src="/assets/mnr-ui.js"></script>
 <script>
     window.onbeforeunload = function() { window.scrollTo(0, 0); };
     if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
