@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="icon" href="/favicon-32.png" type="image/png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <title>정품 등록 — Melanoir</title>
-    <meta property="og:title" content="정품 등록 — 멜라누아">
-    <meta property="og:description" content="멜라누아 엠보 정품을 등록하고 크레딧을 받으세요.">
+    <title>멜라누아 클럽 — Melanoir</title>
+    <meta property="og:title" content="멜라누아 클럽 — Melanoir">
+    <meta property="og:description" content="멜라누아 클럽 — 정품 등록 프로그램. 정식 출시 알림을 신청하세요.">
     <meta property="og:url" content="https://melanoir.co.kr/register">
     <meta property="og:image" content="[OG_IMAGE_URL]">
     <meta property="og:image:width" content="1200">
@@ -16,14 +16,14 @@
     <meta name="twitter:image" content="[OG_IMAGE_URL]">
     <link rel="stylesheet" href="/assets/design-tokens.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
-  <link rel="stylesheet" href="/assets/mnr-ui.css">
-  <link rel="stylesheet" href="/assets/mnr-waitlist.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
+    <link rel="stylesheet" href="/assets/mnr-ui.css">
+    <link rel="stylesheet" href="/assets/mnr-waitlist.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body {
             background-color: var(--color-bg); color: var(--color-ink);
             font-family: 'Pretendard', -apple-system, sans-serif !important;
@@ -31,28 +31,45 @@
         }
         .container { max-width: 980px; margin: 0 auto; padding: 0 22px; }
 
-        .hero { padding: 80px 0 100px; background: var(--color-ink); color: #f5f5f7; text-align: center; }
+        .hero { padding: 80px 0 72px; background: var(--color-ink); color: #f5f5f7; text-align: center; }
         .hero-eyebrow { font-size: 13px !important; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 18px; }
         .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 500; line-height: 1.08; letter-spacing: -0.04em; color: #f5f5f7; margin-bottom: 24px; }
-        .hero-desc { font-size: clamp(1rem, 2.2vw, 1.2rem) !important; color: rgba(255,255,255,0.6); max-width: 540px; margin: 0 auto 40px; line-height: 1.7; }
+        .hero-desc { font-size: clamp(1rem, 2.2vw, 1.2rem) !important; color: rgba(255,255,255,0.6); max-width: 540px; margin: 0 auto 32px; line-height: 1.7; }
         .hero-cta { display: inline-block; background: #ffffff; color: var(--color-ink); padding: 14px 32px; border-radius: var(--btn-radius); font-size: 15px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
         .hero-cta:hover { opacity: 0.85; }
+        .hero-note { margin-top: 16px; font-size: 13px !important; color: rgba(255,255,255,0.45); line-height: 1.6; }
+        .hero-prereq { margin-top: 10px; font-size: 12px !important; color: rgba(255,255,255,0.35); }
+        .hero-media { max-width: 360px; margin: 0 auto 32px; }
+        .hero-media .mnr-media-slot { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.45); }
 
-        .section { background-color: var(--color-bg); border-bottom: 1px solid var(--color-bg-subtle); }
-        .section-alt { background-color: var(--color-bg-alt); border-bottom: 1px solid var(--color-bg-subtle); }
+        .pro-banner { background: #fbfbfd; border-bottom: 1px solid #f5f5f7; padding: 14px 22px; text-align: center; font-size: 13px; color: #6e6e73; }
+
+        .section { padding: var(--space-xl) 0; background-color: var(--color-bg); border-bottom: 1px solid var(--color-bg-subtle); }
+        .section-alt { padding: var(--space-xl) 0; background-color: var(--color-bg-alt); border-bottom: 1px solid var(--color-bg-subtle); }
+        @media (min-width: 769px) { .section, .section-alt { padding: var(--space-2xl) 0; } }
         .section-eyebrow { font-size: 12px !important; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-dim); margin-bottom: 14px; }
         .section h2, .section-alt h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
-        .section-lead { font-size: clamp(1rem, 2vw, 1.15rem) !important; color: var(--color-text-muted); max-width: 600px; line-height: 1.7; margin-bottom: 60px; }
+        .section-lead { font-size: clamp(1rem, 2vw, 1.15rem) !important; color: var(--color-text-muted); max-width: 600px; line-height: 1.7; margin-bottom: 48px; }
 
-        .steps { display: flex; flex-direction: column; gap: 0; margin-top: 60px; }
+        .steps { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
         @media (min-width: 769px) { .steps { flex-direction: row; } }
-        .step { flex: 1; padding: 40px 32px; border-top: 2px solid var(--color-ink); display: flex; flex-direction: column; gap: 14px; }
-        @media (min-width: 769px) { .step { border-top: none; border-left: 2px solid var(--color-ink); } .step:first-child { border-left: none; border-top: 2px solid var(--color-ink); } }
+        .step { flex: 1; padding: 32px 24px; border-top: 2px solid var(--color-ink); display: flex; flex-direction: column; gap: 14px; }
+        @media (min-width: 769px) {
+            .step { border-top: none; border-left: 2px solid var(--color-ink); padding: 40px 28px; }
+            .step:first-child { border-left: none; border-top: 2px solid var(--color-ink); }
+        }
         .step-num { font-size: 12px !important; font-weight: 700; letter-spacing: 0.08em; color: var(--color-text-dim); }
         .step-title { font-size: 1.1rem !important; font-weight: 700; color: var(--color-ink); letter-spacing: -0.02em; }
         .step-desc { font-size: 14px !important; color: var(--color-text-muted); line-height: 1.65; }
 
-        .credit-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--color-line); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-line); margin-top: 60px; }
+        .process-media-col { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+        @media (min-width: 769px) {
+            .process-with-media { display: grid; grid-template-columns: 1fr minmax(160px, 26%); gap: 32px; align-items: start; margin-top: 48px; }
+            .process-with-media .steps { margin-top: 0; grid-column: 1; }
+            .process-media-col { margin-top: 0; grid-column: 2; position: sticky; top: 100px; }
+        }
+
+        .credit-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--color-line); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-line); margin-top: 48px; }
         @media (min-width: 600px) { .credit-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 900px) { .credit-grid { grid-template-columns: repeat(3, 1fr); } }
         .credit-card { background: var(--color-bg); padding: 36px 28px; display: flex; flex-direction: column; gap: 12px; }
@@ -60,16 +77,36 @@
         .credit-card-amount { font-family: var(--font-display); font-size: 2.2rem; font-weight: 500; color: var(--color-ink); letter-spacing: -0.04em; line-height: 1; }
         .credit-card-unit { font-size: 13px !important; color: var(--color-text-dim); }
 
-        .usage-wrap { margin-top: 60px; display: flex; flex-direction: column; gap: 16px; }
+        .usage-wrap { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
         .usage-item { padding: 28px 32px; border: 1px solid var(--color-line); border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
         .usage-title { font-size: 1rem !important; font-weight: 600; color: var(--color-ink); }
-        .usage-desc { font-size: 13px !important; color: var(--color-text-dim); margin-top: 4px; }
+        .usage-desc { font-size: 13px !important; color: var(--color-text-dim); margin-top: 4px; line-height: 1.65; }
         .usage-badge { font-size: 11px !important; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: var(--btn-radius); background: var(--color-bg-subtle); color: var(--color-text-dim); white-space: nowrap; flex-shrink: 0; }
         .usage-badge.active { background: var(--color-ink); color: #f5f5f7; }
 
-        .note-box { margin-top: 60px; padding: 28px 32px; background: var(--color-bg-alt); border: 1px solid var(--color-line); border-radius: 16px; }
-        .note-box p { font-size: 14px !important; color: var(--color-text-muted); line-height: 1.7; }
+        .usage-item--route { cursor: pointer; text-decoration: none; color: inherit; transition: border-color 0.2s; }
+        .usage-item--route:hover { border-color: var(--color-line-strong); }
+        .usage-item--benefit, .usage-item--faq { cursor: default; }
+        .usage-item--faq .usage-title { font-weight: 700; }
+        .usage-item--faq .usage-desc { color: var(--color-text-muted); }
+
+        .note-box { margin-top: 48px; padding: 28px 32px; background: var(--color-bg-alt); border: 1px solid var(--color-line); border-radius: 16px; }
+        .note-box p { font-size: 14px !important; color: var(--color-text-muted); line-height: 1.75; }
         .note-box strong { color: var(--color-ink); }
+        .note-box a { color: var(--color-ink); font-weight: 600; }
+        .process-outcome { margin-top: 32px; }
+
+        .mnr-media-slot {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 8px; min-height: 120px; padding: 24px;
+            border: 2px dashed var(--color-line-strong); border-radius: var(--radius-sm, 12px);
+            background: var(--color-bg-alt); color: var(--color-text-dim); text-align: center;
+        }
+        .mnr-media-slot--wide { aspect-ratio: 16 / 9; min-height: 0; }
+        .mnr-media-slot--square { aspect-ratio: 1 / 1; min-height: 0; }
+        .mnr-media-slot--card { aspect-ratio: 4 / 3; min-height: 0; }
+        .mnr-media-slot-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+        .mnr-media-slot-ratio { font-size: 11px; opacity: 0.7; }
 
         .cta-section { padding: var(--space-xl) 0; text-align: center; background: var(--color-bg); border-top: 1px solid var(--color-bg-subtle); }
         @media (min-width: 769px) { .cta-section { padding: var(--space-2xl) 0; } }
@@ -77,15 +114,31 @@
         .cta-section p { font-size: 1rem !important; color: var(--color-text-dim); margin-bottom: 36px; }
         .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
+        .sticky-waitlist {
+            display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+            padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
+            border-top: 1px solid var(--color-line); text-align: center;
+        }
+        .sticky-waitlist a {
+            display: block; padding: 14px 24px; background: var(--color-ink); color: #f5f5f7 !important;
+            border-radius: var(--btn-radius); font-size: 15px; font-weight: 600; text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .sticky-waitlist { display: block; }
+            body { padding-bottom: 72px; }
+        }
+
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; }
 
-        .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%; background: rgba(29,29,31,0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%; background: rgba(29,29,31,0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 899; }
         .back-to-top.show { opacity: 1; pointer-events: auto; }
         .back-to-top svg { width: 18px; height: 18px; stroke: #f5f5f7; stroke-width: 2; fill: none; }
+        @media (max-width: 768px) { .back-to-top { bottom: 88px; } }
     </style>
 </head>
 <body>
@@ -109,45 +162,51 @@
 <section class="hero">
     <div class="container">
         <p class="hero-eyebrow reveal">Melanoir Club</p>
-        <h1 class="reveal delay-1">정품 등록.</h1>
+        <h1 class="reveal delay-1">멜라누아 클럽.</h1>
         <p class="hero-desc reveal delay-2">
-            멜라누아 엠보로 시술 받은 고객을 위한 프로그램.<br>
-            정품을 등록하세요. 그날부터 크레딧이 쌓입니다.
+            멜라누아 엠보 시술 고객을 위한 프로그램입니다.<br>
+            별도 가입 없이 정품 등록으로 시작합니다. 현재 베타 기간 — 출시 알림을 신청하세요.
         </p>
+        <!-- [MEDIA SLOT: club-hero-card] 보증서 QR 카드 — 오너 에셋 교체 -->
+        <div class="hero-media reveal delay-2">
+            <div class="mnr-media-slot mnr-media-slot--card" data-mnr-media-slot="club-hero-card" aria-hidden="true">
+                <span class="mnr-media-slot-label">IMAGE · 보증서 QR 카드</span>
+                <span class="mnr-media-slot-ratio">4:3</span>
+            </div>
+        </div>
         <a href="#waitlist" class="hero-cta reveal delay-3">출시 알림 받기</a>
-        <p class="reveal delay-3" style="margin-top:16px; font-size:13px; color:rgba(255,255,255,0.45);">
-          현재 베타 기간입니다. 정식 출시와 함께 정품 등록이 오픈됩니다.
-        </p>
+        <p class="hero-note reveal delay-3">현재 베타 기간입니다. 정식 출시와 함께 정품 등록이 오픈됩니다.</p>
+        <p class="hero-prereq reveal delay-3">보증서 QR · 시술자 사전 등록 필요 (정식 출시 후)</p>
     </div>
 </section>
 
-<div style="background:#fbfbfd; border-bottom:1px solid #f5f5f7; padding:14px 22px; text-align:center; font-size:13px; color:#6e6e73;">
+<div class="pro-banner">
   시술자이신가요? <a href="/pro" style="color:#1d1d1f; font-weight:600;">멜라누아 프로 →</a>
 </div>
 
 <section class="section-alt">
     <div class="container">
-        <p class="section-eyebrow reveal">Who Is This For</p>
+        <p class="section-eyebrow reveal">For You</p>
         <h2 class="reveal delay-1">어디에 해당하시나요?</h2>
         <div class="usage-wrap reveal delay-2">
-            <a class="usage-item" href="#waitlist" style="text-decoration:none;">
+            <a class="usage-item usage-item--route" href="#waitlist">
                 <div>
                     <p class="usage-title">시술을 받았어요</p>
                     <p class="usage-desc">정식 출시 후 보증서 QR로 정품을 등록할 수 있습니다. 출시 알림을 신청하세요.</p>
                 </div>
                 <span class="usage-badge active">출시 알림 →</span>
             </a>
-            <a class="usage-item" href="/pro" style="text-decoration:none;">
+            <a class="usage-item usage-item--route" href="/pro">
                 <div>
                     <p class="usage-title">시술자입니다</p>
-                    <p class="usage-desc">시술자를 위한 등급·포인트 프로그램은 멜라누아 프로입니다.</p>
+                    <p class="usage-desc">등급·포인트 프로그램은 멜라누아 프로입니다.</p>
                 </div>
                 <span class="usage-badge">멜라누아 프로 →</span>
             </a>
-            <a class="usage-item" href="/products/embo" style="text-decoration:none;">
+            <a class="usage-item usage-item--route" href="/products/embo">
                 <div>
                     <p class="usage-title">아직 시술 전이에요</p>
-                    <p class="usage-desc">가까운 반영구 아티스트에게 <strong>"멜라누아 엠보 쓰세요?"</strong>라고 물어보세요. 멜라누아 프로 인증 시술자가 정품을 사용하며, 시술 후 정품을 등록하면 혜택이 그날부터 시작됩니다.</p>
+                    <p class="usage-desc">가까운 반영구 아티스트에게 <strong>"멜라누아 엠보 쓰세요?"</strong>라고 물어보세요. 정식 출시 후 등록하면 혜택이 시작됩니다.</p>
                 </div>
                 <span class="usage-badge">엠보 알아보기 →</span>
             </a>
@@ -155,32 +214,75 @@
     </div>
 </section>
 
+<section class="section">
+    <div class="container">
+        <p class="section-eyebrow reveal">Benefits</p>
+        <h2 class="reveal delay-1">클럽 혜택.</h2>
+        <p class="section-lead reveal delay-2">정식 출시 후, 기록이 쌓일수록 혜택이 이어집니다. 리터칭 케어는 크레딧과 별개로 제공됩니다.</p>
+        <div class="usage-wrap reveal delay-2">
+            <div class="usage-item usage-item--benefit">
+                <div>
+                    <p class="usage-title">리터칭 케어</p>
+                    <p class="usage-desc">힐링 완료 등록 시 리터칭용 제품 1개를 자동 발송합니다. 크레딧 차감 없이 제공됩니다.</p>
+                </div>
+                <span class="usage-badge active">핵심 혜택</span>
+            </div>
+            <div class="usage-item usage-item--benefit">
+                <div>
+                    <p class="usage-title">멜라누아 이벤트 우선권</p>
+                    <p class="usage-desc">신제품 런칭 이벤트, 회원 전용 프로모션 참여 우선권</p>
+                </div>
+                <span class="usage-badge">Coming Soon</span>
+            </div>
+            <div class="usage-item usage-item--benefit">
+                <div>
+                    <p class="usage-title">제휴 뷰티 서비스</p>
+                    <p class="usage-desc">파트너 뷰티 시술, 제품 구매 시 크레딧 사용</p>
+                </div>
+                <span class="usage-badge">Coming Soon</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="section-alt">
     <div class="container">
-        <p class="section-eyebrow reveal">How It Works</p>
-        <h2 class="reveal delay-1">등록 방법.</h2>
-        <p class="section-lead reveal delay-2">별도 가입 절차가 없습니다. 정품 등록을 완료하면 크레딧이 자동으로 적립됩니다.</p>
-        <div class="steps">
-            <div class="step reveal">
-                <span class="step-num">01</span>
-                <span class="step-title">보증서 QR 스캔</span>
-                <p class="step-desc">시술 시 받은 보증서의 QR 코드를 스마트폰 카메라로 스캔합니다.</p>
+        <p class="section-eyebrow reveal">Process</p>
+        <h2 class="reveal delay-1">등록 흐름.</h2>
+        <p class="section-lead reveal delay-2">별도 가입 절차는 없습니다. 정식 출시 후 verify에서 정품 등록을 완료하면 크레딧이 자동으로 적립됩니다.</p>
+        <div class="process-with-media reveal delay-2">
+            <div class="steps">
+                <div class="step reveal">
+                    <span class="step-num">01</span>
+                    <span class="step-title">보증서 QR 스캔</span>
+                    <p class="step-desc">시술 시 받은 보증서의 QR 코드를 스마트폰 카메라로 스캔합니다.</p>
+                </div>
+                <div class="step reveal delay-1">
+                    <span class="step-num">02</span>
+                    <span class="step-title">제품 이력 확인</span>
+                    <p class="step-desc">제조일 · 배송일 · 시술일 · 시술자 정보를 확인합니다.</p>
+                </div>
+                <div class="step reveal delay-2">
+                    <span class="step-num">03</span>
+                    <span class="step-title">기록 등록</span>
+                    <p class="step-desc">이름·연락처와 시술 부위 사진을 등록합니다. 정품 시술 검증과 동시에 크레딧 적립이 시작됩니다.</p>
+                </div>
             </div>
-            <div class="step reveal delay-1">
-                <span class="step-num">02</span>
-                <span class="step-title">정품 확인</span>
-                <p class="step-desc">제조일 · 배송일 · 시술일 · 시술자 정보를 확인합니다.</p>
+            <div class="process-media-col">
+                <!-- [MEDIA SLOT: club-flow-scan] QR 스캔 — 오너 에셋 교체 -->
+                <div class="mnr-media-slot mnr-media-slot--square" data-mnr-media-slot="club-flow-scan" aria-hidden="true">
+                    <span class="mnr-media-slot-label">IMAGE · QR 스캔</span>
+                    <span class="mnr-media-slot-ratio">1:1</span>
+                </div>
+                <!-- [MEDIA SLOT: club-flow-register] verify 등록 화면 — 오너 에셋 교체 -->
+                <div class="mnr-media-slot mnr-media-slot--card" data-mnr-media-slot="club-flow-register" aria-hidden="true">
+                    <span class="mnr-media-slot-label">IMAGE · 등록 화면</span>
+                    <span class="mnr-media-slot-ratio">4:3</span>
+                </div>
             </div>
-            <div class="step reveal delay-2">
-                <span class="step-num">03</span>
-                <span class="step-title">정품 등록</span>
-                <p class="step-desc">이름·연락처와 시술 부위 사진을 등록합니다. 정품 시술 확인과 동시에 크레딧 적립.</p>
-            </div>
-            <div class="step reveal delay-3">
-                <span class="step-num">04</span>
-                <span class="step-title">크레딧 적립</span>
-                <p class="step-desc">등록 즉시 크레딧이 지급됩니다. 힐링·6개월 기록 시 추가 적립. 적립 기준은 정식 출시 시 공개됩니다.</p>
-            </div>
+        </div>
+        <div class="note-box process-outcome reveal delay-3">
+            <p><strong>등록 완료 시</strong> 크레딧이 적립됩니다. 힐링·6개월 기록 시 추가 적립됩니다. 적립 기준은 <a href="/terms">약관</a> 및 정식 출시 공지에 따릅니다.</p>
         </div>
     </div>
 </section>
@@ -188,7 +290,7 @@
 <section class="section">
     <div class="container">
         <p class="section-eyebrow reveal">Credits</p>
-        <h2 class="reveal delay-1">크레딧 적립 기준.</h2>
+        <h2 class="reveal delay-1">적립 구조.</h2>
         <p class="section-lead reveal delay-2">세 번의 기록으로 크레딧이 쌓입니다. 적립 금액과 세부 기준은 정식 출시 시 공개됩니다.</p>
         <div class="credit-grid reveal delay-2">
             <div class="credit-card">
@@ -199,7 +301,7 @@
             <div class="credit-card">
                 <span class="credit-card-label">힐링 사진 + 후기 (시술 후 7~30일 권장)</span>
                 <span class="credit-card-amount">02</span>
-                <span class="credit-card-unit">힐링 등록 + 리터칭 잉크</span>
+                <span class="credit-card-unit">힐링 등록 + 리터칭 케어</span>
             </div>
             <div class="credit-card">
                 <span class="credit-card-label">경과 사진 + 한 줄 후기</span>
@@ -207,11 +309,19 @@
                 <span class="credit-card-unit">6개월 기록</span>
             </div>
         </div>
-        <div class="note-box reveal delay-3" style="margin-top:32px;">
+        <!-- [MEDIA SLOT: club-photo-guide] 눈썹 OK/NG 가이드 — 오너 에셋 교체 -->
+        <div class="reveal delay-3" style="margin-top:32px;">
+            <div class="mnr-media-slot mnr-media-slot--wide" data-mnr-media-slot="club-photo-guide" aria-hidden="true">
+                <span class="mnr-media-slot-label">IMAGE · 시술 부위 사진 가이드 (눈썹 OK / 얼굴 NG)</span>
+                <span class="mnr-media-slot-ratio">16:9</span>
+            </div>
+        </div>
+        <div class="note-box reveal delay-3">
             <p>
-                시술 직후 사진은 <strong>정품 시술 여부 확인</strong>에 사용됩니다.
-                확인된 고객은 힐링 완료 시 <strong>리터칭 케어(잉크 무상 지급) 대상</strong>이 됩니다.
-                얼굴 전체가 아닌 시술 부위(눈썹) 사진만 등록합니다.
+                <strong>베타 안내.</strong> 크레딧 금액·유효기간 등 세부 정책은 정식 출시 시 공개됩니다. 베타 기간 기준은 <a href="/terms">이용약관</a>을 참고하세요.<br><br>
+                <strong>사진 정책.</strong> 시술 부위(눈썹)만 선명히 보이면 됩니다. 얼굴 전체 사진은 필요하지 않습니다.<br><br>
+                <strong>리터칭 케어.</strong> 힐링 완료 등록 시 제공되며, 크레딧과 별개입니다.<br><br>
+                <strong>등록 경로.</strong> 정식 출시 후 verify에서 정품 등록을 진행합니다. 시술자의 사전 등록이 선행되어야 합니다.
             </p>
         </div>
     </div>
@@ -219,57 +329,36 @@
 
 <section class="section-alt">
     <div class="container">
-        <p class="section-eyebrow reveal">Benefits</p>
-        <h2 class="reveal delay-1">클럽 혜택.</h2>
-        <p class="section-lead reveal delay-2">등록 리워드는 크레딧과 별개로 제공됩니다. 크레딧 사용처는 순차적으로 확장됩니다.</p>
-        <div class="usage-wrap reveal delay-2">
-            <div class="usage-item">
-                <div>
-                    <p class="usage-title">리터칭 잉크 무상 지급</p>
-                    <p class="usage-desc">힐링 완료 등록 시 리터칭 잉크 1개 자동 발송 — 크레딧 차감 없음</p>
-                </div>
-                <span class="usage-badge active">등록 리워드</span>
-            </div>
-            <div class="usage-item">
-                <div>
-                    <p class="usage-title">멜라누아 이벤트 우선권</p>
-                    <p class="usage-desc">신제품 런칭 이벤트, 회원 전용 프로모션 참여 우선권</p>
-                </div>
-                <span class="usage-badge">Coming Soon</span>
-            </div>
-            <div class="usage-item">
-                <div>
-                    <p class="usage-title">제휴 뷰티 서비스</p>
-                    <p class="usage-desc">파트너 뷰티 시술, 제품 구매 시 크레딧 사용</p>
-                </div>
-                <span class="usage-badge">Coming Soon</span>
-            </div>
-        </div>
-        <div class="note-box reveal delay-3">
-            <p>
-                <strong>크레딧 유효기간</strong> 등 세부 정책은 정식 출시 시 공개됩니다.<br>
-                사용처는 순차적으로 추가됩니다. 등록 회원에게 사전 안내가 제공됩니다.
-            </p>
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
         <p class="section-eyebrow reveal">FAQ</p>
         <h2 class="reveal delay-1">자주 묻는 질문.</h2>
         <div class="usage-wrap reveal delay-2">
-            <div class="usage-item"><div>
+            <div class="usage-item usage-item--faq"><div>
                 <p class="usage-title">클럽은 누구를 위한 건가요?</p>
-                <p class="usage-desc">멜라누아 정품으로 시술 받은 고객(피시술자)을 위한 혜택 프로그램입니다. 시술자는 멜라누아 프로를 이용하세요.</p>
+                <p class="usage-desc">멜라누아 정품으로 시술받은 시술 고객을 위한 혜택 프로그램입니다. 시술자는 멜라누아 프로를 이용하세요.</p>
             </div></div>
-            <div class="usage-item"><div>
+            <div class="usage-item usage-item--faq"><div>
                 <p class="usage-title">별도 가입 절차가 있나요?</p>
-                <p class="usage-desc">없습니다. 보증서 QR로 정품 등록을 완료하면 자동으로 시작됩니다.</p>
+                <p class="usage-desc">없습니다. 정식 출시 후 보증서 QR로 정품 등록을 완료하면 자동으로 시작됩니다.</p>
             </div></div>
-            <div class="usage-item"><div>
+            <div class="usage-item usage-item--faq"><div>
                 <p class="usage-title">크레딧은 언제까지 쓸 수 있나요?</p>
                 <p class="usage-desc">유효기간 등 세부 정책은 정식 출시 시 공개됩니다. 사용처가 오픈되면 등록 회원에게 사전 안내됩니다.</p>
+            </div></div>
+            <div class="usage-item usage-item--faq"><div>
+                <p class="usage-title">시술자가 먼저 등록하지 않았는데 고객만 등록할 수 있나요?</p>
+                <p class="usage-desc">아니요. 정품 등록은 시술자의 시술 정보 등록 후에만 진행됩니다.</p>
+            </div></div>
+            <div class="usage-item usage-item--faq"><div>
+                <p class="usage-title">보증서를 분실했어요.</p>
+                <p class="usage-desc">현재로서는 재발급·대체 등록 경로가 없습니다. 보증서 QR이 필요합니다.</p>
+            </div></div>
+            <div class="usage-item usage-item--faq"><div>
+                <p class="usage-title">어떤 사진을 올려야 하나요?</p>
+                <p class="usage-desc">시술 부위(눈썹)만 선명히 보이면 됩니다. 얼굴 전체 사진은 필요하지 않습니다.</p>
+            </div></div>
+            <div class="usage-item usage-item--faq"><div>
+                <p class="usage-title">정품 등록 없이 크레딧만 받을 수 있나요?</p>
+                <p class="usage-desc">아니요. 정품 등록 절차를 완료해야 크레딧·리터칭 케어 혜택이 시작됩니다.</p>
             </div></div>
         </div>
     </div>
@@ -287,6 +376,10 @@
         </div>
     </div>
 </section>
+
+<div class="sticky-waitlist" aria-hidden="false">
+    <a href="#waitlist">출시 알림 받기</a>
+</div>
 
 <div data-mnr-explore="exclude:club"></div>
 <div data-mnr-footer data-theme="light"></div>
