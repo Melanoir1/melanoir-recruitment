@@ -7,8 +7,7 @@
   "use strict";
 
   var BETA_DEADLINE = new Date("2026-06-12T23:59:59+09:00");
-  var LAUNCH_FORM_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLScww4VRsTzfafhJn3PO3hi6w8M1v3bLapLAzZf-eHKsI3w2Jg/viewform?usp=header";
+  var LAUNCH_FORM_URL = "/register#waitlist";
   var LAUNCH_CTA_LABEL = "정식 출시 알림 받기";
 
   function applyPostBeta() {
@@ -39,7 +38,7 @@
     // 4) Open Call 안내 보조 문구 (구글 로그인 안내 → 알림 안내)
     document.querySelectorAll(".login-notice").forEach(function (el) {
       if (el.textContent.indexOf("구글 로그인") !== -1) {
-        el.textContent = "이메일을 남기시면 정식 출시 소식을 가장 먼저 보내드립니다.";
+        el.textContent = "연락처를 남기시면 정식 출시 소식을 가장 먼저 보내드립니다.";
       }
     });
 

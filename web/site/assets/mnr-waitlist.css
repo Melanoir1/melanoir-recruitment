@@ -1,0 +1,42 @@
+/* Melanoir — 출시 웨이트리스트 폼 */
+.mnr-wl-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+.mnr-wl-types { display: flex; gap: 8px; }
+.mnr-wl-type { flex: 1; cursor: pointer; }
+.mnr-wl-type input { position: absolute; opacity: 0; pointer-events: none; }
+.mnr-wl-type span {
+  display: block; text-align: center; padding: 12px 8px; border-radius: 12px;
+  border: 1px solid var(--color-line, #e8e8ed); background: var(--color-bg, #fff);
+  font-size: 14px; font-weight: 600; color: var(--color-text-muted, #6e6e73);
+  transition: all 0.2s;
+}
+.mnr-wl-type input:checked + span {
+  background: var(--color-ink, #1d1d1f); border-color: var(--color-ink, #1d1d1f); color: #f5f5f7;
+}
+.mnr-wl-form input[type="text"], .mnr-wl-form input[type="tel"] {
+  width: 100%; padding: 13px 16px; border-radius: 12px;
+  border: 1px solid var(--color-line, #e8e8ed); background: var(--color-bg, #fff);
+  font-size: 15px; font-family: inherit; color: var(--color-ink, #1d1d1f); outline: none;
+}
+.mnr-wl-form input[type="text"]:focus, .mnr-wl-form input[type="tel"]:focus {
+  border-color: var(--color-ink, #1d1d1f);
+}
+.mnr-wl-consent {
+  display: flex; gap: 8px; align-items: flex-start; cursor: pointer;
+  font-size: 12px; color: var(--color-text-dim, #86868b); line-height: 1.5;
+}
+.mnr-wl-consent input { margin-top: 2px; flex-shrink: 0; }
+.mnr-wl-submit {
+  padding: 14px 32px; border: none; border-radius: var(--btn-radius, 980px); cursor: pointer;
+  background: var(--color-ink, #1d1d1f); color: #f5f5f7;
+  font-size: 15px; font-weight: 600; font-family: inherit; transition: opacity 0.2s;
+}
+.mnr-wl-submit:hover { opacity: 0.85; }
+.mnr-wl-submit:disabled { opacity: 0.5; cursor: default; }
+.mnr-wl-msg { font-size: 13px; margin: 0; min-height: 1em; color: var(--color-text-dim, #86868b); }
+.mnr-wl-msg.is-error { color: #c0392b; }
+.mnr-wl-done {
+  padding: 28px 24px; border-radius: 16px; text-align: center;
+  background: var(--color-bg-alt, #fbfbfd); border: 1px solid var(--color-line, #e8e8ed);
+}
+.mnr-wl-done strong { display: block; font-size: 17px; color: var(--color-ink, #1d1d1f); margin-bottom: 6px; }
+.mnr-wl-done p { font-size: 13px; color: var(--color-text-dim, #86868b); margin: 0; }

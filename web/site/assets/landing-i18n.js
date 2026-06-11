@@ -5,8 +5,7 @@
   "use strict";
 
   var HIRE_KO = "[2026년 상반기 채용] 멜라누아 R&amp;D 팀에 합류하기";
-  var NOTIFY_FORM_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLScww4VRsTzfafhJn3PO3hi6w8M1v3bLapLAzZf-eHKsI3w2Jg/viewform?usp=header";
+  var NOTIFY_FORM_URL = "/register#waitlist";
 
   var PAGE_META = {
     kr: {
@@ -314,7 +313,7 @@
       "</a>" +
       '<a class="hero-cta" href="' +
       NOTIFY_FORM_URL +
-      '" target="_blank" rel="noopener noreferrer">' +
+      '">' +
       t.heroCtaNotify +
       "</a></div>" +
       '<p class="scroll-hint reveal">' +
