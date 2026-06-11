@@ -1,24 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase'
+import { sendSms } from '@/lib/sms'
 
 function generateOtp(): string {
   return Math.floor(100000 + Math.random() * 900000).toString()
-}
-
-async function sendSms(phone: string, code: string) {
-  // Coolsms API 연동 (환경 변수 설정 후 활성화)
-  const apiKey = process.env.SMS_API_KEY
-  const senderPhone = process.env.SMS_SENDER_PHONE
-
-  if (!apiKey || !senderPhone) {
-    // 개발 환경: 콘솔 출력
-    console.log(`[DEV] SMS to ${phone}: 인증번호 [${code}]`)
-    return
-  }
-
-  // TODO: Coolsms 또는 알리고 API 호출
-  // 현재는 개발용 콘솔 출력만
-  console.log(`SMS to ${phone}: ${code}`)
 }
 
 export async function POST(req: NextRequest) {
@@ -28,17 +13,39 @@ export async function POST(req: NextRequest) {
   }
 
   const normalizedPhone = phone.replace(/-/g, '')
-  const code = generateOtp()
-  const expiresAt = new Date(Date.now() + 5 * 60 * 1000) // 5분
-
   const supabase = createServiceClient()
+
+  const oneMinuteAgo = new Date(Date.now() - 60 * 1000).toISOString()
+  const { data: recent } = await supabase
+    .from('mnr_sms_verifications')
+    .select('id')
+    .eq('phone', normalizedPhone)
+    .gte('created_at', oneMinuteAgo)
+    .limit(1)
+  if (recent && recent.length > 0) {
+    return NextResponse.json({ error: '잠시 후 다시 시도해주세요.' }, { status: 429 })
+  }
+
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString()
+  const { count } = await supabase
+    .from('mnr_sms_verifications')
+    .select('id', { count: 'exact', head: true })
+    .eq('phone', normalizedPhone)
+    .gte('created_at', oneHourAgo)
+  if ((count ?? 0) >= 5) {
+    return NextResponse.json({ error: '요청 횟수를 초과했습니다. 1시간 후 다시 시도해주세요.' }, { status: 429 })
+  }
+
+  const code = generateOtp()
+  const expiresAt = new Date(Date.now() + 5 * 60 * 1000)
+
   await supabase.from('mnr_sms_verifications').insert({
     phone: normalizedPhone,
     code,
     expires_at: expiresAt.toISOString(),
   })
 
-  await sendSms(normalizedPhone, code)
+  await sendSms(normalizedPhone, `[멜라누아] 인증번호 [${code}]`)
 
   return NextResponse.json({ success: true, expires_at: expiresAt.toISOString() })
 }

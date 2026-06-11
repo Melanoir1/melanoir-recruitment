@@ -2,7 +2,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="/favicon-32.png" type="image/png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <title>정품 등록 — Melanoir</title>
     <meta property="og:title" content="정품 등록 — 멜라누아">
     <meta property="og:description" content="멜라누아 엠보 정품을 등록하고 크레딧을 받으세요.">
@@ -12,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
+  <link rel="stylesheet" href="/assets/mnr-ui.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
@@ -45,7 +48,7 @@
 
         .credit-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--color-line); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-line); margin-top: 60px; }
         @media (min-width: 600px) { .credit-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 900px) { .credit-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 900px) { .credit-grid { grid-template-columns: repeat(3, 1fr); } }
         .credit-card { background: var(--color-bg); padding: 36px 28px; display: flex; flex-direction: column; gap: 12px; }
         .credit-card-label { font-size: 13px !important; color: var(--color-text-dim); font-weight: 500; line-height: 1.4; }
         .credit-card-amount { font-family: var(--font-display); font-size: 2.2rem; font-weight: 500; color: var(--color-ink); letter-spacing: -0.04em; line-height: 1; }
@@ -90,22 +93,56 @@
     </button>
     <nav class="mnr-nav">
       <a href="/products">Products</a>
-      <a href="/pro">Pro</a>
-      <a href="/register" class="is-current">정품등록</a>
       <a href="/#technology">Technology</a>
+      <a href="/register" class="is-current">Club</a>
+      <a href="/pro">Pro</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
     <div class="container">
-        <p class="hero-eyebrow reveal">Authenticity Registration</p>
+        <p class="hero-eyebrow reveal">Melanoir Club</p>
         <h1 class="reveal delay-1">정품 등록.</h1>
         <p class="hero-desc reveal delay-2">
-            시술 받은 날부터 시작되는 혜택.<br>
-            정품을 등록하세요. 크레딧이 쌓입니다.
+            멜라누아 엠보로 시술 받은 고객을 위한 프로그램.<br>
+            정품을 등록하세요. 그날부터 크레딧이 쌓입니다.
         </p>
         <a href="https://verify.melanoir.co.kr" class="hero-cta reveal delay-3">정품 등록하기</a>
+    </div>
+</section>
+
+<div style="background:#fbfbfd; border-bottom:1px solid #f5f5f7; padding:14px 22px; text-align:center; font-size:13px; color:#6e6e73;">
+  시술자이신가요? <a href="/pro" style="color:#1d1d1f; font-weight:600;">멜라누아 프로 →</a>
+</div>
+
+<section class="section-alt">
+    <div class="container">
+        <p class="section-eyebrow reveal">Who Is This For</p>
+        <h2 class="reveal delay-1">어디에 해당하시나요?</h2>
+        <div class="usage-wrap reveal delay-2">
+            <a class="usage-item" href="https://verify.melanoir.co.kr" style="text-decoration:none;">
+                <div>
+                    <p class="usage-title">시술을 받았어요</p>
+                    <p class="usage-desc">보증서 QR로 정품을 등록하고 크레딧을 받으세요. 이 페이지가 맞습니다.</p>
+                </div>
+                <span class="usage-badge active">정품 등록 →</span>
+            </a>
+            <a class="usage-item" href="/pro" style="text-decoration:none;">
+                <div>
+                    <p class="usage-title">시술자입니다</p>
+                    <p class="usage-desc">시술자를 위한 등급·포인트 프로그램은 멜라누아 프로입니다.</p>
+                </div>
+                <span class="usage-badge">멜라누아 프로 →</span>
+            </a>
+            <a class="usage-item" href="/products/embo" style="text-decoration:none;">
+                <div>
+                    <p class="usage-title">아직 시술 전이에요</p>
+                    <p class="usage-desc">시술 후 정품을 등록하면 혜택이 그날부터 시작됩니다. 제품을 먼저 살펴보세요.</p>
+                </div>
+                <span class="usage-badge">엠보 알아보기 →</span>
+            </a>
+        </div>
     </div>
 </section>
 
@@ -128,12 +165,12 @@
             <div class="step reveal delay-2">
                 <span class="step-num">03</span>
                 <span class="step-title">정품 등록</span>
-                <p class="step-desc">이름 · 후기 · 시술 직후 사진을 등록합니다. 완료와 동시에 크레딧 적립.</p>
+                <p class="step-desc">이름·연락처와 시술 부위 사진을 등록합니다. 정품 시술 확인과 동시에 크레딧 적립.</p>
             </div>
             <div class="step reveal delay-3">
                 <span class="step-num">04</span>
                 <span class="step-title">크레딧 적립</span>
-                <p class="step-desc">등록 즉시 크레딧이 지급됩니다. 힐링 완료 사진 추가 시 추가 적립.</p>
+                <p class="step-desc">등록 즉시 20,000 크레딧이 지급됩니다. 힐링·6개월 기록 시 추가 적립.</p>
             </div>
         </div>
     </div>
@@ -143,28 +180,30 @@
     <div class="container">
         <p class="section-eyebrow reveal">Credits</p>
         <h2 class="reveal delay-1">크레딧 적립 기준.</h2>
-        <p class="section-lead reveal delay-2">행동할수록 크레딧이 쌓입니다. 유효기간은 적립일로부터 24개월입니다.</p>
+        <p class="section-lead reveal delay-2">세 번의 기록으로 최대 50,000 크레딧. 유효기간은 적립일로부터 24개월입니다.</p>
         <div class="credit-grid reveal delay-2">
             <div class="credit-card">
-                <span class="credit-card-label">정품 등록 완료</span>
+                <span class="credit-card-label">정품 등록 — 이름·연락처 + 시술 부위 사진</span>
+                <span class="credit-card-amount">20,000</span>
+                <span class="credit-card-unit">크레딧</span>
+            </div>
+            <div class="credit-card">
+                <span class="credit-card-label">힐링 등록 — 힐링 사진 + 후기 (시술 후 7~30일 권장)</span>
+                <span class="credit-card-amount">20,000</span>
+                <span class="credit-card-unit">크레딧 + 리터칭 잉크</span>
+            </div>
+            <div class="credit-card">
+                <span class="credit-card-label">6개월 기록 — 경과 사진 + 한 줄 후기</span>
                 <span class="credit-card-amount">10,000</span>
                 <span class="credit-card-unit">크레딧</span>
             </div>
-            <div class="credit-card">
-                <span class="credit-card-label">후기 텍스트 작성</span>
-                <span class="credit-card-amount">5,000</span>
-                <span class="credit-card-unit">크레딧</span>
-            </div>
-            <div class="credit-card">
-                <span class="credit-card-label">시술 직후 사진 업로드</span>
-                <span class="credit-card-amount">10,000</span>
-                <span class="credit-card-unit">크레딧</span>
-            </div>
-            <div class="credit-card">
-                <span class="credit-card-label">힐링 완료 사진 업로드</span>
-                <span class="credit-card-amount">15,000</span>
-                <span class="credit-card-unit">크레딧</span>
-            </div>
+        </div>
+        <div class="note-box reveal delay-3" style="margin-top:32px;">
+            <p>
+                시술 직후 사진은 <strong>정품 시술 여부 확인</strong>에 사용됩니다.
+                확인된 고객은 힐링 완료 시 <strong>리터칭 케어(잉크 무상 지급) 대상</strong>이 됩니다.
+                얼굴 전체가 아닌 시술 부위(눈썹) 사진만 등록합니다.
+            </p>
         </div>
     </div>
 </section>
@@ -172,15 +211,15 @@
 <section class="section-alt">
     <div class="container">
         <p class="section-eyebrow reveal">Benefits</p>
-        <h2 class="reveal delay-1">크레딧 사용처.</h2>
-        <p class="section-lead reveal delay-2">쌓인 크레딧은 다양한 혜택으로 연결됩니다. 순차적으로 확장됩니다.</p>
+        <h2 class="reveal delay-1">클럽 혜택.</h2>
+        <p class="section-lead reveal delay-2">등록 리워드는 크레딧과 별개로 제공됩니다. 크레딧 사용처는 순차적으로 확장됩니다.</p>
         <div class="usage-wrap reveal delay-2">
             <div class="usage-item">
                 <div>
                     <p class="usage-title">리터칭 잉크 무상 지급</p>
-                    <p class="usage-desc">힐링 완료 등록 시 리터칭 잉크 1개 자동 발송</p>
+                    <p class="usage-desc">힐링 완료 등록 시 리터칭 잉크 1개 자동 발송 — 크레딧 차감 없음</p>
                 </div>
-                <span class="usage-badge active">운영 중</span>
+                <span class="usage-badge active">등록 리워드</span>
             </div>
             <div class="usage-item">
                 <div>
@@ -206,6 +245,27 @@
     </div>
 </section>
 
+<section class="section">
+    <div class="container">
+        <p class="section-eyebrow reveal">FAQ</p>
+        <h2 class="reveal delay-1">자주 묻는 질문.</h2>
+        <div class="usage-wrap reveal delay-2">
+            <div class="usage-item"><div>
+                <p class="usage-title">클럽은 누구를 위한 건가요?</p>
+                <p class="usage-desc">멜라누아 정품으로 시술 받은 고객(피시술자)을 위한 혜택 프로그램입니다. 시술자는 멜라누아 프로를 이용하세요.</p>
+            </div></div>
+            <div class="usage-item"><div>
+                <p class="usage-title">별도 가입 절차가 있나요?</p>
+                <p class="usage-desc">없습니다. 보증서 QR로 정품 등록을 완료하면 자동으로 시작됩니다.</p>
+            </div></div>
+            <div class="usage-item"><div>
+                <p class="usage-title">크레딧은 언제까지 쓸 수 있나요?</p>
+                <p class="usage-desc">적립일로부터 24개월간 유효합니다. 사용처가 오픈되면 등록 회원에게 사전 안내됩니다.</p>
+            </div></div>
+        </div>
+    </div>
+</section>
+
 <section class="cta-section">
     <div class="container">
         <h2 class="reveal">지금 바로 등록하세요.</h2>
@@ -217,26 +277,15 @@
     </div>
 </section>
 
-<footer class="mnr-footer">
-  <div class="mnr-footer-inner">
-    <p class="mnr-footer-corp">
-      Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
-      © 2026 Melanoir. All rights reserved.
-    </p>
-    <nav class="mnr-footer-nav">
-      <a href="/products">Products</a>
-      <a href="/pro">Pro</a>
-      <a href="/register">정품등록</a>
-      <a href="/privacy">개인정보처리방침</a>
-    </nav>
-  </div>
-</footer>
+<div data-mnr-explore="exclude:club"></div>
+<div data-mnr-footer data-theme="light"></div>
 
 <div id="backToTop" class="back-to-top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script src="/assets/mnr-nav.js"></script>
+<script src="/assets/mnr-ui.js"></script>
 <script>
     window.onbeforeunload = function() { window.scrollTo(0, 0); };
     if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }

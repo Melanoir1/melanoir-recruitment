@@ -3,22 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="icon" href="/favicon-32.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <title>Melanoir · Products</title>
   <meta name="description" content="멜라누아 제품 라인업 — Embo(PMU 잉크), Photoshield Core(광차폐 소재)">
+  <meta property="og:title" content="Melanoir · Products">
+  <meta property="og:description" content="멜라누아 제품 라인업 — Embo(PMU 잉크), Photoshield Core(광차폐 소재)">
+  <meta property="og:url" content="https://melanoir.co.kr/products">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-  <link rel="stylesheet" href="../assets/melanoir-shell.css" />
+  <link rel="stylesheet" href="../assets/design-tokens.css" />
+  <link rel="stylesheet" href="../assets/melanoir-subpage-header.css" />
+  <link rel="stylesheet" href="../assets/mnr-ui.css" />
   <link rel="stylesheet" href="../assets/melanoir-lang.css" />
   <style>
-    /* —— Products 페이지 헤더 섹션 —— */
-    .products-header {
-      padding: var(--shell-pad-y) var(--shell-pad-x) 22px;
-      border-bottom: 1px solid var(--shell-line);
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--color-bg);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      word-break: keep-all;
+      letter-spacing: -0.01em;
     }
 
-    /* —— 제품 섹션 (풀 와이드, 배경 이미지) —— */
+    /* —— Products 페이지 헤더 섹션 (화이트) —— */
+    .products-header {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 56px 24px 28px;
+    }
+    .products-header .eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      margin: 0 0 10px;
+    }
+    .products-header .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 8vw, 56px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--color-ink);
+      margin: 0 0 14px;
+    }
+    .products-lead {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      max-width: 560px;
+      margin: 0;
+    }
+
+    /* —— 제품 섹션 (풀 와이드, 배경 이미지 — 기존 비주얼 그대로) —— */
     .product-section {
       position: relative;
       min-height: 56vh;
@@ -26,9 +69,11 @@
       flex-direction: column;
       justify-content: flex-end;
       overflow: hidden;
-      border-bottom: 1px solid var(--shell-line);
+      border-top: 1px solid var(--color-line);
     }
-
+    .product-section:last-of-type {
+      border-bottom: 1px solid var(--color-line);
+    }
     .product-section-bg {
       position: absolute;
       inset: 0;
@@ -38,11 +83,7 @@
       background-repeat: no-repeat;
       transition: transform 560ms ease;
     }
-
-    .product-section:hover .product-section-bg {
-      transform: scale(1.02);
-    }
-
+    .product-section:hover .product-section-bg { transform: scale(1.02); }
     .product-section-scrim {
       position: absolute;
       inset: 0;
@@ -56,22 +97,25 @@
       );
       pointer-events: none;
     }
-
     .product-section-body {
       position: relative;
       z-index: 2;
-      padding: 32px var(--shell-pad-x);
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 24px;
     }
-
     .product-section-eyebrow {
       font-size: 10px;
       letter-spacing: 0.18em;
       color: rgba(255, 255, 255, 0.5);
       margin: 0 0 10px;
       display: block;
+      text-transform: uppercase;
+      font-weight: 700;
     }
-
     .product-section h2 {
+      font-family: var(--font-display);
       font-size: clamp(26px, 7vw, 38px);
       letter-spacing: 0.04em;
       font-weight: 700;
@@ -79,190 +123,172 @@
       margin: 0 0 12px;
       color: rgba(255, 255, 255, 0.96);
     }
-
     .product-section-desc {
-      font-family: var(--shell-font-ko);
+      font-family: var(--font-body);
       font-size: 14px;
       line-height: 1.65;
       color: rgba(255, 255, 255, 0.68);
       margin: 0 0 22px;
-      text-transform: none;
-      letter-spacing: normal;
+      max-width: 560px;
     }
-
     .product-section-cta {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 11px 18px;
       border: 1px solid rgba(255, 255, 255, 0.45);
-      border-radius: 2px;
+      border-radius: var(--btn-radius);
       color: rgba(255, 255, 255, 0.92);
       text-decoration: none;
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.08em;
-      text-transform: none;
-      font-family: var(--shell-font-ko);
+      font-family: var(--font-body);
       transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
-
     .product-section-cta:hover {
       background: rgba(255, 255, 255, 0.08);
       border-color: #fff;
       color: #fff;
     }
-
     @media (prefers-reduced-motion: reduce) {
-      .product-section-bg {
-        transition: none;
-      }
-      .product-section:hover .product-section-bg {
-        transform: none;
-      }
+      .product-section-bg { transition: none; }
+      .product-section:hover .product-section-bg { transform: none; }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <div id="melanoir-content"></div>
+<header class="mnr-header">
+  <div class="mnr-header-inner">
+    <a class="mnr-header-logo" href="/">
+      <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" style="filter: invert(1);">
+    </a>
+    <button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="mnr-nav">
+      <a href="/products" class="is-current">Products</a>
+      <a href="/#technology">Technology</a>
+      <a href="/register">Club</a>
+      <a href="/pro">Pro</a>
+    </nav>
   </div>
-  <a class="melanoir-hire-fab" href="/recruitment" aria-label="2026년 상반기 채용 — 멜라누아 R&amp;D 팀에 합류하기">
-    [2026년 상반기 채용]<br>멜라누아 R&amp;D 팀에 합류하기
-  </a>
-  <script src="../assets/melanoir-lang.js"></script>
-  <script>
-    (function () {
-      var hireKo = "[2026\uB144 \uC0C1\uBC18\uAE30 \uCC44\uC6A9] \uBA5C\uB77C\uB204\uC544 R&amp;D \uD300\uC5D0 \uD569\uB958\uD558\uAE30";
+</header>
 
-      var pageMeta = {
-        kr: { title: "Melanoir · 제품", description: "멜라누아 제품 라인업 — Embo(멜라닌 기반 PMU 잉크), Photoshield Core(광차폐 소재)" },
-        en: { title: "Melanoir · Products", description: "Melanoir product lineup — Embo (melanin-based PMU ink) and Photoshield Core (photoprotection material)" },
-        fr: { title: "Melanoir · Produits", description: "Gamme produits Melanoir — Embo (encre PMU à base de mélanine) et Photoshield Core (matériau de protection)" },
-        jp: { title: "Melanoir · プロダクト", description: "Melanoir 製品ラインアップ — Embo（メラニン系PMUインク）、Photoshield Core（光遮蔽素材）" },
-        cn: { title: "Melanoir · 产品", description: "Melanoir 产品线 — Embo（黑色素基PMU墨水）、Photoshield Core（光屏蔽材料）" },
-      };
+<div id="melanoir-content"></div>
 
-      var EMBO_IMG    = "https://res.cloudinary.com/dssuxurpt/image/upload/v1779242062/Embo_gsb90t.png";
-      var PS_IMG      = "https://res.cloudinary.com/dssuxurpt/image/upload/v1775722105/22p-1_cv8e3g.png";
+<div data-mnr-explore="exclude:products"></div>
+<div data-mnr-footer data-theme="light"></div>
 
-      function shellPage(t) {
-        return (
-          '<header class="topbar topbar--site">' +
-          '<div class="topbar-head">' +
-          '<a class="logo logo--brand" href="/">' +
-          '<img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" width="140" height="20" decoding="async">' +
-          "</a>" +
-          '<nav class="nav" aria-label="' + t.navAria + '">' +
-          '<a class="is-here" href="/products">' + t.navProducts + "</a>" +
-          '<a href="/#technology">' + t.navTechnology + "</a>" +
-          "</nav></div>" +
-          '<a class="topbar-hire" href="/recruitment">' + hireKo + "</a>" +
-          "</header>" +
-          '<div class="products-header">' +
-          '<p class="eyebrow">' + t.eyebrow + "</p>" +
-          '<h1 class="page-title">' + t.pageTitle + "</h1>" +
-          '<p class="products-lead shell-i18n-prose">' + t.lead + "</p>" +
-          "</div>" +
-          '<section class="product-section" aria-labelledby="embo-title">' +
-          '<div class="product-section-bg" style="background-image:url(' + EMBO_IMG + ');" aria-hidden="true"></div>' +
-          '<div class="product-section-scrim" aria-hidden="true"></div>' +
-          '<div class="product-section-body">' +
-          '<span class="product-section-eyebrow">PMU INK · PIGMENT</span>' +
-          '<h2 id="embo-title">MELANOIR EMBO</h2>' +
-          '<p class="product-section-desc shell-i18n-prose">' + t.emboDesc + "</p>" +
-          '<a class="product-section-cta" href="/products/embo">' + t.cta + "</a>" +
-          "</div></section>" +
-          '<section class="product-section" aria-labelledby="ps-title">' +
-          '<div class="product-section-bg" style="background-image:url(' + PS_IMG + ');" aria-hidden="true"></div>' +
-          '<div class="product-section-scrim" aria-hidden="true"></div>' +
-          '<div class="product-section-body">' +
-          '<span class="product-section-eyebrow">PHOTOPROTECTION</span>' +
-          '<h2 id="ps-title">MELANOIR PHOTOSHIELD CORE</h2>' +
-          '<p class="product-section-desc shell-i18n-prose">' + t.psDesc + "</p>" +
-          '<a class="product-section-cta" href="/products/photoshieldcore">' + t.cta + "</a>" +
-          "</div></section>" +
-          '<footer class="site-footer"><p>© Melanoir · <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p></footer>'
-        );
-      }
+<script src="../assets/melanoir-lang.js"></script>
+<script src="../assets/mnr-nav.js"></script>
+<script src="../assets/mnr-ui.js"></script>
+<script>
+  (function () {
+    var pageMeta = {
+      kr: { title: "Melanoir · 제품", description: "멜라누아 제품 라인업 — Embo(멜라닌 기반 PMU 잉크), Photoshield Core(광차폐 소재)" },
+      en: { title: "Melanoir · Products", description: "Melanoir product lineup — Embo (melanin-based PMU ink) and Photoshield Core (photoprotection material)" },
+      fr: { title: "Melanoir · Produits", description: "Gamme produits Melanoir — Embo (encre PMU à base de mélanine) et Photoshield Core (matériau de protection)" },
+      jp: { title: "Melanoir · プロダクト", description: "Melanoir 製品ラインアップ — Embo（メラニン系PMUインク）、Photoshield Core（光遮蔽素材）" },
+      cn: { title: "Melanoir · 产品", description: "Melanoir 产品线 — Embo（黑色素基PMU墨水）、Photoshield Core（光屏蔽材料）" },
+    };
 
-      var copy = {
-        kr: {
-          navAria: "Main",
-          navProducts: "Products",
-          navTechnology: "Technology",
-          eyebrow: "PRODUCT LINEUP",
-          pageTitle: "PRODUCTS",
-          lead: "멜라누아 제품 라인업. 각 제품 섹션에서 상세 페이지로 이동합니다.",
-          emboDesc: "Embo — 멜라닌 기반 PMU 잉크의 제품 스펙, 브랜드 스토리, 데이터.",
-          psDesc: "Photoshield Core — 멜라닌 광차폐 기술 브로슈어.",
-          cta: "자세히 알아보기",
-        },
-        en: {
-          navAria: "Main",
-          navProducts: "Products",
-          navTechnology: "Technology",
-          eyebrow: "PRODUCT LINEUP",
-          pageTitle: "PRODUCTS",
-          lead: "The Melanoir product lineup. Each section opens the full product story, specs, and proof points.",
-          emboDesc: "Embo — formulation narrative, performance data, and the pursuit of the safest black.",
-          psDesc: "Photoshield Core — technical brochure for our melanin-forward photoprotection shield.",
-          cta: "Learn more",
-        },
-        fr: {
-          navAria: "Principal",
-          navProducts: "Produits",
-          navTechnology: "Technologie",
-          eyebrow: "GAMME PRODUITS",
-          pageTitle: "PRODUITS",
-          lead: "La gamme produits Melanoir. Chaque section mène à l'histoire complète du produit.",
-          emboDesc: "Embo — récit, fiches techniques et données de performance.",
-          psDesc: "Photoshield Core — brochure technique autour du bouclier à base de mélanine.",
-          cta: "En savoir plus",
-        },
-        jp: {
-          navAria: "メイン",
-          navProducts: "製品",
-          navTechnology: "テクノロジー",
-          eyebrow: "PRODUCT LINEUP",
-          pageTitle: "PRODUCTS",
-          lead: "メラヌア 製品ラインアップ。各セクションから商品の詳細ページへ進みます。",
-          emboDesc: "Embo — 製品スペック、ブランドストーリー、検証データ。",
-          psDesc: "Photoshield Core — メラニンシールドの技術ブローシャー。",
-          cta: "詳しく見る",
-        },
-        cn: {
-          navAria: "主导航",
-          navProducts: "产品",
-          navTechnology: "技术",
-          eyebrow: "PRODUCT LINEUP",
-          pageTitle: "PRODUCTS",
-          lead: "Melanoir 产品线。点击各部分进入完整产品故事与数据页面。",
-          emboDesc: "Embo — 产品规格、品牌叙事与验证数据。",
-          psDesc: "Photoshield Core — 以黑色素为核心的防护技术手册。",
-          cta: "了解更多",
-        },
-      };
+    var EMBO_IMG = "https://res.cloudinary.com/dssuxurpt/image/upload/v1779242062/Embo_gsb90t.png";
+    var PS_IMG   = "https://res.cloudinary.com/dssuxurpt/image/upload/v1775722105/22p-1_cv8e3g.png";
 
-      var localizedContent = {};
-      Object.keys(copy).forEach(function (lang) {
-        localizedContent[lang] = shellPage(copy[lang]);
-      });
+    function shellPage(t) {
+      return (
+        '<div class="products-header">' +
+        '<p class="eyebrow">' + t.eyebrow + "</p>" +
+        '<h1 class="page-title">' + t.pageTitle + "</h1>" +
+        '<p class="products-lead shell-i18n-prose">' + t.lead + "</p>" +
+        "</div>" +
+        '<section class="product-section" aria-labelledby="embo-title">' +
+        '<div class="product-section-bg" style="background-image:url(' + EMBO_IMG + ');" aria-hidden="true"></div>' +
+        '<div class="product-section-scrim" aria-hidden="true"></div>' +
+        '<div class="product-section-body">' +
+        '<span class="product-section-eyebrow">PMU INK · PIGMENT</span>' +
+        '<h2 id="embo-title">MELANOIR EMBO</h2>' +
+        '<p class="product-section-desc shell-i18n-prose">' + t.emboDesc + "</p>" +
+        '<a class="product-section-cta" href="/products/embo">' + t.cta + "</a>" +
+        "</div></section>" +
+        '<section class="product-section" aria-labelledby="ps-title">' +
+        '<div class="product-section-bg" style="background-image:url(' + PS_IMG + ');" aria-hidden="true"></div>' +
+        '<div class="product-section-scrim" aria-hidden="true"></div>' +
+        '<div class="product-section-body">' +
+        '<span class="product-section-eyebrow">PHOTOPROTECTION</span>' +
+        '<h2 id="ps-title">MELANOIR PHOTOSHIELD CORE</h2>' +
+        '<p class="product-section-desc shell-i18n-prose">' + t.psDesc + "</p>" +
+        '<a class="product-section-cta" href="/products/photoshieldcore">' + t.cta + "</a>" +
+        "</div></section>"
+      );
+    }
 
-      function applyMeta(lang) {
-        var meta = pageMeta[lang] || pageMeta.kr;
-        document.title = meta.title;
-        var desc = document.querySelector('meta[name="description"]');
-        if (desc) desc.setAttribute("content", meta.description);
-      }
+    var copy = {
+      kr: {
+        eyebrow: "PRODUCT LINEUP",
+        pageTitle: "PRODUCTS",
+        lead: "지구에서 가장 안전한 Black — 멜라닌으로 만든 제품들.",
+        emboDesc: "Embo — 멜라닌 기반 PMU 잉크의 제품 스펙, 브랜드 스토리, 데이터.",
+        psDesc: "Photoshield Core — 멜라닌 광차폐 기술 브로슈어.",
+        cta: "자세히 알아보기",
+      },
+      en: {
+        eyebrow: "PRODUCT LINEUP",
+        pageTitle: "PRODUCTS",
+        lead: "For the safest black in the universe — products made of melanin.",
+        emboDesc: "Embo — formulation narrative, performance data, and the pursuit of the safest black.",
+        psDesc: "Photoshield Core — technical brochure for our melanin-forward photoprotection shield.",
+        cta: "Learn more",
+      },
+      fr: {
+        eyebrow: "GAMME PRODUITS",
+        pageTitle: "PRODUITS",
+        lead: "Pour le Black le plus sûr — des produits faits de mélanine.",
+        emboDesc: "Embo — récit, fiches techniques et données de performance.",
+        psDesc: "Photoshield Core — brochure technique autour du bouclier à base de mélanine.",
+        cta: "En savoir plus",
+      },
+      jp: {
+        eyebrow: "PRODUCT LINEUP",
+        pageTitle: "PRODUCTS",
+        lead: "地球で最も安全な Black — メラニンでつくられた製品。",
+        emboDesc: "Embo — 製品スペック、ブランドストーリー、検証データ。",
+        psDesc: "Photoshield Core — メラニンシールドの技術ブローシャー。",
+        cta: "詳しく見る",
+      },
+      cn: {
+        eyebrow: "PRODUCT LINEUP",
+        pageTitle: "PRODUCTS",
+        lead: "地球上最安全的 Black — 以黑色素制成的产品。",
+        emboDesc: "Embo — 产品规格、品牌叙事与验证数据。",
+        psDesc: "Photoshield Core — 以黑色素为核心的防护技术手册。",
+        cta: "了解更多",
+      },
+    };
 
-      MelanoirLang.init({
-        theme: "dark",
-        contentSelector: "#melanoir-content",
-        localizedContent: localizedContent,
-        onApply: applyMeta,
-      });
-    })();
-  </script>
+    var localizedContent = {};
+    Object.keys(copy).forEach(function (lang) {
+      localizedContent[lang] = shellPage(copy[lang]);
+    });
+
+    function applyMeta(lang) {
+      var meta = pageMeta[lang] || pageMeta.kr;
+      document.title = meta.title;
+      var desc = document.querySelector('meta[name="description"]');
+      if (desc) desc.setAttribute("content", meta.description);
+    }
+
+    MelanoirLang.init({
+      theme: "light",
+      contentSelector: "#melanoir-content",
+      localizedContent: localizedContent,
+      onApply: function (lang) {
+        applyMeta(lang);
+        if (window.MnrUI) window.MnrUI.renderAll();
+      },
+    });
+  })();
+</script>
 </body>
 </html>

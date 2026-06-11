@@ -618,30 +618,48 @@ export type Database = {
       }
       mnr_procedures: {
         Row: {
+          area: string | null
           customer_phone: string | null
+          device_type: string | null
+          dilution: string | null
+          is_retouch: boolean | null
+          needle_type: string | null
           practitioner_id: string | null
           procedure_at: string
           procedure_id: string
           registered_at: string | null
           serial_token: string | null
+          skin_type: string | null
           technique: string
         }
         Insert: {
+          area?: string | null
           customer_phone?: string | null
+          device_type?: string | null
+          dilution?: string | null
+          is_retouch?: boolean | null
+          needle_type?: string | null
           practitioner_id?: string | null
           procedure_at: string
           procedure_id?: string
           registered_at?: string | null
           serial_token?: string | null
+          skin_type?: string | null
           technique: string
         }
         Update: {
+          area?: string | null
           customer_phone?: string | null
+          device_type?: string | null
+          dilution?: string | null
+          is_retouch?: boolean | null
+          needle_type?: string | null
           practitioner_id?: string | null
           procedure_at?: string
           procedure_id?: string
           registered_at?: string | null
           serial_token?: string | null
+          skin_type?: string | null
           technique?: string
         }
         Relationships: [
@@ -695,42 +713,81 @@ export type Database = {
       }
       mnr_registrations: {
         Row: {
+          consented_at: string | null
           credits_issued: boolean | null
           customer_name: string | null
           customer_phone: string | null
+          discomfort: string[] | null
           healing_credits_issued: boolean | null
           healing_photo_url: string | null
           healing_registered_at: string | null
+          healing_reminder2_sent_at: string | null
+          healing_reminder_sent_at: string | null
+          healing_review_text: string | null
+          longterm_review_text: string | null
+          longterm_credits_issued: boolean | null
+          longterm_photo_url: string | null
+          longterm_registered_at: string | null
+          longterm_reminder_sent_at: string | null
+          marketing_consent: boolean | null
           photo_url: string | null
           reg_id: string
           registered_at: string | null
+          research_consent: boolean | null
           review_text: string | null
+          satisfaction: number | null
           serial_token: string | null
         }
         Insert: {
+          consented_at?: string | null
           credits_issued?: boolean | null
           customer_name?: string | null
           customer_phone?: string | null
+          discomfort?: string[] | null
           healing_credits_issued?: boolean | null
           healing_photo_url?: string | null
           healing_registered_at?: string | null
+          healing_reminder2_sent_at?: string | null
+          healing_reminder_sent_at?: string | null
+          healing_review_text?: string | null
+          longterm_credits_issued?: boolean | null
+          longterm_photo_url?: string | null
+          longterm_registered_at?: string | null
+          longterm_reminder_sent_at?: string | null
+          longterm_review_text?: string | null
+          marketing_consent?: boolean | null
           photo_url?: string | null
           reg_id?: string
           registered_at?: string | null
+          research_consent?: boolean | null
           review_text?: string | null
+          satisfaction?: number | null
           serial_token?: string | null
         }
         Update: {
+          consented_at?: string | null
           credits_issued?: boolean | null
           customer_name?: string | null
           customer_phone?: string | null
+          discomfort?: string[] | null
           healing_credits_issued?: boolean | null
           healing_photo_url?: string | null
           healing_registered_at?: string | null
+          healing_reminder2_sent_at?: string | null
+          healing_reminder_sent_at?: string | null
+          healing_review_text?: string | null
+          longterm_credits_issued?: boolean | null
+          longterm_photo_url?: string | null
+          longterm_registered_at?: string | null
+          longterm_reminder_sent_at?: string | null
+          longterm_review_text?: string | null
+          marketing_consent?: boolean | null
           photo_url?: string | null
           reg_id?: string
           registered_at?: string | null
+          research_consent?: boolean | null
           review_text?: string | null
+          satisfaction?: number | null
           serial_token?: string | null
         }
         Relationships: [

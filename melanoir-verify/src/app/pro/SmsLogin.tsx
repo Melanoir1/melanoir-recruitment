@@ -15,6 +15,7 @@ export default function SmsLogin({ onLogin }: Props) {
   const [otp, setOtp] = useState('')
   const [name, setName] = useState('')
   const [shopName, setShopName] = useState('')
+  const [region, setRegion] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -59,7 +60,7 @@ export default function SmsLogin({ onLogin }: Props) {
     const res = await fetch('/api/auth/verify-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone, code: otp, name, shop_name: shopName }),
+      body: JSON.stringify({ phone, code: otp, name, shop_name: shopName, region }),
     })
     const j = await res.json()
     setLoading(false)
@@ -148,6 +149,15 @@ export default function SmsLogin({ onLogin }: Props) {
                   onChange={e => setShopName(e.target.value)}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
                   placeholder="○○ 뷰티샵"
+                />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">활동 지역</label>
+                <input
+                  value={region}
+                  onChange={e => setRegion(e.target.value)}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                  placeholder="활동 지역 (예: 서울 강남구)"
                 />
               </div>
               {error && <p className="text-red-500 text-xs">{error}</p>}

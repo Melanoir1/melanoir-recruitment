@@ -2,15 +2,22 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="icon" href="/favicon-32.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <title>Cosmetics — Melanoir</title>
   <meta name="description" content="멜라닌 화장품 성분 기능화 — 광보호·항산화를 담은 새로운 원료.">
+  <meta property="og:title" content="Cosmetics — Melanoir">
+  <meta property="og:description" content="멜라닌 화장품 성분 기능화 — 광보호·항산화를 담은 새로운 원료.">
+  <meta property="og:url" content="https://melanoir.co.kr/technology/cosmetics">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="../../assets/melanoir-shell.css" />
   <link rel="stylesheet" href="../../assets/melanoir-lang.css" />
+  <link rel="stylesheet" href="../../assets/mnr-ui.css" />
   <style>
     .tech-hero {
       padding: 52px var(--shell-pad-x) 40px;
@@ -120,6 +127,8 @@
         <nav class="nav" aria-label="Main">
           <a href="/products">Products</a>
           <a href="/#technology">Technology</a>
+          <a href="/register">Club</a>
+          <a href="/pro">Pro</a>
         </nav>
       </div>
       <a class="topbar-hire" href="/recruitment">[2026년 상반기 채용] 멜라누아 R&amp;D 팀에 합류하기</a>
@@ -160,14 +169,10 @@
         <a class="tech-back-cta" href="/">홈으로 돌아가기</a>
       </section>
     </main>
-    <footer class="site-footer">
-      <p>© Melanoir</p>
-      <p>문의·쇼핑: <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p>
-    </footer>
+    <div data-mnr-explore="exclude:products" data-theme="dark"></div>
+    <div data-mnr-footer data-theme="dark"></div>
   </div>
-  <a class="melanoir-hire-fab" href="/recruitment" aria-label="2026년 상반기 채용 — 멜라누아 R&D 팀에 합류하기">
-    [2026년 상반기 채용]<br>멜라누아 R&amp;D 팀에 합류하기
-  </a>
+  <script src="../../assets/mnr-ui.js"></script>
   <script>
     (function () {
       var bar = document.getElementById("scrollProgress");

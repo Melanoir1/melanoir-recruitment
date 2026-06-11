@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase'
 
 export async function POST(req: NextRequest) {
-  const { phone, code, name, shop_name } = await req.json()
+  const { phone, code, name, shop_name, region } = await req.json()
   if (!phone || !code) {
     return NextResponse.json({ error: '전화번호와 인증번호를 입력해주세요.' }, { status: 400 })
   }
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
 
   const { data: newPractitioner, error } = await supabase
     .from('mnr_practitioners')
-    .insert({ phone: normalizedPhone, name, shop_name })
+    .insert({ phone: normalizedPhone, name, shop_name, region: region ?? null })
     .select()
     .single()
 

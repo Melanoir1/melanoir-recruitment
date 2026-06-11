@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
     .select(`
       procedure_at,
       technique,
-      practitioners (
+      mnr_practitioners (
         name,
         shop_name,
         region
@@ -70,7 +70,7 @@ export async function GET(req: NextRequest) {
       ? {
           procedure_at: procedure.procedure_at,
           technique: procedure.technique,
-          practitioner: procedure.practitioners,
+          practitioner: procedure.mnr_practitioners,
         }
       : null,
     registration: registration
