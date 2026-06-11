@@ -18,6 +18,7 @@
       links: [
         { label: "Embo", href: "/products/embo" },
         { label: "Photoshield Core", href: "/products/photoshieldcore" },
+        { label: "품질·안전 데이터", href: "/quality" },
         { label: "전체 제품", href: "/products" },
       ],
     },
