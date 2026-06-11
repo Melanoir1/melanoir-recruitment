@@ -67,14 +67,16 @@
 }
 .mnr-uft-group a:hover { color: var(--uft-head); }
 .mnr-uft-base {
-  margin: 10px 0 0;
+  margin: 10px 0 0 !important;
+  margin-bottom: 0 !important;
   padding-top: 10px;
   border-top: 1px solid var(--uft-line);
-  font-size: 9px;
-  line-height: 1.5;
-  color: var(--uft-dim);
+  font-size: 9px !important;
+  line-height: 1.5 !important;
+  color: var(--uft-dim) !important;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
-.mnr-uft-base a { color: var(--uft-dim); }
+.mnr-uft-base a { color: var(--uft-dim) !important; }
 
 /* 페이지 한정 법적 고지 (푸터 위 보존 블록 — embo 위생용품 고지 등) */
 .mnr-page-note {
@@ -182,10 +184,12 @@
 .mnr-explore-card .mnr-explore-cta::after { content: " →"; }
 
 .mnr-footer-legal {
-  margin: 12px 0 0;
+  margin: 12px 0 0 !important;
+  margin-bottom: 0 !important;
   padding-top: 10px;
   border-top: 1px solid rgba(255,255,255,0.08);
-  font-size: 9px;
-  line-height: 1.5;
-  color: #86868b;
+  font-size: 9px !important;
+  line-height: 1.5 !important;
+  color: #86868b !important;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
