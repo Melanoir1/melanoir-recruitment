@@ -23,11 +23,10 @@
       ],
     },
     {
-      title: "Club",
+      title: "Membership",
       links: [
         { label: "멜라누아 클럽 (정품 등록)", href: "/register" },
         { label: "멜라누아 프로", href: "/pro" },
-        { label: "정품 확인", href: "https://verify.melanoir.co.kr" },
       ],
     },
     {
