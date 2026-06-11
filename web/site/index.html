@@ -162,6 +162,20 @@
       color: var(--shell-text-dim);
     }
 
+    .hero-cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+    .hero-cta {
+      display: inline-flex; align-items: center; padding: 11px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 2px;
+      color: rgba(255, 255, 255, 0.92); text-decoration: none;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      font-family: var(--shell-font-ko); text-transform: none;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .hero-cta:hover { background: rgba(255, 255, 255, 0.08); border-color: #fff; }
+    .hero-cta--primary { background: rgba(255, 255, 255, 0.92); color: #000; border-color: transparent; }
+    .hero-cta--primary:hover { background: #fff; }
+    .hero-cta-row { transition-delay: 260ms; }
+
     .scroll-hint {
       margin: 36px 0 0;
       font-size: 11px;

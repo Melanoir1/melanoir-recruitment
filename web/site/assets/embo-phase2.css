@@ -1,0 +1,221 @@
+/* ============================================================
+   Melanoir Embo — Phase 2 컴포넌트
+   ① 로컬 네비 (.embo-ln)  ② 하이라이트 갤러리 (.embo-hl)
+   ③ '왜 정품 Embo인가' 타일 (.embo-why)
+   /products/embo, /products/embo/specs 에서 사용.
+   ============================================================ */
+
+/* ── ① 로컬 네비 (mnr-header 바로 아래 sticky) ── */
+.embo-ln {
+  position: sticky;
+  top: 52px; /* mnr-header 높이 */
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.embo-ln-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.embo-ln-name {
+  font-family: var(--font-display, "Barlow Condensed", sans-serif);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #1d1d1f;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.embo-ln-tabs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.embo-ln-tabs::-webkit-scrollbar { display: none; }
+.embo-ln-tabs a {
+  font-size: 12px;
+  font-weight: 500;
+  color: #424245;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+.embo-ln-tabs a:hover { color: #1d1d1f; }
+.embo-ln-tabs a.is-here { color: #1d1d1f; font-weight: 600; }
+.embo-ln-cta {
+  flex-shrink: 0;
+  display: inline-block;
+  background: #1d1d1f;
+  color: #ffffff !important;
+  padding: 7px 16px;
+  border-radius: 980px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.embo-ln-cta:hover { opacity: 0.85; }
+@media (max-width: 480px) {
+  .embo-ln-inner { padding: 0 16px; gap: 12px; }
+  .embo-ln-tabs { gap: 12px; }
+}
+
+/* ── ② 하이라이트 갤러리 ── */
+.embo-hl {
+  background: #fbfbfd;
+  border-top: 1px solid #f5f5f7;
+  border-bottom: 1px solid #f5f5f7;
+  padding: 80px 0;
+}
+.embo-hl .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.embo-hl-eyebrow {
+  font-size: 13px !important;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #86868b;
+  margin-bottom: 10px !important;
+}
+.embo-hl-title {
+  font-family: var(--font-display, "Barlow Condensed", sans-serif);
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
+  font-weight: 700 !important;
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+  color: #1d1d1f;
+}
+.embo-hl-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 600px) { .embo-hl-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .embo-hl-grid { grid-template-columns: repeat(3, 1fr); } }
+.embo-hl-card {
+  background: #ffffff;
+  border: 1px solid #f0f0f2;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+.embo-hl-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+.embo-hl-body { padding: 22px 24px 26px; }
+.embo-hl-stat {
+  font-family: var(--font-display, "Barlow Condensed", sans-serif);
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #1d1d1f;
+  padding: 34px 24px 0;
+}
+.embo-hl-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 6px;
+}
+.embo-hl-card p {
+  font-size: 13px !important;
+  color: #86868b;
+  line-height: 1.6;
+  margin: 0 !important;
+}
+
+/* ── ③ '왜 정품 Embo인가' 타일 ── */
+.embo-why {
+  background: #f5f5f7;
+  border-bottom: 1px solid #e8e8ed;
+  padding: 100px 0;
+}
+.embo-why .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.embo-why-eyebrow {
+  font-size: 13px !important;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #86868b;
+  margin-bottom: 10px !important;
+}
+.embo-why-title {
+  font-family: var(--font-display, "Barlow Condensed", sans-serif);
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
+  font-weight: 700 !important;
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+  color: #1d1d1f;
+}
+.embo-why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+@media (min-width: 769px) { .embo-why-grid { grid-template-columns: repeat(3, 1fr); } }
+.embo-why-card {
+  background: #ffffff;
+  border: 1px solid #e8e8ed;
+  border-radius: 24px;
+  padding: 36px 30px;
+}
+.embo-why-card .value {
+  font-family: var(--font-display, "Barlow Condensed", sans-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #1d1d1f;
+  margin-bottom: 10px;
+}
+.embo-why-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 8px;
+}
+.embo-why-card p {
+  font-size: 13px !important;
+  color: #6e6e73;
+  line-height: 1.65;
+  margin: 0 !important;
+}
+.embo-why-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ── Specs 안내 콜아웃 (표 이전 자리) ── */
+.embo-specs-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d1d1f;
+  text-decoration: none;
+  border-bottom: 1px solid #d2d2d7;
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+.embo-specs-link::after { content: "→"; }
+.embo-specs-link:hover { border-color: #1d1d1f; }

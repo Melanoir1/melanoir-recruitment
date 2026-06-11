@@ -5,6 +5,8 @@
   "use strict";
 
   var HIRE_KO = "[2026년 상반기 채용] 멜라누아 R&amp;D 팀에 합류하기";
+  var NOTIFY_FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLScww4VRsTzfafhJn3PO3hi6w8M1v3bLapLAzZf-eHKsI3w2Jg/viewform?usp=header";
 
   var PAGE_META = {
     kr: {
@@ -42,6 +44,8 @@
       promisePrimary: "지구에서 가장 안전한 Black",
       promiseSecondary: "For the Safest Black in the Universe.",
       scroll: "SCROLL",
+      heroCtaEmbo: "Embo 살펴보기",
+      heroCtaNotify: "출시 알림 받기",
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "왜 멜라닌인가요?",
       melaninImgAlt: "멜라닌과 광·산화 환경을 상징하는 비주얼",
@@ -80,6 +84,8 @@
       promisePrimary: "For the Safest Black in the Universe.",
       promiseSecondary: "",
       scroll: "SCROLL",
+      heroCtaEmbo: "Explore Embo",
+      heroCtaNotify: "Get launch updates",
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "Visual symbolizing melanin in light and oxidative environments",
@@ -118,6 +124,8 @@
       promisePrimary: "Pour le Black le plus sûr sur Terre.",
       promiseSecondary: "",
       scroll: "DÉFILER",
+      heroCtaEmbo: "Découvrir Embo",
+      heroCtaNotify: "Être informé du lancement",
       melaninEyebrow: "LA MATIÈRE",
       melaninTitle: "POURQUOI LA MÉLANINE",
       melaninImgAlt: "Visuel évoquant la mélanine face à la lumière et à l’oxydation",
@@ -156,6 +164,8 @@
       promisePrimary: "地球で最も安全な Black。",
       promiseSecondary: "",
       scroll: "SCROLL",
+      heroCtaEmbo: "Emboを見る",
+      heroCtaNotify: "発売通知を受け取る",
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "メラニンと光・酸化環境を象徴するビジュアル",
@@ -194,6 +204,8 @@
       promisePrimary: "地球上最安全的 Black。",
       promiseSecondary: "",
       scroll: "SCROLL",
+      heroCtaEmbo: "了解 Embo",
+      heroCtaNotify: "获取上市通知",
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "象征黑色素与光、氧化环境的视觉",
@@ -296,6 +308,15 @@
       t.mission +
       "</span></h1>" +
       promiseBlock(t) +
+      '<div class="hero-cta-row reveal">' +
+      '<a class="hero-cta hero-cta--primary" href="/products/embo">' +
+      t.heroCtaEmbo +
+      "</a>" +
+      '<a class="hero-cta" href="' +
+      NOTIFY_FORM_URL +
+      '" target="_blank" rel="noopener noreferrer">' +
+      t.heroCtaNotify +
+      "</a></div>" +
       '<p class="scroll-hint reveal">' +
       t.scroll +
       "</p></section>" +
