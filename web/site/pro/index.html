@@ -2,13 +2,21 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="/favicon-32.png" type="image/png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <title>Melanoir Pro — 멜라누아 프로</title>
     <meta property="og:title" content="멜라누아 프로 — Melanoir Pro">
     <meta property="og:description" content="엠보 시술자를 위한 포인트 프로그램.">
     <meta property="og:url" content="https://melanoir.co.kr/pro">
+    <meta property="og:image" content="[OG_IMAGE_URL]">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="[OG_IMAGE_URL]">
     <link rel="stylesheet" href="/assets/design-tokens.css">
     <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
+    <link rel="stylesheet" href="/assets/mnr-ui.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
@@ -117,9 +125,9 @@
     </button>
     <nav class="mnr-nav">
       <a href="/products">Products</a>
-      <a href="/pro" class="is-current">Pro</a>
-      <a href="/register">정품등록</a>
       <a href="/#technology">Technology</a>
+      <a href="/register">Club</a>
+      <a href="/pro" class="is-current">Pro</a>
     </nav>
   </div>
 </header>
@@ -138,6 +146,10 @@
         </p>
     </div>
 </section>
+
+<div style="background:#fbfbfd; border-bottom:1px solid #f5f5f7; padding:14px 22px; text-align:center; font-size:13px; color:#6e6e73;">
+  시술을 받으신 고객이신가요? <a href="/register" style="color:#1d1d1f; font-weight:600;">멜라누아 클럽 (정품 등록) →</a>
+</div>
 
 
 <!-- ══════════════════════════════════════════════════════
@@ -276,7 +288,7 @@
             <div class="how-card">
                 <div class="how-num">02</div>
                 <div class="how-title">시술 등록</div>
-                <p class="how-desc">제품 박스의 QR을 스캔하여 시술 내용을 등록합니다. 시술 당일 처리됩니다.</p>
+                <p class="how-desc">정품 보증서의 QR을 스캔하여 시술 내용을 등록합니다. 시술 당일 처리됩니다.</p>
             </div>
             <div class="how-card">
                 <div class="how-num">03</div>
@@ -285,6 +297,21 @@
             </div>
         </div>
     </div>
+</section>
+
+<!-- 포인트 사용처 · 구매 -->
+<section class="section">
+  <div class="container">
+    <h3 class="reveal">Points</h3>
+    <h2 class="reveal delay-1">포인트는 이렇게 씁니다.</h2>
+    <p class="reveal delay-2" style="max-width:620px;">
+      적립된 프로 포인트는 엠보 구매 시 할인으로 사용합니다. 유효기간은 적립일로부터 12개월입니다.
+      구매는 아래 채널로 문의하세요. 정식 판매 채널이 오픈되면 회원에게 우선 안내됩니다.
+    </p>
+    <div class="reveal delay-2" style="margin-top:28px;">
+      <a href="/contact" class="btn-primary">구매 문의하기</a>
+    </div>
+  </div>
 </section>
 
 
@@ -301,10 +328,11 @@
       <h2 style="margin-bottom: 16px;">지금 Pro를 시작하세요.</h2>
       <p style="color: var(--color-text-muted, #6e6e73); max-width: 520px; margin: 0 auto 36px;">
         멜라누아 엠보를 사용하는 시술자라면 Pro 프로그램에 참여할 수 있습니다.
+        휴대폰 인증 후 시술자·시술샵 정보를 입력하면 즉시 가입됩니다.
         시술 등록마다 포인트가 쌓이고, 등급에 따라 혜택이 늘어납니다.
       </p>
-      <a href="/register" class="btn-secondary" style="margin-right: 12px;">정품 등록하기</a>
-      <a href="/products/embo" class="btn-primary">엠보 알아보기</a>
+      <a href="https://verify.melanoir.co.kr/pro" class="btn-primary" style="margin-right: 12px;">프로 시작하기</a>
+      <a href="/products/embo" class="btn-secondary">엠보 알아보기</a>
     </div>
   </div>
 </section>
@@ -313,26 +341,15 @@
 <!-- ══════════════════════════════════════════════════════
   FOOTER
 ══════════════════════════════════════════════════════ -->
-<footer class="mnr-footer">
-  <div class="mnr-footer-inner">
-    <p class="mnr-footer-corp">
-      Melanoir Co., Ltd. | 인천광역시 서구 정서진로 410, A312<br>
-      © 2026 Melanoir. All rights reserved.
-    </p>
-    <nav class="mnr-footer-nav">
-      <a href="/products">Products</a>
-      <a href="/pro">Pro</a>
-      <a href="/register">정품등록</a>
-      <a href="/privacy">개인정보처리방침</a>
-    </nav>
-  </div>
-</footer>
+<div data-mnr-explore="exclude:pro"></div>
+<div data-mnr-footer data-theme="light"></div>
 
 <div id="backToTop" class="back-to-top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </div>
 
 <script src="/assets/mnr-nav.js"></script>
+<script src="/assets/mnr-ui.js"></script>
 <script>
     window.onbeforeunload = function() { window.scrollTo(0, 0); };
     if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>품질·안전 데이터 — Melanoir</title>
+  <meta name="description" content="멜라누아 제품의 공인시험 결과 — 수치로 증명하는 안전.">
+  <link rel="stylesheet" href="/assets/design-tokens.css">
+  <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
+  <link rel="stylesheet" href="/assets/mnr-ui.css">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--color-bg); color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.6; word-break: keep-all; letter-spacing: -0.01em;
+    }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    .hero { padding: 72px 0 56px; border-bottom: 1px solid var(--color-bg-subtle); }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-dim); margin-bottom: 12px; }
+    h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px; }
+    .hero-lead { font-size: 15px; color: var(--color-text-muted); max-width: 580px; line-height: 1.75; }
+
+    .block { padding: 64px 0; border-bottom: 1px solid var(--color-bg-subtle); }
+    .block-product { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-dim); margin-bottom: 8px; }
+    h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .verdict {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin: 14px 0 26px; padding: 8px 16px;
+      background: var(--color-bg-subtle); border-radius: 980px;
+      font-size: 13px; font-weight: 700; color: var(--color-ink);
+    }
+    .verdict .dot { width: 7px; height: 7px; border-radius: 50%; background: #1d1d1f; }
+    .block-desc { font-size: 14px; color: var(--color-text-muted); max-width: 620px; line-height: 1.75; margin-bottom: 28px; }
+
+    table { width: 100%; border-collapse: collapse; }
+    tr { border-bottom: 1px solid var(--color-line); }
+    thead tr { border-top: 2px solid var(--color-ink); border-bottom: 1px solid var(--color-line-strong); }
+    th, td { padding: 13px 4px; font-size: 14px; text-align: left; vertical-align: top; }
+    thead th { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); }
+    tbody th { font-weight: 600; color: var(--color-ink); width: 38%; }
+    td.std { color: var(--color-text-muted); }
+    td.res { font-weight: 700; color: var(--color-ink); text-align: right; white-space: nowrap; }
+
+    .scale { margin-top: 22px; }
+    .scale caption { caption-side: top; text-align: left; font-size: 12px; font-weight: 700; color: var(--color-text-dim); padding-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .scale .is-result th, .scale .is-result td { background: var(--color-bg-alt); font-weight: 700; }
+
+    .disclaimer { margin: 56px 0 72px; padding: 22px 24px; background: var(--color-bg-alt); border: 1px solid var(--color-line); border-radius: 12px; font-size: 12px; color: var(--color-text-dim); line-height: 1.8; }
+    .links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+  </style>
+</head>
+<body>
+<header class="mnr-header">
+  <div class="mnr-header-inner">
+    <a class="mnr-header-logo" href="/">
+      <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" style="filter: invert(1);">
+    </a>
+    <button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="mnr-nav">
+      <a href="/products">Products</a>
+      <a href="/#technology">Technology</a>
+      <a href="/register">Club</a>
+      <a href="/pro">Pro</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <p class="hero-eyebrow">Quality &amp; Safety</p>
+      <h1>수치로 증명합니다.</h1>
+      <p class="hero-lead">
+        멜라누아의 안전은 선언이 아니라 결과입니다.
+        아래 데이터는 공인시험을 통해 확인된 결과이며, 제품별 시험 항목과 판정을 그대로 옮겼습니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="block" id="embo">
+    <div class="container">
+      <p class="block-product">Melanoir Embo · 문신용염료</p>
+      <h2>위생용품 자가품질검사.</h2>
+      <p class="verdict"><span class="dot"></span>종합판정 — 적합</p>
+      <p class="block-desc">
+        위생용품 관리법에 따른 자가품질검사 결과입니다.
+        중금속 7종, 보존제(파라벤류), 포름알데히드, 다핵방향족탄화수소, 무균 시험까지
+        11개 전 항목에서 기준 이내 — 전 항목 불검출·적합 판정을 받았습니다.
+      </p>
+      <table>
+        <thead>
+          <tr><th>시험 항목</th><th>기준</th><th style="text-align:right;">결과</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>바륨 (mg/kg)</th><td class="std">500 이하</td><td class="res">불검출</td></tr>
+          <tr><th>코발트 (mg/kg)</th><td class="std">250 이하</td><td class="res">불검출</td></tr>
+          <tr><th>구리 (mg/kg)</th><td class="std">250 이하</td><td class="res">불검출</td></tr>
+          <tr><th>셀레늄 (mg/kg)</th><td class="std">20 이하</td><td class="res">불검출</td></tr>
+          <tr><th>안티몬 (mg/kg)</th><td class="std">20 이하</td><td class="res">불검출</td></tr>
+          <tr><th>주석 (mg/kg)</th><td class="std">500 이하</td><td class="res">불검출</td></tr>
+          <tr><th>아연 (mg/kg)</th><td class="std">500 이하</td><td class="res">불검출</td></tr>
+          <tr><th>파라벤류 (mg/kg)</th><td class="std">단일물질 4,000 이하 · 혼합물 8,000 이하</td><td class="res">불검출</td></tr>
+          <tr><th>포름알데히드 (mg/kg)</th><td class="std">200 이하</td><td class="res">불검출</td></tr>
+          <tr><th>다핵방향족탄화수소 (mg/kg)</th><td class="std">총 합으로 0.5 이하 (벤조-a-피렌 0.005 이하)</td><td class="res">불검출</td></tr>
+          <tr><th>무균 시험</th><td class="std">불검출</td><td class="res">적합</td></tr>
+        </tbody>
+      </table>
+      <div class="links">
+        <a class="btn-secondary" href="/products/embo/specs">Embo 전체 스펙</a>
+        <a class="btn-secondary" href="/products/embo">Embo 개요</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="photoshield">
+    <div class="container">
+      <p class="block-product">Melanoir Photoshield Core</p>
+      <h2>피부 첩포 일차자극 인체적용시험.</h2>
+      <p class="verdict"><span class="dot"></span>자극 지수 0.00 — 비자극성 (Excellent)</p>
+      <p class="block-desc">
+        GCP 및 식품의약품안전처 관련 규정에 따라 수행된 인체적용시험 결과입니다.
+        시험 제품을 챔버에 로딩하여 피부에 24시간 부착한 뒤, 패치 제거 30분 후와 24시간 후
+        피부과 전문의가 자극 유무를 판정했습니다.
+      </p>
+      <table class="scale">
+        <caption>자극성 평가 척도</caption>
+        <thead>
+          <tr><th>피부 자극 지수</th><th>평가</th><th style="text-align:right;">판정</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-result"><th>0.00 ~ 0.25</th><td class="std">비(무)자극성 (Excellent)</td><td class="res">본 제품 — 0.00</td></tr>
+          <tr><th>0.26 ~ 1.00</th><td class="std">약한 자극성 (Good)</td><td class="res"></td></tr>
+          <tr><th>1.01 ~ 2.50</th><td class="std">중증도 자극성 (Bad)</td><td class="res"></td></tr>
+          <tr><th>2.51 ~ 4.00</th><td class="std">강한 자극성 (Very Bad)</td><td class="res"></td></tr>
+        </tbody>
+      </table>
+      <div class="links">
+        <a class="btn-secondary" href="/products/photoshieldcore">Photoshield Core 알아보기</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="disclaimer">
+      본 페이지의 결과는 공인시험기관이 발급한 시험·검사성적서 및 인체적용시험 결과보고서에 따른 것입니다.
+      결과는 의뢰된 시험 항목과 특정 시험 조건에 한하며, 개인의 피부 타입이나 사용 환경에 따라 차이가 있을 수 있습니다.
+      성적서 원본의 확인이 필요한 경우 official@melanoir.co.kr 로 문의해 주세요.
+    </div>
+  </div>
+</main>
+
+<div data-mnr-explore="exclude:none"></div>
+<div data-mnr-footer data-theme="light"></div>
+
+<script src="/assets/mnr-nav.js"></script>
+<script src="/assets/mnr-ui.js"></script>
+</body>
+</html>

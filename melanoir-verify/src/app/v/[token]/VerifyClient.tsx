@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 /* ── 타입 ── */
 interface PractitionerData {
@@ -27,6 +27,7 @@ interface VerifyData {
     review_text: string | null
     photo_url: string | null
     healing_photo_url: string | null
+    longterm_photo_url: string | null
     credits_issued: boolean | null
     healing_credits_issued: boolean | null
   } | null
@@ -42,6 +43,7 @@ type Step =
   | 'no_procedure'   // 고객: 시술자 미등록 안내
   | 'register'       // 고객: 정품 등록 폼
   | 'healing'        // 고객: 힐링 사진 업로드
+  | 'longterm'       // 고객: 6개월 경과 사진 업로드
   | 'done'           // 완료 (크레딧 지급)
   | 'complete'       // 모든 등록 완료
 
@@ -49,6 +51,20 @@ const TECHNIQUE_LABELS: Record<string, string> = {
   hairstroke: '헤어스트로크',
   combo: '콤보',
   machine_gradient: '머신 그라데이션',
+}
+
+const PHOTO_GUIDE = [
+  '눈썹이 화면에 가득 차도록 가까이',
+  '정면에서, 밝은 곳(자연광)에서',
+  '얼굴 전체가 나오지 않아도 됩니다',
+]
+
+function PhotoGuide() {
+  return (
+    <ul className="text-[11px] text-gray-400 mb-2 space-y-0.5 list-disc pl-4">
+      {PHOTO_GUIDE.map(line => <li key={line}>{line}</li>)}
+    </ul>
+  )
 }
 
 function formatDate(dateStr: string | null | undefined): string {
@@ -71,9 +87,9 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 export default function VerifyClient({ data }: { data: VerifyData }) {
   const { token, lot, shipment, procedure, registration } = data
 
-  /* 초기 step 결정: registration이 이미 완전히 끝났으면 'complete'로 시작 */
+  /* 초기 step 결정 */
   function initialStep(): Step {
-    if (registration?.healing_photo_url) return 'complete'
+    if (registration?.healing_photo_url && registration?.longterm_photo_url) return 'complete'
     return 'role'
   }
 
@@ -87,6 +103,7 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
   const [proOtp, setProOtp] = useState('')
   const [proName, setProName] = useState('')
   const [proShop, setProShop] = useState('')
+  const [proRegion, setProRegion] = useState('')
   const [practitionerId, setPractitionerId] = useState<string | null>(null)
 
   /* 시술 정보 */
@@ -95,11 +112,24 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
     new Date().toISOString().split('T')[0]
   )
   const [customerPhone, setCustomerPhone] = useState('')
+  const [procArea, setProcArea] = useState('eyebrow')
+  const [procIsRetouch, setProcIsRetouch] = useState(false)
+  const [showProDetail, setShowProDetail] = useState(false)
+  const [procSkinType, setProcSkinType] = useState('')
+  const [procDeviceType, setProcDeviceType] = useState('')
+  const [procNeedle, setProcNeedle] = useState('')
+  const [procDilution, setProcDilution] = useState('')
 
   /* 고객 등록 폼 */
   const [custName, setCustName] = useState('')
   const [custPhone, setCustPhone] = useState('')
-  const [custReview, setCustReview] = useState('')
+  const [custPhoto, setCustPhoto] = useState<File | null>(null)
+  const [photoConsent, setPhotoConsent] = useState(false)
+  const [marketingConsent, setMarketingConsent] = useState(false)
+  const [healingReview, setHealingReview] = useState('')
+  const [longtermReview, setLongtermReview] = useState('')
+  const [longtermSatisfaction, setLongtermSatisfaction] = useState(0)
+  const [creditBalance, setCreditBalance] = useState<number | null>(null)
 
   const practitioner = procedure?.mnr_practitioners
     ? Array.isArray(procedure.mnr_practitioners)
@@ -145,7 +175,7 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
     const res = await fetch('/api/auth/verify-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone: proPhone, code: proOtp, name: proName, shop_name: proShop }),
+      body: JSON.stringify({ phone: proPhone, code: proOtp, name: proName, shop_name: proShop, region: proRegion }),
     })
     const j = await res.json()
     setLoading(false)
@@ -168,6 +198,12 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
         procedure_at: procedureAt,
         technique,
         customer_phone: customerPhone || null,
+        area: procArea,
+        is_retouch: procIsRetouch,
+        skin_type: procSkinType || null,
+        device_type: procDeviceType || null,
+        needle_type: procNeedle || null,
+        dilution: procDilution || null,
       }),
     })
     const j = await res.json()
@@ -179,20 +215,35 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
   /* ── 고객: 역할 선택 후 분기 ── */
   function selectCustomer() {
     if (!procedure) { setStep('no_procedure'); return }
-    if (registration?.healing_photo_url) { setStep('complete'); return }
+    if (registration?.healing_photo_url) {
+      setStep(registration?.longterm_photo_url ? 'complete' : 'longterm')
+      return
+    }
     if (registration) { setStep('healing'); return }
     setStep('register')
   }
 
+  useEffect(() => {
+    if (step !== 'complete') return
+    fetch(`/api/credits/balance?token=${encodeURIComponent(token)}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(j => { if (j?.balance != null) setCreditBalance(j.balance) })
+      .catch(() => {})
+  }, [step, token])
+
   /* ── 고객: 정품 등록 ── */
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault()
+    if (!custPhoto) { setError('시술 부위 사진을 첨부해주세요.'); return }
+    if (!photoConsent) { setError('시술 부위 사진 수집·이용 동의가 필요합니다.'); return }
     setLoading(true); setError(null)
     const formData = new FormData()
     formData.append('token', token)
     formData.append('customer_name', custName)
     formData.append('customer_phone', custPhone)
-    formData.append('review_text', custReview)
+    formData.append('photo_consent', String(photoConsent))
+    formData.append('marketing_consent', String(marketingConsent))
+    formData.append('photo', custPhoto)
     const res = await fetch('/api/registration', { method: 'POST', body: formData })
     const j = await res.json()
     setLoading(false)
@@ -203,11 +254,30 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
 
   /* ── 고객: 힐링 사진 업로드 ── */
   const [healingFile, setHealingFile] = useState<File | null>(null)
-  async function handleHealing(e: React.FormEvent) {
+  const [longtermFile, setLongtermFile] = useState<File | null>(null)
+  async function handleLongterm(e: React.FormEvent) {
     e.preventDefault()
+    if (longtermSatisfaction === 0) { setError('만족도를 선택해주세요.'); return }
     setLoading(true); setError(null)
     const formData = new FormData()
     formData.append('token', token)
+    formData.append('satisfaction', String(longtermSatisfaction))
+    if (longtermReview.trim()) formData.append('review_text', longtermReview)
+    if (longtermFile) formData.append('longterm_photo', longtermFile)
+    const res = await fetch('/api/registration/longterm', { method: 'POST', body: formData })
+    const j = await res.json()
+    setLoading(false)
+    if (!res.ok) { setError(j.error ?? '업로드 실패'); return }
+    setCreditsEarned(j.credits_earned ?? 0)
+    setStep('done')
+  }
+  async function handleHealing(e: React.FormEvent) {
+    e.preventDefault()
+    if (!healingReview.trim()) { setError('후기를 입력해주세요.'); return }
+    setLoading(true); setError(null)
+    const formData = new FormData()
+    formData.append('token', token)
+    formData.append('review_text', healingReview)
     if (healingFile) formData.append('healing_photo', healingFile)
     const res = await fetch('/api/registration/healing', { method: 'POST', body: formData })
     const j = await res.json()
@@ -349,6 +419,7 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
             <form onSubmit={registerPro} className="space-y-4">
               <InputField label="이름" required value={proName} onChange={e => setProName(e.target.value)} placeholder="홍길동" />
               <InputField label="샵 이름" required value={proShop} onChange={e => setProShop(e.target.value)} placeholder="○○ 뷰티샵" />
+              <InputField label="활동 지역" value={proRegion} onChange={e => setProRegion(e.target.value)} placeholder="활동 지역 (예: 서울 강남구)" />
               {error && <p className="text-red-500 text-xs">{error}</p>}
               <PrimaryBtn disabled={loading}>{loading ? '등록 중...' : '계속'}</PrimaryBtn>
             </form>
@@ -380,6 +451,67 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
                   onChange={e => setProcedureAt(e.target.value)}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
                 />
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">시술 부위 *</label>
+                <select
+                  value={procArea} onChange={e => setProcArea(e.target.value)}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                >
+                  <option value="eyebrow">눈썹</option>
+                  <option value="eyeliner">아이라인</option>
+                  <option value="lip">입술</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">시술 구분 *</label>
+                <select
+                  value={procIsRetouch ? 'retouch' : 'first'}
+                  onChange={e => setProcIsRetouch(e.target.value === 'retouch')}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                >
+                  <option value="first">첫 시술</option>
+                  <option value="retouch">리터치</option>
+                </select>
+              </div>
+              <div className="border border-gray-100 rounded-xl">
+                <button
+                  type="button"
+                  onClick={() => setShowProDetail(v => !v)}
+                  className="w-full px-4 py-3 text-xs text-left text-gray-600 font-medium"
+                >
+                  {showProDetail ? '▾' : '▸'} 상세 데이터 입력 (선택 — 2개 이상 작성 시 프로 1,000P)
+                </button>
+                {showProDetail && (
+                  <div className="px-4 pb-4 space-y-3">
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1">고객 피부 타입</label>
+                      <select
+                        value={procSkinType} onChange={e => setProcSkinType(e.target.value)}
+                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                      >
+                        <option value="">선택 안 함</option>
+                        <option value="oily">지성</option>
+                        <option value="dry">건성</option>
+                        <option value="combination">복합성</option>
+                        <option value="sensitive">민감성</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1">시술 방식</label>
+                      <select
+                        value={procDeviceType} onChange={e => setProcDeviceType(e.target.value)}
+                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                      >
+                        <option value="">선택 안 함</option>
+                        <option value="machine">머신</option>
+                        <option value="manual">수지</option>
+                      </select>
+                    </div>
+                    <InputField label="니들 종류" value={procNeedle} onChange={e => setProcNeedle(e.target.value)} placeholder="예: 1R 0.25" />
+                    <InputField label="희석 비율" value={procDilution} onChange={e => setProcDilution(e.target.value)} placeholder="예: 원액 / 1:1" />
+                  </div>
+                )}
               </div>
               <InputField
                 label="고객 연락처 (선택)"
@@ -427,22 +559,36 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
               <div>
                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">정품 등록 — 크레딧 받기</p>
                 <p className="text-xs text-gray-400 mb-4 leading-relaxed">
-                  등록 완료 시 <strong className="text-black">10,000 크레딧</strong>이 즉시 지급됩니다.
-                  후기 작성 시 추가 5,000 크레딧.
+                  시술 직후 사진으로 <strong className="text-black">정품 시술 여부를 확인</strong>합니다.
+                  확인된 고객은 힐링 완료 시 <strong className="text-black">리터칭 케어(잉크 무상 지급) 대상</strong>이 됩니다.
+                  등록 완료 시 <strong className="text-black">20,000 크레딧</strong>이 적립됩니다.
                 </p>
               </div>
               <InputField label="이름" required value={custName} onChange={e => setCustName(e.target.value)} placeholder="홍길동" />
               <InputField label="연락처" required value={custPhone} onChange={e => setCustPhone(e.target.value)} placeholder="01012345678" />
               <div>
-                <label className="block text-xs text-gray-500 mb-1">후기 (선택 — 추가 5,000 크레딧)</label>
-                <textarea
-                  value={custReview} onChange={e => setCustReview(e.target.value)}
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black resize-none"
-                  rows={3} placeholder="시술 후 느낌을 자유롭게 작성해주세요."
+                <label className="block text-xs text-gray-500 mb-1">시술 부위 사진 *</label>
+                <PhotoGuide />
+                <input
+                  type="file" accept="image/*" required
+                  onChange={e => setCustPhoto(e.target.files?.[0] ?? null)}
+                  className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-gray-100 file:text-gray-700"
                 />
               </div>
+              <div className="space-y-2 pt-1">
+                <label className="flex items-start gap-2 text-xs text-gray-600">
+                  <input type="checkbox" checked={photoConsent} onChange={e => setPhotoConsent(e.target.checked)} className="mt-0.5" />
+                  <span>[필수] 실고객 확인을 위한 시술 부위 사진 수집·이용에 동의합니다</span>
+                </label>
+                <label className="flex items-start gap-2 text-xs text-gray-500">
+                  <input type="checkbox" checked={marketingConsent} onChange={e => setMarketingConsent(e.target.checked)} className="mt-0.5" />
+                  <span>[선택] 사례 소개(마케팅) 활용에 동의합니다</span>
+                </label>
+              </div>
               {error && <p className="text-red-500 text-xs">{error}</p>}
-              <PrimaryBtn disabled={loading}>{loading ? '등록 중...' : '등록 완료'}</PrimaryBtn>
+              <PrimaryBtn disabled={loading || !custPhoto || !photoConsent}>
+                {loading ? '등록 중...' : '등록 완료'}
+              </PrimaryBtn>
               <GhostBtn onClick={() => setStep('role')}>← 돌아가기</GhostBtn>
             </form>
           </>
@@ -453,18 +599,77 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
           <form onSubmit={handleHealing} className="bg-white rounded-2xl p-6 shadow-sm space-y-4">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">힐링 완료 사진</p>
             <p className="text-xs text-gray-500 leading-relaxed">
-              힐링 후 눈썹 사진을 업로드하면<br />
-              <strong className="text-black">15,000 크레딧 + 리터칭 잉크</strong>를 받으실 수 있습니다.
+              힐링 사진과 후기를 등록하면 <strong className="text-black">20,000 크레딧과 리터칭 잉크</strong>를 드립니다.
+              시술 후 <strong className="text-black">7~30일 사이</strong> 등록을 권장합니다.
             </p>
             <div>
+              <label className="block text-xs text-gray-500 mb-1">힐링 사진 *</label>
+              <PhotoGuide />
               <input
                 type="file" accept="image/*" required
                 onChange={e => setHealingFile(e.target.files?.[0] ?? null)}
                 className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-gray-100 file:text-gray-700"
               />
             </div>
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">후기 *</label>
+              <textarea
+                required value={healingReview} onChange={e => setHealingReview(e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black resize-none"
+                rows={3} placeholder="시술 경험과 힐링 결과를 들려주세요"
+              />
+            </div>
             {error && <p className="text-red-500 text-xs">{error}</p>}
-            <PrimaryBtn disabled={loading}>{loading ? '업로드 중...' : '사진 업로드'}</PrimaryBtn>
+            <PrimaryBtn disabled={loading || !healingReview.trim()}>
+              {loading ? '업로드 중...' : '등록 완료'}
+            </PrimaryBtn>
+            <GhostBtn onClick={() => setStep('role')}>← 돌아가기</GhostBtn>
+          </form>
+        )}
+
+        {/* ══ 고객: 6개월 경과 사진 ══ */}
+        {step === 'longterm' && (
+          <form onSubmit={handleLongterm} className="bg-white rounded-2xl p-6 shadow-sm space-y-4">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">6개월 기록</p>
+            <p className="text-xs text-gray-500 leading-relaxed">
+              6개월이 지난 지금의 사진과 한 줄 평을 남겨주세요.
+              <strong className="text-black"> 10,000 크레딧</strong>을 드립니다.
+            </p>
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">현재 사진 *</label>
+              <PhotoGuide />
+              <input
+                type="file" accept="image/*" required
+                onChange={e => setLongtermFile(e.target.files?.[0] ?? null)}
+                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-gray-100 file:text-gray-700"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">한 줄 후기 (선택)</label>
+              <input
+                value={longtermReview} onChange={e => setLongtermReview(e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                placeholder="지금 발색·만족도를 한 줄로 남겨주세요"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">만족도 *</label>
+              <div className="flex gap-2">
+                {[1, 2, 3, 4, 5].map(n => (
+                  <button
+                    key={n} type="button"
+                    onClick={() => setLongtermSatisfaction(n)}
+                    className={`flex-1 py-3 rounded-xl border text-lg transition-colors ${
+                      longtermSatisfaction >= n ? 'border-black bg-black text-white' : 'border-gray-200 text-gray-300'
+                    }`}
+                  >★</button>
+                ))}
+              </div>
+            </div>
+            {error && <p className="text-red-500 text-xs">{error}</p>}
+            <PrimaryBtn disabled={loading || longtermSatisfaction === 0}>
+              {loading ? '업로드 중...' : '등록 완료'}
+            </PrimaryBtn>
             <GhostBtn onClick={() => setStep('role')}>← 돌아가기</GhostBtn>
           </form>
         )}
@@ -487,7 +692,13 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
           <>
             <ProductCard />
             <Card className="text-center">
-              <p className="text-sm text-gray-500">모든 등록이 완료되었습니다. 감사합니다.</p>
+              <p className="text-sm text-gray-500 mb-3">모든 등록이 완료되었습니다. 감사합니다.</p>
+              {creditBalance != null && (
+                <p className="text-sm text-gray-600">
+                  누적 <span className="font-semibold text-black">{creditBalance.toLocaleString()} 크레딧</span>
+                  {' · '}유효기간 24개월
+                </p>
+              )}
             </Card>
           </>
         )}

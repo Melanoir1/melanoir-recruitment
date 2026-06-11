@@ -5,6 +5,8 @@
   "use strict";
 
   var HIRE_KO = "[2026년 상반기 채용] 멜라누아 R&amp;D 팀에 합류하기";
+  var NOTIFY_FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLScww4VRsTzfafhJn3PO3hi6w8M1v3bLapLAzZf-eHKsI3w2Jg/viewform?usp=header";
 
   var PAGE_META = {
     kr: {
@@ -34,7 +36,7 @@
       navAria: "Main",
       navProducts: "Products",
       navPro: "Pro",
-      navMembership: "정품등록",
+      navClub: "Club",
       navTechnology: "Technology",
       missionEyebrow: "OUR MISSION",
       mission: "우리의 미션은 멜라닌의 유익함을 모두가 누릴 수 있도록 하는 것입니다.",
@@ -42,6 +44,8 @@
       promisePrimary: "지구에서 가장 안전한 Black",
       promiseSecondary: "For the Safest Black in the Universe.",
       scroll: "SCROLL",
+      heroCtaEmbo: "Embo 살펴보기",
+      heroCtaNotify: "출시 알림 받기",
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "왜 멜라닌인가요?",
       melaninImgAlt: "멜라닌과 광·산화 환경을 상징하는 비주얼",
@@ -72,7 +76,7 @@
       navAria: "Main",
       navProducts: "Products",
       navPro: "Pro",
-      navMembership: "Register",
+      navClub: "Club",
       navTechnology: "Technology",
       missionEyebrow: "OUR MISSION",
       mission: "Our mission is to make the benefits of melanin accessible to everyone.",
@@ -80,6 +84,8 @@
       promisePrimary: "For the Safest Black in the Universe.",
       promiseSecondary: "",
       scroll: "SCROLL",
+      heroCtaEmbo: "Explore Embo",
+      heroCtaNotify: "Get launch updates",
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "Visual symbolizing melanin in light and oxidative environments",
@@ -110,7 +116,7 @@
       navAria: "Principal",
       navProducts: "Produits",
       navPro: "Pro",
-      navMembership: "Enregistrement",
+      navClub: "Club",
       navTechnology: "Technologie",
       missionEyebrow: "NOTRE MISSION",
       mission: "Notre mission est de rendre les bienfaits de la mélanine accessibles à tous.",
@@ -118,6 +124,8 @@
       promisePrimary: "Pour le Black le plus sûr sur Terre.",
       promiseSecondary: "",
       scroll: "DÉFILER",
+      heroCtaEmbo: "Découvrir Embo",
+      heroCtaNotify: "Être informé du lancement",
       melaninEyebrow: "LA MATIÈRE",
       melaninTitle: "POURQUOI LA MÉLANINE",
       melaninImgAlt: "Visuel évoquant la mélanine face à la lumière et à l’oxydation",
@@ -148,7 +156,7 @@
       navAria: "メイン",
       navProducts: "製品",
       navPro: "Pro",
-      navMembership: "正規登録",
+      navClub: "クラブ",
       navTechnology: "テクノロジー",
       missionEyebrow: "OUR MISSION",
       mission: "私たちのミッションは、メラニンの恩恵をすべての人が享受できるようにすることです。",
@@ -156,6 +164,8 @@
       promisePrimary: "地球で最も安全な Black。",
       promiseSecondary: "",
       scroll: "SCROLL",
+      heroCtaEmbo: "Emboを見る",
+      heroCtaNotify: "発売通知を受け取る",
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "メラニンと光・酸化環境を象徴するビジュアル",
@@ -186,7 +196,7 @@
       navAria: "主导航",
       navProducts: "产品",
       navPro: "Pro",
-      navMembership: "正品登记",
+      navClub: "俱乐部",
       navTechnology: "技术",
       missionEyebrow: "OUR MISSION",
       mission: "我们的使命，是让所有人都能享有黑色素的益处。",
@@ -194,6 +204,8 @@
       promisePrimary: "地球上最安全的 Black。",
       promiseSecondary: "",
       scroll: "SCROLL",
+      heroCtaEmbo: "了解 Embo",
+      heroCtaNotify: "获取上市通知",
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "象征黑色素与光、氧化环境的视觉",
@@ -269,14 +281,14 @@
       '<a href="/products">' +
       t.navProducts +
       "</a>" +
-      '<a href="/pro">' +
-      t.navPro +
-      "</a>" +
-      '<a href="/register">' +
-      t.navMembership +
-      "</a>" +
       '<a href="/#technology">' +
       t.navTechnology +
+      "</a>" +
+      '<a href="/register">' +
+      t.navClub +
+      "</a>" +
+      '<a href="/pro">' +
+      t.navPro +
       "</a>" +
       "</nav></div>" +
       '<a class="topbar-hire" href="/recruitment">' +
@@ -296,6 +308,15 @@
       t.mission +
       "</span></h1>" +
       promiseBlock(t) +
+      '<div class="hero-cta-row reveal">' +
+      '<a class="hero-cta hero-cta--primary" href="/products/embo">' +
+      t.heroCtaEmbo +
+      "</a>" +
+      '<a class="hero-cta" href="' +
+      NOTIFY_FORM_URL +
+      '" target="_blank" rel="noopener noreferrer">' +
+      t.heroCtaNotify +
+      "</a></div>" +
       '<p class="scroll-hint reveal">' +
       t.scroll +
       "</p></section>" +
@@ -379,10 +400,8 @@
       deferredLearnMoreLink("traj-cta", "/technology/cosmetics", t.learnMore) +
       "</article>" +
       "</div></section></div></main>" +
-      '<footer class="site-footer"><p>© Melanoir</p><p class="shell-i18n-prose">' +
-      t.footerShop +
-      ': <a href="https://melanoir.co.kr" target="_blank" rel="noopener noreferrer">melanoir.co.kr</a></p>' +
-      '<p><a href="/privacy/privacy">개인정보처리방침</a></p></footer>'
+      '<div data-mnr-explore="exclude:products" data-theme="dark"></div>' +
+      '<div data-mnr-footer data-theme="dark"></div>'
     );
   }
 

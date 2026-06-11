@@ -1,0 +1,184 @@
+/* ============================================================
+   Melanoir — 통합 푸터 + Keep Exploring 컴포넌트 (Phase 1)
+   mnr-ui.js 가 렌더링하는 마크업의 스타일.
+   [data-theme="light"](기본) / [data-theme="dark"] 지원.
+   ============================================================ */
+
+/* ── 통합 푸터 ── */
+.mnr-uft {
+  --uft-bg: #ffffff;
+  --uft-line: #e8e8ed;
+  --uft-head: #1d1d1f;
+  --uft-text: #6e6e73;
+  --uft-dim: #86868b;
+  background: var(--uft-bg);
+  border-top: 1px solid var(--uft-line);
+  padding: 48px 0 40px;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.mnr-uft[data-theme="dark"],
+[data-theme="dark"] .mnr-uft {
+  --uft-bg: #000000;
+  --uft-line: rgba(255, 255, 255, 0.14);
+  --uft-head: rgba(255, 255, 255, 0.92);
+  --uft-text: rgba(255, 255, 255, 0.55);
+  --uft-dim: rgba(255, 255, 255, 0.35);
+}
+.mnr-uft-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.mnr-uft-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px 24px;
+}
+@media (min-width: 600px) {
+  .mnr-uft-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .mnr-uft-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.mnr-uft-group h3 {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--uft-head);
+  font-family: inherit;
+}
+.mnr-uft-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mnr-uft-group a {
+  font-size: 13px;
+  color: var(--uft-text);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.mnr-uft-group a:hover { color: var(--uft-head); }
+.mnr-uft-base {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--uft-line);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--uft-dim);
+}
+.mnr-uft-base a { color: var(--uft-dim); }
+
+/* 페이지 한정 법적 고지 (푸터 위 보존 블록 — embo 위생용품 고지 등) */
+.mnr-page-note {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 24px 8px;
+  font-size: 12px !important;
+  line-height: 1.8;
+  color: #86868b;
+  text-align: center;
+  font-family: "Pretendard", -apple-system, sans-serif;
+}
+
+/* ── Keep Exploring ── */
+.mnr-explore {
+  --exp-bg: #fbfbfd;
+  --exp-line: #e8e8ed;
+  --exp-head: #1d1d1f;
+  --exp-text: #6e6e73;
+  --exp-dim: #86868b;
+  --exp-card: #ffffff;
+  background: var(--exp-bg);
+  border-top: 1px solid var(--exp-line);
+  padding: 64px 0 72px;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.mnr-explore[data-theme="dark"],
+[data-theme="dark"] .mnr-explore {
+  --exp-bg: #000000;
+  --exp-line: rgba(255, 255, 255, 0.14);
+  --exp-head: rgba(255, 255, 255, 0.94);
+  --exp-text: rgba(255, 255, 255, 0.6);
+  --exp-dim: rgba(255, 255, 255, 0.35);
+  --exp-card: rgba(255, 255, 255, 0.04);
+}
+.mnr-explore-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.mnr-explore-eyebrow {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--exp-dim);
+}
+.mnr-explore-title {
+  margin: 0 0 28px;
+  font-size: clamp(22px, 4.5vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--exp-head);
+  font-family: inherit;
+  text-transform: none;
+}
+.mnr-explore-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 700px) {
+  .mnr-explore-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.mnr-explore-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 24px;
+  background: var(--exp-card);
+  border: 1px solid var(--exp-line);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+.mnr-explore-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--exp-dim);
+}
+.mnr-explore-card h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--exp-head);
+  font-family: inherit;
+}
+.mnr-explore-card p {
+  margin: 0;
+  font-size: 13px !important;
+  line-height: 1.6;
+  color: var(--exp-text);
+  font-family: inherit;
+}
+.mnr-explore-card .mnr-explore-cta {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--exp-head);
+}
+.mnr-explore-card .mnr-explore-cta::after { content: " →"; }
+
+.mnr-footer-legal { font-size: 11px; color: #86868b; line-height: 1.8; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); }

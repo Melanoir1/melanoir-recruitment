@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import type { Practitioner } from './page'
+import type { Practitioner } from './types'
+import { logoutPro } from './actions'
 
 const TECHNIQUE_LABELS: Record<string, string> = {
   hairstroke: '헤어스트로크',
@@ -25,29 +26,39 @@ interface ProcedureRecord {
 }
 
 interface Props {
+  practitionerId: string
   practitioner: Practitioner
-  onLogout: () => void
 }
 
-export default function Dashboard({ practitioner, onLogout }: Props) {
+export default function Dashboard({ practitionerId, practitioner }: Props) {
   const [tab, setTab] = useState<'scan' | 'history'>('scan')
   const [token, setToken] = useState('')
   const [procedureAt, setProcedureAt] = useState(new Date().toISOString().split('T')[0])
   const [technique, setTechnique] = useState('hairstroke')
+  const [procArea, setProcArea] = useState('eyebrow')
+  const [procIsRetouch, setProcIsRetouch] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [procedures, setProcedures] = useState<ProcedureRecord[]>([])
   const [loadingHistory, setLoadingHistory] = useState(false)
+  const [proBalance, setProBalance] = useState<number | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (tab === 'history') loadHistory()
   }, [tab])
 
+  useEffect(() => {
+    fetch('/api/credits/pro-balance')
+      .then(r => r.json())
+      .then(d => { if (typeof d.balance === 'number') setProBalance(d.balance) })
+      .catch(() => {})
+  }, [])
+
   async function loadHistory() {
     setLoadingHistory(true)
-    const res = await fetch(`/api/procedure?practitioner_id=${practitioner.practitioner_id}`)
+    const res = await fetch(`/api/procedure?practitioner_id=${practitionerId}`)
     if (res.ok) {
       const j = await res.json()
       setProcedures(j.procedures ?? [])
@@ -66,9 +77,11 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         token: token.replace(/-/g, ''),
-        practitioner_id: practitioner.practitioner_id,
+        practitioner_id: practitionerId,
         procedure_at: procedureAt,
         technique,
+        area: procArea,
+        is_retouch: procIsRetouch,
       }),
     })
 
@@ -91,8 +104,18 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
         <div>
           <h1 className="font-semibold text-sm">Melanoir Pro</h1>
           <p className="text-xs text-gray-400">{practitioner.shop_name} · {TIER_LABELS[practitioner.tier] ?? practitioner.tier}</p>
+          {proBalance !== null && (
+            <div style={{ marginTop: 8, padding: '10px 16px', background: '#f5f5f7', borderRadius: 10, display: 'inline-block' }}>
+              <span style={{ fontSize: 13, color: '#6e6e73' }}>포인트 잔액 </span>
+              <span style={{ fontSize: 18, fontWeight: 700 }}>{proBalance.toLocaleString('ko-KR')}</span>
+              <span style={{ fontSize: 12, color: '#6e6e73', marginLeft: 4 }}>P</span>
+              <span style={{ fontSize: 11, color: '#86868b', marginLeft: 8 }}>유효기간 12개월</span>
+            </div>
+          )}
         </div>
-        <button onClick={onLogout} className="text-xs text-gray-400 hover:text-gray-700">로그아웃</button>
+        <form action={logoutPro} style={{ display: 'inline' }}>
+          <button type="submit" style={{ fontSize: 12, color: '#6e6e73', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 8px' }}>로그아웃</button>
+        </form>
       </header>
 
       {/* 탭 */}
@@ -151,6 +174,29 @@ export default function Dashboard({ practitioner, onLogout }: Props) {
                     {Object.entries(TECHNIQUE_LABELS).map(([v, l]) => (
                       <option key={v} value={v}>{l}</option>
                     ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">시술 부위 *</label>
+                  <select
+                    value={procArea}
+                    onChange={e => setProcArea(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                  >
+                    <option value="eyebrow">눈썹</option>
+                    <option value="eyeliner">아이라인</option>
+                    <option value="lip">입술</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">시술 구분 *</label>
+                  <select
+                    value={procIsRetouch ? 'retouch' : 'first'}
+                    onChange={e => setProcIsRetouch(e.target.value === 'retouch')}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                  >
+                    <option value="first">첫 시술</option>
+                    <option value="retouch">리터치</option>
                   </select>
                 </div>
               </div>
