@@ -1,49 +1,60 @@
 /* ============================================================
-   Melanoir — 출시 웨이트리스트 폼 (자체 호스팅)
-   사용법: <div data-mnr-waitlist data-type="customer|pro"></div>
+   Melanoir — 출시 웨이트리스트 / 베타테스터 폼 (자체 호스팅)
+   사용법: <div data-mnr-waitlist data-type="customer|pro|beta"></div>
+   - 유형 선택 UI 없음. 페이지가 대상을 결정한다.
    ============================================================ */
 (function () {
   "use strict";
 
   var API_URL = "https://verify.melanoir.co.kr/api/waitlist";
 
+  var COPY = {
+    customer: {
+      audience: "멜라누아 엠보로 시술받으신 분들을 위한 자리입니다.",
+      consent: "출시 알림 발송을 위한 개인정보(연락처) 수집·이용에 동의합니다.",
+      submit: "출시 알림 받기",
+      done: "정식 출시 소식을 가장 먼저 보내드릴게요.",
+      shop: false, insta: false
+    },
+    pro: {
+      audience: "멜라누아 엠보로 시술하시는 분들을 위한 자리입니다.",
+      consent: "출시 알림 발송을 위한 개인정보(연락처) 수집·이용에 동의합니다.",
+      submit: "출시 알림 받기",
+      done: "Pro 가입 오픈 소식을 가장 먼저 보내드릴게요.",
+      shop: true, insta: true, instaRequired: false, instaPlaceholder: "인스타그램 아이디"
+    },
+    beta: {
+      audience: "시술 경험이 있는 전문가를 위한 베타테스터 모집입니다.",
+      consent: "베타테스터 모집·선정 안내를 위한 개인정보(연락처·SNS 계정) 수집·이용에 동의합니다.",
+      submit: "베타테스터 신청하기",
+      done: "선정 결과와 안내를 문자로 보내드릴게요.",
+      shop: true, insta: true, instaRequired: true, instaPlaceholder: "인스타그램 계정 — 포트폴리오 확인용"
+    }
+  };
+
   function render(host) {
-    var defaultType = host.getAttribute("data-type") === "pro" ? "pro" : "customer";
+    var type = host.getAttribute("data-type");
+    if (!COPY[type]) type = "customer";
+    var c = COPY[type];
 
     var form = document.createElement("form");
     form.className = "mnr-wl-form";
     form.noValidate = true;
     form.innerHTML =
-      '<div class="mnr-wl-types">' +
-      '<label class="mnr-wl-type"><input type="radio" name="type" value="customer"><span>시술 고객</span></label>' +
-      '<label class="mnr-wl-type"><input type="radio" name="type" value="pro"><span>시술자</span></label>' +
-      "</div>" +
-      '<input type="text" name="name" placeholder="이름 (선택)" maxlength="50" autocomplete="name">' +
-      '<input type="tel" name="phone" placeholder="휴대폰 번호" maxlength="13" autocomplete="tel">' +
-      '<input type="text" name="shop_name" placeholder="샵 이름 (선택)" maxlength="80" style="display:none;">' +
+      '<p class="mnr-wl-audience">' + c.audience + "</p>" +
+      '<input type="text" name="name" placeholder="이름" maxlength="50" autocomplete="name">' +
+      '<input type="tel" name="phone" placeholder="전화번호" maxlength="13" autocomplete="tel">' +
+      (c.insta ? '<input type="text" name="instagram" placeholder="' + c.instaPlaceholder + '" maxlength="80" autocomplete="off">' : "") +
+      (c.shop ? '<input type="text" name="shop_name" placeholder="샵 이름 (선택)" maxlength="80">' : "") +
       '<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;">' +
-      '<label class="mnr-wl-consent"><input type="checkbox" name="consent">' +
-      " 출시 알림 발송을 위한 개인정보(연락처) 수집·이용에 동의합니다.</label>" +
-      '<button type="submit" class="mnr-wl-submit">출시 알림 받기</button>' +
+      '<label class="mnr-wl-consent"><input type="checkbox" name="consent"> ' + c.consent + "</label>" +
+      '<button type="submit" class="mnr-wl-submit">' + c.submit + "</button>" +
       '<p class="mnr-wl-msg" role="status"></p>';
     host.appendChild(form);
 
-    var shopInput = form.querySelector('input[name="shop_name"]');
-    var radios = form.querySelectorAll('input[name="type"]');
-
-    function syncType() {
-      var checked = form.querySelector('input[name="type"]:checked');
-      shopInput.style.display = checked && checked.value === "pro" ? "" : "none";
-    }
-    for (var i = 0; i < radios.length; i++) {
-      if (radios[i].value === defaultType) radios[i].checked = true;
-      radios[i].addEventListener("change", syncType);
-    }
-    syncType();
-
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      submit(form, host);
+      submit(form, host, type, c);
     });
   }
 
@@ -53,13 +64,18 @@
     msg.classList.toggle("is-error", !!isError);
   }
 
-  function submit(form, host) {
-    var typeInput = form.querySelector('input[name="type"]:checked');
+  function submit(form, host, type, c) {
     var phone = form.querySelector('input[name="phone"]').value.replace(/-/g, "").trim();
     var consent = form.querySelector('input[name="consent"]').checked;
+    var instaEl = form.querySelector('input[name="instagram"]');
+    var instagram = instaEl ? instaEl.value.trim().replace(/^@/, "") : "";
 
     if (!/^01[0-9]{8,9}$/.test(phone)) {
       showMsg(form, "유효한 휴대폰 번호를 입력해주세요.", true);
+      return;
+    }
+    if (c.insta && c.instaRequired && !instagram) {
+      showMsg(form, "포트폴리오 확인을 위해 인스타그램 계정을 입력해주세요.", true);
       return;
     }
     if (!consent) {
@@ -71,11 +87,13 @@
     btn.disabled = true;
     showMsg(form, "신청 중...", false);
 
+    var shopEl = form.querySelector('input[name="shop_name"]');
     var payload = {
-      type: typeInput ? typeInput.value : "customer",
+      type: type,
       phone: phone,
       name: form.querySelector('input[name="name"]').value.trim(),
-      shop_name: form.querySelector('input[name="shop_name"]').value.trim(),
+      shop_name: shopEl ? shopEl.value.trim() : "",
+      instagram: instagram,
       consent: true,
       source: location.pathname,
       website: form.querySelector('input[name="website"]').value
@@ -93,7 +111,7 @@
         if (result.ok && result.data && result.data.success) {
           host.innerHTML =
             '<div class="mnr-wl-done"><strong>신청이 완료되었습니다.</strong>' +
-            "<p>정식 출시 소식을 가장 먼저 보내드릴게요.</p></div>";
+            "<p>" + c.done + "</p></div>";
         } else {
           btn.disabled = false;
           showMsg(form, (result.data && result.data.error) || "처리 중 오류가 발생했습니다.", true);

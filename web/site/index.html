@@ -33,6 +33,14 @@
      * 잘림 없이 전체 프레임:
      *   --hero-video-fit: contain;  + min-w/min-h 는 보통 100% 권장(빈 검정 띠 생길 수 있음)
      */
+    /* 앵커 점프 시 sticky 헤더(.topbar--site)에 제목이 가리지 않도록 보정 */
+    #technology { scroll-margin-top: 112px; }
+    @media (max-width: 480px) { #technology { scroll-margin-top: 96px; } }
+
+    /* 앵커 점프 시 sticky 헤더(.topbar--site)에 제목이 가리지 않도록 보정 */
+    #technology { scroll-margin-top: 112px; }
+    @media (max-width: 480px) { #technology { scroll-margin-top: 96px; } }
+
     .section--hero {
       position: relative;
       isolation: isolate;
