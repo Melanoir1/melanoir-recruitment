@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
       phone,
       name: body.name ? String(body.name).slice(0, 50) : null,
       shop_name: type !== 'customer' && body.shop_name ? String(body.shop_name).slice(0, 80) : null,
-      instagram: type === 'beta' ? instagram.slice(0, 80) : null,
+      instagram: type !== 'customer' && instagram ? instagram.slice(0, 80) : null,
       marketing_consent: true,
       source: body.source ? String(body.source).slice(0, 120) : null,
       updated_at: new Date().toISOString(),
