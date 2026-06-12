@@ -14,3 +14,10 @@ export function createServiceClient() {
     auth: { autoRefreshToken: false, persistSession: false },
   })
 }
+
+/** generated types 미포함 테이블(mnr_waitlist 등) 조회용 — URL은 createServiceClient와 동일 */
+export function createRawServiceClient() {
+  return createClient(supabaseUrl, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  })
+}

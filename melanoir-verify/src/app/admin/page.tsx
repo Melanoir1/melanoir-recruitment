@@ -1,5 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
-import { createServiceClient } from '@/lib/supabase'
+import { createRawServiceClient, createServiceClient } from '@/lib/supabase'
 import AdminCollectedData, { type WaitlistRow } from './AdminCollectedData'
 import DispatchActions from './DispatchActions'
 
@@ -20,26 +19,21 @@ async function signedUrl(supabase: ReturnType<typeof createServiceClient>, path:
   return data?.signedUrl ?? null
 }
 
-async function fetchWaitlist(): Promise<WaitlistRow[]> {
-  const client = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { autoRefreshToken: false, persistSession: false } }
-  )
-  const { data, error } = await client
+async function fetchWaitlist(): Promise<{ rows: WaitlistRow[]; error: string | null }> {
+  const { data, error } = await createRawServiceClient()
     .from('mnr_waitlist')
     .select('id, type, phone, name, shop_name, instagram, source, created_at')
     .order('created_at', { ascending: false })
   if (error) {
     console.error('[admin] waitlist fetch error:', error)
-    return []
+    return { rows: [], error: error.message }
   }
-  return (data ?? []) as WaitlistRow[]
+  return { rows: (data ?? []) as WaitlistRow[], error: null }
 }
 
 export default async function AdminPage() {
   const supabase = createServiceClient()
-  const [funnelRes, lotRes, techRes, dispatchRes, waitlist, clubRes, proRes] = await Promise.all([
+  const [funnelRes, lotRes, techRes, dispatchRes, waitlistRes, clubRes, proRes] = await Promise.all([
     supabase.from('mnr_v_funnel' as 'mnr_credits').select('*').single(),
     supabase.from('mnr_v_lot_quality' as 'mnr_credits').select('*'),
     supabase.from('mnr_v_technique_quality' as 'mnr_credits').select('*'),
@@ -204,7 +198,8 @@ export default async function AdminPage() {
       </section>
 
       <AdminCollectedData
-        waitlist={waitlist}
+        waitlist={waitlistRes.rows}
+        waitlistError={waitlistRes.error}
         clubRegistrations={clubRegistrations}
         proPractitioners={(proRes.data ?? []) as Parameters<typeof AdminCollectedData>[0]['proPractitioners']}
       />

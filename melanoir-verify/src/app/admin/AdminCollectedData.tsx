@@ -236,10 +236,12 @@ function ProTable({ rows }: { rows: ProPractitionerRow[] }) {
 
 export default function AdminCollectedData({
   waitlist,
+  waitlistError,
   clubRegistrations,
   proPractitioners,
 }: {
   waitlist: WaitlistRow[]
+  waitlistError?: string | null
   clubRegistrations: ClubRegistrationRow[]
   proPractitioners: ProPractitionerRow[]
 }) {
@@ -265,6 +267,9 @@ export default function AdminCollectedData({
     <section>
       <h2 className="text-sm font-semibold text-gray-400 uppercase mb-3">수집 데이터</h2>
       <div className="bg-white rounded-xl shadow-sm p-4 md:p-6">
+        {waitlistError ? (
+          <p className="text-sm text-red-600 mb-4">웨이트리스트 조회 오류: {waitlistError}</p>
+        ) : null}
         <TabBar tabs={mainTabs} active={mainTab} onChange={setMainTab} />
 
         {mainTab === 'beta' && (

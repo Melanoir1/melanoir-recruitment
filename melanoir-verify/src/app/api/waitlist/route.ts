@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createRawServiceClient } from '@/lib/supabase'
 import { sendSms } from '@/lib/sms'
 
 const ALLOWED_ORIGINS = ['https://melanoir.co.kr', 'https://www.melanoir.co.kr']
@@ -50,11 +50,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: '개인정보 수집·이용 동의가 필요합니다.' }, { status: 400, headers })
   }
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { autoRefreshToken: false, persistSession: false } }
-  )
+  const supabase = createRawServiceClient()
 
   const { data: existing } = await supabase
     .from('mnr_waitlist')
