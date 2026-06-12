@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache'
 import { createRawServiceClient, createServiceClient } from '@/lib/supabase'
 import AdminCollectedData, { type WaitlistRow } from './AdminCollectedData'
 import DispatchActions from './DispatchActions'
@@ -20,6 +21,7 @@ async function signedUrl(supabase: ReturnType<typeof createServiceClient>, path:
 }
 
 async function fetchWaitlist(): Promise<{ rows: WaitlistRow[]; error: string | null }> {
+  noStore()
   const { data, error } = await createRawServiceClient()
     .from('mnr_waitlist')
     .select('id, type, phone, name, shop_name, instagram, source, created_at')
@@ -32,6 +34,7 @@ async function fetchWaitlist(): Promise<{ rows: WaitlistRow[]; error: string | n
 }
 
 export default async function AdminPage() {
+  noStore()
   const supabase = createServiceClient()
   const [funnelRes, lotRes, techRes, dispatchRes, waitlistRes, clubRes, proRes] = await Promise.all([
     supabase.from('mnr_v_funnel' as 'mnr_credits').select('*').single(),
