@@ -95,6 +95,16 @@
   font-weight: 600;
 }
 
+/* 랜딩·채용 — shell body(Barlow/uppercase) 상속 차단, Pro와 동일 NAV 타이포 */
+body.landing .mnr-nav a,
+body.recruitment .mnr-nav a {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
 /* 모바일 햄버거 메뉴 */
 @media (max-width: 480px) {
   .mnr-header-inner {
@@ -127,6 +137,11 @@
 
   .mnr-nav a {
     padding: 14px 24px;
+    font-size: 15px;
+  }
+
+  body.landing .mnr-nav a,
+  body.recruitment .mnr-nav a {
     font-size: 15px;
   }
 }
