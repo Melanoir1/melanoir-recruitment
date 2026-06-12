@@ -37,6 +37,7 @@
       navPro: "Pro",
       navClub: "Club",
       navTechnology: "Technology",
+      navRecruit: "채용",
       missionEyebrow: "OUR MISSION",
       mission: "우리의 미션은 멜라닌의 유익함을 모두가 누릴 수 있도록 하는 것입니다.",
       promiseAria: "브랜드 약속",
@@ -77,6 +78,7 @@
       navPro: "Pro",
       navClub: "Club",
       navTechnology: "Technology",
+      navRecruit: "Careers",
       missionEyebrow: "OUR MISSION",
       mission: "Our mission is to make the benefits of melanin accessible to everyone.",
       promiseAria: "Brand promise",
@@ -117,6 +119,7 @@
       navPro: "Pro",
       navClub: "Club",
       navTechnology: "Technologie",
+      navRecruit: "Carrières",
       missionEyebrow: "NOTRE MISSION",
       mission: "Notre mission est de rendre les bienfaits de la mélanine accessibles à tous.",
       promiseAria: "Promesse de marque",
@@ -157,6 +160,7 @@
       navPro: "Pro",
       navClub: "クラブ",
       navTechnology: "テクノロジー",
+      navRecruit: "採用",
       missionEyebrow: "OUR MISSION",
       mission: "私たちのミッションは、メラニンの恩恵をすべての人が享受できるようにすることです。",
       promiseAria: "ブランドの約束",
@@ -197,6 +201,7 @@
       navPro: "Pro",
       navClub: "俱乐部",
       navTechnology: "技术",
+      navRecruit: "招聘",
       missionEyebrow: "OUR MISSION",
       mission: "我们的使命，是让所有人都能享有黑色素的益处。",
       promiseAria: "品牌承诺",
@@ -269,12 +274,14 @@
 
   function buildLandingHTML(t) {
     return (
-      '<header class="topbar topbar--site">' +
-      '<div class="topbar-head">' +
-      '<a class="logo logo--brand" href="/">' +
-      '<img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" width="140" height="20" decoding="async">' +
+      '<header class="mnr-header" data-theme="dark">' +
+      '<div class="mnr-header-inner">' +
+      '<a class="mnr-header-logo" href="/">' +
+      '<img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir">' +
       "</a>" +
-      '<nav class="nav" aria-label="' +
+      '<button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">' +
+      "<span></span><span></span><span></span></button>" +
+      '<nav class="mnr-nav" aria-label="' +
       t.navAria +
       '">' +
       '<a href="/products">' +
@@ -289,10 +296,10 @@
       '<a href="/pro">' +
       t.navPro +
       "</a>" +
-      "</nav></div>" +
-      '<a class="topbar-hire" href="/recruitment">' +
-      HIRE_KO +
-      "</a></header>" +
+      '<a href="/recruitment">' +
+      t.navRecruit +
+      "</a>" +
+      "</nav></div></header>" +
       "<main>" +
       '<section class="section section--hero" aria-labelledby="mission-title">' +
       '<div class="hero-video-bg" aria-hidden="true"><video id="heroMissionVideo" autoplay muted loop playsinline disablePictureInPicture><source src="' +

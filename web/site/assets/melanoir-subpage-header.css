@@ -155,3 +155,39 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* ===== 다크 변형 (랜딩 헤더 통일용) ===== */
+.mnr-header[data-theme="dark"]{
+  background: rgba(0, 0, 0, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+}
+.mnr-header[data-theme="dark"] .mnr-header-logo img{ filter: none; } /* 흰 로고 그대로 */
+.mnr-header[data-theme="dark"] .mnr-nav a{ color: rgba(255, 255, 255, 0.86); }
+.mnr-header[data-theme="dark"] .mnr-nav a:hover,
+.mnr-header[data-theme="dark"] .mnr-nav a.is-current{ color: #fff; }
+.mnr-header[data-theme="dark"] .mnr-nav-toggle span{ background: #fff; }
+
+@media (max-width: 480px){
+  .mnr-header[data-theme="dark"] .mnr-nav{
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.16);
+  }
+}
+
+/* ===== 다크 변형 (랜딩 헤더 통일용) ===== */
+.mnr-header[data-theme="dark"]{
+  background: rgba(0, 0, 0, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+}
+.mnr-header[data-theme="dark"] .mnr-header-logo img{ filter: none; } /* 흰 로고 그대로 */
+.mnr-header[data-theme="dark"] .mnr-nav a{ color: rgba(255, 255, 255, 0.86); }
+.mnr-header[data-theme="dark"] .mnr-nav a:hover,
+.mnr-header[data-theme="dark"] .mnr-nav a.is-current{ color: #fff; }
+.mnr-header[data-theme="dark"] .mnr-nav-toggle span{ background: #fff; }
+
+@media (max-width: 480px){
+  .mnr-header[data-theme="dark"] .mnr-nav{
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.16);
+  }
+}

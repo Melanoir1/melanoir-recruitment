@@ -22,7 +22,49 @@
   <link rel="stylesheet" href="assets/melanoir-shell.css" />
   <link rel="stylesheet" href="assets/melanoir-lang.css" />
   <link rel="stylesheet" href="assets/mnr-ui.css" />
+  <link rel="stylesheet" href="assets/melanoir-subpage-header.css" />
   <style>
+    :root{
+      --mnr-content-max: 1080px;   /* 본문·헤더·푸터 표준 폭 (제품 페이지와 동일) */
+      --mnr-feature-max: 1200px;   /* 히어로/비주얼 등 시네마틱 블록 폭 */
+      --mnr-pad-x: clamp(20px, 5vw, 40px); /* 공유 좌우 패딩 */
+    }
+
+    /* === Phase A: 풀블리드 시네마틱 폭 (랜딩 전용) === */
+    body.landing .app{ max-width: none; }      /* 560px 해제 (랜딩만) */
+
+    /* 히어로: 영상/스크림은 100vw 풀블리드 유지, 텍스트만 중앙 정렬 컨테이너로 제한 */
+    body.landing .section--hero{
+      padding-left: var(--mnr-pad-x);
+      padding-right: var(--mnr-pad-x);
+    }
+    body.landing .section--hero > :not(.hero-video-bg):not(.hero-video-scrim){
+      width: 100%;
+      max-width: var(--mnr-feature-max);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* 콘텐츠 섹션: 구분선/배경은 풀블리드, 내부 콘텐츠는 1080px 중앙 정렬 */
+    body.landing .section:not(.section--hero){
+      padding-left: var(--mnr-pad-x);
+      padding-right: var(--mnr-pad-x);
+    }
+    body.landing .section:not(.section--hero) > *{
+      max-width: var(--mnr-content-max);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* 비주얼(이미지/영상)은 조금 더 넓게 허용 */
+    body.landing .section:not(.section--hero) > .section-visual{
+      max-width: var(--mnr-feature-max);
+    }
+
+    /* 데스크톱 수직 리듬 확장 (모바일은 기존 36px 유지) */
+    @media (min-width: 769px){
+      body.landing .section{ padding-top: 96px; padding-bottom: 96px; }
+    }
+
     /*
      * 히어로 배경 영상 튜닝
      * — `.section--hero` 안의 --hero-video-* 값만 바꿔가며 저장·새로고침하면 됩니다.
@@ -37,14 +79,10 @@
     #technology { scroll-margin-top: 112px; }
     @media (max-width: 480px) { #technology { scroll-margin-top: 96px; } }
 
-    /* 앵커 점프 시 sticky 헤더(.topbar--site)에 제목이 가리지 않도록 보정 */
-    #technology { scroll-margin-top: 112px; }
-    @media (max-width: 480px) { #technology { scroll-margin-top: 96px; } }
-
     .section--hero {
       position: relative;
       isolation: isolate;
-      min-height: calc(100dvh - 56px);
+      min-height: calc(100dvh - 52px);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -561,9 +599,40 @@
       letter-spacing: -0.01em;
     }
 
+    /* === Phase C: 보이스 정리 (랜딩 전용) === */
+    /* 셸의 전역 대문자 강제를 랜딩 본문에서 해제하고, 의도된 라벨만 대문자로 */
+    body.landing .prose,
+    body.landing .stat-cell dd,
+    body.landing .traj-title,
+    body.landing .traj-desc,
+    body.landing .domain-cell p{
+      text-transform: none;
+    }
+    /* eyebrow/소형 라벨만 대문자 유지 (제품 페이지와 동일한 액센트) */
+    body.landing .eyebrow,
+    body.landing .traj-eyebrow,
+    body.landing .mnr-nav a,
+    body.landing .scroll-hint{
+      text-transform: uppercase;
+    }
+
+    /* === Phase D: SCALE 하위 도메인 위계 === */
+    @media (min-width: 769px){
+      body.landing .traj-list{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+      }
+      body.landing .traj-item{
+        padding: 0;
+        border-top: none;          /* 풀폭 가로줄 → 카드형 분리로 전환 */
+      }
+      body.landing .traj-item:last-child{ border-bottom: none; }
+    }
+
   </style>
 </head>
-<body>
+<body class="landing">
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <div class="app">
     <div id="melanoir-content"></div>
@@ -576,6 +645,7 @@
   <script src="assets/landing-i18n.js"></script>
   <script src="assets/melanoir-lang.js"></script>
   <script src="assets/mnr-ui.js"></script>
+  <script src="assets/mnr-nav.js"></script>
   <script>
     (function () {
       function initHeroVideo(root) {
@@ -682,6 +752,17 @@
           applyMeta(lang);
           initLandingMotion(document.getElementById("melanoir-content"));
           if (window.MnrUI) window.MnrUI.renderAll();
+          // 헤더 재렌더 후 모바일 햄버거 재바인딩
+          (function(){
+            var tg = document.querySelector('.mnr-nav-toggle');
+            var nv = document.querySelector('.mnr-nav');
+            if (tg && nv){
+              tg.addEventListener('click', function(){
+                var open = nv.classList.toggle('is-open');
+                tg.setAttribute('aria-expanded', open ? 'true' : 'false');
+              });
+            }
+          })();
         },
       });
     })();
