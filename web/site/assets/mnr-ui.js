@@ -20,7 +20,7 @@
     { key: "technology", label: "Technology", href: "/#technology" },
     { key: "club",       label: "Club",       href: "/register" },
     { key: "pro",        label: "Pro",        href: "/pro" },
-    { key: "recruit",    label: "채용",        href: "/recruitment" },
+    { key: "recruit",    label: "Recruitment", href: "/recruitment" },
   ];
 
   var FOOTER_GROUPS = [

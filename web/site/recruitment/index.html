@@ -11,6 +11,7 @@
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="../assets/melanoir-shell.css" />
   <link rel="stylesheet" href="../assets/melanoir-subpage-header.css" />
+  <link rel="stylesheet" href="../assets/mnr-ui.css" />
   <style>
     h1, h2, h3, p { margin: 0; }
 
@@ -679,11 +680,52 @@
         grid-column: auto;
       }
     }
+
+    /* === 공유 폭 토큰 === */
+    :root{
+      --mnr-content-max: 1080px;
+      --mnr-feature-max: 1200px;
+      --mnr-pad-x: clamp(20px, 5vw, 40px);
+    }
+
+    /* === 풀블리드 (recruitment 전용) === */
+    body.recruitment .app{ max-width: none; }
+
+    /* 섹션: 밴드(구분선/배경)는 전폭, 내부 콘텐츠는 1080px 중앙 정렬 */
+    body.recruitment .section,
+    body.recruitment .section--manifesto{
+      padding-left: var(--mnr-pad-x);
+      padding-right: var(--mnr-pad-x);
+    }
+    body.recruitment .section > *,
+    body.recruitment .section--manifesto > *{
+      max-width: var(--mnr-content-max);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* 그래프/카드 그리드 등 와이드 블록 허용 */
+    body.recruitment .section > .grid,
+    body.recruitment .section > .graph-wrap{
+      max-width: var(--mnr-feature-max);
+    }
+
+    /* 데스크톱 수직 리듬 */
+    @media (min-width: 769px){
+      body.recruitment .section{ padding-top: 96px; padding-bottom: 96px; }
+    }
+
+    /* === 카드 그리드 와이드 === */
+    @media (min-width: 769px){
+      body.recruitment .grid{
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
   </style>
 </head>
-<body>
-  <header data-mnr-header data-theme="dark" data-current="recruit"></header>
+<body class="recruitment">
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <header data-mnr-header data-theme="dark" data-current="recruit"></header>
   <div class="app">
     <section class="section reveal" id="intro">
       <p class="eyebrow">01 · MELANOIR INTRODUCTION</p>
@@ -917,10 +959,9 @@
       </div>
     </section>
 
-    <footer class="foot">
-      © Melanoir. All rights reserved.
-    </footer>
   </div>
+  <div data-mnr-explore="exclude:" data-theme="dark"></div>
+  <div data-mnr-footer data-theme="dark"></div>
   <script src="../assets/mnr-ui.js"></script>
   <script src="../assets/mnr-nav.js"></script>
   <script src="../assets/recruitment-space-carousel.js"></script>
