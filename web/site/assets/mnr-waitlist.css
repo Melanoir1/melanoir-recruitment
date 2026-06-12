@@ -32,3 +32,32 @@
 }
 .mnr-wl-done strong { display: block; font-size: 17px; color: var(--color-ink, #1d1d1f); margin-bottom: 6px; }
 .mnr-wl-done p { font-size: 13px; color: var(--color-text-dim, #86868b); margin: 0; }
+
+/* ── 다크 프로그램 페이지(Pro) 폼 변형 ── */
+.mnr-program[data-program-theme="dark"] .mnr-wl-form input[type="text"],
+.mnr-program[data-program-theme="dark"] .mnr-wl-form input[type="tel"] {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #f5f5f7;
+}
+.mnr-program[data-program-theme="dark"] .mnr-wl-form input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+.mnr-program[data-program-theme="dark"] .mnr-wl-form input:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.mnr-program[data-program-theme="dark"] .mnr-wl-audience,
+.mnr-program[data-program-theme="dark"] .mnr-wl-consent,
+.mnr-program[data-program-theme="dark"] .mnr-wl-msg {
+  color: rgba(255, 255, 255, 0.45);
+}
+.mnr-program[data-program-theme="dark"] .mnr-wl-submit {
+  background: #ffffff;
+  color: #1d1d1f;
+}
+.mnr-program[data-program-theme="dark"] .mnr-wl-done {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+.mnr-program[data-program-theme="dark"] .mnr-wl-done strong { color: #f5f5f7; }
+.mnr-program[data-program-theme="dark"] .mnr-wl-done p { color: rgba(255, 255, 255, 0.45); }

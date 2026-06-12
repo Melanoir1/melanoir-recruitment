@@ -1,0 +1,558 @@
+/* ============================================================
+   Melanoir — 프로그램 랜딩 공유 SPINE (Pro / Club)
+   사용: <body class="mnr-program" data-program-theme="dark|light">
+   ============================================================ */
+
+/* ── SPINE 토큰 (테마 무관) ── */
+.mnr-program {
+  --prog-content-max: 1080px;
+  --prog-pad-x: clamp(20px, 5vw, 40px);
+  --prog-reveal-y: 32px;
+  --prog-reveal-dur: 0.8s;
+  --prog-reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mnr-program * { box-sizing: border-box; }
+.mnr-program {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  word-break: keep-all;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── THEME: Dark (Pro) ── */
+.mnr-program[data-program-theme="dark"] {
+  --prog-bg: #000000;
+  --prog-bg-alt: #1d1d1f;
+  --prog-bg-subtle: rgba(255, 255, 255, 0.06);
+  --prog-ink: #f5f5f7;
+  --prog-ink-muted: rgba(255, 255, 255, 0.6);
+  --prog-ink-dim: rgba(255, 255, 255, 0.45);
+  --prog-line: rgba(255, 255, 255, 0.12);
+  --prog-line-strong: rgba(255, 255, 255, 0.22);
+  --prog-card-bg: #1d1d1f;
+  --prog-card-bg-alt: #000000;
+  --prog-grid-gap-bg: rgba(255, 255, 255, 0.08);
+  --prog-hero-cta-bg: #ffffff;
+  --prog-hero-cta-ink: #1d1d1f;
+  --prog-crosslink-bg: #1d1d1f;
+  --prog-crosslink-ink: rgba(255, 255, 255, 0.55);
+  --prog-crosslink-link: #f5f5f7;
+  --prog-waitlist-box-bg: #1d1d1f;
+  --prog-btt-bg: rgba(255, 255, 255, 0.12);
+  --prog-btt-stroke: #f5f5f7;
+  --prog-ghost-num: rgba(255, 255, 255, 0.08);
+  --prog-badge-active-bg: #f5f5f7;
+  --prog-badge-active-ink: #1d1d1f;
+  --prog-badge-bg: rgba(255, 255, 255, 0.08);
+  --prog-badge-ink: rgba(255, 255, 255, 0.45);
+  --prog-accent: #f5f5f7;
+  color: var(--prog-ink);
+  background: var(--prog-bg);
+}
+
+/* ── THEME: Light (Club) ── */
+.mnr-program[data-program-theme="light"] {
+  --prog-bg: var(--color-bg);
+  --prog-bg-alt: var(--color-bg-alt);
+  --prog-bg-subtle: var(--color-bg-subtle);
+  --prog-ink: var(--color-ink);
+  --prog-ink-muted: var(--color-text-muted);
+  --prog-ink-dim: var(--color-text-dim);
+  --prog-line: var(--color-line);
+  --prog-line-strong: var(--color-line-strong);
+  --prog-card-bg: var(--color-bg);
+  --prog-card-bg-alt: var(--color-bg-alt);
+  --prog-grid-gap-bg: var(--color-line);
+  --prog-hero-cta-bg: var(--color-ink);
+  --prog-hero-cta-ink: #f5f5f7;
+  --prog-crosslink-bg: var(--color-bg-alt);
+  --prog-crosslink-ink: var(--color-text-muted);
+  --prog-crosslink-link: var(--color-ink);
+  --prog-waitlist-box-bg: var(--color-bg-alt);
+  --prog-btt-bg: rgba(29, 29, 31, 0.8);
+  --prog-btt-stroke: #f5f5f7;
+  --prog-ghost-num: var(--color-bg-subtle);
+  --prog-badge-active-bg: var(--color-ink);
+  --prog-badge-active-ink: #f5f5f7;
+  --prog-badge-bg: var(--color-bg-subtle);
+  --prog-badge-ink: var(--color-text-dim);
+  --prog-accent: var(--color-accent);
+  color: var(--prog-ink);
+  background: var(--prog-bg);
+}
+
+/* ── 레이아웃 ── */
+.mnr-program .program-container {
+  max-width: var(--prog-content-max);
+  margin: 0 auto;
+  padding: 0 var(--prog-pad-x);
+}
+
+.mnr-program .program-section {
+  padding: var(--space-xl) 0;
+  background: var(--prog-bg);
+  border-bottom: 1px solid var(--prog-line);
+}
+.mnr-program .program-section--alt {
+  padding: var(--space-xl) 0;
+  background: var(--prog-bg-alt);
+  border-bottom: 1px solid var(--prog-line);
+}
+@media (min-width: 769px) {
+  .mnr-program .program-section,
+  .mnr-program .program-section--alt {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+/* ── 타이포 ── */
+.mnr-program .program-eyebrow {
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--prog-ink-dim);
+  margin-bottom: 14px;
+  font-family: var(--font-body);
+}
+.mnr-program h1,
+.mnr-program .program-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: var(--prog-ink);
+  margin-bottom: 24px;
+}
+.mnr-program h2,
+.mnr-program .program-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--prog-ink);
+  margin-bottom: 20px;
+}
+.mnr-program .program-lead {
+  font-size: clamp(1rem, 2vw, 1.15rem) !important;
+  color: var(--prog-ink-muted);
+  max-width: 620px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+.mnr-program .program-lead--center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mnr-program p { margin-bottom: 0; }
+
+/* ── 히어로 ── */
+.mnr-program .program-hero {
+  padding: 96px 0 100px;
+  text-align: center;
+  background: var(--prog-bg);
+  border-bottom: 1px solid var(--prog-line);
+}
+.mnr-program .program-hero-desc {
+  font-size: clamp(1rem, 2.2vw, 1.2rem) !important;
+  color: var(--prog-ink-muted);
+  max-width: 580px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+.mnr-program .program-hero-cta {
+  display: inline-block;
+  background: var(--prog-hero-cta-bg);
+  color: var(--prog-hero-cta-ink);
+  padding: 14px 32px;
+  border-radius: var(--btn-radius);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.mnr-program .program-hero-cta:hover { opacity: 0.85; }
+.mnr-program .program-hero-note {
+  margin-top: 16px;
+  font-size: 13px !important;
+  color: var(--prog-ink-dim);
+  line-height: 1.6;
+}
+
+/* ── 크로스링크 배너 ── */
+.mnr-program .program-crosslink {
+  background: var(--prog-crosslink-bg);
+  border-bottom: 1px solid var(--prog-line);
+  padding: 14px var(--prog-pad-x);
+  text-align: center;
+  font-size: 13px;
+  color: var(--prog-crosslink-ink);
+}
+.mnr-program .program-crosslink a {
+  color: var(--prog-crosslink-link);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ── 3단계 플로우 그리드 (How it works / Process) ── */
+.mnr-program .program-flow-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  margin-top: 48px;
+  background: var(--prog-grid-gap-bg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--prog-grid-gap-bg);
+}
+@media (min-width: 769px) {
+  .mnr-program .program-flow-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.mnr-program .program-flow-card {
+  background: var(--prog-card-bg);
+  padding: 40px 32px;
+}
+.mnr-program .program-flow-num {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--prog-ghost-num);
+  line-height: 1;
+  margin-bottom: 16px;
+  letter-spacing: -0.05em;
+}
+.mnr-program .program-flow-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--prog-ink);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.mnr-program .program-flow-desc {
+  font-size: 15px !important;
+  color: var(--prog-ink-dim);
+  line-height: 1.7;
+}
+
+/* ── 3열 통계/정보 카드 ── */
+.mnr-program .program-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 48px;
+}
+@media (min-width: 769px) {
+  .mnr-program .program-stat-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+.mnr-program .program-stat-card {
+  background: var(--prog-bg-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+}
+.mnr-program .program-stat-label {
+  font-size: 13px !important;
+  font-weight: 700;
+  color: var(--prog-ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.mnr-program .program-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--prog-ink);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.mnr-program .program-stat-desc {
+  font-size: 14px !important;
+  color: var(--prog-ink-dim);
+  line-height: 1.6;
+}
+
+/* ── 4열 등급 카드 (Pro 전용) ── */
+.mnr-program .program-tier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  margin-top: 48px;
+  background: var(--prog-grid-gap-bg);
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid var(--prog-grid-gap-bg);
+}
+@media (min-width: 769px) {
+  .mnr-program .program-tier-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.mnr-program .program-tier-card {
+  background: var(--prog-card-bg);
+  padding: 44px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.mnr-program .program-tier-card--highlight {
+  background: var(--prog-bg-alt);
+}
+.mnr-program[data-program-theme="dark"] .program-tier-card--highlight {
+  background: #000000;
+  border: 1px solid var(--prog-line-strong);
+}
+.mnr-program .program-tier-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--prog-ink);
+  letter-spacing: -0.02em;
+}
+.mnr-program .program-tier-criterion {
+  font-size: 13px !important;
+  color: var(--prog-ink-dim);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.mnr-program .program-tier-divider {
+  height: 1px;
+  background: var(--prog-line);
+}
+.mnr-program .program-tier-benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mnr-program .program-tier-benefits li {
+  font-size: 15px !important;
+  color: var(--prog-ink-muted);
+  font-weight: 500;
+  padding-left: 18px;
+  position: relative;
+}
+.mnr-program .program-tier-benefits li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--prog-ink-dim);
+  font-weight: 400;
+}
+.mnr-program .program-tier-benefits .is-muted {
+  font-style: italic;
+  color: var(--prog-ink-dim) !important;
+  font-size: 14px !important;
+}
+
+/* ── 리스트 카드 (Club: 분기·혜택·FAQ) ── */
+.mnr-program .program-list {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.mnr-program .program-list-item {
+  padding: 28px 32px;
+  border: 1px solid var(--prog-line);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: var(--prog-card-bg);
+}
+.mnr-program a.program-list-item {
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s;
+}
+.mnr-program a.program-list-item:hover {
+  border-color: var(--prog-line-strong);
+}
+.mnr-program .program-list-title {
+  font-size: 1rem !important;
+  font-weight: 600;
+  color: var(--prog-ink);
+}
+.mnr-program .program-list-desc {
+  font-size: 13px !important;
+  color: var(--prog-ink-dim);
+  margin-top: 4px;
+  line-height: 1.65;
+}
+.mnr-program .program-badge {
+  font-size: 11px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--btn-radius);
+  background: var(--prog-badge-bg);
+  color: var(--prog-badge-ink);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mnr-program .program-badge--active {
+  background: var(--prog-badge-active-bg);
+  color: var(--prog-badge-active-ink);
+}
+.mnr-program .program-list-item--faq .program-list-title { font-weight: 700; }
+.mnr-program .program-list-item--faq .program-list-desc { color: var(--prog-ink-muted); }
+
+/* ── 노트 박스 ── */
+.mnr-program .program-note {
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: var(--prog-bg-alt);
+  border: 1px solid var(--prog-line);
+  border-radius: 16px;
+}
+.mnr-program .program-note p {
+  font-size: 14px !important;
+  color: var(--prog-ink-muted);
+  line-height: 1.75;
+}
+.mnr-program .program-note strong { color: var(--prog-ink); }
+.mnr-program .program-note a { color: var(--prog-ink); font-weight: 600; }
+.mnr-program .program-note--tight { margin-top: 32px; }
+
+/* ── 하단 웨이트리스트 CTA ── */
+.mnr-program .program-cta-section {
+  padding: var(--space-xl) 0;
+  text-align: center;
+  background: var(--prog-bg);
+  border-top: 1px solid var(--prog-line);
+}
+@media (min-width: 769px) {
+  .mnr-program .program-cta-section { padding: var(--space-2xl) 0; }
+}
+.mnr-program .program-waitlist-box {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 40px;
+  border: 1px solid var(--prog-line);
+  border-radius: var(--radius-lg);
+  background: var(--prog-waitlist-box-bg);
+}
+@media (max-width: 768px) {
+  .mnr-program .program-waitlist-box { padding: 40px 24px; }
+}
+.mnr-program .program-waitlist-box .program-eyebrow { margin-bottom: 20px; }
+.mnr-program .program-waitlist-box .program-h2 { margin-bottom: 16px; }
+.mnr-program .program-waitlist-desc {
+  font-size: 1rem !important;
+  color: var(--prog-ink-muted);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+.mnr-program .program-cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.mnr-program #waitlist { scroll-margin-top: 64px; }
+
+/* ── 다크 테마 버튼 오버라이드 ── */
+.mnr-program[data-program-theme="dark"] .btn-primary {
+  background: #ffffff;
+  color: #1d1d1f;
+}
+.mnr-program[data-program-theme="dark"] .btn-primary:hover { opacity: 0.85; }
+.mnr-program[data-program-theme="dark"] .btn-secondary {
+  border-color: var(--prog-line-strong);
+  color: var(--prog-ink);
+}
+.mnr-program[data-program-theme="dark"] .btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── reveal ── */
+.mnr-program .reveal {
+  opacity: 0;
+  transform: translateY(var(--prog-reveal-y));
+  transition: opacity var(--prog-reveal-dur) var(--prog-reveal-ease),
+              transform var(--prog-reveal-dur) var(--prog-reveal-ease);
+}
+.mnr-program .reveal.active { opacity: 1; transform: none; }
+.mnr-program .delay-1 { transition-delay: 0.1s; }
+.mnr-program .delay-2 { transition-delay: 0.2s; }
+.mnr-program .delay-3 { transition-delay: 0.3s; }
+.mnr-program .delay-4 { transition-delay: 0.4s; }
+
+/* ── back-to-top ── */
+.mnr-program .back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: var(--prog-btt-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--prog-line);
+  border-radius: 50%;
+  display: grid !important;
+  place-items: center !important;
+  cursor: pointer;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+.mnr-program .back-to-top.show { opacity: 1; visibility: visible; }
+.mnr-program .back-to-top svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--prog-btt-stroke);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (min-width: 769px) {
+  .mnr-program .back-to-top { bottom: 40px; right: 40px; width: 52px; height: 52px; }
+}
+
+/* ── Club 모바일 sticky CTA (light only) ── */
+.mnr-program[data-program-theme="light"] .sticky-waitlist {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--prog-line);
+  text-align: center;
+}
+.mnr-program[data-program-theme="light"] .sticky-waitlist a {
+  display: block;
+  padding: 14px 24px;
+  background: var(--prog-ink);
+  color: #f5f5f7 !important;
+  border-radius: var(--btn-radius);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .mnr-program[data-program-theme="light"] .sticky-waitlist { display: block; }
+  .mnr-program[data-program-theme="light"] { padding-bottom: 72px; }
+  .mnr-program[data-program-theme="light"] .back-to-top { bottom: 88px; }
+}
+
+.mnr-program .program-waitlist-form { max-width: 480px; margin: 0 auto; }
+.mnr-program .program-section-actions { margin-top: 28px; }

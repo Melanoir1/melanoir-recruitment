@@ -19,313 +19,179 @@
     <link rel="stylesheet" href="/assets/mnr-ui.css">
     <link rel="stylesheet" href="/assets/mnr-waitlist.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/mnr-program.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body {
-            background-color: #ffffff; color: #1d1d1f;
-            font-family: 'Pretendard', -apple-system, sans-serif !important;
-            line-height: 1.6; word-break: keep-all; letter-spacing: -0.01em; overflow-x: hidden;
-        }
-
-        h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 700 !important; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 15px; }
-        h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 700 !important; letter-spacing: -0.03em; margin-bottom: 20px; }
-        h3 { font-family: var(--font-body); font-size: 1.2rem; font-weight: 700; color: #86868b; margin-bottom: 12px; text-transform: uppercase; }
-        p { font-size: 18px !important; color: #424245; margin-bottom: 24px; font-family: 'Pretendard', sans-serif !important; }
-        @media (min-width: 769px) { p { font-size: 20px !important; } }
-
-        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-        .section { background-color: #ffffff; border-bottom: 1px solid #f5f5f7; }
-        .section-alt { background-color: #fbfbfd; border-bottom: 1px solid #f5f5f7; }
-        @media (min-width: 769px) {
-            .container { padding: 0 40px; }
-        }
-
-        /* 스크롤 애니메이션 */
-        .reveal { opacity: 0; transform: translateY(48px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
-        .reveal.active { opacity: 1; transform: none; }
-        .delay-1 { transition-delay: 0.10s; }
-        .delay-2 { transition-delay: 0.20s; }
-        .delay-3 { transition-delay: 0.30s; }
-        .delay-4 { transition-delay: 0.40s; }
-
-        /* 히어로 */
-        .hero { padding: 96px 0 100px; text-align: center; background: #ffffff; border-bottom: 1px solid #f5f5f7; }
-        .hero-eyebrow { font-size: 14px !important; font-weight: 700; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
-        .hero-desc { max-width: 580px; margin: 24px auto 0; color: #86868b; font-size: 18px !important; line-height: 1.8; }
-        @media (min-width: 769px) { .hero-desc { font-size: 20px !important; } }
-
-        /* 등급 카드 그리드 */
-        .tier-grid { display: grid; grid-template-columns: 1fr; gap: 1px; margin-top: 60px; background: #f0f0f2; border-radius: 28px; overflow: hidden; border: 1px solid #f0f0f2; }
-        @media (min-width: 769px) { .tier-grid { grid-template-columns: repeat(4, 1fr); } }
-
-        .tier-card { background: #ffffff; padding: 44px 32px; display: flex; flex-direction: column; gap: 20px; }
-        .tier-card.is-partner { background: #1d1d1f; }
-
-        .tier-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: #1d1d1f; letter-spacing: -0.02em; }
-        .tier-card.is-partner .tier-name { color: #f5f5f7; }
-
-        .tier-criterion { font-size: 13px !important; color: #86868b; font-weight: 600; margin-bottom: 0; line-height: 1.5; }
-        .tier-card.is-partner .tier-criterion { color: rgba(255,255,255,0.4); }
-
-        .tier-point-wrap { margin-top: 4px; }
-        .tier-point-label { font-size: 12px !important; font-weight: 700; color: #86868b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-        .tier-point-value { font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--color-accent); line-height: 1; letter-spacing: -0.04em; }
-        .tier-card.is-partner .tier-point-label { color: rgba(255,255,255,0.4); }
-        .tier-card.is-partner .tier-point-value { color: #f5f5f7; }
-
-        .tier-divider { height: 1px; background: #f0f0f2; }
-        .tier-card.is-partner .tier-divider { background: rgba(255,255,255,0.1); }
-
-        .tier-benefits { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .tier-benefits li { font-size: 15px !important; color: #424245; font-weight: 500; padding-left: 18px; position: relative; margin-bottom: 0; }
-        .tier-benefits li::before { content: '—'; position: absolute; left: 0; color: #d2d2d7; font-weight: 400; }
-        .tier-card.is-partner .tier-benefits li { color: rgba(255,255,255,0.7); }
-        .tier-card.is-partner .tier-benefits li::before { color: rgba(255,255,255,0.2); }
-        .tier-hidden-benefit { font-style: italic; color: rgba(255,255,255,0.35) !important; font-size: 14px !important; }
-
-        /* 포인트 안내 박스 */
-        .info-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 50px; }
-        @media (min-width: 769px) { .info-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
-        .info-card { background: #f5f5f7; border-radius: 20px; padding: 32px 28px; }
-        .info-card-label { font-size: 13px !important; font-weight: 700; color: #86868b; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-        .info-card-value { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: #1d1d1f; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 8px; }
-        .info-card-desc { font-size: 14px !important; color: #86868b; margin-bottom: 0; line-height: 1.6; }
-
-        /* How it works */
-        .how-grid { display: grid; grid-template-columns: 1fr; gap: 1px; margin-top: 50px; background: #f0f0f2; border-radius: 24px; overflow: hidden; border: 1px solid #f0f0f2; }
-        @media (min-width: 769px) { .how-grid { grid-template-columns: repeat(3, 1fr); } }
-        .how-card { background: #ffffff; padding: 40px 32px; }
-        .how-num { font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: #f0f0f2; line-height: 1; margin-bottom: 16px; letter-spacing: -0.05em; }
-        .how-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #1d1d1f; margin-bottom: 12px; line-height: 1.3; }
-        .how-desc { font-size: 15px !important; color: #86868b; line-height: 1.7; margin-bottom: 0; }
-
-        #waitlist { scroll-margin-top: 64px; }
-
-        /* Pro 웨이트리스트 박스 — 앵커 점프 시 제목이 자연스럽게 잡히도록 패딩 축소 */
-        .pro-waitlist-box {
-            max-width: 860px; margin: 0 auto; padding: 56px 40px;
-            border: 1px solid var(--color-line, #e8e8ed);
-            border-radius: var(--radius-lg, 20px);
-            background: var(--color-bg-alt, #fbfbfd);
-        }
-        @media (max-width: 768px) { .pro-waitlist-box { padding: 40px 24px; } }
-
-        /* 위로가기 */
-        .back-to-top {
-            position: fixed; bottom: 30px; right: 20px; width: 44px; height: 44px;
-            background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
-            border: 1px solid rgba(0,0,0,0.08); border-radius: 50%;
-            display: grid !important; place-items: center !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;
-            z-index: 9999; opacity: 0; visibility: hidden; transition: 0.3s;
-        }
-        .back-to-top.show { opacity: 1; visibility: visible; }
-        .back-to-top svg { width: 24px; height: 24px; fill: none; stroke: #1d1d1f; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-        @media (min-width: 769px) { .back-to-top { bottom: 40px; right: 40px; width: 52px; height: 52px; } }
     </style>
 </head>
-<body>
-<header data-mnr-header data-theme="light" data-current="pro"></header>
+<body class="mnr-program" data-program-theme="dark">
+<header data-mnr-header data-theme="dark" data-current="pro"></header>
 
-
-<!-- ══════════════════════════════════════════════════════
-  HERO
-══════════════════════════════════════════════════════ -->
-<section class="hero">
-    <div class="container">
-        <p class="hero-eyebrow reveal">Melanoir Pro</p>
+<section class="program-hero">
+    <div class="program-container">
+        <p class="program-eyebrow reveal">Melanoir Pro</p>
         <h1 class="reveal delay-1">멜라누아 프로.</h1>
-        <p class="hero-desc reveal delay-2">
+        <p class="program-hero-desc reveal delay-2">
             멜라누아를 사용하는 시술자에게 드리는 혜택입니다.<br>
             시술할수록 등급이 올라갑니다.
         </p>
-        <div class="reveal delay-3" style="margin-top:36px;">
-            <a href="#waitlist" class="btn-primary">출시 알림 받기</a>
-            <p style="margin-top:14px; font-size:13px !important; color:#86868b;">현재 베타 기간입니다. 정식 출시와 함께 가입이 오픈됩니다.</p>
+        <div class="reveal delay-3">
+            <a href="#waitlist" class="program-hero-cta">출시 알림 받기</a>
+            <p class="program-hero-note">현재 베타 기간입니다. 정식 출시와 함께 가입이 오픈됩니다.</p>
         </div>
     </div>
 </section>
 
-<div style="background:#fbfbfd; border-bottom:1px solid #f5f5f7; padding:14px 22px; text-align:center; font-size:13px; color:#6e6e73;">
-  시술을 받으신 고객이신가요? <a href="/register" style="color:#1d1d1f; font-weight:600;">멜라누아 클럽 (정품 등록) →</a>
+<div class="program-crosslink">
+  시술을 받으신 고객이신가요? <a href="/register">멜라누아 클럽 (정품 등록) →</a>
 </div>
 
+<section class="program-section--alt">
+    <div class="program-container">
+        <p class="program-eyebrow reveal">Pro Tier</p>
+        <h2 class="program-h2 reveal delay-1">등급 안내.</h2>
+        <p class="program-lead reveal delay-2">멜라누아 제품을 사용한 시술 등록 횟수를 기준으로 산정됩니다. 등급별 산정 기준과 포인트 적립률은 정식 출시 시 공개됩니다.</p>
 
-<!-- ══════════════════════════════════════════════════════
-  등급 구조
-══════════════════════════════════════════════════════ -->
-<section class="section-alt">
-    <div class="container">
-        <h3 class="reveal">Pro Tier</h3>
-        <h2 class="reveal delay-1">등급 안내.</h2>
-        <p class="reveal delay-2" style="max-width: 620px;">멜라누아 제품을 사용한 시술 등록 횟수를 기준으로 산정됩니다. 등급별 산정 기준과 포인트 적립률은 정식 출시 시 공개됩니다.</p>
-
-        <div class="tier-grid reveal delay-2">
-
-            <!-- 기본 -->
-            <div class="tier-card">
+        <div class="program-tier-grid reveal delay-2">
+            <div class="program-tier-card">
                 <div>
-                    <div class="tier-name">기본</div>
-                    <p class="tier-criterion">등록 계정 전원</p>
+                    <div class="program-tier-name">기본</div>
+                    <p class="program-tier-criterion">등록 계정 전원</p>
                 </div>
-                <div class="tier-divider"></div>
-                <ul class="tier-benefits">
+                <div class="program-tier-divider"></div>
+                <ul class="program-tier-benefits">
                     <li>교육 콘텐츠 접근권</li>
                 </ul>
             </div>
-
-            <!-- 실버 -->
-            <div class="tier-card">
+            <div class="program-tier-card">
                 <div>
-                    <div class="tier-name">실버</div>
-                    <p class="tier-criterion">산정 기준 — 정식 출시 시 공개</p>
+                    <div class="program-tier-name">실버</div>
+                    <p class="program-tier-criterion">산정 기준 — 정식 출시 시 공개</p>
                 </div>
-                <div class="tier-divider"></div>
-                <ul class="tier-benefits">
+                <div class="program-tier-divider"></div>
+                <ul class="program-tier-benefits">
                     <li>교육 콘텐츠 접근권</li>
                     <li>신제품 출시 사전 알림</li>
                     <li>우선 구매권</li>
                 </ul>
             </div>
-
-            <!-- 골드 -->
-            <div class="tier-card">
+            <div class="program-tier-card">
                 <div>
-                    <div class="tier-name">골드</div>
-                    <p class="tier-criterion">산정 기준 — 정식 출시 시 공개</p>
+                    <div class="program-tier-name">골드</div>
+                    <p class="program-tier-criterion">산정 기준 — 정식 출시 시 공개</p>
                 </div>
-                <div class="tier-divider"></div>
-                <ul class="tier-benefits">
+                <div class="program-tier-divider"></div>
+                <ul class="program-tier-benefits">
                     <li>교육 콘텐츠 접근권</li>
                     <li>신제품 출시 사전 알림</li>
                     <li>우선 구매권</li>
                     <li>신제품 체험권</li>
                 </ul>
             </div>
-
-            <!-- 파트너 -->
-            <div class="tier-card is-partner">
+            <div class="program-tier-card program-tier-card--highlight">
                 <div>
-                    <div class="tier-name">파트너</div>
-                    <p class="tier-criterion">산정 기준 — 정식 출시 시 공개</p>
+                    <div class="program-tier-name">파트너</div>
+                    <p class="program-tier-criterion">산정 기준 — 정식 출시 시 공개</p>
                 </div>
-                <div class="tier-divider"></div>
-                <ul class="tier-benefits">
+                <div class="program-tier-divider"></div>
+                <ul class="program-tier-benefits">
                     <li>교육 콘텐츠 접근권</li>
                     <li>신제품 출시 사전 알림</li>
                     <li>우선 구매권</li>
                     <li>신제품 체험권</li>
-                    <li class="tier-hidden-benefit">파트너 선정 후 개별 안내</li>
+                    <li class="is-muted">파트너 선정 후 개별 안내</li>
                 </ul>
             </div>
-
         </div>
     </div>
 </section>
 
+<section class="program-section">
+    <div class="program-container">
+        <p class="program-eyebrow reveal">Points</p>
+        <h2 class="program-h2 reveal delay-1">포인트 안내.</h2>
 
-<!-- ══════════════════════════════════════════════════════
-  포인트 안내
-══════════════════════════════════════════════════════ -->
-<section class="section">
-    <div class="container">
-        <h3 class="reveal">Points</h3>
-        <h2 class="reveal delay-1">포인트 안내.</h2>
-
-        <div class="info-grid reveal delay-2">
-            <div class="info-card">
-                <div class="info-card-label">적립 기준</div>
-                <div class="info-card-value">등급별<br>차등 적립</div>
-                <p class="info-card-desc">시술 등록이 확인된 구매 건에 한해 적립됩니다. 적립률은 정식 출시 시 공개됩니다.</p>
+        <div class="program-stat-grid reveal delay-2">
+            <div class="program-stat-card">
+                <div class="program-stat-label">적립 기준</div>
+                <div class="program-stat-value">등급별<br>차등 적립</div>
+                <p class="program-stat-desc">시술 등록이 확인된 구매 건에 한해 적립됩니다. 적립률은 정식 출시 시 공개됩니다.</p>
             </div>
-            <div class="info-card">
-                <div class="info-card-label">유효기간</div>
-                <div class="info-card-value">정식 출시 시<br>안내</div>
-                <p class="info-card-desc">유효기간이 지난 포인트는 자동 소멸됩니다.</p>
+            <div class="program-stat-card">
+                <div class="program-stat-label">유효기간</div>
+                <div class="program-stat-value">정식 출시 시<br>안내</div>
+                <p class="program-stat-desc">유효기간이 지난 포인트는 자동 소멸됩니다.</p>
             </div>
-            <div class="info-card">
-                <div class="info-card-label">등급 갱신</div>
-                <div class="info-card-value">실시간<br>자동 재산정</div>
-                <p class="info-card-desc">조건 충족 시 즉시 등급이 전환됩니다.</p>
+            <div class="program-stat-card">
+                <div class="program-stat-label">등급 갱신</div>
+                <div class="program-stat-value">실시간<br>자동 재산정</div>
+                <p class="program-stat-desc">조건 충족 시 즉시 등급이 전환됩니다.</p>
             </div>
         </div>
     </div>
 </section>
 
+<section class="program-section--alt">
+    <div class="program-container">
+        <p class="program-eyebrow reveal">How It Works</p>
+        <h2 class="program-h2 reveal delay-1">작동 방식.</h2>
+        <p class="program-lead reveal delay-2">멜라누아 제품을 사용한 시술을 등록하면 자동으로 집계됩니다.</p>
 
-<!-- ══════════════════════════════════════════════════════
-  How it works
-══════════════════════════════════════════════════════ -->
-<section class="section-alt">
-    <div class="container">
-        <h3 class="reveal">How It Works</h3>
-        <h2 class="reveal delay-1">작동 방식.</h2>
-        <p class="reveal delay-2" style="max-width: 620px;">멜라누아 제품을 사용한 시술을 등록하면 자동으로 집계됩니다.</p>
-
-        <div class="how-grid reveal delay-2">
-            <div class="how-card">
-                <div class="how-num">01</div>
-                <div class="how-title">제품 사용</div>
-                <p class="how-desc">멜라누아 제품으로 고객 시술을 진행합니다.</p>
+        <div class="program-flow-grid reveal delay-2">
+            <div class="program-flow-card">
+                <div class="program-flow-num">01</div>
+                <div class="program-flow-title">제품 사용</div>
+                <p class="program-flow-desc">멜라누아 제품으로 고객 시술을 진행합니다.</p>
             </div>
-            <div class="how-card">
-                <div class="how-num">02</div>
-                <div class="how-title">시술 등록</div>
-                <p class="how-desc">정품 보증서의 QR을 스캔하여 시술 내용을 등록합니다. 시술 당일 처리됩니다.</p>
+            <div class="program-flow-card">
+                <div class="program-flow-num">02</div>
+                <div class="program-flow-title">시술 등록</div>
+                <p class="program-flow-desc">정품 보증서의 QR을 스캔하여 시술 내용을 등록합니다. 시술 당일 처리됩니다.</p>
             </div>
-            <div class="how-card">
-                <div class="how-num">03</div>
-                <div class="how-title">등급 자동 산정</div>
-                <p class="how-desc">최근 6개월 등록 횟수가 기준을 충족하는 순간 등급이 즉시 전환됩니다.</p>
+            <div class="program-flow-card">
+                <div class="program-flow-num">03</div>
+                <div class="program-flow-title">등급 자동 산정</div>
+                <p class="program-flow-desc">최근 6개월 등록 횟수가 기준을 충족하는 순간 등급이 즉시 전환됩니다.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 포인트 사용처 · 구매 -->
-<section class="section">
-  <div class="container">
-    <h3 class="reveal">Points</h3>
-    <h2 class="reveal delay-1">포인트는 이렇게 씁니다.</h2>
-    <p class="reveal delay-2" style="max-width:620px;">
+<section class="program-section">
+  <div class="program-container">
+    <p class="program-eyebrow reveal">Points</p>
+    <h2 class="program-h2 reveal delay-1">포인트는 이렇게 씁니다.</h2>
+    <p class="program-lead reveal delay-2">
       적립된 프로 포인트는 엠보 구매 시 할인으로 사용합니다. 세부 정책은 정식 출시 시 공개됩니다.
       구매는 아래 채널로 문의하세요. 정식 판매 채널이 오픈되면 회원에게 우선 안내됩니다.
     </p>
-    <div class="reveal delay-2" style="margin-top:28px;">
+    <div class="program-section-actions reveal delay-2">
       <a href="/contact" class="btn-primary">구매 문의하기</a>
     </div>
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════════════════════════
-  Pro CTA
-══════════════════════════════════════════════════════ -->
-<section class="section" id="waitlist" style="text-align: center;">
-  <div class="container">
-      <div class="pro-waitlist-box">
-      <h3 style="letter-spacing: 0.15em; margin-bottom: 20px; color: var(--color-text-dim, #86868b);">MELANOIR PRO</h3>
-      <h2 style="margin-bottom: 16px;">Pro 출시 알림을 받으세요.</h2>
-      <p style="color: var(--color-text-muted, #6e6e73); max-width: 520px; margin: 0 auto 36px;">
+<section class="program-cta-section" id="waitlist">
+  <div class="program-container">
+      <div class="program-waitlist-box">
+      <p class="program-eyebrow">MELANOIR PRO</p>
+      <h2 class="program-h2">Pro 출시 알림을 받으세요.</h2>
+      <p class="program-waitlist-desc">
         멜라누아 프로는 정식 출시와 함께 가입이 오픈됩니다.
         연락처를 남기시면 가입 오픈 소식과 혜택 안내를 가장 먼저 보내드립니다.
       </p>
-      <div style="max-width:480px; margin:0 auto 28px;">
+      <div class="program-waitlist-form">
         <div data-mnr-waitlist data-type="pro"></div>
       </div>
-      <a href="/products/embo" class="btn-secondary">엠보 알아보기</a>
+      <div class="program-cta-buttons">
+        <a href="/products/embo" class="btn-secondary">엠보 알아보기</a>
+      </div>
     </div>
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════════════════════════
-  FOOTER
-══════════════════════════════════════════════════════ -->
-<div data-mnr-explore="exclude:pro"></div>
-<div data-mnr-footer data-theme="light"></div>
+<div data-mnr-explore="exclude:pro" data-theme="dark"></div>
+<div data-mnr-footer data-theme="dark"></div>
 
 <div id="backToTop" class="back-to-top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
