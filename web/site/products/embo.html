@@ -227,22 +227,7 @@
     </style>
 </head>
 <body>
-<header class="mnr-header">
-  <div class="mnr-header-inner">
-    <a class="mnr-header-logo" href="/">
-      <img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" style="filter: invert(1);">
-    </a>
-    <button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="mnr-nav">
-      <a href="/products" class="is-current">Products</a>
-      <a href="/#technology">Technology</a>
-      <a href="/register">Club</a>
-      <a href="/pro">Pro</a>
-    </nav>
-  </div>
-</header>
+<header data-mnr-header data-theme="light" data-current="products"></header>
 
 <nav class="embo-ln" aria-label="Embo">
   <div class="embo-ln-inner">
@@ -717,8 +702,8 @@
     </svg>
 </div>
 
-<script src="/assets/mnr-nav.js"></script>
 <script src="/assets/mnr-ui.js"></script>
+<script src="/assets/mnr-nav.js"></script>
 <script src="/assets/mnr-slots.js"></script>
 <script>
     window.onbeforeunload = function() { window.scrollTo(0, 0); };

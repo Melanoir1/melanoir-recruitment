@@ -9,6 +9,7 @@
     <meta property="og:title" content="정품 확인 — Melanoir">
     <meta property="og:description" content="정품 확인 — Melanoir">
     <meta property="og:url" content="https://melanoir.co.kr/verify">
+    <link rel="stylesheet" href="/assets/melanoir-subpage-header.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
@@ -82,6 +83,7 @@
     </style>
 </head>
 <body>
+    <header data-mnr-header data-theme="light" data-current=""></header>
     <p class="logo">Melanoir</p>
 
     <h1>정품 확인.</h1>
@@ -118,6 +120,8 @@
         QR 코드가 손상된 경우, verify.melanoir.co.kr에서<br>보증서의 시리얼 번호를 직접 입력하세요.
     </p>
 
+<script src="/assets/mnr-ui.js"></script>
+<script src="/assets/mnr-nav.js"></script>
 <script>
     // URL에 token 파라미터가 있으면 verify 앱으로 바로 전달
     const params = new URLSearchParams(window.location.search);

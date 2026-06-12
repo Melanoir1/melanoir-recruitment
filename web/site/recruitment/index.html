@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="../assets/melanoir-shell.css" />
+  <link rel="stylesheet" href="../assets/melanoir-subpage-header.css" />
   <style>
     h1, h2, h3, p { margin: 0; }
 
@@ -39,7 +40,7 @@
     #workspace,
     #conditions,
     #apply-form {
-      scroll-margin-top: 92px;
+      scroll-margin-top: 100px;
     }
 
     .space-carousel {
@@ -681,26 +682,9 @@
   </style>
 </head>
 <body>
+  <header data-mnr-header data-theme="dark" data-current="recruit"></header>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <div class="app">
-    <header class="topbar topbar--site">
-      <div class="topbar-head">
-        <a class="logo logo--brand" href="/">
-          <img
-            src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png"
-            alt="Melanoir"
-            width="140"
-            height="20"
-            decoding="async">
-        </a>
-        <nav class="nav" aria-label="Main">
-          <a href="/products">Products</a>
-          <a href="/#technology">Technology</a>
-        </nav>
-      </div>
-      <a class="topbar-hire is-here" href="/recruitment">[2026년 상반기 채용] 멜라누아 R&amp;D 팀에 합류하기</a>
-    </header>
-
     <section class="section reveal" id="intro">
       <p class="eyebrow">01 · MELANOIR INTRODUCTION</p>
       <h1 class="hero-title">BUILD THE NEW STANDARD OF BLACK.</h1>
@@ -937,9 +921,8 @@
       © Melanoir. All rights reserved.
     </footer>
   </div>
-  <a class="melanoir-hire-fab is-here" href="/recruitment" aria-label="2026년 상반기 채용 — 멜라누아 R&amp;D 팀에 합류하기">
-    [2026년 상반기 채용]<br>멜라누아 R&amp;D 팀에 합류하기
-  </a>
+  <script src="../assets/mnr-ui.js"></script>
+  <script src="../assets/mnr-nav.js"></script>
   <script src="../assets/recruitment-space-carousel.js"></script>
   <script>
     (function () {

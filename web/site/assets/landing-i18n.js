@@ -274,32 +274,6 @@
 
   function buildLandingHTML(t) {
     return (
-      '<header class="mnr-header" data-theme="dark">' +
-      '<div class="mnr-header-inner">' +
-      '<a class="mnr-header-logo" href="/">' +
-      '<img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir">' +
-      "</a>" +
-      '<button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">' +
-      "<span></span><span></span><span></span></button>" +
-      '<nav class="mnr-nav" aria-label="' +
-      t.navAria +
-      '">' +
-      '<a href="/products">' +
-      t.navProducts +
-      "</a>" +
-      '<a href="/#technology">' +
-      t.navTechnology +
-      "</a>" +
-      '<a href="/register">' +
-      t.navClub +
-      "</a>" +
-      '<a href="/pro">' +
-      t.navPro +
-      "</a>" +
-      '<a href="/recruitment">' +
-      t.navRecruit +
-      "</a>" +
-      "</nav></div></header>" +
       "<main>" +
       '<section class="section section--hero" aria-labelledby="mission-title">' +
       '<div class="hero-video-bg" aria-hidden="true"><video id="heroMissionVideo" autoplay muted loop playsinline disablePictureInPicture><source src="' +

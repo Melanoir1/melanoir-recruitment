@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="../assets/melanoir-shell.css" />
   <link rel="stylesheet" href="../assets/melanoir-lang.css" />
   <link rel="stylesheet" href="../assets/mnr-ui.css" />
+  <link rel="stylesheet" href="../assets/melanoir-subpage-header.css" />
   <style>
     /* —— 히어로 —— */
     .melanin-hero {
@@ -191,6 +192,7 @@
   </style>
 </head>
 <body>
+  <header data-mnr-header data-theme="dark" data-current=""></header>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <div class="app">
     <div id="melanoir-content"></div>
@@ -198,6 +200,7 @@
 
   <script src="../assets/melanoir-lang.js"></script>
   <script src="../assets/mnr-ui.js"></script>
+  <script src="../assets/mnr-nav.js"></script>
   <script>
     (function () {
       var hireKo = "[2026\uB144 \uC0C1\uBC18\uAE30 \uCC44\uC6A9] \uBA5C\uB77C\uB204\uC544 R&amp;D \uD300\uC5D0 \uD569\uB958\uD558\uAE30";
@@ -297,19 +300,6 @@
 
       function buildPage(t) {
         return (
-          '<header class="topbar topbar--site">' +
-          '<div class="topbar-head">' +
-          '<a class="logo logo--brand" href="/">' +
-          '<img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png" alt="Melanoir" width="140" height="20" decoding="async">' +
-          "</a>" +
-          '<nav class="nav" aria-label="' + t.navAria + '">' +
-          '<a href="/products">' + t.navProducts + "</a>" +
-          '<a href="/#technology">' + t.navTechnology + "</a>" +
-          '<a href="/register">Club</a>' +
-          '<a href="/pro">Pro</a>' +
-          "</nav></div>" +
-          '<a class="topbar-hire" href="/recruitment">' + hireKo + "</a>" +
-          "</header>" +
           "<main>" +
           '<div class="melanin-hero">' +
           '<p class="melanin-hero-eyebrow reveal">' + t.heroEyebrow + "</p>" +

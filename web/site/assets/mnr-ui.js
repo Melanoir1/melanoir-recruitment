@@ -12,6 +12,17 @@
 
   var CONTACT_EMAIL = "official@melanoir.co.kr";
 
+  var LOGO_WHITE = "https://res.cloudinary.com/dssuxurpt/image/upload/v1778836628/MELANOIR_sg2_white_bpaxvi.png";
+
+  /* === 사이트 공통 메뉴: 이 배열이 유일한 출처(Single Source of Truth) === */
+  var NAV_ITEMS = [
+    { key: "products",   label: "Products",   href: "/products" },
+    { key: "technology", label: "Technology", href: "/#technology" },
+    { key: "club",       label: "Club",       href: "/register" },
+    { key: "pro",        label: "Pro",        href: "/pro" },
+    { key: "recruit",    label: "채용",        href: "/recruitment" },
+  ];
+
   var FOOTER_GROUPS = [
     {
       title: "Products",
@@ -81,6 +92,41 @@
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  function headerHTML(theme, current) {
+    var items = NAV_ITEMS.map(function (it) {
+      var cur = it.key === current ? ' class="is-current"' : "";
+      return '<a href="' + it.href + '"' + cur + ">" + esc(it.label) + "</a>";
+    }).join("");
+    // 라이트 배경에서는 흰 로고를 invert하여 검게, 다크 배경에서는 흰 로고 그대로
+    var logoStyle = theme === "dark" ? "" : ' style="filter: invert(1);"';
+    return (
+      '<div class="mnr-header-inner">' +
+        '<a class="mnr-header-logo" href="/">' +
+          '<img src="' + LOGO_WHITE + '" alt="Melanoir"' + logoStyle + ">" +
+        "</a>" +
+        '<button class="mnr-nav-toggle" type="button" aria-label="메뉴" aria-expanded="false">' +
+          "<span></span><span></span><span></span></button>" +
+        '<nav class="mnr-nav" aria-label="Main">' + items + "</nav>" +
+      "</div>"
+    );
+  }
+
+  function bindNavToggle(scope) {
+    var toggle = scope.querySelector(".mnr-nav-toggle");
+    var nav = scope.querySelector(".mnr-nav");
+    if (!toggle || !nav) return;
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
   function footerHTML() {
     var groups = FOOTER_GROUPS.map(function (g) {
       var links = g.links
@@ -126,6 +172,14 @@
   }
 
   function renderAll() {
+    document.querySelectorAll("[data-mnr-header]").forEach(function (el) {
+      var theme = el.getAttribute("data-theme") || "light";
+      var current = el.getAttribute("data-current") || "";
+      el.className = "mnr-header";
+      el.setAttribute("data-theme", theme);
+      el.innerHTML = headerHTML(theme, current);
+      bindNavToggle(el);
+    });
     document.querySelectorAll("[data-mnr-footer]").forEach(function (el) {
       el.className = "mnr-uft";
       if (!el.getAttribute("data-theme")) el.setAttribute("data-theme", "light");
@@ -148,5 +202,5 @@
     renderAll();
   }
 
-  global.MnrUI = { renderAll: renderAll, FOOTER_GROUPS: FOOTER_GROUPS, EXPLORE_CARDS: EXPLORE_CARDS };
+  global.MnrUI = { renderAll: renderAll, FOOTER_GROUPS: FOOTER_GROUPS, EXPLORE_CARDS: EXPLORE_CARDS, NAV_ITEMS: NAV_ITEMS };
 })(typeof window !== "undefined" ? window : globalThis);
