@@ -1,4 +1,6 @@
+import { createClient } from '@supabase/supabase-js'
 import { createServiceClient } from '@/lib/supabase'
+import AdminCollectedData, { type WaitlistRow } from './AdminCollectedData'
 import DispatchActions from './DispatchActions'
 
 export const dynamic = 'force-dynamic'
@@ -18,13 +20,33 @@ async function signedUrl(supabase: ReturnType<typeof createServiceClient>, path:
   return data?.signedUrl ?? null
 }
 
+async function fetchWaitlist(): Promise<WaitlistRow[]> {
+  const client = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } }
+  )
+  const { data, error } = await client
+    .from('mnr_waitlist')
+    .select('id, type, phone, name, shop_name, instagram, source, created_at')
+    .order('created_at', { ascending: false })
+  if (error) {
+    console.error('[admin] waitlist fetch error:', error)
+    return []
+  }
+  return (data ?? []) as WaitlistRow[]
+}
+
 export default async function AdminPage() {
   const supabase = createServiceClient()
-  const [funnelRes, lotRes, techRes, dispatchRes] = await Promise.all([
+  const [funnelRes, lotRes, techRes, dispatchRes, waitlist, clubRes, proRes] = await Promise.all([
     supabase.from('mnr_v_funnel' as 'mnr_credits').select('*').single(),
     supabase.from('mnr_v_lot_quality' as 'mnr_credits').select('*'),
     supabase.from('mnr_v_technique_quality' as 'mnr_credits').select('*'),
     supabase.from('mnr_retouch_dispatches').select('*').order('created_at', { ascending: false }).limit(50),
+    fetchWaitlist(),
+    supabase.from('mnr_registrations').select('serial_token, customer_name, customer_phone, satisfaction, discomfort, photo_url, healing_photo_url, longterm_photo_url, registered_at, healing_registered_at').order('registered_at', { ascending: false }),
+    supabase.from('mnr_practitioners').select('practitioner_id, name, shop_name, phone, region, tier, created_at').order('created_at', { ascending: false }),
   ])
   const funnel = funnelRes.data as unknown as Funnel | null
   const lots = (lotRes.data ?? []) as unknown as LotQuality[]
@@ -44,6 +66,28 @@ export default async function AdminPage() {
     ])
     photoMap.set(reg.serial_token, { before, healing })
   }
+
+  type ClubRow = {
+    serial_token: string; customer_name: string | null; customer_phone: string | null
+    satisfaction: number | null; discomfort: string[] | null
+    photo_url: string | null; healing_photo_url: string | null; longterm_photo_url: string | null
+    registered_at: string | null; healing_registered_at: string | null
+  }
+  const clubRows = (clubRes.data ?? []) as ClubRow[]
+  const clubRegistrations = await Promise.all(
+    clubRows.map(async r => ({
+      serial_token: r.serial_token,
+      customer_name: r.customer_name,
+      customer_phone: r.customer_phone,
+      satisfaction: r.satisfaction,
+      discomfort: r.discomfort,
+      photo_before: await signedUrl(supabase, r.photo_url),
+      photo_healing: await signedUrl(supabase, r.healing_photo_url),
+      photo_longterm: await signedUrl(supabase, r.longterm_photo_url),
+      registered_at: r.registered_at,
+      healing_registered_at: r.healing_registered_at,
+    }))
+  )
 
   const AREA_KO: Record<string, string> = { eyebrow: '눈썹', eyeliner: '아이라인', lip: '입술' }
   const TECH_KO: Record<string, string> = { hairstroke: '헤어스트로크', combo: '콤보', machine_gradient: '머신 그라데이션' }
@@ -158,6 +202,12 @@ export default async function AdminPage() {
           </table>
         </div>
       </section>
+
+      <AdminCollectedData
+        waitlist={waitlist}
+        clubRegistrations={clubRegistrations}
+        proPractitioners={(proRes.data ?? []) as Parameters<typeof AdminCollectedData>[0]['proPractitioners']}
+      />
     </main>
   )
 }
