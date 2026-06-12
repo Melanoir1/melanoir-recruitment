@@ -7,7 +7,7 @@ export async function GET() {
   const supabase = createRawServiceClient()
   const { data, error } = await supabase
     .from('mnr_waitlist')
-    .select('id, type, phone, name, shop_name, instagram, source, created_at')
+    .select('id, type, phone, name, shop_name, instagram, source, created_at, status, phone_verified_at, dm_code, dm_code_sent_at, dm_verified_at')
     .order('created_at', { ascending: false })
 
   if (error) {

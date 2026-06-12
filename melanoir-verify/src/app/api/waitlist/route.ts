@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createRawServiceClient } from '@/lib/supabase'
+import { createRawServiceClient, createServiceClient } from '@/lib/supabase'
 import { sendSms } from '@/lib/sms'
 
 const ALLOWED_ORIGINS = ['https://melanoir.co.kr', 'https://www.melanoir.co.kr']
@@ -50,6 +50,35 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: '개인정보 수집·이용 동의가 필요합니다.' }, { status: 400, headers })
   }
 
+  // beta: SMS 본인 인증 검증 (중복 신청 방지 + 연락처 실소유 확인)
+  let phoneVerifiedAt: string | null = null
+  if (type === 'beta') {
+    const code = String(body.otp_code ?? '').trim()
+    if (!/^[0-9]{6}$/.test(code)) {
+      return NextResponse.json({ error: '인증번호를 입력해주세요.' }, { status: 400, headers })
+    }
+    const otpClient = createServiceClient()
+    const { data: otp } = await otpClient
+      .from('mnr_sms_verifications')
+      .select('id')
+      .eq('phone', phone)
+      .eq('code', code)
+      .eq('verified', false)
+      .gt('expires_at', new Date().toISOString())
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    if (!otp) {
+      return NextResponse.json(
+        { error: '인증번호가 올바르지 않거나 만료되었습니다. 재발송 후 다시 시도해주세요.' },
+        { status: 401, headers }
+      )
+    }
+    // 코드 소진 처리 (재사용 방지)
+    await otpClient.from('mnr_sms_verifications').update({ verified: true }).eq('id', otp.id)
+    phoneVerifiedAt = new Date().toISOString()
+  }
+
   const supabase = createRawServiceClient()
 
   const { data: existing } = await supabase
@@ -59,6 +88,7 @@ export async function POST(req: NextRequest) {
     .eq('type', type)
     .maybeSingle()
 
+  // 주의: status·dm_code 등은 upsert 컬럼에 포함하지 않는다 → 재신청해도 선정 상태가 초기화되지 않음
   const { error } = await supabase.from('mnr_waitlist').upsert(
     {
       type,
@@ -69,6 +99,7 @@ export async function POST(req: NextRequest) {
       marketing_consent: true,
       source: body.source ? String(body.source).slice(0, 120) : null,
       updated_at: new Date().toISOString(),
+      ...(phoneVerifiedAt ? { phone_verified_at: phoneVerifiedAt } : {}),
     },
     { onConflict: 'phone,type' }
   )
@@ -81,7 +112,7 @@ export async function POST(req: NextRequest) {
   // 신규 신청에만 확인 SMS 발송 (중복 신청 시 재발송 방지)
   if (!existing) {
     const smsText = type === 'beta'
-      ? '[멜라누아] 베타테스터 신청이 완료되었습니다. 선정 결과를 문자로 안내드릴게요.'
+      ? '[멜라누아] 베타테스터 신청이 완료되었습니다. 선정 시 인스타그램 DM 인증 안내를 문자로 보내드릴게요.'
       : '[멜라누아] 출시 알림 신청이 완료되었습니다. 정식 출시 소식을 가장 먼저 보내드릴게요.'
     await sendSms(phone, smsText)
   }

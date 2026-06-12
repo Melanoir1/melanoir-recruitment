@@ -61,3 +61,29 @@
 }
 .mnr-program[data-program-theme="dark"] .mnr-wl-done strong { color: #f5f5f7; }
 .mnr-program[data-program-theme="dark"] .mnr-wl-done p { color: rgba(255, 255, 255, 0.45); }
+
+/* ── 베타 폼: SMS 본인 인증 ── */
+.mnr-wl-phone-row { display: flex; gap: 8px; }
+.mnr-wl-phone-row input { flex: 1; min-width: 0; }
+.mnr-wl-otp-btn {
+  flex-shrink: 0; padding: 0 18px; border-radius: 12px; cursor: pointer;
+  border: 1px solid var(--color-ink, #1d1d1f); background: transparent;
+  color: var(--color-ink, #1d1d1f);
+  font-size: 13px; font-weight: 600; font-family: inherit; white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.mnr-wl-otp-btn:hover { opacity: 0.7; }
+.mnr-wl-otp-btn:disabled { opacity: 0.4; cursor: default; }
+.mnr-wl-otp-row[hidden] { display: none; }
+.mnr-wl-notice {
+  font-size: 12px; color: var(--color-text-dim, #86868b);
+  margin: 0; text-align: center;
+}
+
+/* 다크 테마 변형 (현재 베타 폼은 라이트 페이지에만 있으나 안전용) */
+.mnr-program[data-program-theme="dark"] .mnr-wl-otp-btn {
+  border-color: rgba(255, 255, 255, 0.5); color: #f5f5f7;
+}
+.mnr-program[data-program-theme="dark"] .mnr-wl-notice {
+  color: rgba(255, 255, 255, 0.45);
+}

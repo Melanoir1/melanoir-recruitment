@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export interface WaitlistRow {
   id: number
@@ -11,6 +12,11 @@ export interface WaitlistRow {
   instagram: string | null
   source: string | null
   created_at: string
+  status: string | null
+  phone_verified_at: string | null
+  dm_code: string | null
+  dm_code_sent_at: string | null
+  dm_verified_at: string | null
 }
 
 export interface ClubRegistrationRow {
@@ -101,10 +107,58 @@ function EmptyRow({ cols }: { cols: number }) {
   )
 }
 
-function WaitlistTable({ rows }: { rows: WaitlistRow[] }) {
+const STATUS_KO: Record<string, { label: string; cls: string }> = {
+  applied: { label: '신청', cls: 'bg-gray-100 text-gray-600' },
+  selected: { label: '선정·DM 대기', cls: 'bg-amber-100 text-amber-700' },
+  confirmed: { label: '확정', cls: 'bg-green-100 text-green-700' },
+}
+
+function BetaActions({ row }: { row: WaitlistRow }) {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+
+  async function act(action: 'select' | 'confirm_dm') {
+    const who = row.name ?? row.phone
+    const ask =
+      action === 'select'
+        ? `${who} — 선정 처리하고 DM 인증 코드를 SMS로 발송할까요?`
+        : `@${row.instagram ?? '?'} 계정에서 코드 ${row.dm_code ?? ''} DM을 확인했나요? 최종 확정 SMS가 발송됩니다.`
+    if (!window.confirm(ask)) return
+    setLoading(true)
+    await fetch('/api/admin/waitlist/action', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: row.id, action }),
+    })
+    setLoading(false)
+    router.refresh()
+  }
+
+  const btnCls = 'text-xs px-3 py-1.5 rounded-full disabled:opacity-40'
+  if (row.status === 'confirmed') return <span className="text-xs text-gray-400">완료</span>
+  if (row.status === 'selected') {
+    return (
+      <div className="flex gap-1.5">
+        <button onClick={() => act('confirm_dm')} disabled={loading} className={`${btnCls} bg-black text-white`}>
+          DM 확인
+        </button>
+        <button onClick={() => act('select')} disabled={loading} className={`${btnCls} bg-gray-100 text-gray-600`}>
+          재발송
+        </button>
+      </div>
+    )
+  }
+  return (
+    <button onClick={() => act('select')} disabled={loading} className={`${btnCls} bg-black text-white`}>
+      선정
+    </button>
+  )
+}
+
+function WaitlistTable({ rows, beta = false }: { rows: WaitlistRow[]; beta?: boolean }) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[640px]">
+      <table className={`w-full ${beta ? 'min-w-[860px]' : 'min-w-[640px]'}`}>
         <thead>
           <tr>
             <th className={th}>신청일</th>
@@ -113,24 +167,47 @@ function WaitlistTable({ rows }: { rows: WaitlistRow[] }) {
             <th className={th}>샵명</th>
             <th className={th}>인스타그램</th>
             <th className={th}>유입</th>
+            {beta && <th className={th}>휴대폰 인증</th>}
+            {beta && <th className={th}>상태</th>}
+            {beta && <th className={th}>DM 코드</th>}
+            {beta && <th className={th}>액션</th>}
           </tr>
         </thead>
         <tbody>
           {rows.length === 0 ? (
-            <EmptyRow cols={6} />
+            <EmptyRow cols={beta ? 10 : 6} />
           ) : (
-            rows.map(row => (
-              <tr key={row.id}>
-                <td className={td}>{fmtDate(row.created_at)}</td>
-                <td className={td}>{row.name ?? '—'}</td>
-                <td className={td}>{row.phone}</td>
-                <td className={td}>{row.shop_name ?? '—'}</td>
-                <td className={td}>{row.instagram ? `@${row.instagram}` : '—'}</td>
-                <td className={`${td} text-xs text-gray-500 max-w-[160px] truncate`} title={row.source ?? undefined}>
-                  {row.source ?? '—'}
-                </td>
-              </tr>
-            ))
+            rows.map(row => {
+              const st = STATUS_KO[row.status ?? 'applied'] ?? STATUS_KO.applied
+              return (
+                <tr key={row.id}>
+                  <td className={td}>{fmtDate(row.created_at)}</td>
+                  <td className={td}>{row.name ?? '—'}</td>
+                  <td className={td}>{row.phone}</td>
+                  <td className={td}>{row.shop_name ?? '—'}</td>
+                  <td className={td}>{row.instagram ? `@${row.instagram}` : '—'}</td>
+                  <td className={`${td} text-xs text-gray-500 max-w-[160px] truncate`} title={row.source ?? undefined}>
+                    {row.source ?? '—'}
+                  </td>
+                  {beta && (
+                    <td className={td}>
+                      {row.phone_verified_at ? (
+                        <span className="text-xs text-green-600">✓ 인증</span>
+                      ) : (
+                        <span className="text-xs text-gray-400">미인증</span>
+                      )}
+                    </td>
+                  )}
+                  {beta && (
+                    <td className={td}>
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${st.cls}`}>{st.label}</span>
+                    </td>
+                  )}
+                  {beta && <td className={`${td} font-mono text-xs`}>{row.dm_code ?? '—'}</td>}
+                  {beta && <td className={td}><BetaActions row={row} /></td>}
+                </tr>
+              )
+            })
           )}
         </tbody>
       </table>
@@ -277,7 +354,7 @@ export default function AdminCollectedData({
             <p className="text-xs text-gray-400 mb-3">
               엠보 베타테스터 모집 신청 · 선정·안내 대상 ({betaRows.length}건)
             </p>
-            <WaitlistTable rows={betaRows} />
+            <WaitlistTable rows={betaRows} beta />
           </>
         )}
 
