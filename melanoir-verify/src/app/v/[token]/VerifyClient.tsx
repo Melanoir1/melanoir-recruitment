@@ -53,20 +53,6 @@ const TECHNIQUE_LABELS: Record<string, string> = {
   machine_gradient: '머신 그라데이션',
 }
 
-const PHOTO_GUIDE = [
-  '눈썹이 화면에 가득 차도록 가까이',
-  '정면에서, 밝은 곳(자연광)에서',
-  '얼굴 전체가 나오지 않아도 됩니다',
-]
-
-function PhotoGuide() {
-  return (
-    <ul className="text-[11px] text-gray-400 mb-2 space-y-0.5 list-disc pl-4">
-      {PHOTO_GUIDE.map(line => <li key={line}>{line}</li>)}
-    </ul>
-  )
-}
-
 function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return '—'
   return new Date(dateStr).toLocaleDateString('ko-KR', {
@@ -567,8 +553,18 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
               <InputField label="이름" required value={custName} onChange={e => setCustName(e.target.value)} placeholder="홍길동" />
               <InputField label="연락처" required value={custPhone} onChange={e => setCustPhone(e.target.value)} placeholder="01012345678" />
               <div>
+                <div className="flex items-start gap-3 rounded-xl bg-gray-50 border border-gray-200 p-3 mb-3">
+                  <img
+                    src="https://res.cloudinary.com/dssuxurpt/image/upload/v1781193672/review_example_yy8hfg.jpg"
+                    alt="시술 부위 사진 예시"
+                    className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+                  />
+                  <p className="text-xs text-gray-500 leading-relaxed">
+                    예시처럼 시술 부위(눈썹)만 선명히 보이면 됩니다.<br />
+                    <strong className="text-black">얼굴 전체 사진은 필요하지 않습니다.</strong>
+                  </p>
+                </div>
                 <label className="block text-xs text-gray-500 mb-1">시술 부위 사진 *</label>
-                <PhotoGuide />
                 <input
                   type="file" accept="image/*" required
                   onChange={e => setCustPhoto(e.target.files?.[0] ?? null)}
@@ -603,8 +599,8 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
               시술 후 <strong className="text-black">7~30일 사이</strong> 등록을 권장합니다.
             </p>
             <div>
+              <p className="text-xs text-gray-400 mb-2">시술 부위만 선명히 — 얼굴 전체 사진은 필요하지 않습니다.</p>
               <label className="block text-xs text-gray-500 mb-1">힐링 사진 *</label>
-              <PhotoGuide />
               <input
                 type="file" accept="image/*" required
                 onChange={e => setHealingFile(e.target.files?.[0] ?? null)}
@@ -636,8 +632,8 @@ export default function VerifyClient({ data }: { data: VerifyData }) {
               <strong className="text-black"> 10,000 크레딧</strong>을 드립니다.
             </p>
             <div>
+              <p className="text-xs text-gray-400 mb-2">시술 부위만 선명히 — 얼굴 전체 사진은 필요하지 않습니다.</p>
               <label className="block text-xs text-gray-500 mb-1">현재 사진 *</label>
-              <PhotoGuide />
               <input
                 type="file" accept="image/*" required
                 onChange={e => setLongtermFile(e.target.files?.[0] ?? null)}
