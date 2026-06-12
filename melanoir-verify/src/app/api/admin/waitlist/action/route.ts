@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createRawServiceClient } from '@/lib/supabase'
 import { sendSms } from '@/lib/sms'
 
-// ⚠️ 배포 전 Vercel env INSTAGRAM_OFFICIAL_HANDLE에 실제 공식 계정 핸들 설정 (예: @melanoir.official)
-const INSTAGRAM_HANDLE = process.env.INSTAGRAM_OFFICIAL_HANDLE ?? '@melanoir.official'
+const INSTAGRAM_HANDLE = process.env.INSTAGRAM_OFFICIAL_HANDLE ?? '@melanoir_official'
 
 // 혼동 문자(0/O/1/I/L) 제외 4자리
 function generateDmCode(): string {
