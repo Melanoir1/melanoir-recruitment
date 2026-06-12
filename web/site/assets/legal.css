@@ -60,18 +60,18 @@ tr:nth-child(even) td { background: #faf8f6; }
   display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.05em;
   padding: 2px 7px; border-radius: 2px; vertical-align: middle; margin-left: 6px;
 }
-.tag-required { background: #f0ebe5; color: #7a5c3e; }
-.tag-optional { background: #eef4ee; color: #3a7a3a; }
-.tag-auto     { background: #eef0f8; color: #3a4a8a; }
-.tag-future   { background: #f5f5f5; color: #888; border: 1px solid #ddd; }
-.tag-consent  { background: #fff3e0; color: #b35a00; }
+.tag-required { background: #1d1d1f; color: #ffffff; }
+.tag-optional { background: #f5f5f7; color: #1d1d1f; border: 1px solid #d2d2d7; }
+.tag-auto     { background: #f5f5f7; color: #86868b; }
+.tag-future   { background: #f5f5f7; color: #86868b; border: 1px solid #d2d2d7; }
+.tag-consent  { background: #1d1d1f; color: #ffffff; }
 .notice {
   background: var(--light); border-left: 3px solid var(--accent);
   padding: 14px 18px; font-size: 13px; color: #666; border-radius: 2px; margin: 14px 0; line-height: 1.75;
 }
 .notice-ad {
-  background: #fff8f0; border-left: 3px solid #e8a055;
-  padding: 14px 18px; font-size: 13px; color: #7a4a10; border-radius: 2px; margin: 14px 0; line-height: 1.75;
+  background: #f5f5f7; border-left: 3px solid #1d1d1f;
+  padding: 14px 18px; font-size: 13px; color: #6e6e73; border-radius: 2px; margin: 14px 0; line-height: 1.75;
 }
 .contact-box { background: var(--light); border-radius: 6px; padding: 22px 26px; font-size: 14px; }
 .contact-box p { margin-bottom: 6px; }
