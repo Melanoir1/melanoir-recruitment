@@ -250,9 +250,11 @@
 
   /** false → show [더 알아보기] on landing when /melanin, /technology/* are ready */
   var DEFER_DESTINATION_LEARN_MORE = true;
+  // 준비 완료된 목적지는 게이트와 무관하게 노출 (radiation·melanin은 계속 비공개)
+  var READY_DESTINATIONS = ["/technology/tattoo", "/technology/cosmetics"];
 
   function deferredLearnMoreLink(className, href, label) {
-    if (DEFER_DESTINATION_LEARN_MORE) return "";
+    if (DEFER_DESTINATION_LEARN_MORE && READY_DESTINATIONS.indexOf(href) === -1) return "";
     return '<a class="' + className + '" href="' + href + '">' + label + "</a>";
   }
 
