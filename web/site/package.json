@@ -1,0 +1,9 @@
+{
+  "name": "melanoir-site",
+  "private": true,
+  "description": "Melanoir marketing site — local preview matches melanoir.co.kr baseline",
+  "scripts": {
+    "dev": "npx --yes serve -l 3456 .",
+    "sync:production": "bash ../../scripts/sync-melanoir-production.sh"
+  }
+}

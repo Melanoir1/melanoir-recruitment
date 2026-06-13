@@ -1,0 +1,26 @@
+---
+description: 로컬 사이트 프리뷰는 melanoir.co.kr 배포본을 기본 기준으로 맞춘다
+globs: web/site/**
+alwaysApply: false
+---
+
+# Melanoir 사이트 — 프로덕션 기준 로컬 프리뷰
+
+- **배포 기준 URL:** https://melanoir.co.kr
+- **Git baseline:** `0249735` (`landing-i18n.js` 해시가 라이브와 일치함을 검증)
+- **로컬 프리뷰:** `npm run dev` → http://localhost:3456 (`web/site` 루트)
+
+## 작업 전
+
+1. 배포본과 맞추려면 `npm run sync:production` 실행
+2. 랜딩·패치 작업 후에는 라이브와 diff 확인 (`landing-i18n.js` 해시 등)
+
+## 랜딩 변경 시
+
+- `web/site/assets/landing-i18n.js`와 `web/site/index.html`이 랜딩 UI의 핵심
+- 로컬 HEAD가 origin/main보다 앞선 커밋(ROUND5 등)이 있으면 배포본과 다를 수 있음 — 기본은 **배포 baseline** 우선
+
+## 서버
+
+- 포트 **3456** 고정 (`web/site/package.json`)
+- 정적 사이트이므로 파일 변경 후 브라우저 하드 리프레시 필요
