@@ -18,16 +18,20 @@
   --space-xl:  80px;
   --space-2xl: 120px;
 
-  /* 카드 radius */
+  /* 카드 radius (B-8 · 12px 통일) */
   --radius-sm: 12px;
-  --radius-lg: 20px;
+  --radius-lg: 12px;
 
   /* 폰트 */
   --font-display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
   --font-body:    "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* 버튼 */
-  --btn-radius: 3px;
+  --btn-radius: 12px;
+
+  /* 모션 (B-7 · Tesla 표준 단일 타이밍) */
+  --mnr-dur:  0.33s;
+  --mnr-ease: cubic-bezier(0.5, 0, 0, 0.75);
 }
 
 .btn-primary {
@@ -39,7 +43,7 @@
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: opacity var(--mnr-dur) var(--mnr-ease);
   cursor: pointer;
   border: none;
 }
@@ -54,7 +58,7 @@
   font-size: 15px;
   font-weight: 500;
   text-decoration: none;
-  transition: border-color 0.2s;
+  transition: border-color var(--mnr-dur) var(--mnr-ease);
   cursor: pointer;
   background: transparent;
 }
