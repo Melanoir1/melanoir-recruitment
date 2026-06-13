@@ -54,7 +54,7 @@
       statBioLabel: "Bio-material",
       statBio: "생체에서 영감을 받은 고기능 소재. 검은색이 요구되는 자리마다, 더 안전한 대안으로서의 멜라닌을 상상합니다.",
       statReachLabel: "Reach",
-      statReach: "실험실의 소량에서 시작해, 지구와 우주를 가로지르는 응용까지. 스케일이 커질수록 멜라닌이 대체할 수 있는 영역은 넓어집니다.",
+      statReach: "실험실의 소량 합성에서 시작해, 점점 더 넓은 산업적 응용으로. 스케일이 커질수록 멜라닌이 대체할 수 있는 영역은 넓어집니다.",
       techEyebrow: "IRRADIATION",
       techTitle: "How we drive innovation",
       techImgAlt: "조사·광 스트레스 조건에서 멜라닌과 비교 소재의 안정성을 보여 주는 실험 비주얼",
@@ -64,9 +64,9 @@
       scaleImgAlt: "순수 멜라닌 분말이 쌓이며 스케일을 상징하는 비주얼",
       scaleProse: "같은 물질이어도, 영역마다 요구되는 역할은 다릅니다. 아래는 멜라닌이 어떤 세계와 맞닿아 있는지에 대한 방향이며, 각 축이 지향하는 공통 목표는 <strong>지구에서 가장 안전한 Black</strong>입니다.",
       trajTattooTitle: "타투와 눈썹 문신을 더욱 안전하게.",
-      trajTattooDesc: "피부 안에 영구적으로 새겨지는 색소는 그 어떤 소재보다 높은 안전 기준을 요구합니다. 멜라누아는 멜라닌 기반 타투·PMU 잉크를 개발하며, 가장 안전한 블랙을 구현합니다.",
+      trajTattooDesc: "피부 안에 영구적으로 새겨지는 색소는 그 어떤 소재보다 높은 안전 기준을 요구합니다. 멜라누아는 멜라닌 기반 타투·PMU 잉크를 개발하며, 가장 안전한 블랙을 목표로 합니다.",
       trajRadTitle: "방사선 차폐 기술의 혁신을 만듭니다.",
-      trajRadDesc: "멜라닌의 방사선 흡수 특성은 단순한 색소를 넘어, 차세대 차폐 소재로서의 가능성을 열어 줍니다. 우주 산업과 의료 환경이 요구하는 방호 기준을 멜라닌으로 다시 씁니다.",
+      trajRadDesc: "멜라닌의 방사선 흡수 특성은 단순한 색소를 넘어, 차세대 차폐 소재로서의 가능성을 탐색하는 연구로 이어집니다.",
       trajCosmeticTitle: "화장품에 여러 기능성을 동시에 구현합니다.",
       trajCosmeticDesc: "피부에 닿는 성분은 기능을 가져야 합니다. 멜라닌을 정교하게 기능화해, 기존 화장품 성분이 채우지 못했던 광보호와 항산화의 자리를 채웁니다.",
       learnMore: "더 알아보기",
@@ -95,7 +95,7 @@
       statBioLabel: "Bio-material",
       statBio: "A high-performance material inspired by living systems. Wherever black is required, we imagine melanin as the safer alternative.",
       statReachLabel: "Reach",
-      statReach: "From bench-scale batches to applications that span Earth and space—the larger the scale, the wider melanin’s reach becomes.",
+      statReach: "From bench-scale batches to an ever-widening range of industrial applications—the larger the scale, the wider melanin’s reach becomes.",
       techEyebrow: "IRRADIATION",
       techTitle: "How we drive innovation",
       techImgAlt: "Experimental visual of melanin stability under irradiation and optical stress",
@@ -105,9 +105,9 @@
       scaleImgAlt: "Pure melanin powder stacked to symbolize scale",
       scaleProse: "The same molecule plays different roles in different worlds. Below is how melanin meets each domain—and the goal every axis shares: <strong>the safest black on Earth</strong>.",
       trajTattooTitle: "Making tattoo ink safe and beyond.",
-      trajTattooDesc: "Pigments permanently embedded in skin demand the highest safety standards of any material. Melanoir develops melanin-based tattoo and PMU inks that realize the safest black.",
+      trajTattooDesc: "Pigments permanently embedded in skin demand the highest safety standards of any material. Melanoir develops melanin-based tattoo and PMU inks in pursuit of the safest black.",
       trajRadTitle: "Revolutionizing radiation shielding technology.",
-      trajRadDesc: "Melanin’s radiation-absorbing properties open possibilities far beyond ordinary pigments, toward next-generation shielding materials. Melanoir is rewriting protection standards for space and medical environments.",
+      trajRadDesc: "Melanin’s radiation-absorbing properties reach beyond ordinary pigments—an avenue we are exploring toward next-generation shielding materials.",
       trajCosmeticTitle: "Functionalizing cosmetic ingredient.",
       trajCosmeticDesc: "Every ingredient that touches skin must carry a function. Through the precise functionalization of melanin, Melanoir fills the gaps in photoprotection and antioxidant defense that conventional cosmetics leave behind.",
       learnMore: "Learn more",
@@ -136,7 +136,7 @@
       statBioLabel: "Bio-matière",
       statBio: "Un matériau haute performance inspiré du vivant. Partout où le noir est exigé, nous imaginons la mélanine comme l’alternative la plus sûre.",
       statReachLabel: "Portée",
-      statReach: "Du laboratoire aux applications qui traversent la Terre et l’espace—plus l’échelle grandit, plus le champ de la mélanine s’élargit.",
+      statReach: "Du laboratoire à un éventail toujours plus large d’applications industrielles—plus l’échelle grandit, plus le champ de la mélanine s’élargit.",
       techEyebrow: "IRRADIATION",
       techTitle: "Comment nous innovons",
       techImgAlt: "Visuel expérimental de la stabilité de la mélanine sous stress lumineux et irradiation",
@@ -146,9 +146,9 @@
       scaleImgAlt: "Poudre de mélanine pure symbolisant l’échelle",
       scaleProse: "Une même molécule, des rôles différents selon les mondes. Voici comment la mélanine touche chaque domaine—avec un objectif commun : <strong>le Black le plus sûr sur Terre</strong>.",
       trajTattooTitle: "Un encre de tatouage sûr. Et au-delà.",
-      trajTattooDesc: "Les pigments incrustés définitivement dans la peau exigent les plus hauts critères de sécurité. Melanoir développe des encres de tatouage et PMU à base de mélanine pour réaliser le Black le plus sûr.",
+      trajTattooDesc: "Les pigments incrustés définitivement dans la peau exigent les plus hauts critères de sécurité. Melanoir développe des encres de tatouage et PMU à base de mélanine, avec l’ambition du Black le plus sûr.",
       trajRadTitle: "Révolutionner la technologie de protection contre les rayonnements.",
-      trajRadDesc: "Les propriétés d'absorption des rayonnements de la mélanine ouvrent des perspectives au-delà du simple pigment, vers des matériaux de blindage de nouvelle génération. Melanoir réécrit les normes de protection pour l'espace et le médical.",
+      trajRadDesc: "Les propriétés d’absorption des rayonnements de la mélanine dépassent le simple pigment—une voie que nous explorons vers des matériaux de blindage de nouvelle génération.",
       trajCosmeticTitle: "Des ingrédients cosmétiques fonctionnalisés.",
       trajCosmeticDesc: "Chaque ingrédient en contact avec la peau doit avoir une fonction. Par la fonctionnalisation précise de la mélanine, Melanoir comble les lacunes en photoprotection et défense antioxydante.",
       learnMore: "En savoir plus",
@@ -177,7 +177,7 @@
       statBioLabel: "Bio-material",
       statBio: "生体から着想を得た高機能材料。黒が求められる場所ごとに、より安全な代替としてのメラニンを描きます。",
       statReachLabel: "Reach",
-      statReach: "実験室の少量から、地球と宇宙を横断する応用まで。スケールが大きくなるほど、メラニンが担える領域は広がります。",
+      statReach: "実験室の少量から、ますます広がる産業応用まで。スケールが大きくなるほど、メラニンが担える領域は広がります。",
       techEyebrow: "IRRADIATION",
       techTitle: "イノベーションの進め方",
       techImgAlt: "照射・光ストレス下でのメラニン安定性を示す実験ビジュアル",
@@ -187,9 +187,9 @@
       scaleImgAlt: "純メラニン粉末が積み重なりスケールを象徴するビジュアル",
       scaleProse: "同じ物質でも、領域ごとに求められる役割は異なります。以下はメラニンが接する世界の方向性であり、各軸が目指す共通のゴールは<strong>地球で最も安全な Black</strong>です。",
       trajTattooTitle: "タトゥーインクを安全に。そして、その先へ。",
-      trajTattooDesc: "皮膚に永久に刻まれる色素は、あらゆる素材の中で最高の安全基準を求めます。メラヌアはメラニンベースのタトゥー・PMUインクを開発し、最も安全なブラックを実現します。",
+      trajTattooDesc: "皮膚に永久に刻まれる色素は、あらゆる素材の中で最高の安全基準を求めます。メラヌアはメラニンベースのタトゥー・PMUインクを開発し、最も安全なブラックを目指します。",
       trajRadTitle: "放射線遮蔽技術の革新をつくります。",
-      trajRadDesc: "メラニンの放射線吸収特性は、単なる色素を超えて次世代遮蔽材料への可能性を開きます。宇宙産業と医療環境が求める防護基準をメラニンで書き替えます。",
+      trajRadDesc: "メラニンの放射線吸収特性は単なる色素を超え、次世代遮蔽材料への可能性を探る研究へとつながります。",
       trajCosmeticTitle: "化粧品成分に先端技術を適用します。",
       trajCosmeticDesc: "膚に触れる成分は機能を持つべきです。メラニンの精巧な機能化を通じて、従来の化粧品成分が埋められなかった光防護と抗酸化の空白を埋めます。",
       learnMore: "詳しく見る",
@@ -218,7 +218,7 @@
       statBioLabel: "Bio-material",
       statBio: "源于生命启发的高性能材料。在需要黑色的每一处，我们想象黑色素作为更安全的替代。",
       statReachLabel: "Reach",
-      statReach: "从实验室微量到横跨地球与宇宙的应用——规模越大，黑色素可触及的领域越广。",
+      statReach: "从实验室微量到不断拓展的工业应用——规模越大，黑色素可触及的领域越广。",
       techEyebrow: "IRRADIATION",
       techTitle: "我们如何推动创新",
       techImgAlt: "照射与光应激条件下黑色素稳定性的实验视觉",
@@ -228,9 +228,9 @@
       scaleImgAlt: "纯黑色素粉末堆叠，象征规模",
       scaleProse: "同一物质，在不同领域承担不同角色。以下是黑色素所触及的世界方向——各轴共同指向<strong>地球上最安全的 Black</strong>。",
       trajTattooTitle: "让纹身墨水更安全。以及更远。",
-      trajTattooDesc: "永久嵌入皮肤的色素要求所有材料中最高的安全标准。Melanoir 开发基于黑色素的纹身和 PMU 墨水，实现最安全的黑色。",
+      trajTattooDesc: "永久嵌入皮肤的色素要求所有材料中最高的安全标准。Melanoir 开发基于黑色素的纹身和 PMU 墨水，以最安全的黑色为目标。",
       trajRadTitle: "开创辐射防护技术的革新。",
-      trajRadDesc: "黑色素的辐射吸收特性超越了普通色素，开启了新一代防护材料的可能性。Melanoir 正在用黑色素重写航天和医疗环境的防护标准。",
+      trajRadDesc: "黑色素的辐射吸收特性超越普通色素，是我们正在探索的新一代防护材料方向。",
       trajCosmeticTitle: "将先进技术应用于化妆品成分。",
       trajCosmeticDesc: "接触皮肤的每种成分都必须具有功能。通过精确功能化黑色素，Melanoir 填补了传统化妆品成分在光防护和抗氧化防御方面留下的空白。",
       learnMore: "了解更多",
@@ -327,19 +327,6 @@
       deferredLearnMoreLink("section-cta reveal", "/melanin", t.melaninLearnMore) +
       "</section>" +
       '<div id="technology">' +
-      '<section class="section" id="tech-research" aria-labelledby="tech-title">' +
-      '<p class="eyebrow reveal">' +
-      t.techEyebrow +
-      "</p>" +
-      '<h2 id="tech-title" class="section-head section-head--sentence reveal">' +
-      t.techTitle +
-      "</h2>" +
-      '<figure class="section-visual reveal"><img src="https://res.cloudinary.com/dssuxurpt/image/upload/v1778563616/Irradiation_eaqkxe.png" alt="' +
-      t.techImgAlt +
-      '" loading="lazy" decoding="async"></figure>' +
-      '<p class="prose reveal shell-i18n-prose">' +
-      t.techProse +
-      "</p></section>" +
       '<section class="section" id="domains" aria-labelledby="domains-title">' +
       '<p class="eyebrow reveal">' +
       t.scaleEyebrow +
