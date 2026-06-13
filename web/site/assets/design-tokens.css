@@ -23,7 +23,7 @@
   --radius-lg: 12px;
 
   /* 폰트 */
-  --font-display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-display: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body:    "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* 버튼 */

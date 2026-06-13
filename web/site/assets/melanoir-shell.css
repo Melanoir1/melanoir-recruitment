@@ -553,3 +553,12 @@ body {
     padding: 14px 14px;
   }
 }
+
+/* ===== B-6 · 본문 링크 신호 (무채 = 모양으로 신호) ===== */
+/* 문장 속 본문 링크: 밑줄 + 오프셋. (CTA의 후행 화살표 → 는 기존 .section-cta/.traj-cta 유지) */
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+.prose a:hover { text-decoration-thickness: 2px; }
