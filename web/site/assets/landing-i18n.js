@@ -5,8 +5,6 @@
   "use strict";
 
   var HIRE_KO = "[2026년 상반기 채용] 멜라누아 R&amp;D 팀에 합류하기";
-  var NOTIFY_FORM_URL = "/register#waitlist";
-
   var PAGE_META = {
     kr: {
       title: "Melanoir · Melanin",
@@ -49,7 +47,7 @@
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "왜 멜라닌인가요?",
       melaninImgAlt: "멜라닌과 광·산화 환경을 상징하는 비주얼",
-      melaninProse: "멜라닌은 생명이 오랜 시간 동안 빛과 산화로부터 자신을 지키기 위해 진화시킨 <strong>자연의 방패</strong>입니다. 멜라누아는 자연이 정교하게 설계한 이 구조를 우리의 일상으로 가져옵니다.",
+      melaninProse: "멜라닌은 생명이 오랜 시간 동안 빛과 산화로부터 자신을 지키기 위해 진화시킨 자연의 방패입니다. 멜라누아는 자연이 정교하게 설계한 이 구조를 우리의 일상으로 가져옵니다.",
       melaninLearnMore: "더 알아보기",
       statBioLabel: "Bio-material",
       statBio: "생체에서 영감을 받은 고기능 소재. 검은색이 요구되는 자리마다, 더 안전한 대안으로서의 멜라닌을 상상합니다.",
@@ -62,7 +60,7 @@
       scaleEyebrow: "SCALE",
       scaleTitle: "멜라누아의 기술이 적용되는 곳",
       scaleImgAlt: "순수 멜라닌 분말이 쌓이며 스케일을 상징하는 비주얼",
-      scaleProse: "같은 물질이어도, 영역마다 요구되는 역할은 다릅니다. 아래는 멜라닌이 어떤 세계와 맞닿아 있는지에 대한 방향이며, 각 축이 지향하는 공통 목표는 <strong>지구에서 가장 안전한 Black</strong>입니다.",
+      scaleProse: "같은 물질이어도, 영역마다 요구되는 역할은 다릅니다. 아래는 멜라닌이 어떤 세계와 맞닿아 있는지에 대한 방향이며, 각 축이 지향하는 공통 목표는 지구에서 가장 안전한 Black입니다.",
       trajTattooTitle: "타투와 눈썹 문신을 더욱 안전하게.",
       trajTattooDesc: "피부 안에 영구적으로 새겨지는 색소는 그 어떤 소재보다 높은 안전 기준을 요구합니다. 멜라누아는 멜라닌 기반 타투·PMU 잉크를 개발하며, 가장 안전한 블랙을 목표로 합니다.",
       trajRadTitle: "방사선 차폐 기술의 혁신을 만듭니다.",
@@ -103,7 +101,7 @@
       scaleEyebrow: "SCALE",
       scaleTitle: "Our trajectory",
       scaleImgAlt: "Pure melanin powder stacked to symbolize scale",
-      scaleProse: "The same molecule plays different roles in different worlds. Below is how melanin meets each domain—and the goal every axis shares: <strong>the safest black on Earth</strong>.",
+      scaleProse: "The same molecule plays different roles in different worlds. Below is how melanin meets each domain—and the goal every axis shares: the safest black on Earth.",
       trajTattooTitle: "Making tattoo ink safe and beyond.",
       trajTattooDesc: "Pigments permanently embedded in skin demand the highest safety standards of any material. Melanoir develops melanin-based tattoo and PMU inks in pursuit of the safest black.",
       trajRadTitle: "Revolutionizing radiation shielding technology.",
@@ -131,7 +129,7 @@
       melaninEyebrow: "LA MATIÈRE",
       melaninTitle: "POURQUOI LA MÉLANINE",
       melaninImgAlt: "Visuel évoquant la mélanine face à la lumière et à l’oxydation",
-      melaninProse: "La mélanine est le <strong>bouclier de la nature</strong>, façonné par l’évolution pour protéger le vivant de la lumière et de l’oxydation. Melanoir apporte cette structure finement conçue par la nature dans votre quotidien.",
+      melaninProse: "La mélanine est le bouclier de la nature, façonné par l’évolution pour protéger le vivant de la lumière et de l’oxydation. Melanoir apporte cette structure finement conçue par la nature dans votre quotidien.",
       melaninLearnMore: "En savoir plus",
       statBioLabel: "Bio-matière",
       statBio: "Un matériau haute performance inspiré du vivant. Partout où le noir est exigé, nous imaginons la mélanine comme l’alternative la plus sûre.",
@@ -144,7 +142,7 @@
       scaleEyebrow: "ÉCHELLE",
       scaleTitle: "Notre trajectoire",
       scaleImgAlt: "Poudre de mélanine pure symbolisant l’échelle",
-      scaleProse: "Une même molécule, des rôles différents selon les mondes. Voici comment la mélanine touche chaque domaine—avec un objectif commun : <strong>le Black le plus sûr sur Terre</strong>.",
+      scaleProse: "Une même molécule, des rôles différents selon les mondes. Voici comment la mélanine touche chaque domaine—avec un objectif commun : le Black le plus sûr sur Terre.",
       trajTattooTitle: "Un encre de tatouage sûr. Et au-delà.",
       trajTattooDesc: "Les pigments incrustés définitivement dans la peau exigent les plus hauts critères de sécurité. Melanoir développe des encres de tatouage et PMU à base de mélanine, avec l’ambition du Black le plus sûr.",
       trajRadTitle: "Révolutionner la technologie de protection contre les rayonnements.",
@@ -172,7 +170,7 @@
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "メラニンと光・酸化環境を象徴するビジュアル",
-      melaninProse: "メラニンは、生命が長い時間をかけて光と酸化から身を守るために進化させた<strong>自然の盾</strong>です。メラヌアは、自然が精巧に設計したこの構造を私たちの日常へ届けます。",
+      melaninProse: "メラニンは、生命が長い時間をかけて光と酸化から身を守るために進化させた自然の盾です。メラヌアは、自然が精巧に設計したこの構造を私たちの日常へ届けます。",
       melaninLearnMore: "詳しく見る",
       statBioLabel: "Bio-material",
       statBio: "生体から着想を得た高機能材料。黒が求められる場所ごとに、より安全な代替としてのメラニンを描きます。",
@@ -185,7 +183,7 @@
       scaleEyebrow: "SCALE",
       scaleTitle: "私たちの軌道",
       scaleImgAlt: "純メラニン粉末が積み重なりスケールを象徴するビジュアル",
-      scaleProse: "同じ物質でも、領域ごとに求められる役割は異なります。以下はメラニンが接する世界の方向性であり、各軸が目指す共通のゴールは<strong>地球で最も安全な Black</strong>です。",
+      scaleProse: "同じ物質でも、領域ごとに求められる役割は異なります。以下はメラニンが接する世界の方向性であり、各軸が目指す共通のゴールは地球で最も安全な Blackです。",
       trajTattooTitle: "タトゥーインクを安全に。そして、その先へ。",
       trajTattooDesc: "皮膚に永久に刻まれる色素は、あらゆる素材の中で最高の安全基準を求めます。メラヌアはメラニンベースのタトゥー・PMUインクを開発し、最も安全なブラックを目指します。",
       trajRadTitle: "放射線遮蔽技術の革新をつくります。",
@@ -213,7 +211,7 @@
       melaninEyebrow: "THE MATERIAL",
       melaninTitle: "WHY MELANIN",
       melaninImgAlt: "象征黑色素与光、氧化环境的视觉",
-      melaninProse: "黑色素是生命在漫长岁月中为抗御光与氧化而进化出的<strong>自然之盾</strong>。Melanoir 将这一由自然精心设计的结构带入日常生活。",
+      melaninProse: "黑色素是生命在漫长岁月中为抗御光与氧化而进化出的自然之盾。Melanoir 将这一由自然精心设计的结构带入日常生活。",
       melaninLearnMore: "了解更多",
       statBioLabel: "Bio-material",
       statBio: "源于生命启发的高性能材料。在需要黑色的每一处，我们想象黑色素作为更安全的替代。",
@@ -226,7 +224,7 @@
       scaleEyebrow: "SCALE",
       scaleTitle: "我们的路径",
       scaleImgAlt: "纯黑色素粉末堆叠，象征规模",
-      scaleProse: "同一物质，在不同领域承担不同角色。以下是黑色素所触及的世界方向——各轴共同指向<strong>地球上最安全的 Black</strong>。",
+      scaleProse: "同一物质，在不同领域承担不同角色。以下是黑色素所触及的世界方向——各轴共同指向地球上最安全的 Black。",
       trajTattooTitle: "让纹身墨水更安全。以及更远。",
       trajTattooDesc: "永久嵌入皮肤的色素要求所有材料中最高的安全标准。Melanoir 开发基于黑色素的纹身和 PMU 墨水，以最安全的黑色为目标。",
       trajRadTitle: "开创辐射防护技术的革新。",
@@ -290,15 +288,6 @@
       t.mission +
       "</span></h1>" +
       promiseBlock(t) +
-      '<div class="hero-cta-row reveal">' +
-      '<a class="hero-cta hero-cta--primary" href="/products/embo">' +
-      t.heroCtaEmbo +
-      "</a>" +
-      '<a class="hero-cta" href="' +
-      NOTIFY_FORM_URL +
-      '">' +
-      t.heroCtaNotify +
-      "</a></div>" +
       '<p class="scroll-hint reveal">' +
       t.scroll +
       "</p></section>" +
@@ -350,7 +339,7 @@
       '<p class="traj-eyebrow">TATTOO · PMU</p>' +
       '<h3 class="traj-title shell-i18n-prose">' + t.trajTattooTitle + "</h3>" +
       '<p class="traj-desc shell-i18n-prose">' + t.trajTattooDesc + "</p>" +
-      deferredLearnMoreLink("traj-cta", "/technology/tattoo", t.learnMore) +
+      '<a class="traj-cta" href="/products/embo">' + t.heroCtaEmbo + "</a>" +
       "</article>" +
       '<article class="traj-item stagger-item">' +
       '<figure class="traj-visual">' +
