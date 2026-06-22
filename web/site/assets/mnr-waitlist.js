@@ -33,7 +33,7 @@
       submit: "베타테스터 신청하기",
       done: "선정 결과를 문자로 안내드릴게요. 선정 시 인스타그램 DM 인증 후 최종 확정됩니다.",
       shop: true, insta: true, instaRequired: true, instaPlaceholder: "인스타그램 계정 — 포트폴리오 확인용",
-      otp: true
+      otp: true, technique: true, target: true
     }
   };
 
@@ -62,6 +62,18 @@
       phoneHtml +
       (c.insta ? '<input type="text" name="instagram" placeholder="' + c.instaPlaceholder + '" maxlength="80" autocomplete="off">' : "") +
       (c.shop ? '<input type="text" name="shop_name" placeholder="샵 이름 (선택)" maxlength="80">' : "") +
+      (c.technique ? '<select name="technique" class="mnr-wl-select" required>' +
+        '<option value="" disabled selected>주력 기법 선택</option>' +
+        '<option value="embo">엠보</option>' +
+        '<option value="hairstroke">헤어스트로크</option>' +
+        '<option value="combo">콤보브로우</option>' +
+        '</select>' : "") +
+      (c.target ? '<select name="target" class="mnr-wl-select" required>' +
+        '<option value="" disabled selected>주 시술 대상 선택</option>' +
+        '<option value="female">여성</option>' +
+        '<option value="male">남성</option>' +
+        '<option value="both">둘 다</option>' +
+        '</select>' : "") +
       '<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;">' +
       '<label class="mnr-wl-consent"><input type="checkbox" name="consent"> ' + c.consent + "</label>" +
       '<button type="submit" class="mnr-wl-submit">' + c.submit + "</button>" +
@@ -161,6 +173,18 @@
       showMsg(form, "포트폴리오 확인을 위해 인스타그램 계정을 입력해주세요.", true);
       return;
     }
+    var techEl = form.querySelector('select[name="technique"]');
+    var technique = techEl ? techEl.value : "";
+    var targetEl = form.querySelector('select[name="target"]');
+    var targetVal = targetEl ? targetEl.value : "";
+    if (c.technique && ["embo", "hairstroke", "combo"].indexOf(technique) === -1) {
+      showMsg(form, "주력 기법을 선택해주세요.", true);
+      return;
+    }
+    if (c.target && ["female", "male", "both"].indexOf(targetVal) === -1) {
+      showMsg(form, "주 시술 대상을 선택해주세요.", true);
+      return;
+    }
     if (!consent) {
       showMsg(form, "개인정보 수집·이용에 동의해주세요.", true);
       return;
@@ -182,6 +206,8 @@
       website: form.querySelector('input[name="website"]').value
     };
     if (c.otp) payload.otp_code = otpCode;
+    if (c.technique) payload.technique = technique;
+    if (c.target) payload.target = targetVal;
 
     fetch(API_URL, {
       method: "POST",

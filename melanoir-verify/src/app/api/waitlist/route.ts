@@ -43,6 +43,16 @@ export async function POST(req: NextRequest) {
   if (type === 'beta' && !instagram) {
     return NextResponse.json({ error: '인스타그램 계정을 입력해주세요.' }, { status: 400, headers })
   }
+  const TECHNIQUE = ['embo', 'hairstroke', 'combo']
+  const TARGET = ['female', 'male', 'both']
+  const technique = String(body.technique ?? '')
+  const target = String(body.target ?? '')
+  if (type === 'beta' && !TECHNIQUE.includes(technique)) {
+    return NextResponse.json({ error: '주력 기법을 선택해주세요.' }, { status: 400, headers })
+  }
+  if (type === 'beta' && !TARGET.includes(target)) {
+    return NextResponse.json({ error: '주 시술 대상을 선택해주세요.' }, { status: 400, headers })
+  }
   if (!/^01[0-9]{8,9}$/.test(phone)) {
     return NextResponse.json({ error: '유효하지 않은 전화번호입니다.' }, { status: 400, headers })
   }
@@ -96,6 +106,8 @@ export async function POST(req: NextRequest) {
       name: body.name ? String(body.name).slice(0, 50) : null,
       shop_name: type !== 'customer' && body.shop_name ? String(body.shop_name).slice(0, 80) : null,
       instagram: type !== 'customer' && instagram ? instagram.slice(0, 80) : null,
+      technique: type === 'beta' ? technique : null,
+      target: type === 'beta' ? target : null,
       marketing_consent: true,
       source: body.source ? String(body.source).slice(0, 120) : null,
       updated_at: new Date().toISOString(),
