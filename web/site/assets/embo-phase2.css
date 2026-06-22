@@ -67,8 +67,16 @@
 }
 .embo-ln-cta:hover { opacity: 0.85; }
 @media (max-width: 480px) {
-  .embo-ln-inner { padding: 0 16px; gap: 12px; }
-  .embo-ln-tabs { gap: 12px; }
+  .embo-ln-inner { padding: 0 16px; gap: 10px; }
+  .embo-ln-name { display: none; }            /* 좌측 타이틀 숨김 → 탭 스크롤 폭 확보 */
+  .embo-ln-tabs {
+    margin-left: 0;                            /* 좌측부터 시작 */
+    flex: 1 1 auto;                            /* CTA 제외 전체 폭 차지 */
+    gap: 18px;
+    padding-right: 4px;
+    -webkit-overflow-scrolling: touch;         /* iOS 관성 스크롤 */
+  }
+  .embo-ln-cta { padding: 7px 14px; }          /* CTA 약간 축소 */
 }
 
 /* ── ② 하이라이트 갤러리 ── */
