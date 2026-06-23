@@ -18,7 +18,10 @@ export interface WaitlistRow {
   dm_code_sent_at: string | null
   dm_verified_at: string | null
   technique: string | null
+  techniques_all: string | null
   target: string | null
+  region: string | null
+  region_detail: string | null
 }
 
 export interface ClubRegistrationRow {
@@ -115,8 +118,9 @@ const STATUS_KO: Record<string, { label: string; cls: string }> = {
   confirmed: { label: '확정', cls: 'bg-green-100 text-green-700' },
 }
 
-const TECH_LABEL: Record<string, string> = { embo: '엠보', hairstroke: '헤어스트로크', combo: '콤보브로우' }
+const TECH_LABEL: Record<string, string> = { embo:'엠보', sooji:'수지/안개', combo:'콤보', hairstroke:'헤어스트록', ombre:'옴브레', machine_combo:'머신콤보', other:'기타' }
 const TARGET_LABEL: Record<string, string> = { female: '여성', male: '남성', both: '둘 다' }
+function techList(csv: string | null){ return (csv ?? '').split(',').filter(Boolean).map(t=>TECH_LABEL[t]??t).join(', ') || '—' }
 
 function BetaActions({ row }: { row: WaitlistRow }) {
   const router = useRouter()
@@ -163,7 +167,7 @@ function BetaActions({ row }: { row: WaitlistRow }) {
 function WaitlistTable({ rows, beta = false }: { rows: WaitlistRow[]; beta?: boolean }) {
   return (
     <div className="overflow-x-auto">
-      <table className={`w-full ${beta ? 'min-w-[980px]' : 'min-w-[640px]'}`}>
+      <table className={`w-full ${beta ? 'min-w-[1180px]' : 'min-w-[640px]'}`}>
         <thead>
           <tr>
             <th className={th}>신청일</th>
@@ -171,8 +175,10 @@ function WaitlistTable({ rows, beta = false }: { rows: WaitlistRow[]; beta?: boo
             <th className={th}>전화번호</th>
             <th className={th}>샵명</th>
             <th className={th}>인스타그램</th>
-            {beta && <th className={th}>기법</th>}
+            {beta && <th className={th}>주력기법</th>}
+            {beta && <th className={th}>가능기법</th>}
             {beta && <th className={th}>대상</th>}
+            {beta && <th className={th}>지역</th>}
             <th className={th}>유입</th>
             {beta && <th className={th}>휴대폰 인증</th>}
             {beta && <th className={th}>상태</th>}
@@ -182,7 +188,7 @@ function WaitlistTable({ rows, beta = false }: { rows: WaitlistRow[]; beta?: boo
         </thead>
         <tbody>
           {rows.length === 0 ? (
-            <EmptyRow cols={beta ? 12 : 6} />
+            <EmptyRow cols={beta ? 14 : 6} />
           ) : (
             rows.map(row => {
               const st = STATUS_KO[row.status ?? 'applied'] ?? STATUS_KO.applied
@@ -193,8 +199,10 @@ function WaitlistTable({ rows, beta = false }: { rows: WaitlistRow[]; beta?: boo
                   <td className={td}>{row.phone}</td>
                   <td className={td}>{row.shop_name ?? '—'}</td>
                   <td className={td}>{row.instagram ? `@${row.instagram}` : '—'}</td>
-                  {beta && <td className={td}>{row.technique ? TECH_LABEL[row.technique] ?? row.technique : '—'}</td>}
-                  {beta && <td className={td}>{row.target ? TARGET_LABEL[row.target] ?? row.target : '—'}</td>}
+                  {beta && <td className={td}>{row.technique ? (TECH_LABEL[row.technique] ?? row.technique) : '—'}</td>}
+                  {beta && <td className={`${td} text-xs`}>{techList(row.techniques_all)}</td>}
+                  {beta && <td className={td}>{row.target ? (TARGET_LABEL[row.target] ?? row.target) : '—'}</td>}
+                  {beta && <td className={td}>{row.region ?? '—'}{row.region_detail ? ` ${row.region_detail}` : ''}</td>}
                   <td className={`${td} text-xs text-gray-500 max-w-[160px] truncate`} title={row.source ?? undefined}>
                     {row.source ?? '—'}
                   </td>

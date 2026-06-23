@@ -11,6 +11,28 @@
   var API_URL = API_BASE + "/api/waitlist";
   var OTP_URL = API_BASE + "/api/waitlist/otp";
 
+  var TECH_OPTS = [
+    ['embo','엠보 (수작업·결)'], ['sooji','수지/안개 (수작업·면)'], ['combo','콤보브로우 (수작업·혼합)'],
+    ['hairstroke','헤어스트록/나노 (머신·결)'], ['ombre','그라데이션/옴브레 (머신·면)'],
+    ['machine_combo','머신콤보 (머신·혼합)'], ['other','기타']
+  ];
+  var REGION_OPTS = ['서울','부산','대구','인천','광주','대전','울산','세종','경기','강원','충북','충남','전북','전남','경북','경남','제주'];
+  function optionsHtml(pairs, placeholder) {
+    var h = '<option value="" disabled selected>' + placeholder + '</option>';
+    for (var i = 0; i < pairs.length; i++) {
+      var v = pairs[i][0], t = pairs[i][1] || pairs[i][0];
+      h += '<option value="' + v + '">' + t + '</option>';
+    }
+    return h;
+  }
+  function checkboxesHtml(pairs, name) {
+    var h = '';
+    for (var i = 0; i < pairs.length; i++) {
+      h += '<label class="mnr-wl-chk"><input type="checkbox" name="' + name + '" value="' + pairs[i][0] + '"> ' + pairs[i][1] + '</label>';
+    }
+    return h;
+  }
+
   var COPY = {
     customer: {
       audience: "멜라누아 엠보 정식 출시 소식을 가장 먼저 받아보실 분을 위한 자리입니다.",
@@ -33,7 +55,7 @@
       submit: "베타테스터 신청하기",
       done: "선정 결과를 문자로 안내드릴게요. 선정 시 인스타그램 DM 인증 후 최종 확정됩니다.",
       shop: true, insta: true, instaRequired: true, instaPlaceholder: "인스타그램 계정 — 포트폴리오 확인용",
-      otp: true, technique: true, target: true
+      otp: true, technique: true, techniquesAll: true, target: true, region: true
     }
   };
 
@@ -62,18 +84,11 @@
       phoneHtml +
       (c.insta ? '<input type="text" name="instagram" placeholder="' + c.instaPlaceholder + '" maxlength="80" autocomplete="off">' : "") +
       (c.shop ? '<input type="text" name="shop_name" placeholder="샵 이름 (선택)" maxlength="80">' : "") +
-      (c.technique ? '<select name="technique" class="mnr-wl-select" required>' +
-        '<option value="" disabled selected>주력 기법 선택</option>' +
-        '<option value="embo">엠보</option>' +
-        '<option value="hairstroke">헤어스트로크</option>' +
-        '<option value="combo">콤보브로우</option>' +
-        '</select>' : "") +
-      (c.target ? '<select name="target" class="mnr-wl-select" required>' +
-        '<option value="" disabled selected>주 시술 대상 선택</option>' +
-        '<option value="female">여성</option>' +
-        '<option value="male">남성</option>' +
-        '<option value="both">둘 다</option>' +
-        '</select>' : "") +
+      (c.technique ? '<select name="technique" class="mnr-wl-select" required>' + optionsHtml(TECH_OPTS, '주력 기법 선택') + '</select>' : "") +
+      (c.techniquesAll ? '<fieldset class="mnr-wl-chkgroup"><legend>가능 기법 (선택, 최대 3)</legend>' + checkboxesHtml(TECH_OPTS, 'techniques_all') + '</fieldset>' : "") +
+      (c.target ? '<select name="target" class="mnr-wl-select" required>' + optionsHtml([['female','여성'],['male','남성'],['both','둘 다']], '주 시술 대상 선택') + '</select>' : "") +
+      (c.region ? '<select name="region" class="mnr-wl-select" required>' + optionsHtml(REGION_OPTS.map(function(r){return [r,r];}), '활동 지역(시/도) 선택') + '</select>' : "") +
+      (c.region ? '<input type="text" name="region_detail" placeholder="시/군/구 (선택)" maxlength="60">' : "") +
       '<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;">' +
       '<label class="mnr-wl-consent"><input type="checkbox" name="consent"> ' + c.consent + "</label>" +
       '<button type="submit" class="mnr-wl-submit">' + c.submit + "</button>" +
@@ -82,6 +97,15 @@
     host.appendChild(form);
 
     if (c.otp) bindOtp(form);
+    if (c.techniquesAll) {
+      var chks = form.querySelectorAll('input[name="techniques_all"]');
+      for (var k = 0; k < chks.length; k++) {
+        chks[k].addEventListener('change', function () {
+          var n = form.querySelectorAll('input[name="techniques_all"]:checked').length;
+          for (var j = 0; j < chks.length; j++) chks[j].disabled = (!chks[j].checked && n >= 3);
+        });
+      }
+    }
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -173,18 +197,18 @@
       showMsg(form, "포트폴리오 확인을 위해 인스타그램 계정을 입력해주세요.", true);
       return;
     }
-    var techEl = form.querySelector('select[name="technique"]');
-    var technique = techEl ? techEl.value : "";
-    var targetEl = form.querySelector('select[name="target"]');
-    var targetVal = targetEl ? targetEl.value : "";
-    if (c.technique && ["embo", "hairstroke", "combo"].indexOf(technique) === -1) {
-      showMsg(form, "주력 기법을 선택해주세요.", true);
-      return;
-    }
-    if (c.target && ["female", "male", "both"].indexOf(targetVal) === -1) {
-      showMsg(form, "주 시술 대상을 선택해주세요.", true);
-      return;
-    }
+    var technique = (form.querySelector('select[name="technique"]') || {}).value || "";
+    var targetVal = (form.querySelector('select[name="target"]') || {}).value || "";
+    var region = (form.querySelector('select[name="region"]') || {}).value || "";
+    var regionDetailEl = form.querySelector('input[name="region_detail"]');
+    var regionDetail = regionDetailEl ? regionDetailEl.value.trim() : "";
+    var techAllEls = form.querySelectorAll('input[name="techniques_all"]:checked');
+    var techniquesAll = Array.prototype.map.call(techAllEls, function (el) { return el.value; }).join(",");
+    var TECH = ["embo","sooji","combo","hairstroke","ombre","machine_combo","other"];
+    if (c.technique && TECH.indexOf(technique) === -1) { showMsg(form, "주력 기법을 선택해주세요.", true); return; }
+    if (c.techniquesAll && techAllEls.length > 3) { showMsg(form, "가능 기법은 최대 3개까지 선택할 수 있습니다.", true); return; }
+    if (c.target && ["female","male","both"].indexOf(targetVal) === -1) { showMsg(form, "주 시술 대상을 선택해주세요.", true); return; }
+    if (c.region && !region) { showMsg(form, "활동 지역을 선택해주세요.", true); return; }
     if (!consent) {
       showMsg(form, "개인정보 수집·이용에 동의해주세요.", true);
       return;
@@ -207,7 +231,9 @@
     };
     if (c.otp) payload.otp_code = otpCode;
     if (c.technique) payload.technique = technique;
+    if (c.techniquesAll) payload.techniques_all = techniquesAll;
     if (c.target) payload.target = targetVal;
+    if (c.region) { payload.region = region; payload.region_detail = regionDetail; }
 
     fetch(API_URL, {
       method: "POST",

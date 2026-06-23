@@ -24,7 +24,7 @@ async function fetchWaitlist(): Promise<{ rows: WaitlistRow[]; error: string | n
   noStore()
   const { data, error } = await createRawServiceClient()
     .from('mnr_waitlist')
-    .select('id, type, phone, name, shop_name, instagram, source, created_at, status, phone_verified_at, dm_code, dm_code_sent_at, dm_verified_at, technique, target')
+    .select('id, type, phone, name, shop_name, instagram, source, created_at, status, phone_verified_at, dm_code, dm_code_sent_at, dm_verified_at, technique, techniques_all, target, region, region_detail')
     .order('created_at', { ascending: false })
   if (error) {
     console.error('[admin] waitlist fetch error:', error)

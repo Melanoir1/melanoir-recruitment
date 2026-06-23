@@ -43,15 +43,30 @@ export async function POST(req: NextRequest) {
   if (type === 'beta' && !instagram) {
     return NextResponse.json({ error: '인스타그램 계정을 입력해주세요.' }, { status: 400, headers })
   }
-  const TECHNIQUE = ['embo', 'hairstroke', 'combo']
+  const TECHNIQUE = ['embo', 'sooji', 'combo', 'hairstroke', 'ombre', 'machine_combo', 'other']
   const TARGET = ['female', 'male', 'both']
+  const REGION = ['서울','부산','대구','인천','광주','대전','울산','세종','경기','강원','충북','충남','전북','전남','경북','경남','제주']
+
   const technique = String(body.technique ?? '')
   const target = String(body.target ?? '')
+  const region = String(body.region ?? '')
+  const regionDetail = body.region_detail ? String(body.region_detail).slice(0, 60) : null
+
+  const techAllArr = String(body.techniques_all ?? '').split(',').map(s => s.trim()).filter(Boolean)
+  const techAllValid = techAllArr.every(t => TECHNIQUE.includes(t)) && techAllArr.length <= 3
+  const techniquesAll = techAllValid && techAllArr.length ? techAllArr.join(',') : null
+
   if (type === 'beta' && !TECHNIQUE.includes(technique)) {
     return NextResponse.json({ error: '주력 기법을 선택해주세요.' }, { status: 400, headers })
   }
+  if (type === 'beta' && String(body.techniques_all ?? '') && !techAllValid) {
+    return NextResponse.json({ error: '가능 기법은 최대 3개까지 선택할 수 있습니다.' }, { status: 400, headers })
+  }
   if (type === 'beta' && !TARGET.includes(target)) {
     return NextResponse.json({ error: '주 시술 대상을 선택해주세요.' }, { status: 400, headers })
+  }
+  if (type === 'beta' && !REGION.includes(region)) {
+    return NextResponse.json({ error: '활동 지역을 선택해주세요.' }, { status: 400, headers })
   }
   if (!/^01[0-9]{8,9}$/.test(phone)) {
     return NextResponse.json({ error: '유효하지 않은 전화번호입니다.' }, { status: 400, headers })
@@ -107,7 +122,10 @@ export async function POST(req: NextRequest) {
       shop_name: type !== 'customer' && body.shop_name ? String(body.shop_name).slice(0, 80) : null,
       instagram: type !== 'customer' && instagram ? instagram.slice(0, 80) : null,
       technique: type === 'beta' ? technique : null,
+      techniques_all: type === 'beta' ? techniquesAll : null,
       target: type === 'beta' ? target : null,
+      region: type === 'beta' ? region : null,
+      region_detail: type === 'beta' ? regionDetail : null,
       marketing_consent: true,
       source: body.source ? String(body.source).slice(0, 120) : null,
       updated_at: new Date().toISOString(),
