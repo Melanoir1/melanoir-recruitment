@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
   // 신규 신청에만 확인 SMS 발송 (중복 신청 시 재발송 방지)
   if (!existing) {
     const smsText = type === 'beta'
-      ? '[멜라누아] 베타테스터 신청이 완료되었습니다. 선정 시 인스타그램 DM 인증 안내를 문자로 보내드릴게요.'
+      ? '[멜라누아] 베타테스터 신청이 완료되었습니다! 선정되시면 별도 안내 문자를 보내드릴게요.'
       : '[멜라누아] 출시 알림 신청이 완료되었습니다. 정식 출시 소식을 가장 먼저 보내드릴게요.'
     await sendSms(phone, smsText)
   }
