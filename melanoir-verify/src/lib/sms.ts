@@ -9,7 +9,7 @@ function buildAuthHeader(apiKey: string, apiSecret: string): string {
   return `HMAC-SHA256 apiKey=${apiKey}, date=${date}, salt=${salt}, signature=${signature}`
 }
 
-export async function sendSms(phone: string, message: string) {
+export async function sendSms(phone: string, message: string, subject?: string) {
   const apiKey = process.env.SMS_API_KEY
   const apiSecret = process.env.SMS_API_SECRET
   const senderPhone = process.env.SMS_SENDER_PHONE
@@ -33,6 +33,7 @@ export async function sendSms(phone: string, message: string) {
           to: normalizedPhone,
           from: senderPhone.replace(/-/g, ''),
           text: message,
+          ...(subject ? { subject } : {}),
         }],
       }),
     })

@@ -49,7 +49,8 @@ export async function POST(req: NextRequest) {
     }
     await sendSms(
       row.phone,
-      `[멜라누아] 베타테스터에 선정되었습니다! 본인 확인을 위해, 신청하신 인스타그램 계정(@${row.instagram})으로 ${INSTAGRAM_HANDLE} 계정에 인증 코드 ${code} 를 DM으로 보내주세요. DM 확인 후 최종 확정됩니다.`
+      `[멜라누아] 베타테스터에 선정되었습니다! 본인 확인을 위해, 신청하신 인스타그램 계정(@${row.instagram})으로 ${INSTAGRAM_HANDLE}에 인증 코드 ${code} 를 DM으로 보내주세요. DM 확인 후 확정됩니다.`,
+      '멜라누아 베타테스터'
     )
     return NextResponse.json({ success: true, dm_code: code })
   }
@@ -80,7 +81,8 @@ export async function POST(req: NextRequest) {
   }
   await sendSms(
     row.phone,
-    '[멜라누아] DM 인증이 확인되어 베타테스터로 확정되었습니다! 모집마감에 맞춰 참여 방법을 문자로 안내드릴게요.'
+    '[멜라누아] DM 인증이 확인되어 베타테스터로 확정되었습니다! 모집마감에 맞춰 참여 방법을 문자로 안내드릴게요.',
+    '멜라누아 베타테스터'
   )
   return NextResponse.json({ success: true })
 }
