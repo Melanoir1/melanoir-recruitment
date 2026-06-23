@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createRawServiceClient, createServiceClient } from '@/lib/supabase'
 import { sendSms } from '@/lib/sms'
+import { sendEmail } from '@/lib/email'
 
 const ALLOWED_ORIGINS = ['https://melanoir.co.kr', 'https://www.melanoir.co.kr']
 
@@ -145,6 +146,29 @@ export async function POST(req: NextRequest) {
       ? '[멜라누아] 베타테스터 신청이 완료되었습니다! 선정자를 대상으로 별도 안내가 발송됩니다.'
       : '[멜라누아] 출시 알림 신청이 완료되었습니다. 정식 출시 소식을 가장 먼저 보내드릴게요.'
     await sendSms(phone, smsText)
+
+    // 베타테스터 신규 지원 시 관리자에게 메일 알림
+    if (type === 'beta') {
+      const TECH_LABEL: Record<string, string> = { embo: '엠보', sooji: '수지/안개', combo: '콤보', hairstroke: '헤어스트록', ombre: '옴브레', machine_combo: '머신콤보', other: '기타' }
+      const TARGET_LABEL: Record<string, string> = { female: '여성', male: '남성', both: '모두' }
+      const techAllLabel = (techniquesAll ?? '').split(',').filter(Boolean).map((t) => TECH_LABEL[t] ?? t).join(', ')
+      const adminUrl = (process.env.NEXT_PUBLIC_BASE_URL ?? 'https://verify.melanoir.co.kr') + '/admin'
+      const lines = [
+        `이름: ${body.name ? String(body.name) : '-'}`,
+        `연락처: ${phone}`,
+        `인스타그램: ${instagram ? '@' + instagram : '-'}`,
+        `샵: ${body.shop_name ? String(body.shop_name) : '-'}`,
+        `주력기법: ${TECH_LABEL[technique] ?? technique}`,
+        `가능기법: ${techAllLabel || '-'}`,
+        `시술대상: ${TARGET_LABEL[target] ?? target}`,
+        `활동지역: ${region}${regionDetail ? ' / ' + regionDetail : ''}`,
+        `신청시각: ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}`,
+      ]
+      await sendEmail({
+        subject: `[멜라누아] 새 베타테스터 지원 — ${body.name ? String(body.name) : phone}`,
+        text: lines.join('\n') + `\n\n관리자 페이지: ${adminUrl}`,
+      })
+    }
   }
 
   return NextResponse.json({ success: true }, { headers })

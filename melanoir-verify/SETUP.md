@@ -95,3 +95,24 @@ DNS에 CNAME 레코드 추가: `verify` → `cname.vercel-dns.com`
 
 Coolsms(솔라피) 연동 시 `SMS_API_KEY`, `SMS_API_SECRET`, `SMS_SENDER_PHONE` 설정.
 미설정 시 개발 환경에서는 콘솔에 메시지가 출력됩니다.
+
+## 8. 베타테스터 지원 알림 메일 (Gmail SMTP)
+
+새 베타테스터가 지원하면(`POST /api/waitlist`, `type=beta`) `slee@melanoir.co.kr`로 알림 메일이 한 통 발송됩니다. 중복 신청 시에는 발송되지 않습니다.
+
+### Gmail 앱 비밀번호 발급
+1. 발송에 쓸 Google 계정에서 **2단계 인증(2FA)** 을 먼저 켭니다.
+2. [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) 접속
+3. 앱 이름(예: `melanoir-verify`) 입력 후 생성 → **16자리 비밀번호** 복사 (공백 제거)
+
+### 환경 변수
+`.env.local` 및 Vercel → Settings → Environment Variables에 추가:
+
+```env
+SMTP_USER=발송계정@gmail.com
+SMTP_APP_PASSWORD=발급받은16자리   # 공백 없이
+ALERT_EMAIL_TO=slee@melanoir.co.kr  # 수신 주소(여러 명은 콤마로 구분)
+# ALERT_EMAIL_FROM=noreply@melanoir.co.kr  # (선택) 표시용 발신 주소
+```
+
+> 미설정 시(개발 환경) 실제 발송 없이 콘솔에만 출력됩니다 — SMS와 동일 동작.
