@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'invalid request' }, { status: 400 })
   }
   const { id, action } = body
-  if (!id || !action || !['select', 'confirm_dm'].includes(action)) {
+  if (!id || !action || !['select', 'confirm_dm', 'confirm_direct'].includes(action)) {
     return NextResponse.json({ error: 'invalid request' }, { status: 400 })
   }
 
@@ -52,6 +52,22 @@ export async function POST(req: NextRequest) {
       `[멜라누아] 베타테스터에 선정되었습니다! 본인 확인을 위해, 신청하신 인스타그램 계정(@${row.instagram})으로 ${INSTAGRAM_HANDLE} 계정에 인증 코드 ${code} 를 DM으로 보내주세요. DM 확인 후 최종 확정됩니다.`
     )
     return NextResponse.json({ success: true, dm_code: code })
+  }
+
+  // confirm_direct: 직접 DM 컨택군 — DM 인증 생략하고 바로 확정 (코드 요청 없는 문자)
+  if (action === 'confirm_direct') {
+    const { error } = await supabase
+      .from('mnr_waitlist')
+      .update({ status: 'confirmed', updated_at: now })
+      .eq('id', id)
+    if (error) {
+      return NextResponse.json({ error: 'update failed' }, { status: 500 })
+    }
+    await sendSms(
+      row.phone,
+      '[멜라누아] 베타테스터로 확정되었습니다! 모집마감에 맞춰 참여 방법을 문자로 안내드릴게요.'
+    )
+    return NextResponse.json({ success: true })
   }
 
   // confirm_dm: 관리자가 인스타 DM에서 코드 수신을 직접 확인한 뒤 누른다

@@ -126,11 +126,13 @@ function BetaActions({ row }: { row: WaitlistRow }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
-  async function act(action: 'select' | 'confirm_dm') {
+  async function act(action: 'select' | 'confirm_dm' | 'confirm_direct') {
     const who = row.name ?? row.phone
     const ask =
       action === 'select'
         ? `${who} — 선정 처리하고 DM 인증 코드를 SMS로 발송할까요?`
+        : action === 'confirm_direct'
+        ? `${who} — DM 인증 없이 바로 확정하고 확정 문자를 발송할까요? (직접 컨택한 분에게만 사용)`
         : `@${row.instagram ?? '?'} 계정에서 코드 ${row.dm_code ?? ''} DM을 확인했나요? 최종 확정 SMS가 발송됩니다.`
     if (!window.confirm(ask)) return
     setLoading(true)
@@ -158,9 +160,14 @@ function BetaActions({ row }: { row: WaitlistRow }) {
     )
   }
   return (
-    <button onClick={() => act('select')} disabled={loading} className={`${btnCls} bg-black text-white`}>
-      선정
-    </button>
+    <div className="flex gap-1.5">
+      <button onClick={() => act('select')} disabled={loading} className={`${btnCls} bg-black text-white`}>
+        선정
+      </button>
+      <button onClick={() => act('confirm_direct')} disabled={loading} className={`${btnCls} bg-emerald-600 text-white`}>
+        바로 확정
+      </button>
+    </div>
   )
 }
 
