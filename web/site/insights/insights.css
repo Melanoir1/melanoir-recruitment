@@ -1,0 +1,142 @@
+/* 인사이트 카드 페이지 — 사이트 design-tokens 재사용. 카드레터(사진+텍스트 오버레이) 스타일. */
+
+.insights-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-2xl, 120px) var(--space-md, 24px) var(--space-xl, 80px);
+  font-family: var(--font-body, "Pretendard", sans-serif);
+  color: var(--color-ink, #1d1d1f);
+}
+
+.insights-hero { text-align: center; margin-bottom: var(--space-xl, 80px); }
+.insights-eyebrow {
+  font-family: "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text-dim, #86868b);
+  margin: 0 0 12px;
+}
+.insights-title {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+.insights-sub {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--color-text-muted, #6e6e73);
+  margin: 0;
+}
+
+/* 카드 그리드 */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md, 24px);
+}
+
+/* 카드레터 — IG 포트레이트 4:5, 사진 풀블리드 + 하단 스크림 + 텍스트 오버레이 */
+.insight-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  background: #0a0a0c;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  transition: transform var(--mnr-dur, 0.33s) var(--mnr-ease, ease),
+              box-shadow var(--mnr-dur, 0.33s) var(--mnr-ease, ease);
+}
+.insight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+}
+
+/* 완성 카드레터 이미지 — 그대로 표시(텍스트는 이미 이미지에 구워져 있음) */
+.ic-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* 날짜 칩 — 이미지 위 우상단(구워진 텍스트와 안 겹침, 데일리 아카이브용) */
+.ic-datechip {
+  position: absolute; top: 12px; right: 12px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(0,0,0,0.42); color: #fff;
+  backdrop-filter: blur(4px);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.ic-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+/* 사진 없을 때(파이프라인 전) — 브랜드 모노톤 그라디언트 폴백 */
+.ic-photo[data-noimg] {
+  background: radial-gradient(120% 120% at 30% 20%, #2a2a30 0%, #0a0a0c 70%);
+}
+.ic-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.72) 100%);
+}
+.ic-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 18px;
+}
+.ic-handle {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  text-transform: uppercase;
+  opacity: 0.92;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.ic-foot { display: flex; flex-direction: column; gap: 6px; }
+.ic-eyebrow {
+  align-self: flex-start;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px; border-radius: 6px;
+  background: rgba(255,255,255,0.16);
+  backdrop-filter: blur(4px);
+}
+.ic-title {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 2px 0 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+  /* 4줄 넘으면 말줄임 */
+  display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+}
+.ic-sub {
+  font-size: 14px; line-height: 1.4; opacity: 0.9; margin: 0;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.ic-date {
+  font-size: 12px; opacity: 0.8; margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cards-empty {
+  text-align: center;
+  color: var(--color-text-dim, #86868b);
+  padding: var(--space-2xl, 120px) 0;
+}
+
+@media (max-width: 600px) {
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-sm, 16px); }
+  .ic-overlay { padding: 14px; }
+}

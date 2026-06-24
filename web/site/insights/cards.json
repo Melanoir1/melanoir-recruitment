@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2026-06-23",
+    "category": "데이터 인사이트",
+    "handle": "@melanoir",
+    "title": "피부 자극 지수 0.00",
+    "subtitle": "ISO 10993-23 시험에서 자극 반응이 측정 범위 최솟값. '순하다'는 말 대신 숫자로.",
+    "image": "2026-06-23.png",
+    "link": "melanoir.co.kr/products/embo"
+  },
+  {
+    "date": "2026-06-16",
+    "category": "소재 인사이트",
+    "handle": "@melanoir",
+    "title": "색소를 고를 때 진짜 봐야 할 건 '검출 안 됨' 데이터다",
+    "subtitle": "필수 항목 All N.D.(불검출) · 무균 시험 적합 — 숫자로 검증한 안전성.",
+    "image": "",
+    "link": ""
+  },
+  {
+    "date": "2026-06-15",
+    "category": "멜라닌 과학",
+    "handle": "@melanoir",
+    "title": "자연이 설계한 가장 안전한 블랙, 멜라닌",
+    "subtitle": "피부가 본래 쓰는 광보호 분자를 색소로.",
+    "image": "",
+    "link": ""
+  }
+]

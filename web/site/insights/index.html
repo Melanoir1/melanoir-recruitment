@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melanoir · Insights</title>
+  <meta name="description" content="멜라누아 데일리 인사이트 카드 — 멜라닌·반영구 색소 소재의 안전성과 과학을 매일 한 장으로." />
+  <link rel="icon" href="/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <!-- 기존 사이트 공통 자산 그대로 재사용 (구조 변경 0) -->
+  <link rel="stylesheet" href="../assets/design-tokens.css" />
+  <link rel="stylesheet" href="../assets/melanoir-shell.css" />
+  <link rel="stylesheet" href="../assets/melanoir-subpage-header.css" />
+  <link rel="stylesheet" href="../assets/mnr-ui.css" />
+  <link rel="stylesheet" href="../assets/melanoir-lang.css" />
+  <link rel="stylesheet" href="insights.css" />
+</head>
+<body class="insights">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <header data-mnr-header data-theme="dark" data-current="insights"></header>
+
+  <main class="insights-main">
+    <section class="insights-hero">
+      <p class="insights-eyebrow">Daily Insights</p>
+      <h1 class="insights-title">인사이트 카드</h1>
+      <p class="insights-sub">멜라닌·반영구 색소의 안전성과 과학을, 매일 한 장으로.</p>
+    </section>
+
+    <section class="cards-grid" id="cardsGrid" aria-live="polite">
+      <!-- cards.json → JS 렌더 -->
+    </section>
+
+    <p class="cards-empty" id="cardsEmpty" hidden>아직 발행된 인사이트 카드가 없습니다.</p>
+  </main>
+
+  <!-- 기존 사이트 공통 스크립트 (헤더/네비 주입) -->
+  <script src="../assets/mnr-ui.js"></script>
+  <script src="../assets/mnr-nav.js"></script>
+  <script src="../assets/melanoir-lang.js"></script>
+
+  <script>
+    // 인사이트 카드 렌더러 — cards.json 을 읽어 카드레터 그리드로.
+    // 에이전트(insight-card.mjs)가 만드는 cards/<날짜>.png 는 텍스트가 이미 구워진
+    // 완성 카드레터다. 그래서 페이지는 그 이미지를 "그대로" 표시한다(텍스트 재오버레이 금지 —
+    // 안 그러면 이중 표시). 이미지가 없을 때만 필드로 폴백 렌더.
+    (async function () {
+      const grid = document.getElementById('cardsGrid');
+      const empty = document.getElementById('cardsEmpty');
+      let cards = [];
+      try {
+        const res = await fetch('cards.json', { cache: 'no-store' });
+        if (res.ok) cards = await res.json();
+      } catch (_) { /* 파일 없거나 오프라인 — empty 처리 */ }
+
+      if (!Array.isArray(cards) || cards.length === 0) {
+        empty.hidden = false;
+        return;
+      }
+      // 최신순 (날짜 내림차순)
+      cards.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+
+      const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+      grid.innerHTML = cards.map((c) => {
+        const img = c.image ? `cards/${esc(c.image)}` : '';
+        const href = c.link ? esc(c.link) : (img || '#');
+        const dateChip = c.date ? `<time class="ic-datechip">${esc(c.date)}</time>` : '';
+
+        // 정상 경로: 완성된 카드레터 PNG 를 그대로 (텍스트는 이미 이미지에 있음)
+        if (img) {
+          return `
+        <a class="insight-card" href="${href}" target="_blank" rel="noopener" aria-label="${esc(c.title)}">
+          <img class="ic-img" src="${img}" alt="${esc(c.title)}" loading="lazy" />
+          ${dateChip}
+        </a>`;
+        }
+
+        // 폴백(이미지 없음/파이프라인 전): 필드로 카드레터 렌더
+        const handle = esc(c.handle || '@melanoir');
+        const eyebrow = c.category ? `<span class="ic-eyebrow">${esc(c.category)}</span>` : '';
+        return `
+        <a class="insight-card" href="${href}" aria-label="${esc(c.title)}">
+          <div class="ic-photo" data-noimg></div>
+          <div class="ic-scrim"></div>
+          <div class="ic-overlay">
+            <span class="ic-handle">${handle}</span>
+            <div class="ic-foot">
+              ${eyebrow}
+              <h2 class="ic-title">${esc(c.title)}</h2>
+              ${c.subtitle ? `<p class="ic-sub">${esc(c.subtitle)}</p>` : ''}
+              ${c.date ? `<time class="ic-date">${esc(c.date)}</time>` : ''}
+            </div>
+          </div>
+        </a>`;
+      }).join('');
+    })();
+  </script>
+</body>
+</html>
