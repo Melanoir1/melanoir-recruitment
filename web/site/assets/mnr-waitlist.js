@@ -50,6 +50,8 @@
     },
     beta: {
       audience: "시술 경험이 있는 전문가를 위한 베타테스터 모집입니다.",
+      reassureNote: "이름과 전화번호는 <strong>중복 신청을 방지하기 위해</strong> 수집합니다.",
+      privacyNote: "수집된 정보는 외부에 <strong>공개되지 않으며</strong>, 철저히 관리됩니다.",
       notice: "중복 신청 방지를 위해 휴대폰 본인 인증 후 신청이 완료됩니다.",
       consent: "베타테스터 모집·선정 안내를 위한 개인정보(연락처·SNS 계정) 수집·이용에 동의합니다.",
       submit: "베타테스터 신청하기",
@@ -68,20 +70,25 @@
     form.className = "mnr-wl-form";
     form.noValidate = true;
 
+    var reassureId = c.reassureNote ? "mnr-wl-reassure-note" : "";
+    var nameDesc = reassureId ? ' aria-describedby="' + reassureId + '"' : "";
+    var phoneDesc = reassureId ? ' aria-describedby="' + reassureId + '"' : "";
+
     var phoneHtml = c.otp
       ? '<div class="mnr-wl-phone-row">' +
-          '<input type="tel" name="phone" placeholder="전화번호" maxlength="13" autocomplete="tel">' +
+          '<input type="tel" name="phone" placeholder="전화번호" maxlength="13" autocomplete="tel"' + phoneDesc + ">" +
           '<button type="button" class="mnr-wl-otp-btn">인증번호 받기</button>' +
         "</div>" +
         '<div class="mnr-wl-otp-row" hidden>' +
           '<input type="text" name="otp_code" inputmode="numeric" placeholder="인증번호 6자리" maxlength="6" autocomplete="one-time-code">' +
         "</div>"
-      : '<input type="tel" name="phone" placeholder="전화번호" maxlength="13" autocomplete="tel">';
+      : '<input type="tel" name="phone" placeholder="전화번호" maxlength="13" autocomplete="tel"' + phoneDesc + ">";
 
     form.innerHTML =
       '<p class="mnr-wl-audience">' + c.audience + "</p>" +
-      '<input type="text" name="name" placeholder="이름" maxlength="50" autocomplete="name">' +
+      '<input type="text" name="name" placeholder="이름" maxlength="50" autocomplete="name"' + nameDesc + ">" +
       phoneHtml +
+      (c.reassureNote ? '<p class="mnr-wl-form-note mnr-wl-form-note--reassure" id="' + reassureId + '">' + c.reassureNote + "</p>" : "") +
       (c.insta ? '<input type="text" name="instagram" placeholder="' + c.instaPlaceholder + '" maxlength="80" autocomplete="off">' : "") +
       (c.shop ? '<input type="text" name="shop_name" placeholder="샵 이름 (선택)" maxlength="80">' : "") +
       (c.technique ? '<select name="technique" class="mnr-wl-select" required>' + optionsHtml(TECH_OPTS, '주력 기법 선택') + '</select>' : "") +
@@ -91,6 +98,7 @@
       (c.region ? '<input type="text" name="region_detail" placeholder="시/군/구 (선택)" maxlength="60">' : "") +
       '<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;">' +
       '<label class="mnr-wl-consent"><input type="checkbox" name="consent"> ' + c.consent + "</label>" +
+      (c.privacyNote ? '<p class="mnr-wl-form-note mnr-wl-form-note--privacy">' + c.privacyNote + "</p>" : "") +
       '<button type="submit" class="mnr-wl-submit">' + c.submit + "</button>" +
       (c.notice ? '<p class="mnr-wl-notice">' + c.notice + "</p>" : "") +
       '<p class="mnr-wl-msg" role="status"></p>';
