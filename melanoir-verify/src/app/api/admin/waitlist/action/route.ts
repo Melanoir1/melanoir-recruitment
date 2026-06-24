@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     }
     await sendSms(
       row.phone,
-      '[멜라누아] 베타테스터로 확정되었습니다! 모집마감에 맞춰 참여 방법을 문자로 안내드릴게요.'
+      '[멜라누아] 베타테스터로 확정되었습니다! 참여 방법을 순차적으로 문자 안내드릴게요.'
     )
     return NextResponse.json({ success: true })
   }
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
   }
   await sendSms(
     row.phone,
-    '[멜라누아] DM 인증이 확인되어 베타테스터로 확정되었습니다! 모집마감에 맞춰 참여 방법을 문자로 안내드릴게요.',
+    '[멜라누아] DM 인증이 확인되어 베타테스터로 확정되었습니다! 참여 방법을 순차적으로 문자 안내드릴게요.',
     '멜라누아 베타테스터'
   )
   return NextResponse.json({ success: true })
