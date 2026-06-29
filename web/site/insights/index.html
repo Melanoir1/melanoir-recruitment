@@ -50,22 +50,27 @@
     (async function () {
       const grid = document.getElementById('cardsGrid');
       const empty = document.getElementById('cardsEmpty');
-      let cards = [];
+      const SB_URL = 'https://inrvgokeuyewwvaxwitc.supabase.co';
+      const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlucnZnb2tldXlld3d2YXh3aXRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMDA5NjcsImV4cCI6MjA5Nzc3Njk2N30.9zTxMfPtSYbWllh3zGlR43dWAqfuMA0imxFYL2wo4ho';
+      // 1) Supabase — 콘솔에서 '발행'된 인사이트만 (status=published)
+      let sb = [];
       try {
-        const res = await fetch('cards.json', { cache: 'no-store' });
-        if (res.ok) cards = await res.json();
-      } catch (_) { /* 파일 없거나 오프라인 — empty 처리 */ }
-
-      if (!Array.isArray(cards) || cards.length === 0) {
-        empty.hidden = false;
-        return;
-      }
+        const r = await fetch(`${SB_URL}/rest/v1/marketing_drafts?channel=eq.insight&status=eq.published&select=title,body,image_urls,created_at&order=created_at.desc`, { headers: { apikey: SB_ANON, Authorization: 'Bearer ' + SB_ANON } });
+        if (r.ok) sb = (await r.json()).map((x) => ({ date: String(x.created_at || '').slice(0, 10), title: x.title || '', subtitle: x.body || '', image: (x.image_urls || [])[0] || '', full: true }));
+      } catch (_) { /* 오프라인 — cards.json 폴백 */ }
+      // 2) cards.json — 정적 누적/폴백
+      let js = [];
+      try { const res = await fetch('cards.json', { cache: 'no-store' }); if (res.ok) js = await res.json(); } catch (_) {}
+      // 머지: Supabase 발행분 우선, 같은 날짜 중복 제외
+      const seen = new Set(sb.map((c) => c.date));
+      let cards = [...sb, ...js.filter((c) => !seen.has(c.date))];
+      if (!Array.isArray(cards) || cards.length === 0) { empty.hidden = false; return; }
       // 최신순 (날짜 내림차순)
       cards.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
       const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
       grid.innerHTML = cards.map((c) => {
-        const img = c.image ? `cards/${esc(c.image)}` : '';
+        const img = c.full ? esc(c.image) : (c.image ? `cards/${esc(c.image)}` : '');
         const href = c.link ? esc(c.link) : (img || '#');
         const dateChip = c.date ? `<time class="ic-datechip">${esc(c.date)}</time>` : '';
 
