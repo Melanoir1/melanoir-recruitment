@@ -79,7 +79,7 @@
         const href = c.link ? esc(c.link) : (img || '#');
         const tags = (c.tags || []).slice(0, 3).map(esc).join(' ');
         return `<a class="insight-card" href="${href}"${img ? ' target="_blank" rel="noopener"' : ''} aria-label="${esc(c.title)}">
-          <div class="ic-thumb">${img ? `<img src="${img}" alt="${esc(c.title)}" loading="lazy" />` : ''}<span class="ic-cat">${esc(c.category || '인사이트')}</span></div>
+          <div class="ic-thumb${img ? '' : ' noimg'}">${img ? `<img src="${img}" alt="${esc(c.title)}" loading="lazy" onerror="this.style.display='none';this.closest('.ic-thumb').classList.add('noimg')" />` : ''}<div class="ic-ph">${esc(c.title)}</div><span class="ic-cat">${esc(c.category || '인사이트')}</span></div>
           <div class="ic-body">
             <h2 class="ic-title">${esc(c.title)}</h2>
             ${c.subtitle ? `<p class="ic-sub">${esc(c.subtitle)}</p>` : ''}
