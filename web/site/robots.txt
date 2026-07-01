@@ -1,4 +1,19 @@
 User-agent: *
 Allow: /
 Disallow: /products/index_legacy.html
+
+# AI 검색 크롤러 — 명시 허용 (GEO: ChatGPT·Claude·Perplexity·Gemini·Google AI 노출)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://melanoir.co.kr/sitemap.xml

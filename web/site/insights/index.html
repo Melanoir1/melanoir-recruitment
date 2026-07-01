@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melanoir · Insights</title>
+  <meta name="description" content="멜라누아 데일리 인사이트 카드 — 멜라닌·반영구 색소 소재의 안전성과 과학을 매일 한 장으로." />
+  <link rel="icon" href="/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <!-- 기존 사이트 공통 자산 그대로 재사용 (구조 변경 0) -->
+  <link rel="stylesheet" href="../assets/design-tokens.css" />
+  <link rel="stylesheet" href="../assets/melanoir-shell.css" />
+  <link rel="stylesheet" href="../assets/melanoir-subpage-header.css" />
+  <link rel="stylesheet" href="../assets/mnr-ui.css" />
+  <link rel="stylesheet" href="../assets/melanoir-lang.css" />
+  <link rel="stylesheet" href="insights.css" />
+</head>
+<body class="insights">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <header data-mnr-header data-theme="dark" data-current="insights"></header>
+
+  <main class="insights-main">
+    <section class="insights-hero">
+      <p class="insights-eyebrow">Melanoir Insights</p>
+      <h1 class="insights-title">안전한 색, <span class="u">숫자로 이야기하다</span></h1>
+      <p class="insights-sub">멜라닌·반영구 색소의 안전성과 과학을, 한 장의 카드로. 매일 쌓이는 멜라누아의 인사이트.</p>
+      <div class="ins-tabs" id="insTabs"></div>
+    </section>
+
+    <div class="ins-crow">
+      <button class="ins-nav prev" id="insPrev" type="button" aria-label="이전">‹</button>
+      <section class="cards-grid" id="cardsGrid" aria-live="polite">
+        <!-- Supabase(발행분) + cards.json → JS 렌더 -->
+      </section>
+      <button class="ins-nav next" id="insNext" type="button" aria-label="다음">›</button>
+    </div>
+
+    <p class="cards-empty" id="cardsEmpty" hidden>아직 발행된 인사이트 카드가 없습니다.</p>
+  </main>
+
+  <!-- 기존 사이트 공통 스크립트 (헤더/네비 주입) -->
+  <script src="../assets/mnr-ui.js"></script>
+  <script src="../assets/mnr-nav.js"></script>
+  <script src="../assets/melanoir-lang.js"></script>
+
+  <script>
+    // 인사이트 캐러셀 — Supabase '발행'분(status=published) + cards.json 폴백을
+    // CJ식 가로 카드(썸네일 + 제목/요약/해시태그/날짜)로 렌더. 카테고리 탭 + 좌우 화살표.
+    (async function () {
+      const grid = document.getElementById('cardsGrid');
+      const empty = document.getElementById('cardsEmpty');
+      const tabsEl = document.getElementById('insTabs');
+      const SB_URL = 'https://inrvgokeuyewwvaxwitc.supabase.co';
+      const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlucnZnb2tldXlld3d2YXh3aXRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMDA5NjcsImV4cCI6MjA5Nzc3Njk2N30.9zTxMfPtSYbWllh3zGlR43dWAqfuMA0imxFYL2wo4ho';
+      const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+      // 1) Supabase — 콘솔/스킬에서 '발행'된 인사이트 (status=published)
+      let sb = [];
+      try {
+        const r = await fetch(`${SB_URL}/rest/v1/marketing_drafts?channel=eq.insight&status=eq.published&select=title,body,image_urls,hashtags,campaign_slug,created_at&order=created_at.desc`, { headers: { apikey: SB_ANON, Authorization: 'Bearer ' + SB_ANON } });
+        if (r.ok) sb = (await r.json()).map((x) => ({ date: String(x.created_at || '').slice(0, 10), title: x.title || '', subtitle: x.body || '', image: (x.image_urls || [])[0] || '', tags: x.hashtags || [], slug: x.campaign_slug || '', category: '브랜드 인사이트' }));
+      } catch (_) { /* 오프라인 — cards.json 폴백 */ }
+      // 2) cards.json — 정적 누적/폴백
+      let js = [];
+      try { const res = await fetch('cards.json', { cache: 'no-store' }); if (res.ok) js = (await res.json()).map((c) => ({ date: c.date || '', title: c.title || '', subtitle: c.subtitle || '', image: c.image ? `cards/${c.image}` : '', tags: c.tags || [], slug: '', category: c.category || '브랜드 인사이트', link: c.link || '' })); } catch (_) {}
+      // 머지: Supabase 발행분 우선, 같은 날짜 중복 제외
+      const seen = new Set(sb.map((c) => c.date));
+      let cards = [...sb, ...js.filter((c) => !seen.has(c.date))];
+      if (!Array.isArray(cards) || cards.length === 0) { empty.hidden = false; tabsEl.innerHTML = ''; return; }
+      cards.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+
+      let cat = '전체';
+      const cardHtml = (c) => {
+        const img = esc(c.image || '');
+        const href = c.link ? esc(c.link) : (img || '#');
+        const tags = (c.tags || []).slice(0, 3).map(esc).join(' ');
+        return `<a class="insight-card" href="${href}"${img ? ' target="_blank" rel="noopener"' : ''} aria-label="${esc(c.title)}">
+          <div class="ic-thumb${img ? '' : ' noimg'}">${img ? `<img src="${img}" alt="${esc(c.title)}" loading="lazy" onerror="this.style.display='none';this.closest('.ic-thumb').classList.add('noimg')" />` : ''}<div class="ic-ph">${esc(c.title)}</div><span class="ic-cat">${esc(c.category || '인사이트')}</span></div>
+          <div class="ic-body">
+            <h2 class="ic-title">${esc(c.title)}</h2>
+            ${c.subtitle ? `<p class="ic-sub">${esc(c.subtitle)}</p>` : ''}
+            ${tags ? `<div class="ic-tags">${tags}</div>` : ''}
+            ${c.date ? `<time class="ic-date">${esc(c.date)}</time>` : ''}
+          </div>
+        </a>`;
+      };
+      const render = () => {
+        const list = cat === '전체' ? cards : cards.filter((c) => (c.category || '인사이트') === cat);
+        grid.innerHTML = list.length ? list.map(cardHtml).join('') : '<div class="cards-empty">이 분류의 인사이트가 아직 없습니다.</div>';
+      };
+      const renderTabs = () => {
+        const cats = ['전체', ...new Set(cards.map((c) => c.category || '인사이트'))];
+        tabsEl.innerHTML = cats.map((c) => `<button class="ins-tab${c === cat ? ' on' : ''}" type="button" data-c="${esc(c)}">${esc(c)}</button>`).join('');
+        tabsEl.querySelectorAll('.ins-tab').forEach((b) => b.onclick = () => { cat = b.dataset.c; renderTabs(); render(); });
+      };
+      renderTabs(); render();
+      document.getElementById('insPrev').onclick = () => grid.scrollBy({ left: -640, behavior: 'smooth' });
+      document.getElementById('insNext').onclick = () => grid.scrollBy({ left: 640, behavior: 'smooth' });
+    })();
+  </script>
+</body>
+</html>
